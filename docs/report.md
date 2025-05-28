@@ -45,7 +45,7 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [Modelos 2° pergunta orietada a dados](#modelos-2º-pergunta-orietada-a-dados)
     *   [Modelos 3° pergunta orietada a dados](#modelos-3º-pergunta-orietada-a-dados)
 *   [Resultados](#resultados)
-    *   [Resultados obtidos com os Modelos 1° pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1°-pergunta-orietada-a-dados)
+    *   [Resultados obtidos com os Modelos 1º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1º-pergunta-orietada-a-dados)
     *   [Resultados obtidos com os Modelos 2° pergunta orietada a dados](#resultados-obtidos-com-o-modelo-2)
     *   [Resultados obtidos com os Modelos 3° pergunta orietada a dados](#resultados-obtidos-com-o-modelo-3)
 *   [Interpretação do modelo](#interpretação-dos-modelos)
@@ -5456,7 +5456,7 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 *   [Resultados obtidos com os modelos 3° pergunta orietada a dados****](#resultados-obtidos-com-o-modelo-3)
 
 
-# Resultados obtidos com os Modelos 1° pergunta orietada a dados
+# Resultados obtidos com os Modelos 1º pergunta orietada a dados
 
 ## Resultados obtidos com o modelo 1 da 1° pergunta orietada a dados.
 
