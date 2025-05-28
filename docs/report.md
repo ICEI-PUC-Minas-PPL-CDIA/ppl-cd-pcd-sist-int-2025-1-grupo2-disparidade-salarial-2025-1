@@ -5530,7 +5530,77 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 - Acurácia do Modelo no Conjunto de Teste: -
 - Diferença de Acurácia (Treino - Teste): -
 
-**Parâmetros do Modelo Random Forest Utilizado:**
+## Métricas de Desempenho:
+
+Com o limiar de classificação otimizado em 0.6, o modelo apresentou os seguintes resultados principais no conjunto de teste:
+
+* **Acurácia Geral:** `0.82` (ou 82%)
+* **Acurácia Balanceada:** `0.8106` (ou 81.06%)
+* **F1-Score (Macro Avg):** `0.81`
+* **F1-Score (Weighted Avg):** `0.82`
+
+**Métricas por Classe (com limiar otimizado de 0.6):**
+
+* **Salário Baixo/Médio (Classe 0):**
+    * Precisão: `0.84`
+    * Recall: `0.84`
+    * F1-Score: `0.84`
+    * Suporte (Número de amostras reais): 568
+* **Salário Alto (Classe 1):**
+    * Precisão: `0.79`
+    * Recall: `0.78`
+    * F1-Score: `0.78`
+    * Suporte (Número de amostras reais): 422
+
+**Matriz de Confusão (com limiar otimizado de 0.6):**
+* Verdadeiros Negativos (TN - Previu Baixo/Médio, Real Baixo/Médio): 478
+* Falsos Positivos (FP - Previu Alto, Real Baixo/Médio): 90
+* Falsos Negativos (FN - Previu Baixo/Médio, Real Alto): 93
+* Verdadeiros Positivos (TP - Previu Alto, Real Alto): 329
+
+**Explicação das Métricas:**
+
+* **Acurácia Geral:** Percentual de previsões corretas que o modelo fez no total. Neste caso, 82% das vezes o modelo acertou se um profissional teria um salário "Alto" ou "Baixo/Médio".
+* **Acurácia Balanceada:** Média da proporção de acertos para cada classe individualmente. É uma métrica importante quando as classes têm tamanhos diferentes (desbalanceadas), como neste caso (57.35% Salário Baixo/Médio vs. 42.65% Salário Alto). Um valor de `0.8106` indica um bom equilíbrio no desempenho entre as classes.
+* **Precisão (por classe):**
+    * Para "Salário Baixo/Médio" (`0.84`): Das vezes que o modelo previu que um profissional teria um salário "Baixo/Médio", ele acertou em 84% dos casos.
+    * Para "Salário Alto" (`0.79`): Das vezes que o modelo previu que um profissional teria um salário "Alto", ele acertou em 79% dos casos.
+* **Recall (Sensibilidade, por classe):**
+    * Para "Salário Baixo/Médio" (`0.84`): Dos profissionais que realmente têm salário "Baixo/Médio", o modelo conseguiu identificar corretamente 84% deles.
+    * Para "Salário Alto" (`0.78`): Dos profissionais que realmente têm salário "Alto", o modelo conseguiu identificar corretamente 78% deles.
+* **F1-Score (por classe e médias):** Média harmônica entre precisão e recall. É útil para ter uma única medida que resume a performance em ambas as métricas. Valores mais altos são melhores.
+    * Um F1-Score de `0.84` para "Salário Baixo/Médio" e `0.78` para "Salário Alto" indicam um bom equilíbrio entre precisão e recall para ambas as classes, sendo ligeiramente melhor para a classe majoritária.
+    * As médias "Macro Avg" (`0.81`) e "Weighted Avg" (`0.82`) fornecem um resumo geral do F1-Score considerando todas as classes.
+* **Matriz de Confusão:** Mostra os acertos e erros do modelo em detalhe:
+    * **TN (478):** O modelo previu corretamente 478 profissionais como "Salário Baixo/Médio".
+    * **FP (90):** O modelo previu erroneamente 90 profissionais como "Salário Alto" quando na verdade eram "Salário Baixo/Médio".
+    * **FN (93):** O modelo previu erroneamente 93 profissionais como "Salário Baixo/Médio" quando na verdade eram "Salário Alto".
+    * **TP (329):** O modelo previu corretamente 329 profissionais como "Salário Alto".
+
+## Interpretação dos Resultados:
+
+O modelo Random Forest demonstrou um desempenho geral **bom** na tarefa de classificar profissionais de dados entre faixas salariais "Alto" e "Baixo/Médio".
+
+* **Pontos Fortes:**
+    * A acurácia geral de 82% e a acurácia balanceada de aproximadamente 81% indicam que o modelo é consistentemente bom em suas previsões, mesmo com um leve desbalanceamento nas classes originais.
+    * O modelo apresenta um bom equilíbrio entre precisão e recall para a classe "Salário Baixo/Médio" (ambos `0.84`). Isso significa que ele é confiável ao prever essa classe e também consegue identificar a maioria dos pertencentes a ela.
+    * A otimização do limiar para `0.6` (em vez do padrão `0.5`) foi crucial para alcançar a melhor acurácia balanceada, mostrando a importância de ajustar o ponto de corte da probabilidade para as necessidades específicas do problema e a distribuição das classes.
+
+* **Pontos Fracos e Áreas para Melhoria:**
+    * O desempenho para a classe "Salário Alto" (Precisão `0.79`, Recall `0.78`) é ligeiramente inferior ao da classe "Salário Baixo/Médio". Isso significa que há um pouco mais de erro ao prever salários altos, tanto em termos de previsões incorretas dessa classe (afetando a precisão) quanto em não conseguir identificar todos os que de fato têm salário alto (afetando o recall). Especificamente, 93 profissionais de salário alto foram classificados erroneamente como de salário baixo/médio (Falsos Negativos).
+    * Ainda existem 90 casos onde o modelo previu "Salário Alto" mas era "Salário Baixo/Médio" (Falsos Positivos). Dependendo do objetivo de negócio, esses erros podem ter custos diferentes.
+
+No geral, o modelo parece ser uma ferramenta útil para entender os fatores que levam a salários mais altos, com uma capacidade de generalização razoável para novos dados.
+
+## Principais Insights e Observações:
+
+* **Distribuição das Classes:** O dataset original apresentava um leve desbalanceamento, com 57.35% dos profissionais na categoria "Salário Baixo/Médio" e 42.65% em "Salário Alto". O uso de `class_weight='balanced_subsample'` nos hiperparâmetros do modelo e a otimização do limiar baseada na `balanced_accuracy` foram estratégias importantes para lidar com isso.
+* **Busca de Hiperparâmetros:** O `GridSearchCV` testou 162 combinações de parâmetros em 5 validações cruzadas (totalizando 810 ajustes de modelo) para encontrar a configuração ótima: `{'class_weight': 'balanced_subsample', 'max_depth': None, 'min_samples_leaf': 7, 'min_samples_split': 15, 'n_estimators': 100}`. Isso indica um esforço robusto para otimizar o modelo.
+* **Otimização do Limiar de Classificação:** A avaliação com diferentes limiares (`0.3` a `0.7`) mostrou que `0.6` forneceu a melhor `Acurácia Balanceada` (`0.8106`). Isso é um passo crucial, pois o limiar padrão de `0.5` nem sempre é o ideal, especialmente em classes desbalanceadas ou quando os custos de diferentes tipos de erros são assimétricos.
+* **Impacto das Features:** Embora não detalhado nestes resultados numéricos, o código Python gera gráficos de importância de features. As features com maior impacto no modelo (como nível de ensino, tempo de experiência, área de formação, senioridade) seriam os principais impulsionadores da disparidade salarial identificada.
+* **Salvamento de Gráficos:** Todos os gráficos gerados pela análise foram salvos no diretório `/kaggle/working/`, permitindo uma exploração visual mais aprofundada dos resultados.
+* **Tempo de Treinamento/Inferência:** O log indica "Fitting 5 folds for each of 162 candidates, totalling 810 fits", o que, dependendo do tamanho do dataset e da complexidade, pode levar um tempo considerável para a busca de hiperparâmetros. O tempo de inferência para o modelo final (depois de treinado) em 990 amostras de teste costuma ser rápido para Random Forests.
+
 
 ### top3_features
 ![top3_features](https://github.com/user-attachments/assets/02f25d1b-4639-4cd9-a357-7a89297bff03)
