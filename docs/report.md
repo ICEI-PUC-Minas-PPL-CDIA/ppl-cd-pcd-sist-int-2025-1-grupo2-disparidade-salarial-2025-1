@@ -46,8 +46,8 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [Modelos 3° pergunta orietada a dados](#modelos-3º-pergunta-orietada-a-dados)
 *   [Resultados](#resultados)
     *   [Resultados obtidos com os Modelos 1º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1º-pergunta-orietada-a-dados)
-    *   [Resultados obtidos com os Modelos 2° pergunta orietada a dados](#resultados-obtidos-com-o-modelo-2)
-    *   [Resultados obtidos com os Modelos 3° pergunta orietada a dados](#resultados-obtidos-com-o-modelo-3)
+    *   [Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
+    *   [Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
 *   [Interpretação do modelo](#interpretação-dos-modelos)
     *   [Interpretação dos Modelos 1° pergunta orietada a dados](#interpretação-do-modelo-1)
     *   [Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-do-modelo-2)
@@ -5562,7 +5562,7 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Resultados obtidos com o modelo 2.
+## Resultados obtidos com os Modelos 2º pergunta orietada a dados
 
 # Resultados do Modelo Random Forest Regressor
 
@@ -5617,7 +5617,7 @@ RandomForestRegressor(
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Resultados obtidos com o modelo 3.
+## Resultados obtidos com os Modelos 3º pergunta orietada a dados
 
 
 ### Relatório de Resultados e Insights: Classificação Binária de Faixa Salarial (v7)
