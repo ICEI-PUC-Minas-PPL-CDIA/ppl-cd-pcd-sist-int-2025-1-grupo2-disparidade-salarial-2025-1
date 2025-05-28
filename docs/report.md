@@ -3793,20 +3793,206 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
 
 ## Modelo 1 Análise de Disparidade Salarial de Profissionais de Dados no Brasil Utilizando o Modelo Random Forest
 
-### *Justificativa1-1*
+## *Justificativa1-1*
 
 
-### - Capacidade de Capturar Interações Complexas:
 
+---
+## - Capacidade de Capturar Interações Complexas:
 
-### - Fornecimento de Importância das Features:
+### Como as Árvores de Decisão (Base do Random Forest) Capturam Interações
 
+* **Natureza Hierárquica e Condicional**:
+    * Uma árvore de decisão funciona dividindo o espaço das features em regiões menores através de uma série de **decisões condicionais (splits)**.
+    * O caminho de uma amostra de dados da raiz até uma folha (nó terminal) representa uma **sequência específica de condições** sobre diferentes features.
+    * Por exemplo, uma árvore pode aprender que "SE `Nível de senioridade` é 'Sênior' E `Tempo de experiência na área de dados` é 'Mais de 10 anos', ENTÃO a probabilidade de `salario_alto` é X". Esta é uma interação direta entre `Nível de senioridade` e `Tempo de experiência`. O efeito da experiência no salário pode ser diferente para um júnior versus um sênior.
 
-### - Robustez e Generalização:
+* **Profundidade da Árvore**:
+    * Árvores mais profundas (controladas por `max_depth`, `min_samples_split`, `min_samples_leaf`) podem capturar interações de ordem superior (interações entre três ou mais features). No modelo otimizado, `max_depth` foi definido como `None`, permitindo que as árvores cresçam até que os critérios de `min_samples_leaf: 7` e `min_samples_split: 15` sejam atingidos. Isso dá flexibilidade para capturar interações significativas.
 
-### - Bom Desempenho em Problemas de Classificação:
+---
 
-### - Manejo de Features Categóricas e Numéricas:
+### Como o Random Forest (Ensemble) Amplifica essa Capacidade
+
+* **Múltiplas Perspectivas**:
+    * O Random Forest constrói **muitas árvores de decisão** (100 neste caso), cada uma treinada em uma subamostra diferente dos dados (bootstrap) e considerando um subconjunto aleatório de features em cada divisão.
+    * Isso significa que diferentes árvores terão a oportunidade de explorar e modelar **diferentes interações** ou as mesmas interações de maneiras ligeiramente diferentes. Algumas árvores podem priorizar certas interações, enquanto outras focam em combinações distintas.
+
+* **Agregação de Conhecimento**:
+    * A previsão final do Random Forest é uma agregação (média de probabilidades para classificação) das previsões de todas as árvores individuais.
+    * Ao combinar o "conhecimento" de muitas árvores que aprenderam diversas interações, o ensemble se torna capaz de representar um **panorama de interações muito mais rico e robusto** do que uma única árvore conseguiria.
+
+---
+
+### Evidências e Suporte no Código do Notebook
+
+* **Visualização de Interação Específica**:
+    * O notebook inclui uma "Análise de Interação entre Formação e Experiência" que gera um heatmap (`interacao_formacao_experiencia.png`). Este gráfico mostra a probabilidade média de `salario_alto` para diferentes combinações de `formacao_academica_encoded` e `experiencia_profissional_encoded`.
+    * O fato de o modelo conseguir gerar previsões que resultam em um padrão claro neste heatmap (por exemplo, mostrando que a combinação de alta formação E alta experiência leva a uma maior probabilidade de salário alto) é uma **demonstração direta** de que o modelo está capturando e utilizando essa interação específica.
+
+* **Engenharia de Features**:
+    * A codificação one-hot de features como `'Área de formação acadêmica'`, `'UF onde mora'`, e `'Setor de atuação da empresa'` cria colunas binárias. O modelo pode então aprender, por exemplo, se o impacto do `'Tempo de experiência na área de dados'` no salário é diferente para `'UF onde mora_São Paulo'` versus `'UF onde mora_Bahia'`.
+
+* **Desempenho Geral do Modelo**:
+    * Um bom desempenho em um problema complexo como a previsão salarial, que intuitivamente depende de como múltiplos fatores se combinam, sugere que o modelo está efetivamente capturando não apenas os efeitos principais das features, mas também suas interações. Se o modelo não conseguisse capturar essas interações, seu poder preditivo seria provavelmente muito menor.
+
+Em resumo, a estrutura baseada em árvores do Random Forest, combinada com a diversidade introduzida pelo bagging e pela amostragem aleatória de features, permite que o modelo aprenda e utilize automaticamente as interações complexas e não lineares entre as variáveis preditoras, o que é fundamental para sua eficácia em muitos problemas do mundo real.
+
+---
+## - Fornecimento de Importância das Features:
+
+### Como o Random Forest Calcula a Importância das Features
+
+* **Redução Média da Impureza (Mean Decrease in Impurity - MDI)**:
+    * O método mais comum, e o padrão no Scikit-learn para `RandomForestClassifier`, é baseado na **impureza de Gini** (ou entropia, dependendo da configuração do critério da árvore).
+    * Quando uma árvore de decisão é construída, cada divisão de um nó é feita escolhendo a feature que resulta na maior redução da impureza (ou seja, que torna os nós filhos mais "puros" em termos de classes).
+    * A importância de uma feature é calculada como a **média da redução da impureza** que ela proporciona em todas as árvores da floresta. Quanto mais uma feature contribui para reduzir a impureza nos nós onde é utilizada para divisão, maior será sua importância.
+    * As importâncias são então normalizadas para que a soma de todas as importâncias seja igual a 1.
+
+---
+
+### Implementação no Código do Notebook
+
+O notebook extrai e utiliza a importância das features da seguinte maneira:
+
+1.  **Extração dos Valores de Importância**:
+    * Após o treinamento e a otimização do `RandomForestClassifier` (armazenado em `best_rf_model`), os valores de importância são acessados diretamente através do atributo:
+        ```python
+        importances = best_rf_model.feature_importances_
+        ```
+    * Os nomes das features correspondentes são obtidos a partir das colunas do DataFrame `X`:
+        ```python
+        feature_names = X.columns
+        ```
+
+2.  **Ordenação e Seleção**:
+    * As importâncias são ordenadas em ordem decrescente para identificar as features mais relevantes:
+        ```python
+        indices = np.argsort(importances)[::-1]
+        ```
+
+3.  **Visualização da Importância das Features**:
+    * O código gera múltiplos gráficos para visualizar essas importâncias, facilitando a interpretação:
+        * **Top 20 Features Mais Relevantes**: Um gráfico de barras horizontais mostrando as 20 features com maior pontuação de importância (`importancia_features_top20.png`).
+        * **Importância Agrupada por Prefixo**: Se houver muitas features (especialmente após o one-hot encoding), gráficos de barras separados são criados para grupos de features com o mesmo prefixo (ex: "UF onde mora\_", "Área de formação acadêmica\_") para melhor organização (`importancia_features_grupo_*.png`).
+        * **Top 3 Features Mais Importantes**: Um gráfico de barras focado nas três features de maior impacto, com os valores de importância anotados (`top3_features.png`).
+        * **Gráfico de Dispersão das Duas Features Mais Importantes**: Visualiza a relação entre as duas features mais importantes e a probabilidade de salário alto (`dispersao_top2_features.png`).
+
+---
+
+### Valor da Análise de Importância das Features
+
+Conhecer a importância das features é extremamente útil por diversos motivos:
+
+* **Interpretabilidade do Modelo**: Ajuda a entender quais fatores o modelo considera mais decisivos para fazer suas previsões. No contexto do problema, revela quais aspectos (como nível de ensino, experiência, senioridade, etc.) são mais determinantes para a faixa salarial.
+* **Seleção de Features (Feature Selection)**:
+    * Features com importância muito baixa podem, em alguns casos, ser removidas do modelo sem grande perda de performance (ou até mesmo com ganho, ao reduzir ruído e complexidade).
+    * Isso pode levar a modelos mais simples, mais rápidos de treinar e, potencialmente, mais generalizáveis.
+* **Direcionamento de Negócios e Pesquisas**:
+    * As features mais importantes podem indicar áreas onde intervenções ou foco podem ser mais eficazes. Por exemplo, se "Nível de ensino alcançado" é muito importante, isso reforça o valor da educação para progressão salarial.
+* **Detecção de Problemas (Sanity Check)**: Se uma feature que intuitivamente não deveria ser importante aparece com alta relevância, isso pode indicar problemas nos dados (vazamento de dados - data leakage) ou na formulação do problema.
+* **Comunicação dos Resultados**: É mais fácil explicar o comportamento de um modelo para stakeholders não técnicos destacando as poucas variáveis que têm o maior impacto.
+
+A análise de importância das features fornecida pelo Random Forest é, portanto, uma etapa crucial não apenas para avaliar o modelo, mas também para extrair insights acionáveis a partir dos dados.
+
+---
+## - Robustez e Generalização:
+
+### Robustez do Modelo 💪
+
+A robustez refere-se à capacidade do modelo de manter seu desempenho mesmo diante de variações nos dados de entrada, como ruído ou outliers.
+
+* **Natureza de Ensemble (Bagging)**:
+    * O Random Forest constrói múltiplas árvores de decisão (100 neste modelo). Cada árvore é treinada em uma subamostra diferente dos dados (bootstrap).
+    * Ao agregar as previsões de muitas árvores, o impacto de **outliers** ou **ruído** que possam ter afetado uma ou algumas árvores é diluído. Uma única árvore pode ser sensível a esses pontos, mas é menos provável que a maioria das árvores seja influenciada da mesma maneira.
+
+* **Aleatoriedade na Seleção de Features**:
+    * Em cada divisão de nó de cada árvore, apenas um subconjunto aleatório de features é considerado. Isso **descorrelaciona as árvores** e impede que features individualmente muito fortes (mas possivelmente ruidosas ou específicas demais para a amostra de treino) dominem a construção de todas as árvores. Isso torna o modelo menos sensível a pequenas variações nas features individuais.
+
+* **Controle da Complexidade das Árvores**:
+    * Os hiperparâmetros otimizados `min_samples_split: 15` e `min_samples_leaf: 7` restringem o crescimento das árvores. Eles evitam que as árvores se tornem excessivamente complexas e se ajustem ao ruído presente nos dados de treinamento. Árvores mais simples e robustas contribuem para uma floresta mais robusta.
+
+* **Tratamento de Desbalanceamento de Classes**:
+    * O uso de `class_weight='balanced_subsample'` e `sample_weights` torna o modelo robusto a distribuições de classe desiguais. Sem isso, o modelo poderia simplesmente aprender a prever a classe majoritária, mostrando um desempenho pobre e não robusto quando confrontado com diferentes proporções de classe ou com a importância da classe minoritária.
+
+---
+
+### Generalização do Modelo 🌍
+
+A generalização é a capacidade do modelo de performar bem em dados novos e não vistos, após ter sido treinado em um conjunto de dados específico. É o objetivo principal do aprendizado de máquina.
+
+* **Redução de Variância pelo Bagging**:
+    * A principal vantagem do bagging (usado no Random Forest) é a **redução da variância** do modelo sem aumentar significativamente o bias. Modelos com alta variância tendem a se ajustar demais aos dados de treinamento (overfitting) e generalizam mal. Ao agregar múltiplas árvores, o Random Forest suaviza as previsões e melhora a generalização.
+
+* **Validação Cruzada (`GridSearchCV` e `CalibratedClassifierCV`)**:
+    * O uso de validação cruzada de **5 folds** tanto no `GridSearchCV` (para otimização de hiperparâmetros) quanto no `CalibratedClassifierCV` (para calibração) é fundamental para a generalização.
+    * Nesses processos, o modelo é treinado e avaliado múltiplas vezes em diferentes subconjuntos dos dados de treinamento. Isso ajuda a garantir que os hiperparâmetros selecionados e o processo de calibração sejam eficazes não apenas para uma divisão específica dos dados, mas que **generalizem bem** para porções não vistas do conjunto de treinamento.
+
+* **Divisão em Conjunto de Treino e Teste**:
+    * A separação inicial dos dados em conjuntos de treino (70%) e teste (30%) é a prática padrão para avaliar a generalização. O modelo é treinado exclusivamente nos dados de treino, e seu desempenho final no conjunto de teste (dados que o modelo nunca viu durante o treinamento, otimização ou calibração) é uma estimativa de quão bem ele generalizará para dados do mundo real.
+
+* **Otimização de Hiperparâmetros Focada em Generalização**:
+    * Parâmetros como `min_samples_split` e `min_samples_leaf` (além de `max_depth`, que aqui foi `None` mas efetivamente limitado pelos outros) são cruciais para controlar a complexidade do modelo.
+    * O `GridSearchCV` seleciona a combinação desses parâmetros que maximiza a `balanced_accuracy` na validação cruzada, buscando um equilíbrio que evite o overfitting aos dados de treino e promova uma boa performance em dados não vistos.
+
+* **Número Adequado de Árvores (`n_estimators=100`)**:
+    * Construir um número suficiente de árvores (100, no caso) geralmente leva a um modelo mais estável e com melhor generalização, pois a agregação se beneficia da "sabedoria da multidão" das árvores. Embora adicionar mais árvores possa não prejudicar (além do custo computacional) após um certo ponto, um número muito pequeno poderia levar a uma generalização pobre.
+
+Em resumo, o modelo Random Forest do notebook é projetado e treinado de forma a não apenas se ajustar bem aos dados de treinamento, mas também a ser estável e performar de maneira confiável em novos dados, o que é essencial para sua aplicação prática.
+
+---
+## - Bom Desempenho em Problemas de Classificação:
+
+### 1. Forças Fundamentais do Algoritmo Random Forest
+
+* **Aprendizado por Ensemble (Bagging)**:
+    * O Random Forest constrói múltiplas árvores de decisão (100, neste caso) treinadas em diferentes subamostras dos dados (bootstrap).
+    * A decisão final é tomada por agregação (média das probabilidades ou voto majoritário para classificação). Isso **reduz a variância** do modelo em comparação com uma única árvore de decisão, tornando-o menos propenso a memorizar o ruído nos dados de treinamento e melhorando a **generalização** para dados não vistos.
+
+* **Alta Capacidade de Modelagem (Não Linearidade)**:
+    * Árvores de decisão, a base do Random Forest, são capazes de capturar relações complexas e **não lineares** entre as features e o alvo. O ensemble herda essa capacidade.
+
+* **Robustez a Outliers e Ruído (Relativa)**:
+    * Devido à agregação de múltiplas árvores, o impacto de outliers individuais ou ruído em algumas árvores tende a ser mitigado pelas outras, tornando o modelo geralmente mais robusto.
+
+* **Redução de Overfitting (Comparado a Árvores Individuais)**:
+    * Ao combinar muitas árvores, cada uma possivelmente overfit a uma parte dos dados, o Random Forest como um todo tende a ter um **overfitting menor**. A aleatoriedade na seleção de features para cada divisão também contribui para isso.
+
+* **Fornecimento de Importância das Features**:
+    * O modelo calcula intrinsecamente a importância de cada feature, o que ajuda a entender os direcionadores da previsão e pode guiar a seleção de features. O código utiliza essa capacidade extensivamente para análise.
+
+---
+
+### 2. Técnicas Específicas Aplicadas no Código que Potencializam o Desempenho
+
+* **Otimização de Hiperparâmetros (`GridSearchCV`)**:
+    * O uso do `GridSearchCV` permitiu testar sistematicamente uma grade de hiperparâmetros (`n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `class_weight`).
+    * A seleção dos **melhores parâmetros** (`{'class_weight': 'balanced_subsample', 'max_depth': None, 'min_samples_leaf': 7, 'min_samples_split': 15, 'n_estimators': 100}`) otimiza o modelo especificamente para este conjunto de dados, maximizando a métrica `balanced_accuracy`.
+
+* **Tratamento Eficaz de Classes Desbalanceadas**:
+    * **`class_weight='balanced_subsample'`**: Este hiperparâmetro ajusta automaticamente os pesos das classes em cada árvore com base nas frequências da subamostra de bootstrap, dando mais importância à classe minoritária.
+    * **`sample_weights`**: Pesos foram explicitamente calculados e passados aos métodos `.fit()` do `GridSearchCV` e `CalibratedClassifierCV`. Isso força o modelo a prestar mais atenção aos exemplos da classe minoritária durante o treinamento.
+    * **Métrica de Avaliação Adequada (`balanced_accuracy`)**: A escolha da `balanced_accuracy` como métrica de scoring no `GridSearchCV` e para a seleção do melhor limiar garante que o desempenho seja avaliado de forma justa, mesmo com classes desbalanceadas.
+
+* **Calibração de Probabilidades (`CalibratedClassifierCV`)**:
+    * Modelos como Random Forest podem produzir probabilidades de classe que não são perfeitamente calibradas (ou seja, uma probabilidade prevista de 0.8 não corresponde necessariamente a uma chance real de 80%).
+    * A calibração com `method='isotonic'` ajusta essas probabilidades para serem **mais confiáveis e realistas**, o que pode ser crucial para a tomada de decisão baseada nas saídas do modelo.
+
+* **Otimização do Limiar de Classificação**:
+    * Em vez de usar o limiar padrão de 0.5 para converter probabilidades em classes, o código **testa múltiplos limiares** (0.3, 0.4, 0.5, 0.6, 0.7).
+    * O limiar que maximiza a `balanced_accuracy` (neste caso, 0.6) é selecionado. Isso ajusta o ponto de decisão do modelo para otimizar o desempenho na métrica escolhida, sendo particularmente útil em cenários com classes desbalanceadas ou custos de erro assimétricos.
+
+* **Engenharia de Features Cuidadosa**:
+    * O mapeamento de variáveis categóricas ordinais para numéricas (`nivel_ensino_map`, `experiencia_map`, etc.) e a aplicação de one-hot encoding (`pd.get_dummies`) para variáveis nominais são etapas cruciais que preparam os dados adequadamente para o algoritmo Random Forest.
+
+* **Avaliação Abrangente e Visualizações Detalhadas**:
+    * O uso de múltiplas métricas (Acurácia, Acurácia Balanceada, F1-Score, Precisão, Recall, Matriz de Confusão, Curva ROC, Curva Precision-Recall) fornece uma visão completa do desempenho do modelo.
+    * As visualizações ajudam a diagnosticar o comportamento do modelo e a identificar áreas de força e fraqueza.
+
+A combinação desses fatores – as qualidades inerentes do Random Forest e as técnicas de modelagem e avaliação cuidadosamente implementadas – resulta em um modelo de classificação com bom desempenho e confiabilidade para o problema em questão.
+
+---
+## - Manejo de Features Categóricas e Numéricas:
 
 | Atributo                                         | Nome                                      | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância |
 |--------------------------------------------------|-------------------------------------------|--------------|-------------------------------------|-----------------------------------------------------------------------------------------------|------------|
@@ -3824,449 +4010,295 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
 | P2o6                                             | Oportunidade de aprendizado               | Qualitativo  | Nominal (Multivalorado)             | Valorização das oportunidades de aprendizado e crescimento profissional                       | Alta       |
 | P2o10                                            | Reputação da empresa                      | Qualitativo  | Nominal (Multivalorado)             | Valorização da reputação que a empresa tem no mercado                                         | Alta       |
 
+---
 
+## *Processo de Amostragem de Dados1-1*
+### 1. Divisão Inicial dos Dados em Treino e Teste  partitioning
 
-### *Processo de Amostragem de Dados1-1*
-
-
-### *Parâmetros utilizados1-1*
-
-
- ### *Explicação do Código1-1*
-
-
-**Etapa 0: Configuração Inicial**
-   
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report, roc_curve, auc, balanced_accuracy_score, f1_score, precision_recall_curve
-from sklearn.calibration import CalibratedClassifierCV
-import matplotlib.pyplot as plt
-from sklearn.tree import plot_tree
-import seaborn as sns
-import os
-
-
-
-**Importações das bibliotecas essenciais:**
-
-- pandas e numpy: Manipulação e processamento de dados
-
-- sklearn: Ferramentas de machine learning, incluindo divisão de dados, algoritmos, métricas e calibração
-
-- matplotlib e seaborn: Visualização de dados e gráficos
-
-- os: Operações do sistema operacional para criação de diretórios
-
-# Criar diretório para salvar os gráficos, se não existir
-
-    output_dir = '/kaggle/working/'
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-**Configuração do diretório de saída para salvar os gráficos gerados. O código verifica se o diretório existe e o cria caso necessário.**
-
-
-# Configurar o estilo dos gráficos para melhor visualização
-    
-    plt.style.use('seaborn-v0_8-whitegrid')
-    plt.rcParams['figure.figsize'] = (12, 8)
-    plt.rcParams['font.size'] = 12
-    plt.rcParams['axes.titlesize'] = 16
-    plt.rcParams['axes.labelsize'] = 14
-
-**Configuração global dos gráficos estabelecendo um estilo consistente com:**
-
-- Estilo seaborn: Grade branca para melhor visualização
-
-- Tamanho padrão: 12x8 polegadas
-
-- Fontes: Tamanhos diferenciados para títulos (16), labels (14) e texto geral (12)
-
-# Etapa 1: Carregamento e Pré-processamento dos Dados
-
-    try:
-        df = pd.read_csv('/kaggle/input/dataset-clean/dados_limpos.csv')
-        print("Dataset carregado do caminho Kaggle.")
-    except FileNotFoundError:
-        try:
-            df = pd.read_csv('dados_limpos.csv') 
-            print("Dataset carregado localmente.")
-        except FileNotFoundError:
-            print("Arquivo 'dados_limpos.csv' não encontrado no caminho Kaggle nem localmente.")
-            print("Por favor, certifique-se de que o arquivo está no diretório correto ou ajuste o caminho.")
-            exit()
-
-**Sistema de carregamento robusto que tenta múltiplos caminhos:**
-
-- Primeiro: Caminho do Kaggle para execução na plataforma
-
-- Segundo: Caminho local para desenvolvimento
-
-- Tratamento de erro: Mensagem informativa e encerramento seguro se o arquivo não for encontrado
-
-        colunas_features = [
-            'Nível de ensino alcançado', 
-            'Tempo de experiência na área de dados',
-            'Área de formação acadêmica',
-            'Nível de senioridade',
-            'UF onde mora',
-            'Setor de atuação da empresa'
-        ]
-        coluna_target = 'Faixa salarial mensal'
-        colunas_necessarias = colunas_features + [coluna_target]
-
-
-**Definição das variáveis do modelo expandindo significativamente o conjunto de features em relação a versões anteriores:**
-
-- Features ordinais: Nível de ensino, experiência e senioridade
-
-- Features categóricas: Área de formação, localização geográfica e setor empresarial
-
-- Target: Faixa salarial mensal para classificação binária
-
-        df_limpo = df[colunas_necessarias].copy()
-        df_limpo.dropna(subset=colunas_necessarias, inplace=True)
-
-**Limpeza inicial dos dados removendo registros com valores ausentes nas colunas cruciais para garantir qualidade dos dados de entrada.**
-
-# Etapa 2: Engenharia de Features e Criação da Variável Alvo
-
-    nivel_ensino_map = {
-        'Estudante de Graduação': 0,
-        'Graduação/Bacharelado': 1,
-        'Pós-graduação': 2,
-        'Mestrado': 3,
-        'Doutorado ou Phd': 4
-    }
-    df_limpo['formacao_academica_encoded'] = df_limpo['Nível de ensino alcançado'].map(nivel_ensino_map)
-
-Mapeamento ordinal para nível educacional criando uma escala numérica que preserva a hierarquia natural dos níveis de formação acadêmica, onde valores maiores representam maior qualificação.
-    
-    experiencia_map = {
-        'Menos de 1 ano': 0,
-        'de 1 a 2 anos': 1,
-        'de 3 a 4 anos': 2,
-        'de 4 a 6 anos': 3,
-        'de 5 a 6 anos': 3, 
-        'de 7 a 10 anos': 4,
-        'Mais de 10 anos': 5
-    }
-    df_limpo['experiencia_profissional_encoded'] = df_limpo['Tempo de experiência na área de dados'].map(experiencia_map)
-
-Codificação ordinal da experiência profissional com tratamento especial para sobreposições nas faixas (como "de 4 a 6 anos" e "de 5 a 6 anos" recebendo o mesmo valor 3).
-
-    senioridade_map = {
-        'Júnior': 0,
-        'Pleno': 1,
-        'Sênior': 2
-    }
-    df_limpo['senioridade_encoded'] = df_limpo['Nível de senioridade'].map(senioridade_map)
-
-Mapeamento do nível de senioridade seguindo a progressão natural da carreira em tecnologia.
-
-    salario_map_ordinal = {
-        'Menos de R$ 1.000/mês': 0,
-        'de R$ 1.001/mês a R$ 2.000/mês': 1,
-        'de R$ 2.001/mês a R$ 3.000/mês': 2,
-        'de R$ 3.001/mês a R$ 4.000/mês': 3,
-        'de R$ 4.001/mês a R$ 6.000/mês': 4,
-        'de R$ 6.001/mês a R$ 8.000/mês': 5,
-        'de R$ 8.001/mês a R$ 12.000/mês': 6,
-        'de R$ 12.001/mês a R$ 16.000/mês': 7,
-        'de R$ 16.001/mês a R$ 20.000/mês': 8,
-        'de R$ 20.001/mês a R$ 25.000/mês': 9,
-        'de R$ 25.001/mês a R$ 30.000/mês': 10,
-        'de R$ 30.001/mês a R$ 40.000/mês': 11,
-        'Acima de R$ 40.001/mês': 12
-    }
-    df_limpo['faixa_salarial_encoded'] = df_limpo['Faixa salarial mensal'].map(salario_map_ordinal)
-
-Codificação ordinal detalhada das faixas salariais criando uma escala numérica de 0 a 12 que preserva a ordem crescente dos valores monetários.
-
-    df_limpo['salario_alto'] = df_limpo['faixa_salarial_encoded'].apply(lambda x: 1 if x > 5 else 0)
-
-**Criação da variável alvo binária definindo o ponto de corte em R$ 8.000 (valor 5 na escala ordinal):**
-
-- 0: Salários até R$ 8.000 (baixo/médio)
-
-- 1: Salários acima de R$ 8.000 (alto)
-
-        df_encoded = pd.get_dummies(df_limpo, columns=['Área de formação acadêmica', 'UF onde mora', 'Setor de atuação da empresa'])
-
-Codificação one-hot para variáveis categóricas transformando variáveis categóricas nominais em múltiplas variáveis binárias, permitindo que o modelo capture diferentes padrões para cada categoria.
-
-    X_columns = ['formacao_academica_encoded', 'experiencia_profissional_encoded', 'senioridade_encoded'] + \
-                [col for col in df_encoded.columns if col.startswith(('Área de formação acadêmica_', 
-                                                                     'UF onde mora_', 
-                                                                     'Setor de atuação da empresa_'))]
-    X = df_encoded[X_columns]
-    y = df_encoded['salario_alto']
-
-Seleção final das features combinando variáveis ordinais codificadas com variáveis dummy criadas pelo one-hot encoding.
-
-# Etapa 3: Validação e Balanceamento dos Dados
-    
-    if X.shape[0] < 10 or len(y.unique()) < 2:
-        print("Não há dados suficientes ou classes suficientes após o pré-processamento para treinar o modelo.")
-        print(f"Tamanho de X: {X.shape}, Classes em y: {y.unique()}")
-        exit()
-
-Verificação de viabilidade do modelo garantindo que existem dados suficientes e ambas as classes estão representadas.
-
-    class_counts = y.value_counts()
-    print("\nDistribuição das classes:")
-    print(f"Salário Baixo/Médio (0): {class_counts[0]} ({class_counts[0]/len(y)*100:.2f}%)")
-    print(f"Salário Alto (1): {class_counts[1]} ({class_counts[1]/len(y)*100:.2f}%)")
-
-Análise do balanceamento das classes exibindo a distribuição para identificar possível desbalanceamento que pode afetar o desempenho do modelo.
-
-
-    class_weights = {0: 1.0, 1: class_counts[0] / class_counts[1]}
-    sample_weights = np.array([class_weights[cls] for cls in y])
-
-Cálculo de pesos para balanceamento criando pesos inversamente proporcionais à frequência das classes para compensar desbalanceamento sem usar técnicas de reamostragem como SMOTE.
-
+* **Método**: A função `train_test_split` do Scikit-learn é utilizada para dividir o conjunto de dados completo (`X`, `y`) e os pesos das amostras (`sample_weights`) em conjuntos de treinamento e teste.
+    ```python
     X_train, X_test, y_train, y_test, sample_weights_train, _ = train_test_split(
         X, y, sample_weights, test_size=0.3, random_state=42, stratify=y
     )
+    ```
+* **Proporção**: **70%** dos dados são alocados para o conjunto de **treinamento** (`X_train`, `y_train`, `sample_weights_train`) e **30%** para o conjunto de **teste** (`X_test`, `y_test`).
+* **Estratificação**: O parâmetro `stratify=y` garante que a proporção das classes da variável alvo (`y`) seja mantida tanto no conjunto de treino quanto no de teste. Isso é crucial, especialmente porque o dataset possui classes desbalanceadas, assegurando que ambas as classes estejam representadas adequadamente em ambas as divisões.
+* **Reprodutibilidade**: `random_state=42` é usado para que a divisão seja sempre a mesma em diferentes execuções do código, garantindo a reprodutibilidade dos resultados.
+* **Pesos das Amostras (`sample_weights_train`)**: Os pesos calculados para lidar com o desbalanceamento de classes são divididos juntamente com os dados, e a porção de treino (`sample_weights_train`) é usada nas etapas subsequentes de treinamento e otimização.
+
+---
+
+### 2. Amostragem Interna do `RandomForestClassifier` (Bootstrap) 🌳
+
+* **Bootstrap Aggregating (Bagging)**: O `RandomForestClassifier` é um ensemble de árvores de decisão. Por padrão (**`bootstrap=True`**, que é o default no Scikit-learn e não foi alterado no código), cada árvore na floresta é treinada em uma amostra diferente do conjunto de treinamento, gerada através de **amostragem com reposição** (bootstrap).
+    * Isso significa que, para cada uma das `n_estimators` (100 árvores, conforme o melhor parâmetro encontrado), uma nova subamostra do `X_train` é criada, tendo o mesmo tamanho do `X_train` original, mas com algumas instâncias repetidas e outras ausentes.
+* **`class_weight='balanced_subsample'`**: Este parâmetro, definido como o melhor pelo `GridSearchCV`, interage com o processo de bootstrap. Os pesos das classes são calculados para cada amostra de bootstrap individualmente, ajustando a importância das classes dentro de cada árvore de forma dinâmica. Isso ajuda a mitigar o desbalanceamento em cada árvore construída.
+* **Amostragem de Features**: Além da amostragem de instâncias (linhas), o Random Forest também realiza uma amostragem de features (colunas) ao procurar a melhor divisão em cada nó de cada árvore. O número de features consideradas é tipicamente `sqrt(n_features)`.
+
+---
+
+### 3. Amostragem na Otimização de Hiperparâmetros (`GridSearchCV`) 🔄
+
+* **Validação Cruzada (Cross-Validation)**: O `GridSearchCV` utiliza validação cruzada para avaliar o desempenho de diferentes combinações de hiperparâmetros. No código, `cv=5` foi especificado.
+    * O conjunto de **treinamento** (`X_train`, `y_train`) é dividido em **5 folds (subconjuntos)** de tamanho aproximadamente igual.
+    * Para cada combinação de hiperparâmetros, o modelo é treinado 5 vezes:
+        * Em cada iteração, 4 folds são usados para treinar o modelo.
+        * O fold restante (1 fold) é usado como conjunto de validação para avaliar o desempenho.
+    * A métrica de desempenho (`balanced_accuracy`) é calculada para cada fold de validação, e a média dessas métricas é usada para classificar a combinação de hiperparâmetros.
+* **Uso de `sample_weights_train`**: Os pesos das amostras (`sample_weights_train`) são passados para o método `fit` do `GridSearchCV`. Isso significa que, durante o treinamento de cada modelo dentro da validação cruzada, as amostras são ponderadas conforme definido, influenciando o aprendizado do modelo e o cálculo da métrica de avaliação em cada fold.
+
+---
 
-Divisão estratificada dos dados mantendo a proporção das classes nos conjuntos de treino e teste, incluindo os pesos calculados.
-
-# Etapa 4: Desenvolvimento do Modelo com Otimização de Hiperparâmetros
-
-    param_grid = {
-        'n_estimators': [100, 200, 300],
-        'max_depth': [None, 10, 20],
-        'min_samples_split': [5, 10, 15],
-        'min_samples_leaf': [3, 5, 7],
-        'class_weight': ['balanced', 'balanced_subsample']
-    }
-
-**Grade de hiperparâmetros para otimização definindo múltiplas combinações para:**
-
-- n_estimators: Número de árvores na floresta
-
-- max_depth: Profundidade máxima das árvores (None permite crescimento completo)
-
-- min_samples_split: Mínimo de amostras para dividir um nó
-
-- min_samples_leaf: Mínimo de amostras em folhas
-
-- class_weight: Estratégias de balanceamento automático
-
-      rf_base = RandomForestClassifier(random_state=42, n_jobs=-1)
-      balanced_acc_scorer = 'balanced_accuracy'
-      grid_search = GridSearchCV(estimator=rf_base, param_grid=param_grid,
-                                cv=5, n_jobs=-1, verbose=1, scoring=balanced_acc_scorer)
-
-**Configuração do GridSearchCV utilizando:**
-
-- Validação cruzada: 5 folds para avaliação robusta
-
-- Métrica balanceada: balanced_accuracy para lidar com desbalanceamento
-
-- Paralelização: n_jobs=-1 para usar todos os cores disponíveis
-      
-      grid_search.fit(X_train, y_train, sample_weight=sample_weights_train)
-      best_rf_model = grid_search.best_estimator_
-
-Treinamento e seleção do melhor modelo aplicando os pesos de amostra durante o treinamento para reforçar o balanceamento.
-
-# Etapa 5: Calibração de Probabilidades
-
-      calibrated_model = CalibratedClassifierCV(
-          base_estimator=best_rf_model,
-          method='isotonic',
-          cv=5
-      )
-      calibrated_model.fit(X_train, y_train, sample_weight=sample_weights_train)
-
-**Calibração isotônica das probabilidades melhorando a confiabilidade das estimativas de probabilidade do modelo através de:**
-
-- Método isotônico: Mais flexível que calibração sigmoid
-
-- Validação cruzada: 5 folds para calibração robusta
-
-# Etapa 6: Otimização de Limiar de Classificação
-
-      y_pred_proba_test = calibrated_model.predict_proba(X_test)[:, 1]
-      thresholds = [0.3, 0.4, 0.5, 0.6, 0.7]
-      results = []
-
-Teste de múltiplos limiares avaliando diferentes pontos de corte para otimizar o desempenho em métricas específicas.
-Pesos de amostra: Mantendo o balanceamento durante calibração
-
-      for threshold in thresholds:
-          y_pred_custom = (y_pred_proba_test >= threshold).astype(int)
-    
-    acc = accuracy_score(y_test, y_pred_custom)
-    bal_acc = balanced_accuracy_score(y_test, y_pred_custom)
-    f1 = f1_score(y_test, y_pred_custom)
-    
-    tn, fp, fn, tp = confusion_matrix(y_test, y_pred_custom).ravel()
-
-**Avaliação abrangente para cada limiar calculando múltiplas métricas:**
-
-- Acurácia simples e balanceada
-
-- F1-score
-
-- Componentes da matriz de confusão
-
-- Precisão e recall por classe
-
-
-      best_threshold_idx = max(range(len(results)), key=lambda i: results[i]['balanced_accuracy'])
-      best_threshold = results[best_threshold_idx]['threshold']
-      y_pred_final = (y_pred_proba_test >= best_threshold).astype(int)
-
-Seleção do limiar ótimo baseado na acurácia balanceada, que é mais apropriada para datasets desbalanceados.
-
-# Etapa 7: Avaliação Final e Relatórios
-      print("\nRelatório de Classificação Final (com limiar otimizado):")
-      print(classification_report(y_test, y_pred_final, target_names=['Salário Baixo/Médio', 'Salário Alto']))
-
-Relatório detalhado de classificação apresentando precisão, recall, F1-score e suporte para cada classe com o limiar otimizado.
-
-# Etapa 8: Geração de Visualizações Avançadas
-
-**8.1 Matriz de Confusão Otimizada**
-      
-      cm = confusion_matrix(y_test, y_pred_final)
-      plt.figure(figsize=(10, 8))
-      sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-                  xticklabels=['Salário Baixo/Médio', 'Salário Alto'],
-                  yticklabels=['Salário Baixo/Médio', 'Salário Alto'],
-                  annot_kws={"size": 14})
-
-Visualização da matriz de confusão com formatação profissional usando heatmap do seaborn, incluindo rótulos descritivos e anotações em tamanho legível.
-
-**8.2 Curva ROC com Limiar Otimizado**
-
-      fpr, tpr, _ = roc_curve(y_test, y_pred_proba_test)
-      roc_auc = auc(fpr, tpr)
-      plt.plot(fpr, tpr, color='darkorange', lw=3, label=f'Curva ROC (AUC = {roc_auc:.2f})')
-      plt.axvline(x=fpr[np.argmin(np.abs(tpr - best_threshold))], color='green', linestyle='--', 
-                  label=f'Limiar Ótimo = {best_threshold}')
-
-**Curva ROC aprimorada incluindo:**
-
-- Área sob a curva (AUC) como métrica de desempenho
-
-- Linha vertical indicando o limiar otimizado
-
-- Formatação profissional com cores contrastantes e legendas
-
-**8.3 Análise de Importância das Features**
-
-      importances = best_rf_model.feature_importances_
-      feature_names = X.columns
-      indices = np.argsort(importances)[::-1]
-      n_features_to_show = min(20, len(indices))
-      top_indices = indices[:n_features_to_show]
-Ranking de importância das features limitado às 20 mais relevantes para melhor visualização e interpretabilidade.
-
-      # Agrupar features por prefixo para melhor organização
-      prefixes = {}
-      for i in indices:
-          feature = feature_names[i]
-          prefix = feature.split('_')[0] if '_' in feature else feature
-          if prefix not in prefixes:
-              prefixes[prefix] = []
-          prefixes[prefix].append((i, importances[i]))
-Agrupamento inteligente por categorias organizando features por prefixos (formação, localização, setor) para análise estruturada da importância por domínio.
-
-**8.4 Agrupamento por Categorias**
-
-      prefixes = {}
-      for i in indices:
-          feature = feature_names[i]
-          prefix = feature.split('_')[0] if '_' in feature else feature
-          if prefix not in prefixes:
-              prefixes[prefix] = []
-          prefixes[prefix].append((i, importances[i]))
-
-Agrupamento inteligente por categorias organizando features por prefixos (formação, localização, setor) para análise estruturada da importância por domínio.
-
-**8.5 Distribuição das Probabilidades Preditas**
-
-      plt.figure(figsize=(12, 8))
-      sns.histplot(y_pred_proba_test, bins=50, kde=True)
-      plt.axvline(x=best_threshold, color='red', linestyle='--', linewidth=2,
-                 label=f'Limiar Ótimo = {best_threshold}')
-
-Análise da distribuição das probabilidades geradas pelo modelo calibrado com marcação do limiar ótimo, permitindo visualizar quantas amostras ficam de cada lado do ponto de corte.
-
-**8.6 Visualização de Árvores de Decisão**
-      
-      plt.figure(figsize=(24, 18))
-      plot_tree(best_rf_model.estimators_[0], 
-                feature_names=X.columns, 
-                class_names=['Salário Baixo/Médio', 'Salário Alto'],
-                filled=True, 
-                rounded=True, 
-                fontsize=12,
-                max_depth=4)
-
-- Visualização detalhada de árvore individual do Random Forest com:
-
-- Tamanho expandido: 24x18 polegadas para máxima legibilidade
-
-- Profundidade controlada: max_depth=4 para mostrar detalhes sem complexidade excessiva
-
-- Formatação aprimorada: Nós preenchidos, bordas arredondadas e fonte de tamanho 12
-
-**8.7 Análise de Interação entre Formação e Experiência**
-
-      pivot_table = pd.crosstab(
-          index=df_limpo['formacao_academica_encoded'], 
-          columns=df_limpo['experiencia_profissional_encoded'],
-          values=df_limpo['salario_alto'],
-          aggfunc=np.mean
-      )
-
-Tabela cruzada avançada utilizando pd.crosstab para calcular a probabilidade média de salário alto para cada combinação de formação acadêmica e experiência profissional.
-
-      formacao_labels = {v: k for k, v in nivel_ensino_map.items()}
-      experiencia_labels = {v: k for k, v in experiencia_map.items()}
-      
-      pivot_table.index = [formacao_labels.get(i, i) for i in pivot_table.index]
-      pivot_table.columns = [experiencia_labels.get(i, i) for i in pivot_table.columns]
-
-Mapeamento reverso dos rótulos convertendo os valores numéricos codificados de volta para suas descrições originais, tornando o heatmap mais interpretável.
-
-**8.8 Visualização das Top 3 Features**
-
-      top3_indices = indices[:3]
-      top3_features = [feature_names[i] for i in top3_indices]
-      top3_importances = importances[top3_indices]
-      
-      plt.figure(figsize=(10, 6))
-      bars = plt.barh(range(3), top3_importances, align='center', color=['#1f77b4', '#ff7f0e', '#2ca02c'])
-
-Gráfico especializado para as 3 features mais importantes com cores diferenciadas e valores anotados nas barras para facilitar a interpretação.
-
-**8.9 Gráfico de Dispersão das Features Principais**
-      
-      if len(indices) >= 2:
-          top2_indices = indices[:2]
-          feature1 = feature_names[top2_indices[0]]
-          feature2 = feature_names[top2_indices[1]]
-          
-          scatter = plt.scatter(X_test[feature1], X_test[feature2], 
-                               c=y_pred_proba_test, cmap='coolwarm', 
-                               alpha=0.7, s=100, edgecolors='k')
-
-Visualização da relação entre as duas features mais importantes colorido pelas probabilidades preditas, revelando padrões espaciais na classificação e permitindo identificar regiões de alta e baixa probabilidade de salário alto.
-
-**8.10 Finalização e Salvamento**
-print(f"\nTodos os gráficos foram salvos no diretório: {output_dir}")
-
-
-
+### 4. Amostragem na Calibração do Modelo (`CalibratedClassifierCV`) ⚖️
+
+* **Validação Cruzada Interna**: O `CalibratedClassifierCV` também utiliza um esquema de validação cruzada para ajustar o calibrador (neste caso, usando o método `'isotonic'`). O parâmetro `cv=5` foi usado aqui também.
+    * O conjunto de **treinamento** (`X_train`, `y_train`) é novamente dividido em 5 folds.
+    * O `base_estimator` (o `best_rf_model` encontrado pelo GridSearchCV) é treinado em 4 folds, e as previsões de probabilidade são feitas no fold restante.
+    * Este processo é repetido para todos os 5 folds, de modo que se obtêm previsões de probabilidade "out-of-fold" para todo o conjunto de treinamento.
+    * O calibrador (regressor isotônico) é então treinado usando essas previsões "out-of-fold" como entrada e os verdadeiros rótulos `y_train` como saída.
+    * Finalmente, o `base_estimator` é retreinado em todo o conjunto `X_train`, `y_train` (com `sample_weights_train`), e o calibrador treinado é aplicado a ele.
+* **Uso de `sample_weights_train`**: Assim como no `GridSearchCV`, os `sample_weights_train` são passados para o método `fit` do `CalibratedClassifierCV`, garantindo que o processo de calibração também leve em consideração o desbalanceamento das classes através da ponderação das amostras.
+
+Este conjunto de técnicas de amostragem e reponderação visa construir um modelo robusto, generalizável e que lide adequadamente com o desbalanceamento inerente aos dados.
+
+---
+## *Parâmetros utilizados1-1*
+O modelo final é um `RandomForestClassifier` cujos hiperparâmetros foram otimizados usando `GridSearchCV`, e subsequentemente, este modelo otimizado foi calibrado usando `CalibratedClassifierCV`.
+
+### 1. Hiperparâmetros Otimizados do `RandomForestClassifier` (Resultado do `GridSearchCV`)
+
+Estes são os melhores parâmetros encontrados pelo `GridSearchCV` para o `RandomForestClassifier`, que é então usado como `base_estimator` para a calibração:
+
+* **`class_weight`**: `'balanced_subsample'`
+    * *Explicação*: Ajusta os pesos das classes de forma inversamente proporcional às suas frequências. A variante `'balanced_subsample'` calcula os pesos com base nas amostras de bootstrap para cada árvore.
+* **`max_depth`**: `None`
+    * *Explicação*: Indica que não há um limite predefinido para a profundidade máxima das árvores. As árvores são expandidas até que todas as folhas sejam puras ou até que todas as folhas contenham menos amostras do que `min_samples_split`.
+* **`min_samples_leaf`**: `7`
+    * *Explicação*: O número mínimo de amostras que um nó folha (nó terminal de uma árvore) deve ter. Um valor maior previne a criação de folhas muito específicas, ajudando a evitar overfitting.
+* **`min_samples_split`**: `15`
+    * *Explicação*: O número mínimo de amostras que um nó interno deve ter para poder ser dividido em novos nós. Similar ao `min_samples_leaf`, ajuda a controlar a complexidade da árvore e a evitar overfitting.
+* **`n_estimators`**: `100`
+    * *Explicação*: O número de árvores na floresta. Um valor maior geralmente leva a um modelo melhor e mais estável, mas também aumenta o tempo de treinamento.
+
+**Parâmetros Adicionais (Fixos na Instanciação Base do `RandomForestClassifier` antes do `GridSearchCV`):**
+
+* **`random_state`**: `42`
+    * *Explicação*: Controla tanto a aleatoriedade do bootstrapping das amostras usadas ao construir as árvores (se `bootstrap=True`) quanto a amostragem das features a serem consideradas ao procurar a melhor divisão em cada nó. Usado para reprodutibilidade.
+* **`n_jobs`**: `-1`
+    * *Explicação*: Indica ao Scikit-learn para usar todos os processadores disponíveis para paralelizar o treinamento das árvores, acelerando o processo.
+
+### 2. Parâmetros do `CalibratedClassifierCV`
+
+O `best_rf_model` (com os hiperparâmetros acima) é então usado como o estimador base para a calibração:
+
+* **`base_estimator`**: `best_rf_model` (o RandomForestClassifier com os parâmetros otimizados listados acima)
+    * *Explicação*: O modelo cujas probabilidades serão calibradas.
+* **`method`**: `'isotonic'`
+    * *Explicação*: O método usado para a calibração. A regressão isotônica é um método não paramétrico que ajusta as probabilidades de forma a minimizar o erro quadrático médio, sob a restrição de que a função de calibração seja monotonicamente crescente. É geralmente mais flexível que o método 'sigmoid'.
+* **`cv`**: `5`
+    * *Explicação*: Determina a estratégia de validação cruzada. Aqui, 5 folds são usados. O modelo é treinado em 4 folds e calibrado no fold restante, e este processo é repetido para todos os folds. As previsões para cada fold são então usadas para treinar o calibrador final.
+
+### 3. Parâmetros Utilizados na Chamada `.fit()` do `GridSearchCV` e `CalibratedClassifierCV`
+
+* **`sample_weight`**: `sample_weights_train`
+    * *Explicação*: Pesos aplicados a amostras individuais durante o treinamento. No código, esses pesos são calculados para dar maior importância às amostras da classe minoritária, ajudando a lidar com o desbalanceamento dos dados. Este parâmetro é passado tanto para o `.fit()` do `GridSearchCV` quanto do `CalibratedClassifierCV`.
+
+---
+
+# *Explicação do Código1-1*
+
+## Análise Detalhada do Código Python: Modelo Random Forest para Previsão Salarial
+
+### 1. Visão Geral do Código
+
+* **Objetivo Principal:** O script tem como objetivo construir um modelo de Machine Learning, especificamente um `RandomForestClassifier`, para prever se um profissional da área de dados possui um salário "alto" (acima de R$ 8.000/mês) ou "baixo/médio" (até R$ 8.000/mês). Isso é tratado como um problema de classificação binária.
+* **Bibliotecas Utilizadas:**
+    * **`pandas`**: Para manipulação e análise de dados, principalmente na forma de DataFrames.
+    * **`numpy`**: Para operações numéricas, especialmente útil para cálculos de `sample_weights` e manipulação de arrays.
+    * **`sklearn.model_selection`**:
+        * `train_test_split`: Para dividir os dados em conjuntos de treino e teste.
+        * `GridSearchCV`: Para otimização de hiperparâmetros do modelo.
+    * **`sklearn.ensemble.RandomForestClassifier`**: A classe principal para a implementação do modelo Random Forest.
+    * **`sklearn.metrics`**: Contém diversas funções para avaliar a performance do modelo, como:
+        * `confusion_matrix`: Para criar a matriz de confusão.
+        * `accuracy_score`: Para calcular a acurácia.
+        * `classification_report`: Para gerar um relatório detalhado com precisão, recall, F1-score por classe.
+        * `roc_curve`, `auc`: Para gerar e calcular a área sob a Curva ROC.
+        * `balanced_accuracy_score`: Acurácia ponderada para classes desbalanceadas.
+        * `f1_score`: Métrica F1, que considera precisão e recall.
+        * `precision_recall_curve`: Para gerar a curva Precision-Recall.
+    * **`sklearn.calibration.CalibratedClassifierCV`**: Para calibrar as probabilidades do modelo, tornando-as mais confiáveis.
+    * **`matplotlib.pyplot`**: Para a criação de gráficos estáticos e visualizações.
+    * **`sklearn.tree.plot_tree`**: Para visualizar uma árvore de decisão individual do Random Forest.
+    * **`seaborn`**: Para criar visualizações estatísticas mais elaboradas e esteticamente agradáveis.
+    * **`os`**: Para interagir com o sistema operacional, como criar diretórios para salvar os gráficos.
+
+---
+
+## 2. Pré-processamento de Dados e Engenharia de Features
+
+O código realiza um pré-processamento extenso e uma engenharia de features cuidadosa.
+
+* **Carregamento dos Dados:**
+    * Os dados são carregados de um arquivo CSV (`dados_limpos.csv`). O script tenta primeiro um caminho no ambiente Kaggle (`/kaggle/input/dataset-clean/dados_limpos.csv`) e, se não encontrado, tenta carregar localmente.
+    * Uma mensagem é impressa indicando a origem do dataset carregado.
+
+* **Seleção e Limpeza Inicial:**
+    * São selecionadas colunas específicas para features (`colunas_features`) e a coluna alvo (`coluna_target`).
+    * Linhas com valores ausentes (`NaN`) nas colunas cruciais selecionadas são removidas usando `df_limpo.dropna(subset=colunas_necessarias, inplace=True)`.
+
+* **Engenharia de Features:**
+    * **Mapeamento Ordinal:** Diversas colunas categóricas ordinais são convertidas para representações numéricas usando mapeamentos predefinidos:
+        * `'Nível de ensino alcançado'` -> `formacao_academica_encoded` (e.g., 'Estudante de Graduação': 0, 'Doutorado ou Phd': 4)
+        * `'Tempo de experiência na área de dados'` -> `experiencia_profissional_encoded` (e.g., 'Menos de 1 ano': 0, 'Mais de 10 anos': 5)
+        * `'Nível de senioridade'` -> `senioridade_encoded` (e.g., 'Júnior': 0, 'Sênior': 2)
+        * `'Faixa salarial mensal'` -> `faixa_salarial_encoded` (e.g., 'Menos de R$ 1.000/mês': 0, 'Acima de R$ 40.001/mês': 12)
+    * **Criação da Variável Alvo Binária:**
+        * A variável alvo `salario_alto` é criada a partir da `faixa_salarial_encoded`. É definida como `1` se `faixa_salarial_encoded > 5` (correspondendo a salários acima de R$ 8.000/mês) e `0` caso contrário.
+    * **Codificação One-Hot:**
+        * Variáveis categóricas nominais (`'Área de formação acadêmica'`, `'UF onde mora'`, `'Setor de atuação da empresa'`) são transformadas em múltiplas colunas binárias (0 ou 1) usando `pd.get_dummies()`. Isso evita que o modelo interprete uma ordem inexistente nessas categorias.
+    * **Remoção Final de NaNs:** Após os mapeamentos, `dropna()` é usado novamente para garantir que não haja NaNs nas colunas codificadas que serão usadas no modelo.
+
+* **Definição das Features (X) e Target (y):**
+    * `X`: Contém as colunas de features processadas (codificadas ordinalmente e via one-hot).
+    * `y`: Contém a variável alvo binária `salario_alto`.
+
+* **Verificação de Dados e Balanceamento das Classes:**
+    * O código verifica se há dados suficientes para o treinamento e se existem pelo menos duas classes na variável alvo.
+    * A distribuição das classes (Salário Baixo/Médio vs. Salário Alto) é impressa, mostrando o percentual de cada uma. Isso é crucial para entender o desbalanceamento.
+
+* **Balanceamento dos Dados (Tratamento de Classes Desbalanceadas):**
+    * Em vez de usar técnicas de reamostragem como SMOTE, o script opta por duas estratégias:
+        1.  **`class_weight` no Modelo:** O hiperparâmetro `class_weight` do `RandomForestClassifier` (e usado no `GridSearchCV`) pode ser configurado como `'balanced'` ou `'balanced_subsample'` para que o modelo penalize mais os erros na classe minoritária.
+        2.  **`sample_weights` no Treinamento:** Pesos são calculados para cada amostra (`sample_weights`) com base na frequência das classes. Amostras da classe minoritária recebem um peso maior. Esses pesos são passados diretamente para o método `fit` do `GridSearchCV` e do `CalibratedClassifierCV`.
+            ```python
+            class_weights_calc = {0: 1.0, 1: class_counts[0] / class_counts[1]}
+            sample_weights = np.array([class_weights_calc[cls] for cls in y])
+            ```
+
+* **Divisão em Conjuntos de Treino e Teste:**
+    * Os dados (`X`, `y`) e os `sample_weights` são divididos em conjuntos de treino e teste usando `train_test_split`.
+    * `test_size=0.3`: 30% dos dados são reservados para o conjunto de teste, e 70% para o treino.
+    * `random_state=42`: Garante que a divisão seja a mesma toda vez que o código for executado, permitindo reprodutibilidade.
+    * `stratify=y`: Assegura que a proporção das classes na variável alvo `y` seja mantida tanto no conjunto de treino quanto no de teste. Isso é especialmente importante para dados desbalanceados.
+    * Os tamanhos dos conjuntos resultantes (`X_train`, `X_test`, `y_train`, `y_test`) são impressos.
+
+---
+
+## 3. Construção e Treinamento do Modelo Random Forest
+
+* **Otimização de Hiperparâmetros com `GridSearchCV`:**
+    * Uma grade de hiperparâmetros (`param_grid`) é definida para o `RandomForestClassifier`. Os parâmetros testados incluem:
+        * `n_estimators`: Número de árvores na floresta (100, 200, 300). Mais árvores geralmente melhoram o desempenho, mas aumentam o custo computacional.
+        * `max_depth`: Profundidade máxima de cada árvore (None - sem limite, 10, 20). Controla a complexidade das árvores; None pode levar a overfitting se não controlado por outros parâmetros.
+        * `min_samples_split`: Número mínimo de amostras necessárias para dividir um nó interno (5, 10, 15). Ajuda a controlar o overfitting.
+        * `min_samples_leaf`: Número mínimo de amostras que um nó folha deve ter (3, 5, 7). Também ajuda a controlar o overfitting.
+        * `class_weight`: Estratégia para lidar com classes desbalanceadas ('balanced', 'balanced_subsample').
+    * Um modelo base `RandomForestClassifier` é instanciado com `random_state=42` (para reprodutibilidade) e `n_jobs=-1` (para usar todos os processadores disponíveis).
+    * `GridSearchCV` é instanciado para testar todas as combinações de hiperparâmetros da `param_grid`.
+        * `estimator=rf_base`: O modelo a ser otimizado.
+        * `cv=5`: Utiliza validação cruzada de 5 folds. Os dados de treino são divididos em 5 partes; o modelo é treinado em 4 e validado na 5ª, repetindo o processo 5 vezes.
+        * `scoring='balanced_accuracy'`: A métrica usada para avaliar qual combinação de hiperparâmetros é a melhor. A acurácia balanceada é preferível à acurácia simples em casos de desbalanceamento.
+        * `verbose=1`: Mostra mensagens durante o processo de busca.
+    * O `GridSearchCV` é treinado usando `grid_search.fit(X_train, y_train, sample_weight=sample_weights_train)`. Note o uso de `sample_weights_train` aqui.
+    * Os melhores parâmetros encontrados pelo `GridSearchCV` são impressos e o melhor estimador (`best_rf_model`) é armazenado.
+
+---
+
+## 4. Calibração do Modelo
+
+* **Objetivo:** As probabilidades brutas de modelos como Random Forest podem não ser bem calibradas (ex: uma probabilidade prevista de 0.7 não significa necessariamente 70% de chance real). A calibração ajusta essas probabilidades para que sejam mais confiáveis.
+* **Implementação:**
+    * `CalibratedClassifierCV` é usado para calibrar o `best_rf_model` encontrado pelo `GridSearchCV`.
+    * `base_estimator=best_rf_model`: O modelo a ser calibrado.
+    * `method='isotonic'`: O método de calibração. A regressão isotônica é um método não paramétrico que geralmente funciona bem. Alternativamente, 'sigmoid' (regressão logística) poderia ser usado.
+    * `cv=5`: Usa validação cruzada de 5 folds para a calibração.
+    * O modelo calibrado (`calibrated_model`) é treinado usando `calibrated_model.fit(X_train, y_train, sample_weight=sample_weights_train)`, novamente utilizando os pesos das amostras.
+
+---
+
+## 5. Realização de Previsões e Otimização do Limiar de Classificação
+
+* **Previsão de Probabilidades:**
+    * O modelo calibrado é usado para prever as probabilidades para a classe positiva (salário alto) no conjunto de teste:
+        ```python
+        y_pred_proba_test = calibrated_model.predict_proba(X_test)[:, 1]
+        ```
+    * `predict_proba` retorna um array com as probabilidades para cada classe. `[:, 1]` seleciona as probabilidades da classe positiva (índice 1). Essas probabilidades são cruciais porque o limiar de decisão padrão de 0.5 nem sempre é o ideal, especialmente em problemas com classes desbalanceadas ou quando os custos de erros falso positivo e falso negativo são diferentes.
+
+* **Avaliação com Diferentes Limiares:**
+    * O código testa uma série de limiares de classificação (`thresholds = [0.3, 0.4, 0.5, 0.6, 0.7]`).
+    * Para cada limiar:
+        * As probabilidades são convertidas em predições de classe: `(y_pred_proba_test >= threshold).astype(int)`.
+        * São calculadas e impressas diversas métricas: Acurácia, Acurácia Balanceada, F1-Score, Matriz de Confusão (TN, FP, FN, TP), e Precisão/Recall para cada classe.
+    * **Seleção do Melhor Limiar:** O limiar que resulta na maior `balanced_accuracy` é escolhido como o "melhor limiar".
+        ```python
+        best_threshold_idx = max(range(len(results)), key=lambda i: results[i]['balanced_accuracy'])
+        best_threshold = results[best_threshold_idx]['threshold']
+        ```
+    * As predições finais no conjunto de teste (`y_pred_final`) são feitas usando este melhor limiar.
+
+---
+
+## 6. Avaliação Final do Modelo
+
+* Com as predições finais (`y_pred_final`) obtidas usando o limiar otimizado, um `classification_report` completo é gerado e impresso.
+* Este relatório fornece:
+    * **Precisão (Precision):** Das vezes que o modelo previu uma classe, quantas estavam corretas. (TP / (TP + FP))
+    * **Recall (Sensibilidade):** Das instâncias reais de uma classe, quantas o modelo conseguiu identificar corretamente. (TP / (TP + FN))
+    * **F1-Score:** Média harmônica da precisão e do recall. É uma boa métrica geral, especialmente se houver desbalanceamento.
+    * **Support:** Número de ocorrências reais de cada classe.
+    * **Accuracy (Acurácia Geral):** Proporção de predições corretas no total.
+    * **Macro Avg:** Média aritmética das métricas (precisão, recall, F1) para cada classe, sem ponderação.
+    * **Weighted Avg:** Média das métricas ponderada pelo suporte de cada classe.
+
+---
+
+## 7. Análise de Importância das Features
+
+* **Cálculo:** A importância de cada feature é extraída do `best_rf_model` (o modelo Random Forest otimizado, antes da calibração, pois `CalibratedClassifierCV` não expõe `feature_importances_` diretamente do `base_estimator` de forma simples, mas o `best_rf_model` é o estimador treinado).
+    ```python
+    importances = best_rf_model.feature_importances_
+    feature_names = X.columns
+    indices = np.argsort(importances)[::-1] # Ordena da mais para a menos importante
+    ```
+* **Valor da Informação:** Entender quais features são mais influentes para as previsões do modelo é crucial para:
+    * Interpretabilidade do modelo.
+    * Seleção de features (possivelmente removendo as menos importantes para simplificar o modelo).
+    * Obter insights sobre o problema em questão.
+* **Visualização:**
+    * Um gráfico de barras horizontais mostra as **20 features mais importantes**.
+    * Para uma análise mais detalhada, são gerados gráficos de barras **por grupo de features** (prefixo do nome da feature, ex: 'Área de formação acadêmica_'), caso haja mais de 20 features no total. Isso ajuda a organizar a visualização quando há muitas features (especialmente após o one-hot encoding).
+    * Um gráfico de barras horizontais focado nas **Top 3 features mais importantes** é criado, com os valores de importância anotados nas barras.
+
+---
+
+## 8. Visualizações Geradas
+
+O script gera e salva diversas visualizações para ajudar na compreensão e avaliação do modelo. Todas são salvas no diretório `/kaggle/working/`.
+
+* **Configuração dos Gráficos:** Um estilo (`seaborn-v0_8-whitegrid`) e tamanhos de fonte/figura padrão são definidos para consistência.
+* **Gráficos:**
+    1.  **Matriz de Confusão (`matriz_confusao_otimizada.png`):**
+        * Visualiza o desempenho do modelo no conjunto de teste usando o limiar otimizado. Mostra Verdadeiros Positivos (TP), Verdadeiros Negativos (TN), Falsos Positivos (FP) e Falsos Negativos (FN).
+    2.  **Curva ROC (`curva_roc_otimizada.png`):**
+        * Plota a Taxa de Verdadeiros Positivos (TPR) contra a Taxa de Falsos Positivos (FPR) para diferentes limiares de classificação.
+        * A área sob a curva (AUC) é uma medida da capacidade do modelo de distinguir entre as classes. Um valor maior é melhor.
+        * Uma linha vertical indica o melhor limiar encontrado.
+    3.  **Curva Precision-Recall (`precision_recall_curve.png`):**
+        * Mostra a relação entre precisão e recall para diferentes limiares. É particularmente útil para problemas com classes desbalanceadas.
+    4.  **Importância das Features (`importancia_features_top20.png`, `importancia_features_grupo_*.png`, `top3_features.png`):**
+        * Conforme descrito na seção anterior, visualiza a relevância de cada feature.
+    5.  **Distribuição das Probabilidades Preditas (`distribuicao_probabilidades.png`):**
+        * Um histograma das probabilidades previstas para a classe "Salário Alto" no conjunto de teste.
+        * Uma linha vertical marca o melhor limiar, ajudando a visualizar como ele separa as predições.
+    6.  **Visualização de uma Árvore do Random Forest (`arvore_exemplo_melhorada.png`, `arvore_exemplo_simplificada.png`):**
+        * Mostra a estrutura de uma única árvore de decisão do ensemble Random Forest (a primeira árvore, `estimators_[0]`).
+        * Duas versões são salvas: uma mais detalhada (`max_depth=4`) e uma mais simplificada (`max_depth=3`) para facilitar a interpretação. É útil para entender como as decisões são tomadas em um nível micro.
+    7.  **Análise de Interação entre Formação e Experiência (`interacao_formacao_experiencia.png`):**
+        * Um heatmap que mostra a probabilidade média de ter "Salário Alto" para diferentes combinações de `formacao_academica_encoded` e `experiencia_profissional_encoded`. Isso ajuda a identificar interações entre essas duas features importantes.
+    8.  **Gráfico de Dispersão para as Duas Features Mais Importantes (`dispersao_top2_features.png`):**
+        * Se houver pelo menos duas features, um gráfico de dispersão é criado usando as duas features mais importantes do conjunto de teste. Os pontos são coloridos pela probabilidade prevista de "Salário Alto", permitindo visualizar como essas duas features, em conjunto, se relacionam com a previsão.
 
 -------------------------------------------
 
