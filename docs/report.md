@@ -5590,8 +5590,6 @@ O modelo Random Forest demonstrou um desempenho geral **bom** na tarefa de class
     * O desempenho para a classe "Salário Alto" (Precisão `0.79`, Recall `0.78`) é ligeiramente inferior ao da classe "Salário Baixo/Médio". Isso significa que há um pouco mais de erro ao prever salários altos, tanto em termos de previsões incorretas dessa classe (afetando a precisão) quanto em não conseguir identificar todos os que de fato têm salário alto (afetando o recall). Especificamente, 93 profissionais de salário alto foram classificados erroneamente como de salário baixo/médio (Falsos Negativos).
     * Ainda existem 90 casos onde o modelo previu "Salário Alto" mas era "Salário Baixo/Médio" (Falsos Positivos). Dependendo do objetivo de negócio, esses erros podem ter custos diferentes.
 
-No geral, o modelo parece ser uma ferramenta útil para entender os fatores que levam a salários mais altos, com uma capacidade de generalização razoável para novos dados.
-
 ## Principais Insights e Observações:
 
 * **Distribuição das Classes:** O dataset original apresentava um leve desbalanceamento, com 57.35% dos profissionais na categoria "Salário Baixo/Médio" e 42.65% em "Salário Alto". O uso de `class_weight='balanced_subsample'` nos hiperparâmetros do modelo e a otimização do limiar baseada na `balanced_accuracy` foram estratégias importantes para lidar com isso.
@@ -5605,35 +5603,322 @@ No geral, o modelo parece ser uma ferramenta útil para entender os fatores que 
 ### top3_features
 ![top3_features](https://github.com/user-attachments/assets/02f25d1b-4639-4cd9-a357-7a89297bff03)
 
+O gráfico apresentado é um **diagrama de barras horizontais** que ilustra as **três características (features) mais influentes** que o modelo de machine learning utilizou para fazer suas previsões sobre a faixa salarial dos profissionais de dados. O título "Top 3 Features Mais Importantes" já nos indica seu propósito principal.
+
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Features):** No lado esquerdo, temos o nome das três features mais relevantes identificadas pelo modelo:
+    * `senioridade_encoded`
+    * `experiencia_profissional_encoded`
+    * `formacao_academica_encoded`
+    *(Estas são as versões codificadas (transformadas em números) das características originais de nível de senioridade, tempo de experiência e formação acadêmica.)*
+
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, temos a escala de "Importância Relativa". Esta escala vai de 0.00 até um valor um pouco acima de 0.40. Quanto maior a barra, maior a importância relativa daquela característica para as decisões do modelo.
+
+* **Barras e Valores:** Cada barra colorida representa uma feature, e seu comprimento corresponde à sua importância. Os números ao final de cada barra indicam o valor exato dessa importância:
+    * **`senioridade_encoded`:** A barra azul, a mais longa, tem uma importância relativa de aproximadamente **0.4053**. Isso significa que o nível de senioridade do profissional foi o fator individual mais forte que o modelo usou para diferenciar as faixas salariais.
+    * **`experiencia_profissional_encoded`:** A barra laranja, a segunda mais longa, tem uma importância de **0.3588**. O tempo de experiência profissional é a segunda característica mais decisiva.
+    * **`formacao_academica_encoded`:** A barra verde, a menor entre as três, possui uma importância de **0.0952**. Embora ainda esteja entre as três primeiras, a formação acadêmica teve um peso consideravelmente menor na definição da faixa salarial em comparação com a senioridade e a experiência, segundo este modelo.
+
+**O que isso significa?**
+
+Este gráfico nos diz que, para o modelo treinado, o **nível de senioridade** de um profissional de dados é o indicador mais poderoso para prever sua faixa salarial. Em seguida, vem o **tempo de experiência na área**. A **formação acadêmica**, apesar de relevante, aparece com uma influência menor quando comparada diretamente com os outros dois fatores dentro deste top 3.
+
+
 ### precision_recall_curve
 ![precision_recall_curve (1)](https://github.com/user-attachments/assets/c74124a4-f6b4-4592-9011-bba7013e93f4)
+
+O gráfico apresentado é uma **Curva Precision-Recall**. Este tipo de gráfico é uma ferramenta visual importante para avaliar o desempenho de um modelo de classificação, especialmente quando as classes que o modelo tenta prever são desbalanceadas (ou seja, uma classe tem muito mais exemplos que a outra).
+
+**Como Ler o Gráfico:**
+
+* **Título:** "Curva Precision-Recall" indica o que o gráfico representa.
+* **Eixo Vertical (Precision / Precisão):** Este eixo mede a "Precisão" do modelo e varia de aproximadamente 0.4 (40%) a 1.0 (100%).
+    * **O que é Precisão?** De todas as vezes que o modelo previu um resultado positivo (por exemplo, "Salário Alto"), qual a porcentagem dessas previsões estava realmente correta? Uma precisão alta significa que quando o modelo diz que algo é positivo, ele geralmente está certo.
+* **Eixo Horizontal (Recall / Revocação / Sensibilidade):** Este eixo mede o "Recall" do modelo e varia de 0.0 (0%) a 1.0 (100%).
+    * **O que é Recall?** De todos os casos que eram *realmente* positivos (por exemplo, todos os profissionais que *realmente* têm "Salário Alto"), qual a porcentagem que o modelo conseguiu identificar corretamente? Um recall alto significa que o modelo encontra a maioria dos casos positivos existentes.
+* **A Linha Azul:** A linha azul no gráfico traça a relação entre a precisão e o recall do modelo em diferentes "limiares de decisão".
+    * **Limiar de Decisão:** Pense nisso como o nível de confiança que o modelo precisa ter para classificar algo como positivo. Se o limiar for muito alto, o modelo será muito cauteloso (alta precisão, mas pode perder alguns casos positivos, resultando em baixo recall). Se o limiar for muito baixo, o modelo identificará mais casos positivos (alto recall), mas também cometerá mais erros ao classificar casos negativos como positivos (baixa precisão).
+
+**Interpretando a Curva:**
+
+* **Trade-off entre Precisão e Recall:** A curva geralmente mostra um "trade-off" (uma troca) entre precisão e recall. Idealmente, gostaríamos que ambas as métricas fossem 100% (canto superior direito do gráfico), mas na prática, aumentar uma muitas vezes leva à diminuição da outra. Isso é visível no gráfico: à medida que o Recall aumenta (movendo-se para a direita no eixo horizontal), a Precisão tende a diminuir (a linha azul geralmente desce).
+* **Formato da Curva:**
+    * No início (lado esquerdo), quando o Recall é baixo (o modelo está identificando poucos dos verdadeiros positivos), a Precisão é alta (próxima de 1.0). Isso sugere que para os poucos casos que ele classifica como positivos, ele está muito certo.
+    * À medida que o modelo tenta capturar mais dos verdadeiros positivos (Recall aumenta), a Precisão começa a cair. Vemos isso pela descida da linha azul. Por exemplo, quando o Recall está em torno de 0.8, a Precisão já caiu para perto de 0.7.
+    * A queda se torna mais acentuada no final direito da curva, onde para alcançar um Recall muito alto (perto de 1.0), a Precisão cai significativamente para cerca de 0.4.
+* **O que é um "bom" resultado?** Uma curva que se mantém o mais próximo possível do canto superior direito (alta precisão e alto recall simultaneamente) indica um modelo com melhor desempenho. Quanto mais a curva "abraça" o canto superior direito, melhor.
+
+**O que este gráfico nos diz sobre o modelo?**
+
+Este gráfico específico mostra que o modelo pode alcançar uma precisão muito alta (perto de 100%) se estivermos dispostos a aceitar um recall baixo (identificar apenas uma pequena fração dos verdadeiros positivos). Por outro lado, se quisermos que o modelo encontre quase todos os verdadeiros positivos (recall perto de 100%), a precisão cairá consideravelmente (para cerca de 40-50%).
+
+A escolha do "melhor" ponto na curva (ou seja, o melhor limiar de decisão) depende do problema específico e de qual erro é mais custoso: classificar um negativo como positivo (erro de precisão) ou não conseguir identificar um positivo (erro de recall).
 
 ### matriz_confusao_otimizada
 ![matriz_confusao_otimizada (1)](https://github.com/user-attachments/assets/44b373ea-b840-4d47-afd7-804967449a49)
 
+O gráfico apresentado é uma **Matriz de Confusão**. Este é um tipo de tabela que ajuda a visualizar o quão bem um modelo de machine learning está performando em uma tarefa de classificação. No caso deste modelo, ele está classificando profissionais entre duas categorias de salário: "Salário Baixo/Médio" e "Salário Alto". O título nos informa que estes resultados são do "Conjunto de Teste" (dados que o modelo não viu durante o treinamento) e que foi utilizado um "Limiar Otimizado" para a classificação.
+
+**Como Ler o Gráfico:**
+
+A matriz é dividida em quatro quadrantes principais, comparando os valores *verdadeiros* (a realidade) com os valores *previstos* pelo modelo:
+
+* **Eixo Vertical (Rótulo "Verdadeiro"):** Mostra a classificação real dos profissionais.
+    * Linha de cima: Profissionais que *realmente* têm "Salário Baixo/Médio".
+    * Linha de baixo: Profissionais que *realmente* têm "Salário Alto".
+
+* **Eixo Horizontal (Rótulo "Previsto"):** Mostra o que o modelo *previu* para esses profissionais.
+    * Coluna da esquerda: O modelo previu "Salário Baixo/Médio".
+    * Coluna da direita: O modelo previu "Salário Alto".
+
+**Interpretando os Quadrantes:**
+
+1.  **Quadrante Superior Esquerdo (Valor: 478):**
+    * **Verdadeiro:** Salário Baixo/Médio
+    * **Previsto:** Salário Baixo/Médio
+    * **Significado:** O modelo acertou! Ele classificou corretamente 478 profissionais que realmente têm salário baixo/médio como tendo salário baixo/médio. Estes são os **Verdadeiros Negativos (TN)**, assumindo "Salário Alto" como a classe positiva.
+
+2.  **Quadrante Superior Direito (Valor: 90):**
+    * **Verdadeiro:** Salário Baixo/Médio
+    * **Previsto:** Salário Alto
+    * **Significado:** O modelo errou. Ele classificou 90 profissionais que realmente têm salário baixo/médio como se tivessem salário alto. Estes são os **Falsos Positivos (FP)** – o modelo "positivou" erroneamente para salário alto.
+
+3.  **Quadrante Inferior Esquerdo (Valor: 93):**
+    * **Verdadeiro:** Salário Alto
+    * **Previsto:** Salário Baixo/Médio
+    * **Significado:** O modelo errou. Ele classificou 93 profissionais que realmente têm salário alto como se tivessem salário baixo/médio. Estes são os **Falsos Negativos (FN)** – o modelo "negou" erroneamente a presença de um salário alto.
+
+4.  **Quadrante Inferior Direito (Valor: 329):**
+    * **Verdadeiro:** Salário Alto
+    * **Previsto:** Salário Alto
+    * **Significado:** O modelo acertou! Ele classificou corretamente 329 profissionais que realmente têm salário alto como tendo salário alto. Estes são os **Verdadeiros Positivos (TP)**.
+
+**Cores:**
+A intensidade da cor azul nos quadrantes geralmente corresponde ao número de instâncias. Quadrantes com números maiores (como 478 e 329, que são os acertos) são mais escuros, enquanto quadrantes com números menores (como 90 e 93, que são os erros) são mais claros.
+
+**O que este gráfico nos diz sobre o modelo?**
+
+* **Acertos:** O modelo acertou um bom número de previsões, como indicado pelos valores na diagonal principal (478 e 329).
+* **Tipos de Erros:**
+    * Ele cometeu 90 erros do tipo "Falso Positivo" (achou que era salário alto, mas não era).
+    * Ele cometeu 93 erros do tipo "Falso Negativo" (não identificou um salário alto que era real).
+* **Desempenho Geral:** A matriz de confusão permite uma análise detalhada de onde o modelo está acertando e onde está errando. Idealmente, os números na diagonal principal (acertos) seriam os maiores possíveis, e os números fora da diagonal (erros) seriam os menores possíveis.
+
 ### interacao_formacao_experiencia
 ![interacao_formacao_experiencia (1)](https://github.com/user-attachments/assets/c6c03e66-554e-42db-a435-e5e909bb9857)
+
+O gráfico apresentado é um **mapa de calor (heatmap)**. Ele mostra visualmente como a combinação do **nível de formação acadêmica** e do **tempo de experiência profissional** influencia a **probabilidade de um profissional ter um salário considerado alto**.
+
+**Como Ler o Gráfico:**
+
+* **Título:** "Probabilidade de Salário Alto por Formação Acadêmica e Experiência Profissional" indica claramente o que o gráfico está medindo.
+* **Eixo Vertical (Nível de Formação):** Lista os diferentes níveis de escolaridade, desde "Estudante de Graduação" no topo até "Doutorado ou Phd" na base.
+* **Eixo Horizontal (Tempo de Experiência):** Apresenta faixas de tempo de experiência profissional, começando com "Menos de 1 ano" à esquerda e indo até "de 7 a 10 anos" à direita.
+* **Células e Números:** Cada "quadradinho" (célula) no gráfico representa a intersecção de um nível de formação específico com uma faixa de tempo de experiência. O número dentro de cada célula (por exemplo, 0.01, 0.61, 0.94) é a **probabilidade estimada** de um profissional com aquela combinação de formação e experiência ter um salário alto. Uma probabilidade de 0.01 significa 1% de chance, enquanto 0.94 significa 94% de chance.
+* **Escala de Cores (Barra à Direita):** A barra vertical à direita é a legenda das cores. As cores no mapa de calor correspondem a essas probabilidades:
+    * **Cores escuras (roxo/azul escuro):** Indicam uma baixa probabilidade de ter salário alto.
+    * **Cores claras (verde, amarelo):** Indicam uma alta probabilidade de ter salário alto.
+    Quanto mais clara/amarela a cor, maior a chance.
+
+**Interpretando as Tendências e Insights do Gráfico:**
+
+1.  **Impacto da Experiência (Movendo da Esquerda para a Direita):**
+    * Para qualquer nível de formação, de modo geral, **quanto maior o tempo de experiência, maior a probabilidade de ter um salário alto.** Isso é visível porque, ao seguir uma linha horizontal (mesmo nível de formação), as cores tendem a ficar mais claras/amarelas à medida que você se move para a direita.
+    * Por exemplo, para um "Graduação/Bacharelado":
+        * Com "Menos de 1 ano" de experiência, a probabilidade é baixa (0.06 ou 6%).
+        * Com "de 7 a 10 anos" de experiência, a probabilidade sobe consideravelmente (0.74 ou 74%).
+
+2.  **Impacto da Formação Acadêmica (Movendo de Cima para Baixo):**
+    * Para qualquer faixa de experiência (especialmente após alguns anos), **quanto maior o nível de formação acadêmica, maior a probabilidade de ter um salário alto.** Isso é notado porque, ao seguir uma coluna vertical (mesmo tempo de experiência), as cores geralmente se tornam mais claras/amarelas à medida que você desce.
+    * Por exemplo, com "de 3 a 4 anos" de experiência:
+        * Um "Estudante de Graduação" tem 0.23 (23%) de probabilidade.
+        * Um "Doutorado ou Phd" tem 0.89 (89%) de probabilidade.
+
+3.  **Interação entre Formação e Experiência (O Ponto Crucial):**
+    * O gráfico demonstra que não é apenas um fator isolado, mas a **combinação** de formação e experiência que mais fortemente influencia a probabilidade de um salário alto.
+    * Profissionais com **níveis mais altos de formação E mais tempo de experiência** (canto inferior direito do gráfico) são os que apresentam as maiores probabilidades de terem salários altos (cores mais amarelas, com probabilidades como 0.91, 0.92, 0.94).
+    * Por outro lado, aqueles com **baixa formação E pouca experiência** (canto superior esquerdo) têm as menores probabilidades (cores mais escuras, com probabilidades como 0.01, 0.06).
+    * É interessante notar que, em alguns casos, muita experiência pode compensar um nível de formação um pouco menor. Por exemplo, um "Estudante de Graduação" com "de 7 a 10 anos" de experiência (0.67) tem uma probabilidade maior de salário alto do que um "Mestrado" com "Menos de 1 ano" de experiência (0.04).
+
 
 ### importancia_features_top20
 ![importancia_features_top20](https://github.com/user-attachments/assets/cbfc487f-4a48-45e1-8a0a-b5ccdf0b2bb5)
 
+O gráfico apresentado é um **diagrama de barras horizontais** que mostra as **20 características (features) consideradas mais importantes** pelo modelo Random Forest para fazer suas previsões sobre a faixa salarial. O título "Importância das 20 Features Mais Relevantes (Random Forest)" resume seu objetivo.
+
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Features):** No lado esquerdo, estão listados os nomes das 20 features que mais influenciaram o modelo. Elas estão ordenadas da menos importante (no topo das 20) para a mais importante (na base das 20).
+    * Vemos features como `senioridade_encoded`, `experiencia_profissional_encoded`, `formacao_academica_encoded` (que já vimos serem as top 3), e outras como `UF onde mora_SP` (indicando se a pessoa mora em São Paulo), `Setor de atuação da empresa_Finanças ou Bancos`, `Área de formação acadêmica_Computação / Engenharia de Software / Sistemas de Informação / TI`, entre outras.
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" varia de 0.00 a pouco mais de 0.40. Quanto maior a barra para uma feature, maior sua importância para as decisões tomadas pelo modelo.
+* **Barras Azuis:** Cada barra azul representa uma feature, e seu comprimento é proporcional à sua importância relativa.
+
+**Interpretando as Informações do Gráfico:**
+
+1.  **As Campeãs de Importância:**
+    * As três barras na parte inferior do gráfico (`senioridade_encoded`, `experiencia_profissional_encoded` e `formacao_academica_encoded`) são significativamente mais longas que todas as outras. Isso confirma que o **nível de senioridade**, o **tempo de experiência profissional** e o **nível de formação acadêmica codificado** são, de longe, os fatores mais decisivos que o modelo utiliza para prever a faixa salarial.
+    * `senioridade_encoded` é a mais importante, com um valor de importância relativa em torno de 0.40.
+    * `experiencia_profissional_encoded` vem em seguida, com importância em torno de 0.35.
+    * `formacao_academica_encoded` tem uma importância próxima a 0.10.
+
+2.  **As Demais Features Relevantes:**
+    * Após as três primeiras, há uma queda acentuada na importância. As 17 features restantes têm uma influência consideravelmente menor, com barras muito mais curtas.
+    * Entre estas, encontramos:
+        * **Localização:** `UF onde mora_SP` (morar em São Paulo) aparece como a quarta feature mais importante, embora com um peso bem menor que as três primeiras. Outras UFs como RJ, PR, RS, DF também figuram na lista, indicando que a localização geográfica tem alguma influência.
+        * **Setor de Atuação da Empresa:** Características como `Setor de atuação da empresa_Finanças ou Bancos`, `Setor de atuação da empresa_Tecnologia/Fábrica de Software`, `Setor de atuação da empresa_Area de Consultoria` também são consideradas pelo modelo, sugerindo que o setor onde o profissional trabalha impacta a previsão salarial.
+        * **Área de Formação Específica:** Além do nível de formação (já no top 3), a área específica da formação também contribui, como `Área de formação acadêmica_Computação / Engenharia de Software / Sistemas de Informação / TI` e `Área de formação acadêmica_Economia/ Administração / Contabilidade / Finanças/ Negócios`.
+
+3.  **O Conceito de "Importância Relativa":**
+    * Os valores no eixo horizontal não são, por exemplo, percentagens diretas do salário, mas sim uma medida de quanto cada feature contribuiu para reduzir a impureza (ou aumentar a precisão) nas árvores de decisão que compõem o modelo Random Forest. A soma de todas as importâncias de todas as features (não apenas as 20 mostradas) seria 1.0 (ou 100%).
+
+**O que este gráfico nos diz sobre o modelo?**
+
+Este gráfico é fundamental para entender "o que o modelo está pensando". Ele revela que, embora muitas características sejam consideradas, um pequeno grupo delas (senioridade, experiência e nível de formação) domina o processo de decisão para prever salários. As outras 17 features mostradas, como localização, setor da empresa e área de formação específica, adicionam nuances e refinamentos à previsão, mas têm um papel secundário em comparação com os três principais fatores.
+
 ### importancia_features_grupo_UF onde mora
 ![importancia_features_grupo_UF onde mora](https://github.com/user-attachments/assets/45719ffa-d305-41f2-b595-4bb70ee884bc)
+
+O gráfico apresentado é um **diagrama de barras horizontais** que detalha a **importância relativa de cada Unidade Federativa (UF) onde um profissional mora**, segundo o modelo de machine learning. O título "Importância das Features: Grupo UF onde mora" indica que estamos olhando especificamente para o impacto da localização geográfica (estado) nas previsões de faixa salarial.
+
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Features - UFs):** No lado esquerdo, temos uma lista de features, cada uma começando com `UF onde mora_` seguida pela sigla de um estado brasileiro (por exemplo, `UF onde mora_SP` para São Paulo, `UF onde mora_PB` para Paraíba). As UFs estão ordenadas, aparentemente da menos importante (no topo) para a mais importante (na base) dentro deste grupo.
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" varia de 0.000 a 0.014. É importante notar que esta escala é bem menor comparada a gráficos de importância de features mais gerais (como o "Top 3" ou "Top 20"). Isso significa que a influência individual de cada estado, embora existente, é mais sutil do que a de fatores como senioridade ou experiência.
+* **Barras Verdes:** Cada barra verde representa um estado específico, e seu comprimento é proporcional à sua importância relativa para as decisões do modelo ao prever a faixa salarial.
+
+**Interpretando as Informações do Gráfico:**
+
+1.  **Qual Estado Mais Influencia (Dentro Deste Grupo)?**
+    * A barra mais longa na parte inferior do gráfico corresponde a `UF onde mora_SP` (São Paulo), com uma importância relativa de aproximadamente 0.0135. Isso indica que, dentre todos os estados analisados como features individuais, residir em São Paulo foi o fator geográfico com maior peso para o modelo.
+
+2.  **Outros Estados com Alguma Relevância:**
+    * Seguindo São Paulo, vemos outros estados com barras progressivamente menores, indicando menor (mas ainda alguma) importância. Nesta lista, destacam-se (em ordem decrescente de importância aproximada mostrada): Paraíba (PB), Distrito Federal (DF), Rio Grande do Sul (RS), Paraná (PR), Rio de Janeiro (RJ), Goiás (GO), Minas Gerais (MG), Santa Catarina (SC), entre outros.
+
+3.  **Estados com Menor Influência Individual:**
+    * Muitos estados, especialmente os localizados na parte superior do gráfico (como Maranhão - MA, Tocantins - TO, Rondônia - RO, Piauí - PI, etc.), possuem barras muito curtas, próximas de zero. Isso sugere que, individualmente, residir nesses estados teve um impacto mínimo ou quase nulo nas previsões de faixa salarial do modelo, *quando comparados aos estados mais influentes como SP*.
+
+4.  **Contexto da Importância:**
+    * É crucial entender que esta "importância relativa" é específica para o grupo "UF onde mora". Embora São Paulo (`UF onde mora_SP`) seja o mais importante *neste grupo*, sua importância geral (0.0135) é consideravelmente menor do que a das features principais do modelo, como `senioridade_encoded` (que tinha importância em torno de 0.40 em gráficos anteriores).
+    * Este gráfico nos dá um zoom na contribuição de cada estado, assumindo que a variável original "UF onde mora" foi transformada em múltiplas features binárias (uma para cada estado, provavelmente através de um processo chamado *one-hot encoding*).
+
+**O que este gráfico nos diz sobre o modelo e os dados?**
+
+Este gráfico detalhado sugere que o modelo encontrou diferenças na probabilidade de ter um salário alto dependendo do estado de residência do profissional. A proeminência de São Paulo pode refletir a concentração econômica e de oportunidades com salários potencialmente mais altos nesse estado. As demais UFs contribuem com informações adicionais, mas com pesos menores.
 
 ### importancia_features_grupo_Setor de atuação da empresa
 ![importancia_features_grupo_Setor de atuação da empresa](https://github.com/user-attachments/assets/af6a6298-28fc-4629-890e-c645aa54ca47)
 
+O gráfico apresentado é um **diagrama de barras horizontais**. Ele mostra a **importância relativa de diferentes setores de atuação das empresas** onde os profissionais de dados trabalham, de acordo com o modelo de machine learning. O título "Importância das Features: Grupo Setor de atuação da empresa" nos diz que estamos analisando o impacto específico dessa categoria de característica nas previsões de faixa salarial.
+
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Features - Setores):** No lado esquerdo, estão listados os diversos setores de atuação. Cada um começa com `Setor de atuação da empresa_` seguido pelo nome do setor (por exemplo, `_Finanças ou Bancos`, `_Varejo`, `_Tecnologia/Fábrica de Software`). Eles parecem estar ordenados da menor importância (no topo) para a maior importância (na base) dentro deste grupo específico.
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" varia de 0.000 a 0.012. É importante notar que esta escala é relativamente pequena, indicando que, embora haja diferenças entre os setores, a influência individual de cada setor pode ser mais sutil em comparação com fatores mais dominantes como senioridade ou experiência (vistos em gráficos anteriores).
+* **Barras Verdes:** Cada barra verde representa um setor de atuação específico. O comprimento da barra é proporcional à sua importância relativa para as decisões que o modelo tomou ao prever a faixa salarial.
+
+**Interpretando as Informações do Gráfico:**
+
+1.  **Qual Setor Mais Influencia (Dentro Deste Grupo)?**
+    * A barra mais longa, localizada na parte inferior do gráfico, corresponde a `Setor de atuação da empresa_Finanças ou Bancos`. Este setor tem a maior importância relativa dentro deste grupo, com um valor aproximado de 0.0115. Isso sugere que trabalhar no setor de Finanças ou Bancos foi o fator setorial com maior peso para o modelo.
+
+2.  **Outros Setores com Relevância Notável:**
+    * Abaixo de "Finanças ou Bancos", outros setores também mostram alguma influência, com barras progressivamente menores. Alguns exemplos incluem (em ordem decrescente de importância aproximada mostrada): "Varejo", "Tecnologia/Fábrica de Software", "Educação", "Outra Opção" (uma categoria genérica), "Área de Consultoria", "Marketing", "Indústria", "Área da Saúde" e "Internet/Ecommerce".
+
+3.  **Setores com Menor Influência Individual:**
+    * Muitos setores, especialmente os que estão na parte superior do gráfico, têm barras bastante curtas, indicando uma importância relativa muito baixa para o modelo. Exemplos incluem: "Filantropia/ONG's", "Setor Imobiliário/ Construção Civil", "Seguros ou Previdência", "Setor Alimentício", "Agronegócios", "Entretenimento ou Esportes", "Setor de Energia", "Setor Automotivo", "Telecomunicação", "Setor Público" e "Setor Farmacêutico". Para estes, o impacto individual na previsão salarial foi mínimo, segundo este modelo.
+
+4.  **Contexto da Importância Relativa:**
+    * É fundamental lembrar que esta "importância relativa" é específica para o grupo "Setor de atuação da empresa". Embora o setor de "Finanças ou Bancos" seja o mais importante *neste grupo específico*, sua importância geral no modelo (aproximadamente 0.0115) é consideravelmente menor do que a das características principais como senioridade (que tinha uma importância em torno de 0.40 em gráficos anteriores).
+    * Este gráfico oferece um olhar detalhado sobre como o modelo diferencia os setores, provavelmente porque a variável original "Setor de atuação da empresa" foi transformada em múltiplas características binárias (uma para cada setor).
+
+**O que este gráfico nos diz sobre o modelo e os dados?**
+
+Este gráfico detalhado sugere que o modelo identificou que o setor de atuação da empresa onde um profissional de dados trabalha tem um papel na determinação da sua faixa salarial. A proeminência do setor de "Finanças ou Bancos" pode indicar que este setor, em média, oferece remunerações distintas ou tem uma representatividade nos dados que o torna um diferenciador para o modelo. Os outros setores contribuem com diferentes graus de influência, alguns tendo um impacto quase negligenciável individualmente.
+
+
 ### importancia_features_grupo_senioridade
 ![importancia_features_grupo_senioridade](https://github.com/user-attachments/assets/88a8e6a4-5bff-4e58-a613-523fe4915bed)
+
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Feature):** No lado esquerdo, vemos apenas uma característica listada: `senioridade_encoded`. Este é o nome da feature que representa o nível de senioridade do profissional, após ter sido codificada (transformada em um formato numérico que o modelo pode entender).
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" vai de 0.00 até um valor um pouco acima de 0.40.
+* **Barra Verde:** Há uma única e longa barra verde que corresponde à feature `senioridade_encoded`. O comprimento desta barra indica o quão importante essa característica é para as previsões de faixa salarial feitas pelo modelo.
+
+**Interpretando as Informações do Gráfico:**
+
+1.  **Foco na Senioridade Codificada:**
+    * O gráfico isola a feature `senioridade_encoded`. Isso sugere que a informação original sobre o nível de senioridade (por exemplo, Júnior, Pleno, Sênior) foi transformada em uma única variável numérica (`senioridade_encoded`) para o modelo.
+
+2.  **Alta Importância Confirmada:**
+    * A barra se estende até um valor de importância relativa de aproximadamente **0.4053** (este valor exato foi visto em outros gráficos de importância geral, como o "Top 3 Features").
+    * Este valor é bastante alto, especialmente quando comparado com a importância de muitas outras características individuais (como os estados ou setores de atuação vistos em gráficos anteriores).
+
+3.  **O que significa "Grupo senioridade" neste contexto?**
+    * Diferentemente dos gráficos de "Grupo UF onde mora" ou "Grupo Setor de atuação da empresa", onde várias features dentro do grupo eram comparadas (por exemplo, diferentes UFs ou diferentes setores), aqui o "Grupo senioridade" parece se referir apenas a esta única feature consolidada.
+    * Isso reforça que a senioridade, como um todo, foi tratada como um conceito único e poderoso pelo modelo.
+
+**O que este gráfico nos diz sobre o modelo?**
+
+Este gráfico serve para enfatizar de forma isolada e clara o **peso significativo que a senioridade (codificada) tem nas previsões do modelo**. Ele reitera que, de todas as informações fornecidas ao modelo, o nível de senioridade de um profissional é um dos indicadores mais fortes e influentes para determinar sua faixa salarial.
+
 
 ### importancia_features_grupo_formacao
 ![importancia_features_grupo_formacao](https://github.com/user-attachments/assets/e9180d58-b603-4e09-9f57-a94ecc4d824f)
 
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Feature):** No lado esquerdo, é listada apenas uma característica: `formacao_academica_encoded`. Este é o nome da feature que representa o nível de formação acadêmica do profissional, após ter sido codificada (ou seja, transformada em um valor numérico que o modelo pode processar).
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" varia de 0.00 até 0.10.
+* **Barra Verde:** Existe uma única e proeminente barra verde que corresponde à feature `formacao_academica_encoded`. O comprimento desta barra indica o peso ou a influência que esta característica tem nas previsões de faixa salarial feitas pelo modelo.
+
+**Interpretando as Informações do Gráfico:**
+
+1.  **Foco na Formação Acadêmica Codificada:**
+    * O gráfico isola a feature `formacao_academica_encoded`. Isso sugere que a informação original sobre o nível de formação acadêmica (por exemplo, Graduação, Pós-graduação, Mestrado, Doutorado, etc.) foi consolidada e transformada em uma única variável numérica (`formacao_academica_encoded`) que foi utilizada pelo modelo.
+
+2.  **Importância Significativa:**
+    * A barra se estende até um valor de importância relativa de aproximadamente **0.0952**. Embora este valor seja menor do que os observados para `senioridade_encoded` (próximo a 0.4053) e `experiencia_profissional_encoded` (próximo a 0.3588) em outros gráficos, ele ainda representa a terceira característica mais importante no geral para o modelo.
+    * Isso indica que, após a senioridade e a experiência, o nível de formação acadêmica é o próximo fator mais influente nas previsões salariais.
+
+3.  **O que significa "Grupo formacao" neste contexto?**
+    * Assim como no gráfico do "Grupo senioridade", o "Grupo formacao" aqui se refere a esta única feature consolidada, `formacao_academica_encoded`.
+    * Isso não é uma comparação entre diferentes aspectos da formação, mas sim uma maneira de destacar a importância total atribuída ao conceito de "nível de formação acadêmica" da forma como foi processado e incluído no modelo.
+
+**O que este gráfico nos diz sobre o modelo?**
+
+Este gráfico simples, mas direto, serve para reforçar que o **nível de formação acadêmica (codificado) dos profissionais é uma variável com impacto considerável nas previsões do modelo** sobre suas faixas salariais. Embora não seja tão dominante quanto a senioridade ou a experiência profissional, a formação acadêmica ainda se destaca como um dos principais fatores levados em conta pelo modelo.
+
 ### importancia_features_grupo_experiencia
 ![importancia_features_grupo_experiencia](https://github.com/user-attachments/assets/bffd0e4f-bc56-42d1-802c-ea1b22b872b7)
 
+**Como Ler o Gráfico:**
+
+* **Eixo Vertical (Feature):** À esquerda, é apresentada apenas uma característica: `experiencia_profissional_encoded`. Este é o nome da feature que representa o tempo ou nível de experiência profissional, após ter sido codificada (transformada em um valor numérico que o modelo pode utilizar).
+* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" se estende de 0.00 até um valor um pouco acima de 0.35.
+* **Barra Verde:** Há uma única e muito longa barra verde. Seu comprimento corresponde diretamente à importância da feature `experiencia_profissional_encoded` para as previsões de faixa salarial feitas pelo modelo.
+
+**Interpretando as Informações do Gráfico:**
+
+1.  **Foco na Experiência Profissional Codificada:**
+    * O gráfico isola a feature `experiencia_profissional_encoded`. Isso indica que a informação original sobre o tempo de experiência profissional (por exemplo, "Menos de 1 ano", "de 1 a 2 anos", etc.) foi transformada em uma única variável numérica (`experiencia_profissional_encoded`) para ser usada pelo modelo.
+
+2.  **Importância Muito Elevada:**
+    * A barra se estende até um valor de importância relativa de aproximadamente **0.3588**. Este valor é substancial e, conforme visto em gráficos anteriores (como o "Top 3 Features"), posiciona a experiência profissional como a segunda característica mais importante para o modelo, ficando atrás apenas da senioridade.
+
+3.  **Significado de "Grupo experiencia" neste Contexto:**
+    * Assim como nos gráficos de "Grupo senioridade" e "Grupo formacao", o "Grupo experiencia" aqui se refere a esta única feature consolidada.
+    * Não se trata de uma comparação entre diferentes facetas da experiência, mas sim de uma forma de destacar a importância total atribuída ao conceito de "experiência profissional" da maneira como foi processado e incluído no modelo.
+
+**O que este gráfico nos diz sobre o modelo?**
+
+Este gráfico, embora simples por apresentar uma única barra, serve para enfatizar de forma clara e inequívoca o **peso extremamente significativo que a experiência profissional (codificada) tem nas previsões do modelo**. Ele confirma que, entre todas as informações fornecidas, o nível de experiência profissional de um indivíduo é um dos indicadores mais fortes e decisivos para determinar sua faixa salarial.
+
 ### importancia_features_grupo_Área de formação acadêmica
 ![importancia_features_grupo_Área de formação acadêmica](https://github.com/user-attachments/assets/17e5dd69-f141-4fc0-b0e5-fbb180912aeb)
+
+
 
 ### distribuicao_probabilidades
 ![distribuicao_probabilidades (1)](https://github.com/user-attachments/assets/f7ed3668-f41f-486f-87bd-dbac9fcd74f1)
