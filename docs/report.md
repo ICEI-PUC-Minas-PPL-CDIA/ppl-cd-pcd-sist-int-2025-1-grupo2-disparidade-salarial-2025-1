@@ -52,7 +52,7 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [Interpretação dos Modelos 1° pergunta orietada a dados](#interpretação-do-modelo-1)
     *   [Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-do-modelo-2)
     *   [Interpretação dos Modelos 3° pergunta orietada a dados](#interpretação-do-modelo-3)
-*   [Análise comparativa dos modelos](#analise-comparativa-dos-modelos)
+*   [Análise comparativa dos modelos](#análise-comparativa-dos-modelos)
 *   [Conclusão](#8-conclusão)
 *   [REFERÊNCIAS](#referências)
 *   [APÊNDICES](#apêndices)
@@ -5424,8 +5424,8 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 # Resultados
 
 
-*   [Resultados obtidos com os Modelos 1° pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1°-pergunta-orietada-a-dados)
-*   [Resultados obtidos com o modelo 1 da 1° pergunta orietada a dados.](#resultados-obtidos-com-o-modelo-1-da-1°-pergunta-orietada-a-dados.)
+*   [Resultados obtidos com os Modelos 1º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1º-pergunta-orietada-a-dados)
+*   [Resultados obtidos com o modelo 1 da 1º pergunta orietada a dados](#resultados-obtidos-com-o-modelo-1-da-1º-pergunta-orietada-a-dados)
 	*   [top3_features](#top3_features)
 	*   [precision_recall_curve](#precision_recall_curve)
  	*   [matriz_confusao_otimizada](#matriz_confusao_otimizada) 
@@ -5443,7 +5443,7 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 	*   [arvore_exemplo_simplificada](#arvore_exemplo_simplificada)
 	*   [arvore_exemplo_melhorada](#arvore_exemplo_melhorada)
 
-*   [Resultados obtidos com o modelo 2 da 1° pergunta orietada a dados.](#resultados-obtidos-com-o-modelo-2-da-1°-pergunta-orietada-a-dados.) 
+*   [Resultados obtidos com o modelo 2 da 1º pergunta orietada a dados](#resultados-obtidos-com-o-modelo-2-da-1º-pergunta-orietada-a-dados) 
 	*   [matriz_confusao 1-2](#matriz_confusao_1_2)
 	*   [distribuicao_faixas_salariais_originais 1-2](#distribuicao_faixas_salariais_originais_1_2)
  	*   [distribuicao_faixas_salariais_agrupadas 1-2](#distribuicao_faixas_salariais_agrupadas_1_2) 
@@ -5451,14 +5451,14 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 
 
 
-*   [Resultados obtidos com os modelos 2° pergunta orietada a dados](#resultados-obtidos-com-o-modelo-2)
+*   [Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
 
-*   [Resultados obtidos com os modelos 3° pergunta orietada a dados****](#resultados-obtidos-com-o-modelo-3)
+*   [Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
 
 
 # Resultados obtidos com os Modelos 1º pergunta orietada a dados
 
-## Resultados obtidos com o modelo 1 da 1° pergunta orietada a dados.
+## Resultados obtidos com o modelo 1 da 1º pergunta orietada a dados
 
 
 | Classe          | Precisão | Recall | F1-Score | Suporte |
@@ -5526,7 +5526,7 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 
 
 
-## Resultados obtidos com o modelo 2 da 1° pergunta orietada a dados.
+## Resultados obtidos com o modelo 2 da 1º pergunta orietada a dados
 
 ### Modelo Árvore de Decisão Classificatória
 
@@ -5974,10 +5974,6 @@ processo de tomada de decisão.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Análise comparativa dos modelos
 
-
-
-## Análise comparativa dos modelos
-
 Discuta sobre as forças e fragilidades de cada modelo. Exemplifique casos em que um
 modelo se sairia melhor que o outro. Nesta seção é possível utilizar a sua imaginação
 e extrapolar um pouco o que os dados sugerem.
@@ -5991,7 +5987,7 @@ em um sistema inteligente.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## 8. Conclusão
+# 8. Conclusão
 
 Apresente aqui a conclusão do seu trabalho. Discussão dos resultados obtidos no trabalho, 
 onde se verifica as observações pessoais de cada aluno.
