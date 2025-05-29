@@ -6370,16 +6370,137 @@ Vamos seguir um caminho hipotético:
 ### matriz_confusao 1_2
 ![matriz_confusao](https://github.com/user-attachments/assets/ac19812f-ecd2-47b0-a08b-f8b7b0db1732)
 
+**Como interpretar a Matriz de Confusão:**
+
+* **Eixo Vertical (Real):** Indica a classe verdadeira à qual cada instância pertence.
+* **Eixo Horizontal (Predito):** Indica a classe que o modelo previu para cada instância.
+* **Células da Matriz:**
+    * **Diagonal Principal (do canto superior esquerdo ao canto inferior direito):** Os números nestas células representam as **classificações corretas**. Por exemplo, o valor na célula onde "Real" é "R$ 8.001/mês a R$ 16.000/mês" e "Predito" também é "R$ 8.001/mês a R$ 16.000/mês" indica quantas vezes o modelo acertou essa classe. Quanto maiores os valores na diagonal, melhor o desempenho para aquelas classes específicas.
+    * **Fora da Diagonal Principal:** Os números nestas células representam **erros de classificação** (confusões).
+        * Um valor em uma célula onde a classe "Real" é X e a classe "Predita" é Y (e X ≠ Y) significa que o modelo classificou erroneamente instâncias da classe X como pertencentes à classe Y.
+* **Escala de Cores:** A barra de cores à direita (geralmente um gradiente) indica a magnitude dos valores nas células. Cores mais escuras (neste caso, azul mais intenso) correspondem a contagens mais altas, facilitando a identificação visual de onde ocorrem a maioria das classificações e misclassificações.
+
+**Análise da Matriz de Confusão Específica (baseada na imagem):**
+
+1.  **Desempenho por Classe (Diagonal):**
+    * **Acima de R$ 30.000/mês:** Apenas **1** instância foi classificada corretamente.
+    * **Até R$ 2.000/mês:** **23** instâncias foram classificadas corretamente.
+    * **R$ 16.001/mês a R$ 30.000/mês:** **18** instâncias foram classificadas corretamente.
+    * **R$ 2.001/mês a R$ 4.000/mês:** **68** instâncias foram classificadas corretamente.
+    * **R$ 4.001/mês a R$ 8.000/mês:** **158** instâncias foram classificadas corretamente.
+    * **R$ 8.001/mês a R$ 16.000/mês:** **254** instâncias foram classificadas corretamente. Esta é a classe com o maior número de acertos.
+
+2.  **Principais Erros de Classificação (Fora da Diagonal):**
+    * **Classe "Acima de R$ 30.000/mês" (Real):**
+        * Foi frequentemente confundida com outras classes, especialmente com "R$ 8.001/mês a R$ 16.000/mês" (**7** vezes) e "R$ 16.001/mês a R$ 30.000/mês" (**2** vezes). Isso indica que o modelo tem muita dificuldade em identificar corretamente os salários mais altos.
+    * **Classe "Até R$ 2.000/mês" (Real):**
+        * Foi confundida principalmente com "R$ 2.001/mês a R$ 4.000/mês" (**20** vezes) e "R$ 4.001/mês a R$ 8.000/mês" (**11** vezes).
+    * **Classe "R$ 16.001/mês a R$ 30.000/mês" (Real):**
+        * A maior confusão foi com "R$ 8.001/mês a R$ 16.000/mês" (**34** vezes).
+    * **Classe "R$ 2.001/mês a R$ 4.000/mês" (Real):**
+        * Confundida com "Até R$ 2.000/mês" (**36** vezes) e "R$ 4.001/mês a R$ 8.000/mês" (**42** vezes).
+    * **Classe "R$ 4.001/mês a R$ 8.000/mês" (Real):**
+        * Confundida com "R$ 2.001/mês a R$ 4.000/mês" (**69** vezes) e "R$ 8.001/mês a R$ 16.000/mês" (**104** vezes).
+
+**Observações Gerais:**
+
+* O modelo parece ter um melhor desempenho para a classe **"R$ 8.001/mês a R$ 16.000/mês"**, que possui o maior número de classificações corretas na diagonal.
+* Há uma tendência de confusão entre faixas salariais adjacentes, o que é esperado, pois a distinção entre elas pode ser sutil.
+* A classe **"Acima de R$ 30.000/mês"** é a que apresenta o pior desempenho em termos de acertos, sendo frequentemente subestimada pelo modelo. Isso pode ser devido a um menor número de amostras nessa classe nos dados de treinamento (desbalanceamento de classes) ou à dificuldade intrínseca de separar essa faixa das demais com as features disponíveis.
 
 
 ### distribuicao_faixas_salariais_originais 1_2
 ![distribuicao_faixas_salariais_originais](https://github.com/user-attachments/assets/9f135a05-dc93-4d26-8b6c-45c32f05a136)
 
+O gráfico apresentado é um **gráfico de barras horizontais** intitulado "Distribuição de Faixas Salariais Originais". Ele mostra a frequência (ou contagem) de cada faixa salarial presente nos dados originais, antes de qualquer agrupamento ou processamento dessas faixas.
+
+**Como interpretar o gráfico:**
+
+* **Eixo Vertical (Faixa Salarial):** Lista as diferentes categorias de faixas salariais mensais que foram reportadas ou coletadas. Cada barra horizontal corresponde a uma dessas faixas.
+* **Eixo Horizontal (Contagem):** Indica o número de vezes que cada faixa salarial aparece no conjunto de dados. O comprimento da barra é diretamente proporcional a essa contagem.
+* **Barras:** Cada barra representa uma faixa salarial específica. Quanto mais longa a barra, maior o número de indivíduos ou registros que se enquadram naquela faixa salarial.
+
+**Análise da Distribuição Apresentada:**
+
+Observando o gráfico, podemos extrair as seguintes informações sobre a distribuição das faixas salariais originais:
+
+* **Faixas Mais Comuns:**
+    * A faixa salarial **"de R$8.001/mês a R$ 12.000/mês"** é a mais frequente, com uma contagem significativamente maior que as outras (aproximadamente 790 ocorrências).
+    * Seguida por **"de R$4.001/mês a R$ 6.000/mês"** (aproximadamente 630-640 ocorrências).
+    * E depois **"de R$6.001/mês a R$ 8.000/mês"** (aproximadamente 540 ocorrências).
+
+* **Faixas Menos Comuns:**
+    * Várias faixas salariais têm contagens muito baixas, indicando que são raras no conjunto de dados. Estas incluem, por exemplo:
+        * "de R$101/mês a R$ 2.000/mês" (contagem muito próxima de zero, quase imperceptível).
+        * "Acima de R$ 40.001/mês".
+        * "Menos de R$ 1.000/mês".
+        * "de R$30.001/mês a R$ 40.000/mês".
+        * "de R$25.001/mês a R$ 30.000/mês".
+
+* **Desbalanceamento:** O gráfico demonstra claramente um desbalanceamento entre as diferentes faixas salariais. Algumas poucas faixas concentram a maioria dos registros, enquanto muitas outras são representadas por um número pequeno de instâncias. Este desbalanceamento é uma característica importante dos dados e frequentemente leva à necessidade de agrupar faixas salariais (como visto no código do notebook) para criar classes mais equilibradas e significativas para modelos de machine learning.
+
+
 ### distribuicao_faixas_salariais_agrupadas 1_2
 ![distribuicao_faixas_salariais_agrupadas](https://github.com/user-attachments/assets/0844c00b-371f-49c3-82d2-505ec0830728)
 
+O gráfico apresentado é um **gráfico de barras horizontais** intitulado "Distribuição de Faixas Salariais Agrupadas". Ele ilustra a frequência (ou contagem) de cada faixa salarial **após** estas terem sido agrupadas em categorias mais amplas. Este agrupamento é uma etapa comum de pré-processamento de dados, realizada para simplificar o problema de classificação, reduzir o número de classes e, potencialmente, lidar com classes minoritárias no conjunto de dados original.
+
+**Como interpretar o gráfico:**
+
+* **Eixo Vertical (Faixa Salarial):** Lista as novas categorias de faixas salariais agrupadas. Cada barra horizontal corresponde a uma dessas faixas consolidadas.
+* **Eixo Horizontal (Contagem):** Indica o número de vezes que cada faixa salarial agrupada aparece no conjunto de dados. O comprimento da barra é diretamente proporcional a essa contagem.
+* **Barras:** Cada barra representa uma faixa salarial agrupada específica. Quanto mais longa a barra, maior o número de indivíduos ou registros que se enquadram naquela faixa salarial consolidada.
+
+**Análise da Distribuição Apresentada:**
+
+Observando o gráfico, podemos notar o seguinte sobre a distribuição das faixas salariais após o agrupamento:
+
+* **Faixas Mais Comuns (Agrupadas):**
+    * A faixa **"R$8.001/mês a R$ 16.000/mês"** é a mais frequente entre as agrupadas (com uma contagem de aproximadamente 1180).
+    * Seguida de perto pela faixa **"R$4.001/mês a R$ 8.000/mês"** (com uma contagem de aproximadamente 1170).
+    * A faixa **"R$2.001/mês a R$ 4.000/mês"** aparece em seguida, com uma contagem consideravelmente menor (aproximadamente 530).
+
+* **Faixas Menos Comuns (Agrupadas):**
+    * A faixa **"Acima de R$ 30.000/mês"** é a menos frequente, com uma contagem muito baixa em comparação com as outras (menos de 50).
+    * As faixas **"Até R$ 2.000/mês"** e **"R$16.001/mês a R$ 30.000/mês"** possuem contagens intermediárias, mas ainda significativamente menores que as duas faixas mais populosas (ambas em torno de 180-200).
+
+* **Impacto do Agrupamento:**
+    * Comparando com uma distribuição de faixas salariais originais (que tipicamente teria mais categorias e maior granularidade), este gráfico mostra um número reduzido de classes.
+    * Embora o agrupamento possa ter tornado algumas classes mais balanceadas (especialmente as duas primeiras), ainda existe um desbalanceamento notável, com a categoria de salário mais alto ("Acima de R$ 30.000/mês") sendo uma classe minoritária clara. Este desbalanceamento é uma consideração importante para o treinamento do modelo de machine learning.
+
+
 ### correlacao_variaveis_faixa_salarial 1_2
 ![correlacao_variaveis_faixa_salarial](https://github.com/user-attachments/assets/18aea812-9bdf-42a8-ae94-46dd2d18a141)
+
+O gráfico apresentado é um **gráfico de barras verticais** intitulado "Correlação (Cramer's V) com Faixa Salarial Agrupada". Ele exibe a força da associação entre diversas variáveis categóricas (features) e a variável alvo, que é a "Faixa Salarial Agrupada". A medida de associação utilizada é o **Coeficiente V de Cramer**.
+
+**Como interpretar o gráfico:**
+
+* **Eixo Vertical (Coeficiente de Cramer's V):** Este eixo mostra o valor do Coeficiente V de Cramer, que varia de 0 a 1.
+    * Um valor próximo de **0** indica uma associação fraca ou inexistente entre a feature e a faixa salarial agrupada.
+    * Um valor próximo de **1** indica uma associação forte entre a feature e a faixa salarial agrupada.
+* **Eixo Horizontal (Features):** Este eixo lista as diferentes variáveis categóricas que foram analisadas em relação à faixa salarial agrupada. As legendas estão rotacionadas para facilitar a leitura.
+* **Barras:** Cada barra representa uma feature. A altura da barra é proporcional ao valor do Coeficiente V de Cramer para aquela feature, indicando visualmente a força de sua associação com a faixa salarial agrupada. As barras estão ordenadas da maior para a menor associação.
+
+**Análise das Associações Apresentadas (da mais forte para a mais fraca):**
+
+1.  **Nível de senioridade:** Apresenta a associação **mais forte** com a faixa salarial agrupada, com um Coeficiente V de Cramer de aproximadamente **0.55**. Isso sugere que o nível de senioridade do profissional é o indicador mais forte da sua faixa salarial entre as features analisadas.
+2.  **Tempo de experiência na área de dados:** Possui a segunda associação mais forte, com um coeficiente em torno de **0.30**.
+3.  **Nível de ensino alcançado:** Mostra uma associação moderada, com um coeficiente de aproximadamente **0.23**.
+4.  **Cargo atual:** Apresenta uma associação de cerca de **0.19**.
+5.  **Setor de atuação da empresa:** A associação é mais fraca, com um coeficiente em torno de **0.09**.
+6.  **UF onde mora:** Mostra uma associação semelhante à anterior, com um coeficiente de aproximadamente **0.08**.
+7.  **Área de formação acadêmica:** Apresenta uma associação de cerca de **0.07**.
+8.  **Gênero do profissional:** A associação é bastante fraca, com um coeficiente em torno de **0.04**.
+9.  **Cor/Raça/Etnia:** Apresenta a associação **mais fraca** entre as features listadas, com um coeficiente também em torno de **0.04**.
+
+**Importância da Análise:**
+
+Este tipo de análise é útil por várias razões:
+
+* **Entendimento dos Dados:** Ajuda a entender quais características dos profissionais estão mais relacionadas com suas faixas salariais.
+* **Seleção de Features:** Features com associações muito baixas com a variável alvo podem, em alguns casos, ser consideradas menos importantes para um modelo preditivo e, potencialmente, descartadas para simplificar o modelo ou reduzir o ruído. No entanto, mesmo features com baixa correlação individual podem ser úteis em combinação com outras.
+* **Direcionamento de Análises Futuras:** Pode indicar quais aspectos merecem uma investigação mais aprofundada.
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
