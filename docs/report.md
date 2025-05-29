@@ -6151,22 +6151,197 @@ Este gráfico, embora simples por apresentar uma única barra, serve para enfati
 ### importancia_features_grupo_Área de formação acadêmica
 ![importancia_features_grupo_Área de formação acadêmica](https://github.com/user-attachments/assets/17e5dd69-f141-4fc0-b0e5-fbb180912aeb)
 
+O gráfico apresentado é um **gráfico de barras horizontais** que ilustra a **importância relativa** de diferentes subcategorias dentro do grupo "Área de formação acadêmica" para um modelo de machine learning. O título "Importância das Features: Grupo Área de formação acadêmica" indica que o gráfico foca em detalhar a relevância de cada área específica de formação.
 
+**Como interpretar o gráfico:**
+
+* **Eixo Y (Vertical):** Lista as diferentes áreas de formação acadêmica que foram consideradas como features (características) pelo modelo. Por exemplo, "Área de formação acadêmica_Ciências Sociais", "Área de formação acadêmica_Marketing / Publicidade / Comunicação / Jornalismo", etc.
+* **Eixo X (Horizontal):** Representa a "Importância Relativa" de cada uma dessas áreas. Quanto maior a barra, maior a importância relativa daquela área de formação para as previsões feitas pelo modelo. Os valores no eixo X (ex: 0.000, 0.002, ..., 0.012) indicam a magnitude dessa importância.
+* **Barras:** O comprimento de cada barra horizontal é proporcional à importância relativa da área de formação correspondente.
+
+**Análise das Features Apresentadas (da mais importante para a menos importante, visualmente):**
+
+1.  **Área de formação acadêmica_Economia/ Administração / Contabilidade / Finanças/ Negócios:** É a área com a **maior importância relativa** (aproximadamente 0.011).
+2.  **Área de formação acadêmica_Computação / Engenharia de Software / Sistemas de Informação/ TI:** Possui a segunda maior importância (aproximadamente 0.009).
+3.  **Área de formação acadêmica_Outras Engenharias:** Apresenta uma importância considerável (aproximadamente 0.007).
+4.  **Área de formação acadêmica_Outra opção:** Segue com uma importância relativa em torno de 0.005.
+5.  **Área de formação acadêmica_Estatística/ Matemática / Matemática Computacional/ Ciências Atuariais:** Mostra uma importância de aproximadamente 0.0035.
+6.  **Área de formação acadêmica_Química / Física:** Tem uma importância menor (aproximadamente 0.0015).
+7.  **Área de formação acadêmica_Ciências Biológicas/ Farmácia/ Medicina/ Área da Saúde:** Apresenta uma importância similar à anterior (aproximadamente 0.0015).
+8.  **Área de formação acadêmica_Marketing / Publicidade / Comunicação / Jornalismo:** Possui uma baixa importância relativa (aproximadamente 0.001).
+9.  **Área de formação acadêmica_Ciências Sociais:** É a área com a **menor importância relativa** entre as listadas (muito próxima de 0.0005).
 
 ### distribuicao_probabilidades
 ![distribuicao_probabilidades (1)](https://github.com/user-attachments/assets/f7ed3668-f41f-486f-87bd-dbac9fcd74f1)
 
+O gráfico apresentado é um **histograma** com uma curva de estimativa de densidade do kernel (KDE) sobreposta, intitulado "Distribuição das Probabilidades Preditas". Ele mostra como as probabilidades preditas pelo modelo para a classe "Salário Alto" estão distribuídas.
+
+**Como interpretar o gráfico:**
+
+* **Eixo X (Horizontal):** "Probabilidade de Salário Alto". Este eixo varia de 0.0 a 1.0 e representa a confiança do modelo de que uma determinada instância pertence à classe "Salário Alto".
+    * Um valor próximo de 0.0 significa que o modelo prevê uma baixa probabilidade de a instância ter um salário alto.
+    * Um valor próximo de 1.0 significa que o modelo prevê uma alta probabilidade de a instância ter um salário alto.
+* **Eixo Y (Vertical):** "Contagem". Este eixo indica o número de previsões (instâncias) que caem em cada intervalo de probabilidade (as barras do histograma).
+* **Barras do Histograma:** Cada barra representa um intervalo de probabilidades preditas, e a altura da barra mostra quantas previsões do modelo caíram nesse intervalo específico.
+* **Curva Azul:** É uma estimativa de densidade do kernel (KDE), que fornece uma representação suavizada da distribuição das probabilidades preditas. Ajuda a visualizar a forma geral da distribuição.
+* **Linha Tracejada Vermelha Vertical:** Identificada na legenda como "Limiar Ótimo = 0.6". Este é um limiar (threshold) escolhido para classificar as instâncias.
+    * Previsões com probabilidade de salário alto **maior ou igual a 0.6** seriam classificadas como pertencentes à classe "Salário Alto".
+    * Previsões com probabilidade **menor que 0.6** seriam classificadas como "Não Salário Alto" (ou a classe oposta).
+
+**Análise da Distribuição:**
+
+* **Concentração nas Extremidades:** Observa-se uma alta concentração de previsões com probabilidades muito baixas (próximas de 0.0). A barra mais alta do histograma está no extremo esquerdo, indicando que muitas instâncias receberam uma probabilidade muito baixa de terem um salário alto.
+* **Outro Pico em Altas Probabilidades:** Há também um acúmulo significativo de previsões com probabilidades altas, especialmente entre 0.9 e 1.0, embora menor que o pico em 0.0.
+* **Menor Contagem no Meio:** Existem menos previsões com probabilidades na faixa intermediária (por exemplo, entre 0.3 e 0.5, e entre 0.6 e 0.7, excluindo o limiar). Isso sugere que o modelo, em muitos casos, está razoavelmente "decidido" sobre a classe, atribuindo probabilidades mais extremas.
+* **Impacto do Limiar (0.6):**
+    * A maioria das previsões à esquerda do limiar de 0.6 seriam classificadas como "Não Salário Alto".
+    * As previsões à direita do limiar (probabilidade >= 0.6) seriam classificadas como "Salário Alto". O gráfico mostra que um número considerável de instâncias se qualifica para esta classe com base neste limiar, especialmente aquelas com probabilidades entre 0.9 e 1.0.
+
+
 ### dispersao_top2_features
 ![dispersao_top2_features](https://github.com/user-attachments/assets/99eb2c9f-d3ef-47d7-b337-5431c00d0571)
+
+O gráfico apresentado é um **diagrama de dispersão (scatter plot)** intitulado "Relação entre as Duas Features Mais Importantes: senioridade_encoded vs experiencia_profissional_encoded". Ele visualiza como as duas características consideradas mais importantes pelo modelo – senioridade e experiência profissional (ambas codificadas numericamente) – se relacionam com a probabilidade predita de um indivíduo ter um salário alto.
+
+**Como interpretar o gráfico:**
+
+* **Eixo X (Horizontal):** "senioridade_encoded". Representa os diferentes níveis de senioridade, que foram convertidos para um formato numérico (codificado). Valores maiores neste eixo provavelmente correspondem a níveis de senioridade mais altos.
+* **Eixo Y (Vertical):** "experiencia_profissional_encoded". Representa os diferentes níveis de experiência profissional, também codificados numericamente. Valores maiores neste eixo provavelmente indicam mais anos ou níveis de experiência.
+* **Pontos no Gráfico:** Cada ponto representa uma combinação específica de `senioridade_encoded` e `experiencia_profissional_encoded` observada nos dados.
+* **Escala de Cores (Barra Lateral):** "Probabilidade de Salário Alto". Esta barra de cores, variando do azul (0.0) ao vermelho (1.0), indica a probabilidade predita pelo modelo de um indivíduo ter um salário alto.
+    * **Pontos azuis/roxos:** Baixa probabilidade de salário alto.
+    * **Pontos vermelhos/laranjas:** Alta probabilidade de salário alto.
+
+**Análise das Relações e Padrões Visíveis:**
+
+* **Impacto da Senioridade:** Observa-se uma tendência clara de que, à medida que `senioridade_encoded` aumenta (movendo da esquerda para a direita no gráfico), a cor dos pontos tende a mudar de azul para vermelho. Isso sugere que níveis mais altos de senioridade estão associados a uma maior probabilidade de ter um salário alto.
+    * Por exemplo, os pontos com `senioridade_encoded = 2.00` são predominantemente vermelhos ou laranjas, indicando altas probabilidades de salário alto.
+    * Em contraste, os pontos com `senioridade_encoded = 0.00` são todos azuis ou roxos, indicando baixas probabilidades.
+
+* **Impacto da Experiência Profissional:** Similarmente, para um dado nível de senioridade, um aumento em `experiencia_profissional_encoded` (movendo de baixo para cima no gráfico) também tende a aumentar a probabilidade de salário alto.
+    * Por exemplo, para `senioridade_encoded = 2.00`:
+        * Com `experiencia_profissional_encoded = 0.0`, o ponto é laranja claro (probabilidade moderada-alta).
+        * Com `experiencia_profissional_encoded = 4.0`, o ponto é vermelho escuro (probabilidade muito alta).
+
+* **Combinação de Fatores:** O efeito mais forte (maior probabilidade de salário alto) é observado quando ambos, senioridade e experiência profissional, são altos. O ponto no canto superior direito (`senioridade_encoded = 2.00`, `experiencia_profissional_encoded = 4.0`) é o mais vermelho, indicando a maior probabilidade predita de salário alto.
+
+* **Valores Codificados:** Os valores nos eixos parecem ser discretos (ex: 0.00, 1.00, 2.00 para senioridade; 0.0, 1.0, 2.0, 3.0, 4.0 para experiência). Isso é consistente com a ideia de que estas são features categóricas que foram codificadas numericamente para uso no modelo.
 
 ### curva_roc_otimizada
 ![curva_roc_otimizada (1)](https://github.com/user-attachments/assets/2bd509b0-24c8-46ad-9bb0-b18203609795)
 
+O gráfico apresentado é uma **Curva ROC (Receiver Operating Characteristic)**, uma ferramenta fundamental para avaliar o desempenho de modelos de classificação binária. O título "Curva ROC com Limiar Otimizado" indica que, além da curva em si, um limiar específico considerado ótimo é destacado.
+
+**Como interpretar o gráfico:**
+
+* **Eixo X (Horizontal): Taxa de Falsos Positivos (FPR - False Positive Rate)**
+    * Também conhecida como (1 - Especificidade).
+    * Representa a proporção de instâncias negativas que foram incorretamente classificadas como positivas pelo modelo.
+    * Valores mais baixos de FPR são melhores (menos alarmes falsos).
+
+* **Eixo Y (Vertical): Taxa de Verdadeiros Positivos (TPR - True Positive Rate)**
+    * Também conhecida como Sensibilidade ou Recall.
+    * Representa a proporção de instâncias positivas que foram corretamente classificadas como positivas pelo modelo.
+    * Valores mais altos de TPR são melhores (mais acertos corretos dos positivos).
+
+* **Curva ROC (Laranja):**
+    * Esta curva ilustra o desempenho do modelo de classificação em todos os limiares de classificação possíveis. Cada ponto na curva ROC representa um par (FPR, TPR) correspondente a um determinado limiar.
+    * Um modelo ideal teria uma curva que sobe rapidamente em direção ao canto superior esquerdo do gráfico (TPR = 1, FPR = 0). Quanto mais a curva se aproxima desse canto, melhor o desempenho do modelo.
+
+* **AUC (Area Under the Curve) = 0.88:**
+    * A Área Sob a Curva ROC (AUC) é uma medida agregada do desempenho do modelo em todos os limiares.
+    * A AUC varia de 0 a 1:
+        * AUC = 0.5: O modelo não tem capacidade de discriminação (equivalente a um classificador aleatório).
+        * AUC > 0.5: O modelo tem alguma capacidade de discriminação.
+        * AUC = 1.0: O modelo é um classificador perfeito.
+    * Um valor de **AUC = 0.88** indica um bom desempenho do modelo, significando que há uma probabilidade de 88% de que o modelo classifique corretamente uma instância positiva escolhida aleatoriamente como mais provável de ser positiva do que uma instância negativa escolhida aleatoriamente.
+
+* **Linha Diagonal Tracejada (Azul Escuro):**
+    * Representa o desempenho de um classificador aleatório (que não tem poder de discriminação). A Curva ROC de um bom modelo deve estar significativamente acima desta linha.
+
+* **Linha Vertical Tracejada (Verde): Limiar Ótimo = 0.6**
+    * Esta linha vertical indica um limiar específico (threshold) de 0.6 que foi escolhido como "ótimo" para este modelo, possivelmente com base em algum critério de otimização (como maximizar o índice de Youden, ou balancear TPR e FPR de acordo com as necessidades do problema).
+    * O ponto onde esta linha verde intercepta a Curva ROC laranja mostra o desempenho do modelo (o par TPR e FPR) quando este limiar de 0.6 é usado para classificar as instâncias. Visualmente, para este limiar de 0.6, o FPR é baixo (aproximadamente 0.08) e o TPR é considerável (aproximadamente 0.65).
+
+**Análise do Desempenho:**
+
+* A Curva ROC laranja está bem acima da linha diagonal, e o valor de AUC de 0.88 confirma que o modelo tem um bom poder de discriminação entre as classes positiva e negativa.
+* A escolha do "Limiar Ótimo = 0.6" resulta em uma baixa taxa de falsos positivos (poucos negativos classificados erroneamente como positivos) e uma taxa de verdadeiros positivos razoavelmente alta (uma boa proporção dos positivos reais são identificados corretamente). A adequação deste limiar depende do contexto específico do problema e dos custos associados a falsos positivos versus falsos negativos.
+
+
 ### arvore_exemplo_simplificada
 ![arvore_exemplo_simplificada](https://github.com/user-attachments/assets/a4d395fd-d40a-43e0-a655-1cc5eece761e)
 
+O gráfico apresentado é uma **visualização de uma única árvore de decisão**, extraída de um modelo mais complexo chamado **Random Forest**. Um Random Forest é um conjunto (ou "floresta") de múltiplas árvores de decisão, onde cada árvore contribui para a predição final. Esta visualização simplificada nos ajuda a entender como uma dessas árvores toma decisões para classificar os dados.
+
+---
+
+**Como interpretar os componentes da árvore:**
+
+* **Nós (Retângulos):** Cada retângulo é um nó na árvore.
+    * **Nós de Decisão (Nós Internos):** São os retângulos que têm ramificações (setas) saindo deles. Eles contêm uma condição baseada em uma das *features* (características) dos dados.
+        * **Condição de Divisão:** A primeira linha no nó de decisão (ex: `experiencia_profissional_encoded <= 1.5`). Esta é a pergunta que a árvore faz sobre uma amostra de dados. Se a condição for verdadeira, a amostra segue para o galho da esquerda; se for falsa, para o galho da direita.
+        * `gini`: O **Índice de Gini** é uma medida de impureza do nó. Um valor de Gini igual a 0 significa que o nó é perfeitamente puro (todas as amostras nesse nó pertencem à mesma classe). Quanto maior o Gini, mais misturadas estão as classes no nó.
+        * `samples`: O número de amostras de treinamento que alcançaram este nó.
+        * `value`: Mostra a distribuição das amostras entre as diferentes classes possíveis dentro daquele nó. Por exemplo, `value = [100, 632, 267, 722]` no segundo nó da esquerda indica como as amostras estão distribuídas entre as classes (o número de classes e sua ordem dependeriam da codificação do problema).
+        * `class`: Indica a classe majoritária entre as amostras presentes naquele nó. Se este fosse um nó folha, essa seria a predição da árvore para as amostras que chegam até ele.
+    * **Nós Folha (Nós Terminais):** São os nós no final das ramificações, onde não há mais divisões. Eles representam a predição final para qualquer amostra que percorra o caminho até eles.
+        * Neste gráfico, os nós cinzas com `(...)` no final indicam que a árvore continua, mas foi **truncada ou simplificada** para esta visualização, não mostrando todos os detalhes das ramificações mais profundas.
+        * Os nós coloridos que não possuem mais divisões (como o nó mais à direita `Setor de atuação da empresa_Finanças ou Bancos <= 0.5`) também são nós folha para os caminhos que terminam ali na visualização.
+
+* **Cores dos Nós:** As diferentes cores dos nós (neste caso, laranja e azul) geralmente representam a classe predominante naquele nó, ajudando a visualizar como a árvore está tentando separar as diferentes classes.
+
+---
+
+**Exemplo de Caminho de Decisão:**
+
+Vamos seguir um caminho hipotético:
+
+1.  **Nó Raiz (Topo):** A primeira decisão é baseada em `experiencia_profissional_encoded <= 1.5`.
+    * **Se VERDADEIRO** (experiência profissional codificada é menor ou igual a 1.5): A amostra segue para o nó da esquerda, cuja próxima decisão é `senioridade_encoded <= 1.5`.
+    * **Se FALSO** (experiência profissional codificada é maior que 1.5): A amostra segue para o nó da direita, cuja próxima decisão é `UF onde mora_MG <= 0.5` (provavelmente perguntando se a UF onde mora é Minas Gerais ou não, baseado na codificação).
+
+2.  Suponha que `experiencia_profissional_encoded <= 1.5` foi **VERDADEIRO**. Chegamos ao nó que pergunta `senioridade_encoded <= 1.5`.
+    * Se `senioridade_encoded <= 1.5` for **VERDADEIRO**: A amostra vai para o nó mais à esquerda, `Setor de atuação da empresa_Marketing <= 0.5`. A classe predominante neste nó é "Salário Baixo/Médio".
+    * ... e assim por diante, até que a amostra chegue a um nó folha (ou um nó truncado `(...)` nesta visualização).
+
+
 ### arvore_exemplo_melhorada
 ![arvore_exemplo_melhorada](https://github.com/user-attachments/assets/410ea2af-736a-4cbf-9541-d0edb1ac49d1)
+
+O gráfico apresentado é uma **visualização de uma única árvore de decisão**, extraída de um modelo mais complexo chamado **Random Forest**. Um Random Forest é um conjunto (ou "floresta") de múltiplas árvores de decisão, onde cada árvore contribui para a predição final. Esta visualização nos ajuda a entender como uma dessas árvores toma decisões para classificar os dados.
+
+---
+
+**Como interpretar os componentes da árvore:**
+
+* **Nós (Retângulos):** Cada retângulo é um nó na árvore.
+    * **Nós de Decisão (Nós Internos):** São os retângulos que têm ramificações (setas) saindo deles. Eles contêm uma condição baseada em uma das *features* (características) dos dados.
+        * **Condição de Divisão:** A primeira linha no nó de decisão (ex: `experiencia_profissional_encoded <= 1.5`). Esta é a pergunta que a árvore faz sobre uma amostra de dados. Se a condição for verdadeira, a amostra segue para o galho da esquerda; se for falsa, para o galho da direita.
+        * `gini`: O **Índice de Gini** é uma medida de impureza do nó. Um valor de Gini igual a 0 significa que o nó é perfeitamente puro (todas as amostras nesse nó pertencem à mesma classe). Quanto maior o Gini, mais misturadas estão as classes no nó.
+        * `samples`: O número de amostras de treinamento que alcançaram este nó.
+        * `value`: Mostra a distribuição das amostras entre as diferentes classes possíveis dentro daquele nó. Por exemplo, `value = [100,632, 267,722]` no segundo nó da esquerda (contando o nó raiz como o primeiro nível) indica como as 1801 amostras (`samples = 1801`) estão distribuídas entre as classes. A classe predominante, "Salário Baixo/Médio", é determinada por essa distribuição.
+        * `class`: Indica a classe majoritária entre as amostras presentes naquele nó. Se este fosse um nó folha, essa seria a predição da árvore para as amostras que chegam até ele.
+    * **Nós Folha (Nós Terminais):** São os nós no final das ramificações, onde não há mais divisões. Eles representam a predição final para qualquer amostra que percorra o caminho até eles.
+        * Neste gráfico, os nós cinzas com `(...)` no final indicam que a árvore continua, mas foi **truncada ou simplificada** para esta visualização, não mostrando todos os detalhes das ramificações mais profundas.
+        * Os nós coloridos que não possuem mais divisões (como o nó mais à direita na segunda linha de profundidade: `Setor de atuação da empresa_Finanças ou Bancos <= 0.5`) também são nós folha para os caminhos que terminam ali na visualização, se não tiverem mais ramificações abaixo deles.
+
+* **Cores dos Nós:** As diferentes cores dos nós (neste caso, laranja e azul) geralmente representam a classe predominante naquele nó, ajudando a visualizar como a árvore está tentando separar as diferentes classes. Por exemplo, nós laranjas podem predominantemente representar "Salário Baixo/Médio", enquanto nós azuis podem representar "Salário Alto".
+
+---
+
+**Exemplo de Caminho de Decisão:**
+
+Vamos seguir um caminho hipotético:
+
+1.  **Nó Raiz (Topo):** A primeira decisão é baseada em `experiencia_profissional_encoded <= 1.5`.
+    * **Se VERDADEIRO** (experiência profissional codificada é menor ou igual a 1.5): A amostra segue para o nó da esquerda, cuja próxima decisão é `senioridade_encoded <= 1.5`.
+    * **Se FALSO** (experiência profissional codificada é maior que 1.5): A amostra segue para o nó da direita, cuja próxima decisão é `UF onde mora_MG <= 0.5`.
+
+2.  Suponha que `experiencia_profissional_encoded <= 1.5` foi **VERDADEIRO**. Chegamos ao nó que pergunta `senioridade_encoded <= 1.5`.
+    * Se `senioridade_encoded <= 1.5` for **VERDADEIRO**: A amostra vai para o nó mais à esquerda na linha seguinte, `Setor de atuação da empresa_Marketing <= 0.5`. A classe predominante neste nó é "Salário Baixo/Médio".
+    * ... e assim por diante, até que a amostra chegue a um nó folha (ou um nó truncado `(...)` nesta visualização). A classe indicada no nó final alcançado seria a predição dessa árvore específica para a amostra.
+
 
 
 
@@ -6194,6 +6369,8 @@ Este gráfico, embora simples por apresentar uma única barra, serve para enfati
 
 ### matriz_confusao 1_2
 ![matriz_confusao](https://github.com/user-attachments/assets/ac19812f-ecd2-47b0-a08b-f8b7b0db1732)
+
+
 
 ### distribuicao_faixas_salariais_originais 1_2
 ![distribuicao_faixas_salariais_originais](https://github.com/user-attachments/assets/9f135a05-dc93-4d26-8b6c-45c32f05a136)
