@@ -5720,8 +5720,6 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
  	*   [matriz_confusao_otimizada](#matriz_confusao_otimizada) 
 	*   [interacao_formacao_experiencia](#interacao_formacao_experiencia)
 	*   [importancia_features_top20](#importancia_features_top20)
-	*   [importancia_features_grupo_UF onde mora](#importancia_features_grupo_uf-onde-mora)
-	*   [importancia_features_grupo_Setor de atuação da empresa](#importancia_features_grupo_setor-de-atuação-da-empresa)
 	*   [importancia_features_grupo_senioridade](#importancia_features_grupo_senioridade)
 	*   [importancia_features_grupo_formacao](#importancia_features_grupo_formacao)
 	*   [importancia_features_grupo_experiencia](#importancia_features_grupo_experiencia)
@@ -6008,67 +6006,6 @@ O gráfico apresentado é um **diagrama de barras horizontais** que mostra as **
 **O que este gráfico nos diz sobre o modelo?**
 
 Este gráfico é fundamental para entender "o que o modelo está pensando". Ele revela que, embora muitas características sejam consideradas, um pequeno grupo delas (senioridade, experiência e nível de formação) domina o processo de decisão para prever salários. As outras 17 features mostradas, como localização, setor da empresa e área de formação específica, adicionam nuances e refinamentos à previsão, mas têm um papel secundário em comparação com os três principais fatores.
-
-### importancia_features_grupo_UF onde mora
-![importancia_features_grupo_UF onde mora](https://github.com/user-attachments/assets/45719ffa-d305-41f2-b595-4bb70ee884bc)
-
-O gráfico apresentado é um **diagrama de barras horizontais** que detalha a **importância relativa de cada Unidade Federativa (UF) onde um profissional mora**, segundo o modelo de machine learning. O título "Importância das Features: Grupo UF onde mora" indica que estamos olhando especificamente para o impacto da localização geográfica (estado) nas previsões de faixa salarial.
-
-**Como Ler o Gráfico:**
-
-* **Eixo Vertical (Features - UFs):** No lado esquerdo, temos uma lista de features, cada uma começando com `UF onde mora_` seguida pela sigla de um estado brasileiro (por exemplo, `UF onde mora_SP` para São Paulo, `UF onde mora_PB` para Paraíba). As UFs estão ordenadas, aparentemente da menos importante (no topo) para a mais importante (na base) dentro deste grupo.
-* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" varia de 0.000 a 0.014. É importante notar que esta escala é bem menor comparada a gráficos de importância de features mais gerais (como o "Top 3" ou "Top 20"). Isso significa que a influência individual de cada estado, embora existente, é mais sutil do que a de fatores como senioridade ou experiência.
-* **Barras Verdes:** Cada barra verde representa um estado específico, e seu comprimento é proporcional à sua importância relativa para as decisões do modelo ao prever a faixa salarial.
-
-**Interpretando as Informações do Gráfico:**
-
-1.  **Qual Estado Mais Influencia (Dentro Deste Grupo)?**
-    * A barra mais longa na parte inferior do gráfico corresponde a `UF onde mora_SP` (São Paulo), com uma importância relativa de aproximadamente 0.0135. Isso indica que, dentre todos os estados analisados como features individuais, residir em São Paulo foi o fator geográfico com maior peso para o modelo.
-
-2.  **Outros Estados com Alguma Relevância:**
-    * Seguindo São Paulo, vemos outros estados com barras progressivamente menores, indicando menor (mas ainda alguma) importância. Nesta lista, destacam-se (em ordem decrescente de importância aproximada mostrada): Paraíba (PB), Distrito Federal (DF), Rio Grande do Sul (RS), Paraná (PR), Rio de Janeiro (RJ), Goiás (GO), Minas Gerais (MG), Santa Catarina (SC), entre outros.
-
-3.  **Estados com Menor Influência Individual:**
-    * Muitos estados, especialmente os localizados na parte superior do gráfico (como Maranhão - MA, Tocantins - TO, Rondônia - RO, Piauí - PI, etc.), possuem barras muito curtas, próximas de zero. Isso sugere que, individualmente, residir nesses estados teve um impacto mínimo ou quase nulo nas previsões de faixa salarial do modelo, *quando comparados aos estados mais influentes como SP*.
-
-4.  **Contexto da Importância:**
-    * É crucial entender que esta "importância relativa" é específica para o grupo "UF onde mora". Embora São Paulo (`UF onde mora_SP`) seja o mais importante *neste grupo*, sua importância geral (0.0135) é consideravelmente menor do que a das features principais do modelo, como `senioridade_encoded` (que tinha importância em torno de 0.40 em gráficos anteriores).
-    * Este gráfico nos dá um zoom na contribuição de cada estado, assumindo que a variável original "UF onde mora" foi transformada em múltiplas features binárias (uma para cada estado, provavelmente através de um processo chamado *one-hot encoding*).
-
-**O que este gráfico nos diz sobre o modelo e os dados?**
-
-Este gráfico detalhado sugere que o modelo encontrou diferenças na probabilidade de ter um salário alto dependendo do estado de residência do profissional. A proeminência de São Paulo pode refletir a concentração econômica e de oportunidades com salários potencialmente mais altos nesse estado. As demais UFs contribuem com informações adicionais, mas com pesos menores.
-
-### importancia_features_grupo_Setor de atuação da empresa
-![importancia_features_grupo_Setor de atuação da empresa](https://github.com/user-attachments/assets/af6a6298-28fc-4629-890e-c645aa54ca47)
-
-O gráfico apresentado é um **diagrama de barras horizontais**. Ele mostra a **importância relativa de diferentes setores de atuação das empresas** onde os profissionais de dados trabalham, de acordo com o modelo de machine learning. O título "Importância das Features: Grupo Setor de atuação da empresa" nos diz que estamos analisando o impacto específico dessa categoria de característica nas previsões de faixa salarial.
-
-**Como Ler o Gráfico:**
-
-* **Eixo Vertical (Features - Setores):** No lado esquerdo, estão listados os diversos setores de atuação. Cada um começa com `Setor de atuação da empresa_` seguido pelo nome do setor (por exemplo, `_Finanças ou Bancos`, `_Varejo`, `_Tecnologia/Fábrica de Software`). Eles parecem estar ordenados da menor importância (no topo) para a maior importância (na base) dentro deste grupo específico.
-* **Eixo Horizontal (Importância Relativa):** Na parte inferior, a escala de "Importância Relativa" varia de 0.000 a 0.012. É importante notar que esta escala é relativamente pequena, indicando que, embora haja diferenças entre os setores, a influência individual de cada setor pode ser mais sutil em comparação com fatores mais dominantes como senioridade ou experiência (vistos em gráficos anteriores).
-* **Barras Verdes:** Cada barra verde representa um setor de atuação específico. O comprimento da barra é proporcional à sua importância relativa para as decisões que o modelo tomou ao prever a faixa salarial.
-
-**Interpretando as Informações do Gráfico:**
-
-1.  **Qual Setor Mais Influencia (Dentro Deste Grupo)?**
-    * A barra mais longa, localizada na parte inferior do gráfico, corresponde a `Setor de atuação da empresa_Finanças ou Bancos`. Este setor tem a maior importância relativa dentro deste grupo, com um valor aproximado de 0.0115. Isso sugere que trabalhar no setor de Finanças ou Bancos foi o fator setorial com maior peso para o modelo.
-
-2.  **Outros Setores com Relevância Notável:**
-    * Abaixo de "Finanças ou Bancos", outros setores também mostram alguma influência, com barras progressivamente menores. Alguns exemplos incluem (em ordem decrescente de importância aproximada mostrada): "Varejo", "Tecnologia/Fábrica de Software", "Educação", "Outra Opção" (uma categoria genérica), "Área de Consultoria", "Marketing", "Indústria", "Área da Saúde" e "Internet/Ecommerce".
-
-3.  **Setores com Menor Influência Individual:**
-    * Muitos setores, especialmente os que estão na parte superior do gráfico, têm barras bastante curtas, indicando uma importância relativa muito baixa para o modelo. Exemplos incluem: "Filantropia/ONG's", "Setor Imobiliário/ Construção Civil", "Seguros ou Previdência", "Setor Alimentício", "Agronegócios", "Entretenimento ou Esportes", "Setor de Energia", "Setor Automotivo", "Telecomunicação", "Setor Público" e "Setor Farmacêutico". Para estes, o impacto individual na previsão salarial foi mínimo, segundo este modelo.
-
-4.  **Contexto da Importância Relativa:**
-    * É fundamental lembrar que esta "importância relativa" é específica para o grupo "Setor de atuação da empresa". Embora o setor de "Finanças ou Bancos" seja o mais importante *neste grupo específico*, sua importância geral no modelo (aproximadamente 0.0115) é consideravelmente menor do que a das características principais como senioridade (que tinha uma importância em torno de 0.40 em gráficos anteriores).
-    * Este gráfico oferece um olhar detalhado sobre como o modelo diferencia os setores, provavelmente porque a variável original "Setor de atuação da empresa" foi transformada em múltiplas características binárias (uma para cada setor).
-
-**O que este gráfico nos diz sobre o modelo e os dados?**
-
-Este gráfico detalhado sugere que o modelo identificou que o setor de atuação da empresa onde um profissional de dados trabalha tem um papel na determinação da sua faixa salarial. A proeminência do setor de "Finanças ou Bancos" pode indicar que este setor, em média, oferece remunerações distintas ou tem uma representatividade nos dados que o torna um diferenciador para o modelo. Os outros setores contribuem com diferentes graus de influência, alguns tendo um impacto quase negligenciável individualmente.
-
 
 ### importancia_features_grupo_senioridade
 ![importancia_features_grupo_senioridade](https://github.com/user-attachments/assets/88a8e6a4-5bff-4e58-a613-523fe4915bed)
