@@ -6886,14 +6886,14 @@ Este relatório adaptado foca nos resultados e no contexto da Rede Neural v2, ut
 # Interpretação dos modelos
 
 
+## Interpretação dos modelo 1º pergunta orientada a dados
+
 ### Interpretação do modelo 1
 
 Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
 processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
 o *feature importances* para tentar entender quais atributos o modelo se baseia no
 processo de tomada de decisão.
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Interpretação do modelo 2
 
@@ -6902,10 +6902,19 @@ processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas 
 o *feature importances* para tentar entender quais atributos o modelo se baseia no
 processo de tomada de decisão.
 
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+## Interpretação dos modelo 2º pergunta orientada a dados
 
-### Interpretação do modelo 3
+### Interpretação do modelo 1
+
+Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
+processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
+o *feature importances* para tentar entender quais atributos o modelo se baseia no
+processo de tomada de decisão.
+
+### Interpretação do modelo 2
 
 Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
 processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
@@ -6914,7 +6923,41 @@ processo de tomada de decisão.
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Análise comparativa dos modelos
+
+
+## Interpretação dos modelo 3º pergunta orientada a dados
+
+### Interpretação do modelo 1
+
+Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
+processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
+o *feature importances* para tentar entender quais atributos o modelo se baseia no
+processo de tomada de decisão.
+
+### Interpretação do modelo 2
+
+Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
+processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
+o *feature importances* para tentar entender quais atributos o modelo se baseia no
+processo de tomada de decisão.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Análise comparativa dos modelos da 1º pergunta orientada a dados
+
+Discuta sobre as forças e fragilidades de cada modelo. Exemplifique casos em que um
+modelo se sairia melhor que o outro. Nesta seção é possível utilizar a sua imaginação
+e extrapolar um pouco o que os dados sugerem.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Análise comparativa dos modelos da 2º pergunta orientada a dados
+
+Discuta sobre as forças e fragilidades de cada modelo. Exemplifique casos em que um
+modelo se sairia melhor que o outro. Nesta seção é possível utilizar a sua imaginação
+e extrapolar um pouco o que os dados sugerem.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Análise comparativa dos modelos da 3º pergunta orientada a dados
 
 Discuta sobre as forças e fragilidades de cada modelo. Exemplifique casos em que um
 modelo se sairia melhor que o outro. Nesta seção é possível utilizar a sua imaginação
