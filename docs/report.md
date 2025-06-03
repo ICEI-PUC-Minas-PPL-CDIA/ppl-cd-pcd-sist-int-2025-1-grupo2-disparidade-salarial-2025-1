@@ -4771,9 +4771,58 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
 * **Validação Cruzada (RFECV e Optuna)**: Reduz a variância da estimativa de desempenho e torna a seleção de features e hiperparâmetros mais robusta, diminuindo a chance de escolhas baseadas em uma divisão particular dos dados. `StratifiedKFold` é usado para manter a proporção das classes em cada fold.
 * **Conjunto de Validação Interna para Early Stopping**: Permite que o modelo pare de treinar no momento ótimo, evitando o overfitting aos dados de `X_train_final`, usando `X_val_internal` como um proxy para dados não vistos durante essa fase.
 
-## 3. Parâmetros Utilizados (Principais)
+---
+### 3. Análise de Correlação das Features Iniciais com o Alvo
+(ESTE BLOCO SERIA INSERIDO APÓS A SEÇÃO "2. Processo de Amostragem de Dados" E ANTES DA SEÇÃO "3. Parâmetros Utilizados" DO SEU TEXTO ORIGINAL, QUE SERIA RENOMEADA PARA SEÇÃO 4)
 
-### 3.1.1 Criação da Variável Alvo (`target_col_agrupada_name`)
+Antes da seleção de features pelo RFECV, foi realizada uma análise de correlação das features iniciais (após limpeza e transformações como UF para Região) com a variável alvo (`TARGET_SALARIO_CODIFICADO`). As features consideradas nesta fase foram: `P1_a_1` (Faixa Etária), `P1_b` (Gênero), `P1_l` (Nível de Ensino), `P2_i` (Tempo de Experiência), `P2_g_Nivel` (Nível de Senioridade), `P2_f_Cargo_Atual` (Cargo Atual), e `Regiao_Mapeada`.
+
+**Suposição da Codificação do Alvo para Interpretação da Correlação:** Para a análise abaixo, assume-se que "Salário Baixo" foi codificado com um valor numérico MAIOR e "Salário Alto" com um valor numérico MENOR (ex: Salário Alto -> 0, Salário Baixo -> 1). Se a codificação for inversa, a interpretação dos sinais de correlação de Pearson e Spearman também se inverte. A Correlação de Distância (dcor) mede apenas a força da dependência (0 a 1), não a direção.
+
+**Resumo das Correlações com `TARGET_SALARIO_CODIFICADO` (Dados Completos Processados):**
+
+| Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior) |
+| :----------------- | :------ | :------- | :----------- | :----------------------------------------------------------------- |
+| `P2_i`               | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.    |
+| `P2_g_Nivel`         | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto. |
+| `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos tendem a salário mais alto. |
+| `P1_a_1`             | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto. |
+| `P1_l`               | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
+| `P1_b`               | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                           |
+| `Regiao_Mapeada`     | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente.                            |
+
+**Observações da Análise de Correlação:**
+* **Consistência**: As correlações mostraram-se bastante consistentes entre os dados completos, treino e teste.
+* **Pearson vs. Spearman vs. dcor**:
+    * Para `P2_i`, Spearman e dcor mostraram valores ligeiramente maiores (em magnitude para Spearman) que Pearson, sugerindo que a relação, embora forte, pode não ser perfeitamente linear, mas é fortemente monotônica e com alta dependência geral.
+    * Para `P2_g_Nivel`, todas as três métricas foram muito próximas, indicando que a relação é razoavelmente bem capturada por uma aproximação linear/monotônica.
+    * Para as demais features, as magnitudes foram geralmente consistentes entre os métodos, com `dcor` reforçando a força da dependência detectada.
+* **Features mais Correlacionadas**: `P2_i` (Tempo de Experiência) e `P2_g_Nivel` (Nível de Senioridade) destacaram-se como as mais fortemente correlacionadas com a faixa salarial.
+
+**(Gráficos Mais Relevantes - Mapas de Calor para Dados Completos Processados)**
+
+Para uma visualização completa das inter-relações entre todas as features iniciais e a variável alvo, os seguintes mapas de calor (gerados a partir dos dados completos processados, antes da divisão treino/teste e RFECV) são os mais relevantes. Recomenda-se visualizá-los em um ambiente gráfico.
+
+1.  **Mapa de Calor da Correlação de Pearson:**
+     ![Image](https://github.com/user-attachments/assets/ef5f53bd-a116-4c75-a6c0-e5de9fc3c1af)
+    * Descrição: Este gráfico exibe a força e a direção das relações *lineares* entre cada par de variáveis. Cores mais intensas (vermelho para positivo, azul para negativo) indicam correlações lineares mais fortes.
+
+2.  **Mapa de Calor da Correlação de Spearman:**
+    ![Image](https://github.com/user-attachments/assets/f2da6d6a-1dbb-4dd1-8089-4ee9b385ec99)
+    * Descrição: Este gráfico mostra a força e a direção das relações *monotônicas* (onde as variáveis tendem a se mover juntas, mas não necessariamente a uma taxa constante). É útil para identificar tendências consistentes que podem não ser estritamente lineares.
+
+3.  **Mapa de Calor da Correlação de Distância (dcor):**
+     ![Image](https://github.com/user-attachments/assets/1aaf66f2-fbe0-49b1-92a3-f8ac9902724c)
+    * Descrição: Este gráfico indica a força da dependência (linear ou não linear) entre os pares de variáveis, com valores variando de 0 (independência) a 1 (dependência perfeita). Cores mais claras (amarelo, no esquema 'viridis') indicam maior dependência. Ele não mostra a direção da relação.
+
+---
+
+
+---
+
+## 4. Parâmetros Utilizados (Principais)
+
+### 4.1.1 Criação da Variável Alvo (`target_col_agrupada_name`)
 
 * **`salary_group_labels = ["Salário Baixo", "Salário Alto"]`**: Define os nomes das duas categorias da variável alvo.
 * **`point_of_cut_fixed`**: Um valor monetário específico (ex: `7500.0` na última execução que produziu o suporte 622/567) usado para dividir `salary_numeric_lower_bound`. Salários `<= point_of_cut_fixed` são "Salário Baixo/Médios", e `> point_of_cut_fixed` são "Salário Alto". **Este é o parâmetro chave que você tem ajustado para controlar a distribuição das classes.**
@@ -4781,7 +4830,7 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
   ![Image](https://github.com/user-attachments/assets/cc8fdd29-49bd-4b07-82a3-803c81bcb2a7)
 * **`pd.cut(..., include_lowest=True, duplicates='drop')`**: Usado para realizar a divisão com base no `point_of_cut_fixed`.
 
-## 3.1.2 Utilizacao das variáveis preditivas 
+## 4.1.2 Utilizacao das variáveis preditivas 
 
 | Atributo                                           | Código de Referência | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância  |
 |----------------------------------------------------|-----------------------|--------------|-------------------------------------|-----------------------------------------------------------------------------------------------|------------|
@@ -4794,7 +4843,7 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
 | Cargo atual                                        | P2f                   | Qualitativo  | Nominal (Multivalorado)             | Cargo atual ocupado pelo respondente                                                          | Alta       |
 | Nível de senioridade                               | P2g                   | Qualitativo  | Ordinal                             | Nível de senioridade do respondente (Júnior, Pleno, Sênior)                                   | Alta       |
 
-### 3.2. `RFECV`
+### 4.2. `RFECV`
 
 * `estimator=lgb.LGBMClassifier(random_state=42, n_jobs=-1, verbose=-1)`: Modelo base para a seleção de features.
 * `step=rfecv_step` (padrão `1`): Número de features a serem removidas em cada iteração.
@@ -4802,7 +4851,7 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
 * `scoring=rfecv_scoring` (padrão `'accuracy'`): Métrica para avaliar o subconjunto de features.
 * `min_features_to_select=1`: Número mínimo de features a serem selecionadas.
 
-### 3.3. `Optuna` (Otimização de Hiperparâmetros para `lgb.LGBMClassifier`)
+### 4.3. `Optuna` (Otimização de Hiperparâmetros para `lgb.LGBMClassifier`)
 
 * `n_trials=n_optuna_trials` (padrão `100`): Número de combinações de hiperparâmetros a serem testadas.
 * `timeout=optuna_timeout` (padrão `1800` segundos): Tempo máximo para a otimização.
@@ -4824,12 +4873,12 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
     * `metric`: Definido como `'binary_logloss'` para avaliação interna e early stopping.
     * `num_class`: Omitido para classificação binária no LightGBM (ou definido como 1 implicitamente).
 
-### 3.4. Treinamento do Modelo Final (`best_lgbm`)
+### 4.4. Treinamento do Modelo Final (`best_lgbm`)
 
 * Usa os `best_params_optuna` encontrados.
 * `early_stopping(callbacks=[lgb.early_stopping(25, verbose=False)])`: Para o treinamento se a métrica no conjunto de validação interna (`X_val_internal`) não melhorar por 25 rodadas. O número de árvores final foi 105 na sua última execução.
 
-## 4. Explicação do Código (Fluxo Principal)
+## 5. Explicação do Código (Fluxo Principal)
 
 ### Pergunta orientada a dados : **Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?**
   * O fluxo de execução do código principal pode ser resumido nas seguintes etapas:
