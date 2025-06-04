@@ -7371,24 +7371,42 @@ a.  **Métricas de Desempenho Agregadas (Conjunto de Teste):**
     * **ROC AUC (Binário) no Teste:** 0.9263
     A acurácia de aproximadamente 83.77% no teste e um ROC AUC de 0.9263 indicam que o modelo RNA v2 possui um bom poder preditivo e capacidade de discriminação entre as classes "Salário Alto" e "Salário Baixo".
 
-b.  **Relatório de Classificação Detalhado (Teste - RNA v2) e Análise da Matriz de Confusão:**
-    O relatório de classificação detalhado fornece insights sobre o desempenho por classe:
 
-    | Classe        | Precision | Recall | F1-score | Support |
-    | :------------ | :-------- | :----- | :------- | :------ |
-    | Salário Alto  | 0.85      | 0.84   | 0.84     | 622     |
-    | Salário Baixo | 0.83      | 0.84   | 0.83     | 567     |
-    | accuracy      |           |        | 0.84     | 1189    |
-    | macro avg     | 0.84      | 0.84   | 0.84     | 1189    |
-    | weighted avg  | 0.84      | 0.84   | 0.84     | 1189    |
+b.  **Relatório de Classificação Detalhado (Teste - RNA v2) e Análise da Matriz de Confusão:**
 
-**Interpretação:**
-        * O modelo demonstra um desempenho equilibrado para ambas as classes, com Precision, Recall e F1-score em torno de 0.83-0.85.
-        * Para "Salário Alto": 85% das previsões de "Salário Alto" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Alto" (Recall).
-        * Para "Salário Baixo": 83% das previsões de "Salário Baixo" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Baixo" (Recall).
-    * **Matriz de Confusão Normalizada (Teste - RNA v2 - `matriz_confusao_norm_RNA.png`):**
-        * A matriz de confusão visualiza esses resultados. Conforme o relatório fornecido, ela mostra que aproximadamente 83.60% dos verdadeiros "Salário Alto" foram corretamente previstos como "Salário Alto", e cerca de 83.95% dos verdadeiros "Salário Baixo" foram corretamente previstos como "Salário Baixo" (valores baseados na interpretação da imagem `download.png`, que devem ser consistentes com os Recalls de 0.84 acima).
-        * As taxas de erro (classificações incorretas) são relativamente simétricas: ~16.40% dos "Salário Alto" classificados incorretamente como "Baixo", e ~16.05% dos "Salário Baixo" classificados incorretamente como "Alto". Isso indica que o modelo não tem um viés significativamente maior para errar em uma direção específica.
+    O relatório de classificação detalhado fornece insights sobre o desempenho por classe:
+
+
+
+    | Classe        | Precision | Recall | F1-score | Support |
+
+    | :------------ | :-------- | :----- | :------- | :------ |
+
+    | Salário Alto  | 0.85      | 0.84   | 0.84     | 622     |
+
+    | Salário Baixo | 0.83      | 0.84   | 0.83     | 567     |
+
+    | accuracy      |           |        | 0.84     | 1189    |
+
+    | macro avg     | 0.84      | 0.84   | 0.84     | 1189    |
+
+    | weighted avg  | 0.84      | 0.84   | 0.84     | 1189    |
+
+
+
+    * **Interpretação:**
+
+        * O modelo demonstra um desempenho equilibrado para ambas as classes, com Precision, Recall e F1-score em torno de 0.83-0.85.
+
+        * Para "Salário Alto": 85% das previsões de "Salário Alto" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Alto" (Recall).
+
+        * Para "Salário Baixo": 83% das previsões de "Salário Baixo" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Baixo" (Recall).
+
+    * **Matriz de Confusão Normalizada (Teste - RNA v2 - `matriz_confusao_norm_RNA.png`):**
+
+        * A matriz de confusão visualiza esses resultados. Conforme o relatório fornecido, ela mostra que aproximadamente 83.60% dos verdadeiros "Salário Alto" foram corretamente previstos como "Salário Alto", e cerca de 83.95% dos verdadeiros "Salário Baixo" foram corretamente previstos como "Salário Baixo" (valores baseados na interpretação da imagem `download.png`, que devem ser consistentes com os Recalls de 0.84 acima).
+
+        * As taxas de erro (classificações incorretas) são relativamente simétricas: ~16.40% dos "Salário Alto" classificados incorretamente como "Baixo", e ~16.05% dos "Salário Baixo" classificados incorretamente como "Alto". Isso indica que o modelo não tem um viés significativamente maior para errar em uma direção específica.
 
 ### III. Análise de Preditores e Lógica do Modelo RNA v2
 
