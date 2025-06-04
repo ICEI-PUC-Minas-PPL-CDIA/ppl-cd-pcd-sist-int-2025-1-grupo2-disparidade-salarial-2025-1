@@ -6990,14 +6990,14 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 ## Códigos relacionados a 1º pergunta orientada a dados
 
 ### Limpeza de Dados
-- [Limpeza de Dados Base Principal State of Data](src/code_data_cleanest/base_principal_state_of_data/1_pergunta_orientada_a_dados/versão_3) 
-- [Limpeza de Dados Base Auxiliar](src/code_data_cleanest/base_auxiliares/1_pergunta_orientada_a_dados) 
+- [Limpeza de Dados Base Principal State of Data](/src/code_data_cleanest/base_principal_state_of_data/1_pergunta_orientada_a_dados/versão_3) 
+- [Limpeza de Dados Base Auxiliar](/src/code_data_cleanest/base_auxiliares/1_pergunta_orientada_a_dados) 
 
 ### Analise Exploratória de Dados
-- [Análise Exploratória de Dados](src/analise_exploratorias_-perguntas_orientadas_a_dados/1_pergunta_orientada_a_dados/versão_2)
+- [Análise Exploratória de Dados](/src/analise_exploratorias_-perguntas_orientadas_a_dados/1_pergunta_orientada_a_dados/versão_2)
 
 ### Indução a Modelos
-- [Indução a Modelos](src/modelos/modelo-1/modelo_state_of_data)
+- [Indução a Modelos](/src/modelos/modelo-1/modelo_state_of_data)
 
 ---
 
