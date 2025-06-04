@@ -6987,17 +6987,17 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 # Codigos do Projeto
 
-## Códigos relacionados a 1º pergunta orientada a dados
+## Códigos relacionados a 1º pergunta orientada a dados❌(concertar direcionamento)
 
 ### Limpeza de Dados
 - [Limpeza de Dados Base Principal State of Data](/src/code_data_cleanest/base_principal_state_of_data/1_pergunta_orientada_a_dados/versão_3) 
 - [Limpeza de Dados Base Auxiliar](/src/code_data_cleanest/base_auxiliares/1_pergunta_orientada_a_dados) 
 
-### Analise Exploratória de Dados
+### Analise Exploratória de Dados❌(concertar direcionamento)
 - [Análise Exploratória de Dados](/src/analise_exploratorias_perguntas_orientadas_a_dados/1_pergunta_orientada_a_dados/versão_2)
 
-### Indução a Modelos
-- [Indução a Modelos](/src/modelos/modelo1/modelo_state_of_data)
+### Indução a Modelos❌(concertar direcionamento)
+- [Indução a Modelos](/src/modelos)
 
 ---
 
@@ -7027,22 +7027,28 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 ---
 
-# Artefatos do Projeto
+# Artefatos do Projeto 
 
 ## Artefatos relacionados a 1º pergunta orientada a dados
+### Base de Dados Originais
+- [Base de Dados Original State of Data](/assets/data/bases_principais/base_principal_state_of_data)
+- [Base de Dados Original Auxiliar](/assets/data/bases_principais/bases_auxiliar/1_pergunta_orientada_a_dados)
 
 ### Limpeza de Dados
-[Limpeza de Dados]() 
+- [Base de Dados Original State of Data](/assets/data/cleaned_data/1_pergunta_orientada_a_dados/versão_3/base_principal_state_of_data)
+- [Base de Dados Original Auxiliar](/assets/data/cleaned_data/1_pergunta_orientada_a_dados/versão_3/base_auxiliar)
 
 ### Analise Exploratória de Dados
-[Análise Exploratória de Dados]()
+[Análise Exploratória de Dados](/assets/results/análise_exploratória_de_dados/1_pergunta_orientada_a_dados)
 
 ### Indução a Modelos
-[Indução a Modelos]()
+[Indução a Modelos](/assets/results/modelos/1º_pergunta_orientada_a_dados/imagens)
 
 ---
 
 ## Artefatos relacionados a 2º pergunta orientada a dados
+### Base de Dados Originais
+[Base de Dados Originais]()  ⚠️(2ºPerguntOrientadaaDados)
 
 ### Limpeza de Dados
 [Limpeza de Dados]()  ⚠️(2ºPerguntOrientadaaDados) 
@@ -7056,6 +7062,8 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 ---
 
 ## Artefatos relacionados a 3º pergunta orientada a dados
+### Base de Dados Originais
+[Base de Dados Originais]()  ⚠️(3ºPerguntOrientadaaDados) 
 
 ### Limpeza de Dados
 [Limpeza de Dados]() ⚠️(3ºPerguntOrientadaaDados) 
