@@ -6876,12 +6876,12 @@ Este relatório adaptado foca nos resultados e no contexto da Rede Neural v2, ut
 	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
  
 *   [Interpretação dos modelo 2º pergunta orientada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+	*    [Interpretação do modelo 1_2](#interpretação-do-modelo-1_2)
+	*    [Interpretação do modelo 2_2](#interpretação-do-modelo-2_2)
 	 
 *   [Interpretação dos modelo 3º pergunta orientada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+	*    [Interpretação do modelo 1_3](#interpretação-do-modelo-1_3)
+	*    [Interpretação do modelo 2_3](#interpretação-do-modelo-2_3)
 
 
 ## Interpretação dos modelo 1º pergunta orientada a dados
