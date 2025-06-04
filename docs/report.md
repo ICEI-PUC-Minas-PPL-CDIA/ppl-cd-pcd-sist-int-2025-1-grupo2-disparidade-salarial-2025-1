@@ -49,9 +49,9 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
     *   [Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
 *   [Interpretação do modelo](#interpretação-dos-modelos)
-    *   [Interpretação dos Modelos 1° pergunta orietada a dados](#interpretação-do-modelo-1)
-    *   [Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-do-modelo-2)
-    *   [Interpretação dos Modelos 3° pergunta orietada a dados](#interpretação-do-modelo-3)
+    *   [Interpretação dos Modelos 1° pergunta orietada a dados](##interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
+    *   [Interpretação dos Modelos 2° pergunta orietada a dados](##interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
+    *   [Interpretação dos Modelos 3° pergunta orietada a dados](##interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
 *   [Análise comparativa dos modelos](#análise-comparativa-dos-modelos)
 *   [Conclusão](#8-conclusão)
 *   [REFERÊNCIAS](#referências)
@@ -6876,12 +6876,12 @@ Este relatório adaptado foca nos resultados e no contexto da Rede Neural v2, ut
 	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
  
 *   [Interpretação dos modelo 2º pergunta orientada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)[Interpretação do modelo 1_2](#interpretação-do-modelo-1_2)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)[Interpretação do modelo 2_2](#interpretação-do-modelo-2_2)
+	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
 	 
 *   [Interpretação dos modelo 3º pergunta orientada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)[Interpretação do modelo 1_3](#interpretação-do-modelo-1_3)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)[Interpretação do modelo 2_3](#interpretação-do-modelo-2_3)
+	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
 
 
 ## Interpretação dos modelo 1º pergunta orientada a dados
