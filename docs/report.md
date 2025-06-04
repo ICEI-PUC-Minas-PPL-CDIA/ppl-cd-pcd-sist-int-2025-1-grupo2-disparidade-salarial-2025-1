@@ -7380,8 +7380,8 @@ b.  **Relatório de Classificação Detalhado (Teste - RNA v2) e Análise da Ma
     | :------------ | :-------- | :----- | :------- | :------ |
     | Salário Alto  | 0.85      | 0.84   | 0.84     | 622     |
     | Salário Baixo | 0.83      | 0.84   | 0.83     | 567     |
-    | accuracy      |           |        | 0.84     | 1189    
-    | macro avg     | 0.84      | 0.84   | 0.84     | 1189    
+    | accuracy      |           |        | 0.84     | 1189    |
+    | macro avg     | 0.84      | 0.84   | 0.84     | 1189    |
     | weighted avg  | 0.84      | 0.84   | 0.84     | 1189    |
 
     * **Interpretação:**
