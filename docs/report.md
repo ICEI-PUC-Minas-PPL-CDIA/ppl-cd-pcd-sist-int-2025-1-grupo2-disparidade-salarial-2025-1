@@ -7640,137 +7640,134 @@ e extrapolar um pouco o que os dados sugerem.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Análise comparativa dos modelos da 3º pergunta orientada a dados
 
-Análise comparativa dos modelos da 3º pergunta orientada a dados
+# Análise Comparativa dos Modelos – 1ª Pergunta Orientada a Dados
 
-3.1. Discussão de Forças e Fragilidades de Cada Modelo
+## 3.1 Discussão de Forças e Fragilidades de Cada Modelo
 
-Modelo 1: LightGBM (v7 - Classificação Binária com RFECV e Optuna)
+---
 
-Fonte do Código: Conheça_o_Colab_(2).ipynb (e relatórios associados)
+### Modelo 1: LightGBM  
+**Versão**: v7 – Classificação Binária com RFECV e Optuna  
+**Fonte do Código**: `Conheça_o_Colab_(2).ipynb` (e relatórios associados)
 
-**Forças do Modelo 1 (LightGBM):**
+#### 🔹 Forças do Modelo 1
 
-***Alta Performance Preditiva em Dados Tabulares:***
-LightGBM é um algoritmo de gradient boosting altamente eficiente e eficaz para dados tabulares, frequentemente alcançando resultados de ponta. O modelo demonstrou bom desempenho (Acurácia Teste ~0.833, ROC AUC ~0.921-0.923).
-***Conexão com Objetivos:*** Contribui para "aplicar por meio de algoritmos de aprendizado de máquina, a previsão da variação salarial com base nos fatores identificados" de forma eficaz.
+**1. Alta Performance Preditiva em Dados Tabulares**
+- LightGBM é altamente eficaz para dados tabulares.
+- Acurácia de teste: ~0.833  
+- ROC AUC: ~0.921–0.923  
+- **Conexão com Objetivos**: Eficaz para prever variação salarial com base em fatores identificados.
 
-***Fornecimento Direto de Importância das Features:***
-O modelo LightGBM fornece uma métrica clara de importância das features (baseada em "ganho" ou "divisões"), ajudando a identificar quais fatores são mais determinantes para a classificação da faixa salarial. As features mais importantes foram `P2_i` (Tempo de experiência), `P2_f_Cargo_Atual` (Cargo atual) e `P2_g_Nivel` (Nível de senioridade).
-***Conexão com Objetivos:*** Auxilia na "Identificação de Fatores Relevantes" e na "interpretação dos resultados" de forma relativamente direta, o que é crucial para "compreender os fatores que influenciam a variação salarial".
+**2. Fornecimento Direto de Importância das Features**
+- Métricas claras de importância com base em ganho/divisões.
+- Principais variáveis: `P2_i` (Experiência), `P2_f_Cargo_Atual` (Cargo), `P2_g_Nivel` (Senioridade).
+- **Conexão com Objetivos**: Facilita a interpretação dos fatores que influenciam a variação salarial.
 
-***Seleção Robusta de Features com RFECV:***
-O uso de Recursive Feature Elimination with Cross-Validation (RFECV) ajudou a selecionar um subconjunto otimizado de 6 features, potencialmente melhorando a generalização, reduzindo o ruído e focando o modelo nos preditores mais impactantes.
-***Conexão com Objetivos:*** Contribui para um modelo mais parcimonioso e focado nos preditores mais relevantes, alinhado com a necessidade de "identificar padrões e tendências" de forma clara.
+**3. Seleção Robusta de Features com RFECV**
+- Subconjunto otimizado de 6 features.
+- Redução de ruído e foco nos preditores mais impactantes.
+- **Conexão com Objetivos**: Alinhado à identificação clara de padrões e tendências.
 
-***Eficiência Computacional:***
-Comparado a redes neurais complexas, LightGBM geralmente oferece tempos de treinamento e inferência mais rápidos, sendo uma boa opção para prototipagem rápida, experimentação com diferentes parametrizações e para cenários com restrições de recursos.
-***Conexão com Objetivos:*** Permite iterações mais rápidas no desenvolvimento do "sistema inteligente" e na "geração de insights para o mercado" de forma ágil.
+**4. Eficiência Computacional**
+- Treinamento e inferência rápidos.
+- Ideal para prototipagem e ajustes frequentes.
+- **Conexão com Objetivos**: Agilidade no desenvolvimento do sistema inteligente.
 
-***Robustez a Diferentes Escalas de Features e Tratamento Nativo (ou Eficaz) de Categóricas:***
-Modelos baseados em árvores como LightGBM não requerem escalonamento de features numéricas e podem lidar com features categóricas eficientemente (seja nativamente ou com encodings simples), o que simplifica a etapa de pré-processamento.
-***Conexão com Objetivos:*** Simplifica o pré-processamento e mantém a interpretabilidade das features originais, facilitando a análise dos "fatores que influenciam a variação salarial".
+**5. Robustez a Escalas e Tratamento de Categóricas**
+- Não exige escalonamento.
+- Lida bem com variáveis categóricas.
+- **Conexão com Objetivos**: Facilita o pré-processamento e preserva a interpretabilidade.
 
-**Fragilidades do Modelo 1 (LightGBM):**
+#### 🔻 Fragilidades do Modelo 1
 
-***Interpretabilidade do Ensemble:***
-Embora a importância global das features seja útil, entender *como* o ensemble de árvores chega a uma decisão específica para um indivíduo é menos direto do que uma única árvore. Explicar interações complexas, que são cruciais para a 1ª pergunta orientada a dados (interação formação vs. experiência), pode exigir ferramentas adicionais (ex: SHAP).
-***Impacto na Investigação:*** Pode ser desafiador "compreender os fatores que influenciam a variação salarial" em sua total complexidade interacional e "interpretar os resultados" de forma granular apenas com as saídas padrão do LightGBM.
+**1. Interpretabilidade do Ensemble**
+- Explicações individuais pouco transparentes.
+- Requer SHAP ou ferramentas similares para entender interações.
+- **Impacto**: Dificulta interpretação granular, especialmente sobre interação entre formação e experiência.
 
-***Sensibilidade a Hiperparâmetros:***
-Modelos de boosting podem ser sensíveis à escolha dos hiperparâmetros. Embora Optuna tenha sido usado para otimização, a qualidade da busca depende da definição do espaço de busca e do tempo de execução. Uma otimização não exaustiva pode não extrair o máximo do modelo.
-***Impacto na Investigação:*** Uma otimização subótima poderia levar a conclusões menos robustas sobre a importância dos fatores ou o desempenho do modelo, afetando a confiabilidade do "sistema inteligente".
+**2. Sensibilidade a Hiperparâmetros**
+- Boosting é sensível a parâmetros.
+- Depende da qualidade da busca do Optuna.
+- **Impacto**: Pode afetar robustez e conclusões da análise.
 
-***Variável Alvo Binária Simplificada:***
-A classificação em apenas duas categorias ("Salário Alto" vs. "Salário Baixo") com um corte fixo em R$ 7.500 perde a granularidade das disparidades salariais. Profissionais ganhando R$ 8.000 e R$ 30.000 são tratados da mesma forma na classe "Salário Alto".
-***Impacto na Investigação:*** Dificulta a compreensão das nuances da "variação salarial" e a identificação de diferentes "tetos" ou progressões dentro da categoria "Salário Alto", limitando a profundidade da "geração de insights para o mercado".
+**3. Variável Alvo Binária Simplificada**
+- Corte fixo em R$ 7.500 reduz granularidade.
+- Agrupa salários de R$ 8.000 e R$ 30.000 como equivalentes.
+- **Impacto**: Limita a profundidade dos insights sobre progressão salarial.
 
-***Exclusão de Features por RFECV:***
-A feature `P1_b` (Gênero) foi eliminada pelo RFECV, o que significa que não contribuiu para melhorar o desempenho preditivo *deste modelo específico* sob o critério do RFECV. Se o Gênero tiver um papel sutil ou interacional importante para a disparidade salarial (um dos focos de "auxiliar na equiparação salarial"), sua exclusão pode ser uma limitação para responder a todas as nuances da pergunta de pesquisa.
-***Impacto na Investigação:*** Pode omitir a análise de um fator demográfico potencialmente relevante para a disparidade salarial e para discussões sobre equidade, mesmo que seu poder preditivo isolado ou marginal no contexto das outras features seja baixo.
+**4. Exclusão de `P1_b` (Gênero) pelo RFECV**
+- Gênero removido por não melhorar performance.
+- **Impacto**: Pode omitir um fator relevante para análise de equidade salarial.
 
-Modelo 2: Rede Neural (RNA v2 - Classificação Binária com RayTune)
+---
 
-Fonte do Código: Conheça_o_Colab (3).ipynb (e "Formulário de Resultados" associado)
+### Modelo 2: Rede Neural  
+**Versão**: RNA v2 – Classificação Binária com RayTune  
+**Fonte do Código**: `Conheça_o_Colab (3).ipynb` (e formulário de resultados associado)
 
-**Forças do Modelo 2 (Rede Neural):**
+#### 🔹 Forças do Modelo 2
 
-***Capacidade Superior de Modelar Interações Complexas e Não Lineares:***
-Redes Neurais são excelentes em aprender automaticamente interações complexas e relações não lineares entre features, sem a necessidade de especificá-las manualmente. Isso é particularmente valioso para explorar a interação entre formação, experiência e outras features.
-***Conexão com Objetivos:*** Altamente relevante para a 1ª pergunta orientada a dados, que foca na interação entre formação e experiência para "compreender os fatores que influenciam a variação salarial" de maneira profunda.
+**1. Modelagem de Interações Complexas e Não Lineares**
+- Capacidade de capturar relações complexas entre variáveis.
+- **Conexão com Objetivos**: Ideal para investigar interações entre formação e experiência.
 
-***Representações Ricas para Features Categóricas via Embeddings:***
-O uso de camadas de embedding para features categóricas (`P1_a_1`, `P1_b`, `P1_l`, `P2_g_Nivel`, `P2_f_Cargo_Atual`, `Regiao_Mapeada`) permite à RNA aprender representações vetoriais densas e contextualmente ricas. Isso pode capturar nuances e semelhanças entre categorias de forma mais eficaz do que encodings tradicionais.
-***Conexão com Objetivos:*** Pode levar a uma modelagem mais precisa do impacto de features como "Nível de ensino" ou "Cargo atual", e como elas interagem, contribuindo para "identificar padrões e tendências" mais sutis.
+**2. Embeddings para Features Categóricas**
+- Representações densas e contextuais para variáveis como `P1_b`, `P2_g_Nivel`, `Regiao_Mapeada`, etc.
+- **Conexão com Objetivos**: Pode revelar padrões mais sutis.
 
-***Inclusão de Todas as Features Iniciais Relevantes:***
-A RNA v2 utilizou todas as 7 features consideradas inicialmente relevantes, incluindo `P1_b` (Gênero). Isso permite ao modelo explorar o potencial preditivo e as interações dessa feature, que foi descartada no processo do LightGBM.
-***Conexão com Objetivos:*** Permite uma análise potencialmente mais completa dos fatores demográficos e sua interação com outros preditores, o que pode ser importante para "auxiliar na equiparação salarial" e entender disparidades de gênero.
+**3. Inclusão de Todas as Features Relevantes**
+- Inclui `P1_b` (Gênero) e demais variáveis.
+- **Conexão com Objetivos**: Permite uma análise mais ampla das disparidades de gênero e outros fatores.
 
-***Alto Desempenho Preditivo Potencial:***
-Redes neurais, quando bem configuradas e ajustadas, podem alcançar desempenho de ponta em muitas tarefas de classificação. O desempenho da RNA v2 (Acurácia Teste ~0.838, ROC AUC ~0.926) foi muito competitivo e ligeiramente superior em ROC AUC ao LightGBM neste caso.
-***Conexão com Objetivos:*** Suporta a "previsão da variação salarial com base nos fatores identificados" com alta acurácia, visando a construção de um "sistema inteligente" robusto.
+**4. Alto Desempenho Preditivo Potencial**
+- Acurácia de teste: ~0.838  
+- ROC AUC: ~0.926 (ligeiramente superior ao LightGBM)
+- **Conexão com Objetivos**: Suporta previsões robustas da variação salarial.
 
-**Fragilidades do Modelo 2 (Rede Neural):**
+### Fragilidades do Modelo 2 (Rede Neural)
 
-***Natureza "Caixa-Preta" e Baixa Interpretabilidade Direta:***
-Redes Neurais são notoriamente difíceis de interpretar. Entender *por que* o modelo tomou uma decisão específica para um indivíduo requer técnicas especializadas (como SHAP ou Permutation Importance), que não foram detalhadas no relatório da RNA v2.
-***Impacto na Investigação:*** Torna muito desafiador "compreender os fatores que influenciam a variação salarial" de forma explícita e "interpretar os resultados" de maneira intuitiva para stakeholders ou para "geração de insights para o mercado" que sejam facilmente acionáveis.
+**Natureza "Caixa-Preta" e Baixa Interpretabilidade Direta:**
+Redes neurais são notoriamente difíceis de interpretar. Entender *por que* o modelo tomou uma decisão específica para um indivíduo requer técnicas especializadas como LIME, SHAP ou Integrated Gradients. Isso dificulta a explicação dos resultados para públicos não técnicos ou para fins de auditoria.
 
-***Sensibilidade à Arquitetura e Hiperparâmetros:***
-O desempenho de uma RNA é altamente dependente da escolha da arquitetura (número de camadas, neurônios) e de múltiplos hiperparâmetros. Embora RayTune tenha sido usado para otimização, o processo é complexo e computacionalmente intensivo, e o espaço de busca pode não ser explorado exaustivamente.
-***Impacto na Investigação:*** Uma configuração subótima pode levar a um desempenho inferior ou a um modelo que não generaliza bem, afetando a confiabilidade das conclusões sobre a "variação salarial".
+- **Impacto na Investigação:** Limita a transparência e a capacidade de "interpretar os resultados" de maneira clara, dificultando a compreensão granular dos "fatores que influenciam a variação salarial", especialmente em contextos que demandam justificativas explicativas.
 
-***Custo Computacional Elevado:***
-O treinamento de redes neurais e, especialmente, a otimização de hiperparâmetros com ferramentas como RayTune, tendem a ser significativamente mais demorados e a exigir mais recursos computacionais (CPU/GPU) do que modelos como LightGBM.
-***Impacto na Investigação:*** Pode limitar a velocidade de iteração, a exploração de um espaço de hiperparâmetros mais amplo, ou a viabilidade de re-treinamentos frequentes do "sistema inteligente".
+**Maior Complexidade de Treinamento e Ajuste:**
+O treinamento de redes neurais requer maior cuidado com regularização, taxas de aprendizado, arquitetura, função de ativação, número de épocas e outros hiperparâmetros. O uso de RayTune foi uma escolha adequada, mas ainda assim exige tempo de computação significativo e expertise.
 
-***Variável Alvo Binária Simplificada:***
-Assim como o Modelo 1, a classificação em apenas duas categorias ("Salário Alto" vs. "Salário Baixo") limita a profundidade da análise da "variação salarial", apesar da sofisticação do modelo.
-***Impacto na Investigação:*** Dificulta a compreensão das nuances da disparidade dentro das categorias e a análise de progressões salariais mais finas.
+- **Impacto na Investigação:** A complexidade técnica pode se tornar uma barreira para reprodutibilidade, refinamento iterativo ou adoção prática do modelo por stakeholders não especializados.
 
-***Necessidade de Pré-processamento Cuidadoso:***
-RNAs geralmente requerem um pré-processamento mais cuidadoso, como escalonamento de features numéricas (se aplicável) e o correto manuseio de features categóricas para as camadas de embedding (escolha de dimensões de embedding, etc.).
-***Impacto na Investigação:*** Erros ou escolhas subótimas no pré-processamento podem impactar negativamente o desempenho e a capacidade de aprendizado do modelo, distorcendo a "identificação de padrões e tendências".
+**Demanda Computacional Elevada:**
+Comparado ao LightGBM, o modelo de RNA requer mais tempo de treinamento, maior uso de memória e, potencialmente, GPU para desempenho ideal.
 
-3.2. Exemplificação de Casos de Superioridade (Imaginação e Extrapolação Fundamentada)
+- **Impacto na Investigação:** Aumenta o custo de experimentação e de deploy do "sistema inteligente", podendo ser um entrave para ambientes com recursos computacionais limitados.
 
-Cenários de Superioridade para o Modelo 1 (LightGBM v7 - Binário):
+**Risco de Overfitting:**
+Modelos de rede neural, especialmente com conjuntos de dados pequenos ou com número relativamente baixo de observações por classe, podem superajustar aos dados de treino sem as devidas técnicas de regularização e validação.
 
-Cenário: Desenvolvimento Inicial de um Sistema de Classificação Salarial para Validação Rápida de Hipóteses.
-Situação: Uma equipe de pesquisa está nas fases iniciais de investigação sobre disparidade salarial e precisa de um modelo funcional rapidamente para validar hipóteses sobre quais são os principais fatores (experiência, senioridade, formação, etc.) que distinguem profissionais que ganham acima ou abaixo de um limiar chave (R$7.500). A interpretabilidade dos fatores mais impactantes e a velocidade de iteração são cruciais nesta fase.
-Por que Modelo 1 seria superior:
-    * **Importância de Features Explícita e Rápida:** LightGBM fornece uma clara hierarquia da importância das features de forma nativa. Isso permite que a equipe identifique rapidamente os principais preditores (ex: `P2_i`, `P2_f_Cargo_Atual`, `P2_g_Nivel`) e compare com suas hipóteses iniciais, sem a necessidade de rodar análises de interpretabilidade mais complexas como SHAP.
-    * **Eficiência no Treinamento e Ajuste:** O ciclo de treinamento e ajuste de hiperparâmetros (mesmo com Optuna) para LightGBM tende a ser mais rápido que para uma RNA com RayTune. Isso permite mais experimentações e validações em menos tempo.
-    * **Modelo Mais Simples para Análise Preliminar:** A estrutura baseada em árvores, mesmo em ensemble, é conceitualmente mais simples para uma análise inicial de como as features são usadas para fazer splits e tomar decisões, em comparação com as transformações e pesos em uma rede neural.
-    * **Robustez com Feature Selection:** O uso de RFECV para selecionar 6 features foco o modelo nos sinais mais fortes, o que pode ser benéfico para uma primeira validação, evitando ruído de features menos impactantes.
-Relação com o Problema: Este cenário alinha-se com a fase inicial de "compreender os fatores que influenciam a variação salarial" e "identificar padrões e tendências" de forma ágil. O modelo serviria como uma base sólida para refinar a pergunta de pesquisa e justificar investigações mais profundas, talvez com modelos mais complexos posteriormente. A rapidez na "geração de insights" preliminares seria uma vantagem.
+- **Impacto na Investigação:** Pode prejudicar a generalização do modelo, afetando sua aplicabilidade em novos contextos ou bases de dados futuras, o que compromete a robustez da "geração de insights para o mercado".
 
-Cenário: Criação de um Módulo de "Estimativa Salarial Simplificada" para uma Plataforma de Carreira com Recursos Limitados.
-Situação: Uma plataforma online de desenvolvimento de carreira quer oferecer uma ferramenta simples onde usuários podem inserir seus dados (experiência, cargo, senioridade, etc.) e receber uma indicação se seu perfil se enquadra na faixa "Salário Alto" ou "Baixo/Médio", como um primeiro ponto de referência. A plataforma tem limitações de orçamento para infraestrutura de inferência e precisa de um modelo leve e rápido.
-Por que Modelo 1 seria superior:
-    * **Leveza e Velocidade de Inferência:** Modelos LightGBM treinados são geralmente mais compactos e rápidos para fazer previsões individuais do que redes neurais, tornando-os mais adequados para aplicações com alta demanda de inferência ou com restrições de hardware.
-    * **Menor Complexidade de Implantação:** A implantação de um modelo LightGBM (ex: via um arquivo pickle) e suas dependências é geralmente mais simples do que uma RNA que pode envolver um framework como TensorFlow/Keras e o manejo de pesos e arquitetura de forma mais complexa.
-    * **Transparência Parcial para o Usuário:** Embora não totalmente transparente, é possível comunicar aos usuários que "fatores como sua experiência e senioridade foram os mais importantes para esta estimativa", com base na importância de features do LightGBM.
-Relação com o Problema: Este cenário foca em "aplicar por meio de algoritmos de aprendizado de máquina, a previsão da variação salarial" de forma prática e acessível. A ferramenta poderia "auxiliar na equiparação salarial" ao dar aos usuários um ponto de partida para entenderem seu posicionamento no mercado, mesmo que de forma simplificada, e "gerar insights para o mercado" sobre as expectativas salariais.
+---
 
-Cenários de Superioridade para o Modelo 2 (Rede Neural RNA v2 - Binário):
+## 3.2. Conclusões Comparativas
 
-Cenário: Pesquisa Detalhada sobre o Impacto e Interações de Features Categóricas Complexas, incluindo Gênero, na Disparidade Salarial.
-Situação: Um estudo aprofundado visa não apenas prever a faixa salarial, mas entender como as diversas categorias dentro de features como "Cargo Atual" (que pode ter dezenas ou centenas de valores únicos) ou "Nível de Ensino" interagem entre si e com outras features como "Gênero" e "Região". O objetivo é descobrir padrões sutis que podem ser mascarados por métodos de encoding mais simples ou pela exclusão de features.
-Por que Modelo 2 seria superior:
-    * **Embeddings para Captura de Nuances Categóricas:** As camadas de embedding da RNA são ideais para aprender representações vetoriais para um grande número de categorias, capturando relações de similaridade e oposição entre elas (ex: cargos com responsabilidades parecidas podem ter embeddings próximos). Isso permite modelar o impacto dessas categorias e suas interações de forma muito mais rica.
-    * **Modelagem de Interações de Alta Ordem:** A arquitetura da RNA pode, teoricamente, aprender interações de ordem superior entre múltiplas features simultaneamente (ex: como Gênero + Região + Nível de Ensino + Cargo específico se combinam).
-    * **Inclusão Explícita de Gênero (`P1_b`):** A RNA v2 considerou o Gênero desde o início, permitindo que o modelo aprendesse qualquer contribuição preditiva direta ou interacional que essa feature possa ter, o que é crucial para estudos de equidade salarial.
-    * **Potencial de Performance Marginalmente Superior:** Se o objetivo é a máxima acurácia ou poder discriminatório (como o ROC AUC ligeiramente superior), e acredita-se que essas interações sutis são a chave, a RNA pode ter uma vantagem.
-Relação com o Problema: Este cenário se aprofunda em "compreender os fatores que influenciam a variação salarial" e "identificar padrões e tendências", especialmente aqueles relacionados a interações complexas e o papel de features categóricas detalhadas. É vital para "auxiliar na equiparação salarial" se forem descobertas interações que revelem vieses ou desvantagens para certos grupos.
+- **Desempenho Preditivo:** Ambos os modelos apresentaram alto desempenho. A RNA teve leve vantagem no ROC AUC (~0.926 vs. ~0.921), indicando maior capacidade de discriminar entre classes. Contudo, essa diferença é pequena.
 
-Cenário: Desenvolvimento de um "Sistema Inteligente" de Próxima Geração para Recomendações Personalizadas de Carreira e Salário.
-Situação: O objetivo final é um sistema que não apenas classifique o salário atual, mas que possa, no futuro, ser expandido para oferecer recomendações personalizadas (ex: "qual especialização ou transição de cargo teria maior impacto positivo no seu salário, dado seu perfil atual?"). Isso requer um modelo que aprenda representações profundas dos perfis dos profissionais.
-Por que Modelo 2 seria superior:
-    * **Representações Aprendidas (Embeddings) como Base para Recomendações:** Os vetores de embedding aprendidos para cargos, níveis de ensino, etc., podem ser usados para calcular similaridades entre perfis, identificar trajetórias de carreira comuns, ou alimentar outros modelos de recomendação. Eles contêm informação latente sobre as features.
-    * **Capacidade de Generalização para Novos Padrões (Potencial):** Com dados suficientes e arquitetura adequada, RNAs podem ter melhor capacidade de generalizar para combinações de features não vistas ou para identificar tendências emergentes no mercado de trabalho, devido à forma como aprendem as representações.
-    * **Fundação para Modelos Mais Avançados:** Uma RNA bem-sucedida pode ser o ponto de partida para arquiteturas mais complexas, como redes que incorporam dados textuais (descrições de vagas, currículos) ou modelos sequenciais para análise de progressão de carreira.
-Relação com o Problema: Este cenário visa "desenvolver um sistema inteligente" que vá além da simples classificação. As representações aprendidas pela RNA são cruciais para "gerar insights para o mercado" de forma mais dinâmica e para, eventualmente, "auxiliar na equiparação salarial" através de aconselhamento de carreira mais sofisticado e personalizado, explorando a interação entre formação, experiência e outros fatores de maneira proativa.
+- **Interpretabilidade:** O LightGBM se destaca nesse aspecto, fornecendo métricas diretas de importância das features e permitindo interpretação mais acessível, ainda que limitada. A RNA, por outro lado, exige ferramentas especializadas para justificar suas decisões.
+
+- **Tratamento de Interações:** A RNA possui vantagem estrutural por capturar interações complexas automaticamente, especialmente úteis para analisar a relação entre formação e experiência. O LightGBM pode captar algumas interações, mas não da mesma profundidade.
+
+- **Uso de Features Demográficas:** A RNA retém `P1_b` (Gênero), permitindo avaliar seu papel preditivo. O LightGBM, ao eliminá-la, pode ser mais conservador, mas também pode negligenciar nuances relevantes para a equidade salarial.
+
+- **Eficiência e Praticidade:** O LightGBM é mais leve, rápido e simples de implementar. Ideal para pipelines produtivos ou situações com recursos limitados.
+
+---
+
+## 3.3. Recomendação Estratégica
+
+- Para **explicabilidade e aplicabilidade rápida** em ambientes com restrições de tempo e recursos: **LightGBM (Modelo 1)** é preferível.
+- Para **exploração mais profunda de interações** e **investigação de disparidades complexas**, especialmente envolvendo demografia: **Rede Neural (Modelo 2)** é mais indicada.
+- **Integração futura entre ambos os modelos (ensemble ou comparação sistemática)** pode reunir o melhor dos dois mundos: robustez, explicabilidade e capacidade preditiva.
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Distribuição do modelo (opcional)
