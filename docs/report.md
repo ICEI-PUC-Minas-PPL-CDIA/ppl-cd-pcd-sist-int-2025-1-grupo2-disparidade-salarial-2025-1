@@ -7376,13 +7376,15 @@ b.  **Relatório de Classificação Detalhado (Teste - RNA v2) e Análise da Ma
 
     O relatório de classificação detalhado fornece insights sobre o desempenho por classe:
 
-    | Classe        | Precision | Recall | F1-score | Support |
-    | :------------ | :-------- | :----- | :------- | :------ |
-    | Salário Alto  | 0.85      | 0.84   | 0.84     | 622     |
-    | Salário Baixo | 0.83      | 0.84   | 0.83     | 567     |
-    | accuracy      |           |        | 0.84     | 1189    |
-    | macro avg     | 0.84      | 0.84   | 0.84     | 1189    |
-    | weighted avg  | 0.84      | 0.84   | 0.84     | 1189    |
+| Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
+| :----------------- | :------ | :------- | :----------- | :--------------------------------------------------------------------------- |
+| `P2_i`             | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.               |
+| `P2_g_Nivel`       | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto.     |
+| `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
+| `P1_a_1`           | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto.       |
+| `P1_l`             | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
+| `P1_b`             | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                                     |
+| `Regiao_Mapeada`   | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente (linear/monotônica).                  |
 
     * **Interpretação:**
 
