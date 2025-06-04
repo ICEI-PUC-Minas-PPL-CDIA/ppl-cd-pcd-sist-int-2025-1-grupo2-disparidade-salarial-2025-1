@@ -6994,10 +6994,10 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 - [Limpeza de Dados Base Auxiliar](/src/code_data_cleanest/base_auxiliares/1_pergunta_orientada_a_dados) 
 
 ### Analise Exploratória de Dados
-- [Análise Exploratória de Dados](/src/analise_exploratorias_-perguntas_orientadas_a_dados/1_pergunta_orientada_a_dados/versão_2)
+- [Análise Exploratória de Dados](/src/analise_exploratorias_perguntas_orientadas_a_dados/1_pergunta_orientada_a_dados/versão_2)
 
 ### Indução a Modelos
-- [Indução a Modelos](/src/modelos/modelo-1/modelo_state_of_data)
+- [Indução a Modelos](/src/modelos/modelo1/modelo_state_of_data)
 
 ---
 
