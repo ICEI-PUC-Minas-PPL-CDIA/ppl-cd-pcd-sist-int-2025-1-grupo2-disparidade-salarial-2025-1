@@ -6983,16 +6983,94 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 # APÊNDICES
 
-**Colocar link:**
+---
 
-Do código (armazenado no repositório);
+# Codigos do Projeto
 
-Dos artefatos (armazenado do repositório);
+## Códigos relacionados a 1º pergunta orientada a dados
 
-Da apresentação final (armazenado no repositório);
+### Limpeza de Dados
+- [Limpeza de Dados Base Principal State of Data](src/code_data_cleanest/base_principal_state_of_data/1_pergunta_orientada_a_dados/versão_3) 
+- [Limpeza de Dados Base Auxiliar](src/code_data_cleanest/base_auxiliares/1_pergunta_orientada_a_dados) 
 
-Do vídeo de apresentação (armazenado no repositório).
+### Analise Exploratória de Dados
+- [Análise Exploratória de Dados](src/analise_exploratorias_-perguntas_orientadas_a_dados/1_pergunta_orientada_a_dados/versão_2)
 
+### Indução a Modelos
+- [Indução a Modelos](src/modelos/modelo-1/modelo_state_of_data)
+
+---
+
+## Códigos relacionados a 2º pergunta orientada a dados
+
+### Limpeza de Dados
+[Limpeza de Dados]() ⚠️(2ºPerguntOrientadaaDados) 
+
+### Analise Exploratória de Dados
+[Análise Exploratória de Dados]() ⚠️(2ºPerguntOrientadaaDados) 
+
+### Indução a Modelos
+[Indução a Modelos]() ⚠️(2ºPerguntOrientadaaDados) 
+
+---
+
+## Códigos relacionados a 3º pergunta orientada a dados
+
+### Limpeza de Dados
+[Limpeza de Dados]()  ⚠️(3ºPerguntOrientadaaDados) 
+
+### Analise Exploratória de Dados
+[Análise Exploratória de Dados]() ⚠️(3ºPerguntOrientadaaDados) 
+
+### Indução a Modelos
+[Indução a Modelos]() ⚠️(3ºPerguntOrientadaaDados) 
+
+---
+
+# Artefatos do Projeto
+
+## Artefatos relacionados a 1º pergunta orientada a dados
+
+### Limpeza de Dados
+[Limpeza de Dados]() 
+
+### Analise Exploratória de Dados
+[Análise Exploratória de Dados]()
+
+### Indução a Modelos
+[Indução a Modelos]()
+
+---
+
+## Artefatos relacionados a 2º pergunta orientada a dados
+
+### Limpeza de Dados
+[Limpeza de Dados]()  ⚠️(2ºPerguntOrientadaaDados) 
+
+### Analise Exploratória de Dados
+[Análise Exploratória de Dados]() ⚠️(2ºPerguntOrientadaaDados) 
+
+### Indução a Modelos
+[Indução a Modelos]() ⚠️(2ºPerguntOrientadaaDados) 
+
+---
+
+## Artefatos relacionados a 3º pergunta orientada a dados
+
+### Limpeza de Dados
+[Limpeza de Dados]() ⚠️(3ºPerguntOrientadaaDados) 
+
+### Analise Exploratória de Dados
+[Análise Exploratória de Dados]() ⚠️(3ºPerguntOrientadaaDados) 
+
+### Indução a Modelos
+[Indução a Modelos]() ⚠️(3ºPerguntOrientadaaDados) 
+
+---
+
+**Da apresentação final (armazenado no repositório);** ⚠️
+
+**Do vídeo de apresentação (armazenado no repositório).** ⚠️
 
 
 
