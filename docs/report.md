@@ -7214,15 +7214,15 @@ a.  **Metodologia e Codificação do Alvo para Correlação:**
 
 b.  **Resumo das Correlações das Features Iniciais com `TARGET_SALARIO_CODIFICADO`:**
 
-    | Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
-    | :----------------- | :------ | :------- | :----------- | :----------------------------------------------------------------- |
-    | `P2_i`             | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.     |
-    | `P2_g_Nivel`       | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto. |
-    | `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
-    | `P1_a_1`           | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto. |
-    | `P1_l`             | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
-    | `P1_b`             | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                           |
-    | `Regiao_Mapeada`   | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente (linear/monotônica).        |
+| Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
+| :----------------- | :------ | :------- | :----------- | :--------------------------------------------------------------------------- |
+| `P2_i`             | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.               |
+| `P2_g_Nivel`       | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto.     |
+| `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
+| `P1_a_1`           | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto.       |
+| `P1_l`             | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
+| `P1_b`             | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                                     |
+| `Regiao_Mapeada`   | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente (linear/monotônica).                  |
 
 c.  **Observações da Análise de Correlação Inicial:**
     * **Consistência e Força:** `P2_i` (Tempo de Experiência) e `P2_g_Nivel` (Nível de Senioridade) exibiram as correlações (negativas, indicando associação com "Salário Alto") e dependências (dcor) mais fortes com a faixa salarial. `P2_f_Cargo_Atual` (Cargo Atual) e `P1_a_1` (Faixa Etária) seguiram com dependência moderada.
