@@ -6864,10 +6864,6 @@ Com base nos logs da última execução bem-sucedida:
 *(Placeholder para a imagem `dist_experiencia_salario_RNA_contexto.png`)*
 ![Boxplot e Violin Plot de Tempo de Experiência por Faixa Salarial](dist_experiencia_salario_RNA_contexto.png)
 
----
-
-Este relatório adaptado foca nos resultados e no contexto da Rede Neural v2, utilizando a estrutura do seu `Explicacao_do_modelo.txt` como base e incorporando as imagens fornecidas.
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # _Interpretação dos modelos_
 
@@ -7175,10 +7171,144 @@ processo de tomada de decisão.
 
 ### Interpretação do modelo 1_3
 
-Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
-processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
-o *feature importances* para tentar entender quais atributos o modelo se baseia no
-processo de tomada de decisão.
+## Interpretação Completa do Modelo v7 (LightGBM com RFECV e Optuna) - Incluindo Análise de Correlação e Relatório de Resultados
+
+### I. Especificação do Modelo e Parâmetros Chave
+
+a.  **Tipo de Modelo de Machine Learning:**
+    O modelo implementado é um **`LGBMClassifier`** da biblioteca `lightgbm`. Este é um framework de gradient boosting que utiliza árvores de decisão, reconhecido por sua eficiência e performance. O objetivo do modelo é realizar uma classificação binária, distinguindo entre 'Salário Alto' e 'Salário Baixo'.
+    * **Codificação da Variável Alvo**: 'Salário Alto' é a classe 0 e 'Salário Baixo' é a classe 1 (após LabelEncoding), conforme indicado no Relatório de Resultados.
+
+b.  **Principais Hiperparâmetros do Modelo Final Treinado e Relevância (conforme Relatório de Resultados, Seção 2.2):**
+    O modelo final foi otimizado usando `Optuna` para hiperparâmetros e `RFECV` para seleção de features.
+    * **`n_estimators` (configurado em Optuna): 1100**
+        * *Relevância*: Número máximo de árvores a serem construídas.
+        * *Nota*: O modelo final utilizou **105 árvores** devido ao mecanismo de **early stopping**.
+    * **`learning_rate`: 0.06509228494862056**
+        * *Relevância*: Controla a contribuição de cada árvore.
+    * **`num_leaves`: 80**
+        * *Relevância*: Número máximo de folhas por árvore.
+    * **`max_depth`: 12**
+        * *Relevância*: Profundidade máxima das árvores.
+    * **`min_child_samples`: 25**
+        * *Relevância*: Número mínimo de amostras necessárias em um nó folha.
+    * **`subsample`: 0.5**
+        * *Relevância*: Fração de amostras usadas para treinar cada árvore (50%).
+    * **`colsample_bytree`: 0.6000000000000001**
+        * *Relevância*: Fração de features usadas para treinar cada árvore (60%).
+    * **`reg_alpha` (L1 regularização): 1.5671157141467156**
+        * *Relevância*: Penaliza pesos grandes, podendo levar à esparsidade.
+    * **`reg_lambda` (L2 regularização): 14.655960291115573**
+        * *Relevância*: Penaliza pesos grandes quadraticamente.
+    * **`min_split_gain`: 0.3854595582770911**
+        * *Relevância*: Ganho mínimo necessário para uma divisão.
+    * **`min_child_weight`: 0.1393188921160219**
+        * *Relevância*: Peso mínimo (soma dos pesos de hessiana) em um nó filho.
+
+### II. Análise de Correlação Inicial das Features com o Alvo
+
+Antes da seleção de features pelo RFECV e do treinamento do modelo LightGBM final, foi realizada uma análise de correlação das features iniciais (após limpeza e transformações) com a variável alvo `TARGET_SALARIO_CODIFICADO`. As features consideradas nesta fase foram: `P1_a_1` (Faixa Etária), `P1_b` (Gênero), `P1_l` (Nível de Ensino), `P2_i` (Tempo de Experiência), `P2_g_Nivel` (Nível de Senioridade), `P2_f_Cargo_Atual` (Cargo Atual), e `Regiao_Mapeada`.
+
+a.  **Metodologia e Codificação do Alvo para Correlação:**
+    Para a interpretação da correlação, assume-se a codificação onde "Salário Baixo" recebeu um valor numérico MAIOR e "Salário Alto" um valor numérico MENOR (ex: Salário Alto -> 0, Salário Baixo -> 1). Com esta codificação, um coeficiente de correlação negativo entre uma feature e o alvo indica que um aumento no valor da feature tende a estar associado a "Salário Alto". A Correlação de Distância (dcor) mede a força da dependência (0 a 1), independentemente da direção.
+
+b.  **Resumo das Correlações das Features Iniciais com `TARGET_SALARIO_CODIFICADO`:**
+
+    | Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
+    | :----------------- | :------ | :------- | :----------- | :----------------------------------------------------------------- |
+    | `P2_i`             | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.     |
+    | `P2_g_Nivel`       | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto. |
+    | `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
+    | `P1_a_1`           | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto. |
+    | `P1_l`             | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
+    | `P1_b`             | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                           |
+    | `Regiao_Mapeada`   | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente (linear/monotônica).        |
+
+c.  **Observações da Análise de Correlação Inicial:**
+    * **Consistência e Força:** `P2_i` (Tempo de Experiência) e `P2_g_Nivel` (Nível de Senioridade) exibiram as correlações (negativas, indicando associação com "Salário Alto") e dependências (dcor) mais fortes com a faixa salarial. `P2_f_Cargo_Atual` (Cargo Atual) e `P1_a_1` (Faixa Etária) seguiram com dependência moderada.
+    * **Relações Não Estritamente Lineares:** Para `P2_i`, os valores de Spearman e dcor ligeiramente maiores que Pearson sugerem que a relação, embora forte, pode ter componentes não perfeitamente lineares, mas é claramente monotônica.
+    * **Impacto Menor (Linear/Monotônico):** `P1_l` (Nível de Ensino) mostrou uma associação mais modesta. `P1_b` (Gênero) e `Regiao_Mapeada` (Região) apresentaram correlações lineares/monotônicas muito fracas com o alvo nesta análise inicial. Isso sugere que, individualmente e de forma linear/monotônica, Gênero e Região têm pouca influência na distinção das faixas salariais.
+
+d.  **Insights dos Mapas de Calor de Correlação (Inter-feature):**
+    Os mapas de calor de correlação (Pearson, Spearman, dcor) são ferramentas visuais importantes para entender as inter-relações entre todas as features *antes* da modelagem.
+    * **Pearson e Spearman Heatmaps:** Estes gráficos revelam a força e direção das relações lineares (Pearson) e monotônicas (Spearman) entre pares de features. É esperado, por exemplo, observar correlações positivas entre `P2_i` (Experiência), `P1_a_1` (Faixa Etária) e `P2_g_Nivel` (Senioridade). Entender essas inter-correlações ajuda a contextualizar a importância que o modelo LightGBM atribui a cada uma, pois features correlacionadas podem ter suas importâncias "compartilhadas" ou uma pode "representar" a outra parcialmente.
+    * **Distance Correlation (dcor) Heatmap:** Este mapa destaca a força da dependência geral (linear ou não linear) entre as features, complementando as outras duas métricas ao identificar relações que podem não ser capturadas por medidas lineares ou monotônicas.
+
+### III. Fatores Preditivos Dominantes no Modelo LightGBM: Análise das Features Selecionadas e Sua Importância
+
+a.  **Features Selecionadas (RFECV) e Seus Significados (conforme Relatório de Resultados, Seção 3.2):**
+    O processo de `RFECV` selecionou 6 features para o modelo final:
+    1.  `P2_i`: Tempo de experiência
+    2.  `P2_f_Cargo_Atual`: Cargo atual
+    3.  `P2_g_Nivel`: Nível de senioridade
+    4.  `P1_l`: Nível de ensino
+    5.  `P1_a_1`: Faixa etária
+    6.  `Regiao_Mapeada`: Região onde mora
+
+    *Nota: `P1_b` (Gênero), que apresentou correlação inicial muito fraca com o alvo, foi eliminada pelo RFECV, o que é consistente com sua baixa associação linear/monotônica individual.*
+
+b.  **Análise de Importância de Features no Modelo LightGBM (conforme Relatório de Resultados, Seção 3.2):**
+    O LightGBM atribuiu a seguinte ordem de importância (provavelmente baseada em "ganho") para as features selecionadas:
+    1.  **`P2_i` (Tempo de experiência)**
+    2.  **`P2_f_Cargo_Atual` (Cargo atual)**
+    3.  **`P2_g_Nivel` (Nível de senioridade)**
+    4.  **`P1_l` (Nível de ensino)**
+    5.  **`P1_a_1` (Faixa etária)**
+    6.  **`Regiao_Mapeada` (Região onde mora)**
+
+c.  **Interpretação no Contexto da Predição Salarial (Considerando Correlações e Importância no Modelo):**
+    * **Consistência entre Correlação e Importância:** As features com maior correlação inicial com o alvo (`P2_i`, `P2_g_Nivel`, `P2_f_Cargo_Atual`, `P1_a_1`) também figuram entre as mais importantes para o modelo LightGBM. Isso reforça a ideia de que são direcionadores chave da faixa salarial.
+    * **Papel da Experiência e Hierarquia:** `P2_i`, `P2_f_Cargo_Atual`, e `P2_g_Nivel` dominam tanto na correlação inicial quanto na importância para o modelo, sublinhando que a progressão na carreira e o acúmulo de experiência são cruciais para atingir salários mais altos.
+    * **Nível de Ensino e Faixa Etária (`P1_l`, `P1_a_1`):** Apresentaram correlações moderadas e são importantes para o modelo, embora com menor peso que o trio anterior. O modelo provavelmente as utiliza para refinar predições dentro de grupos definidos por experiência/cargo/nível.
+    * **Região Mapeada (`Regiao_Mapeada`):** Esta feature teve uma correlação linear/monotônica inicial quase nula com o alvo. No entanto, foi selecionada pelo RFECV e possui alguma importância (a menor entre as 6) no modelo LightGBM. Isso sugere que sua contribuição é provavelmente não-linear ou se manifesta através de interações com outras features que o modelo de árvore consegue capturar, mas que a análise de correlação bivariada simples não evidencia. Por exemplo, o impacto de um cargo pode variar significativamente apenas em certas regiões.
+
+### IV. Desvendando a Lógica do Modelo: 'Regras de Raciocínio' e Caminhos de Decisão
+
+a.  **Elucidando a Lógica do `LGBMClassifier`:**
+    O modelo final consiste em 105 árvores de decisão. Extrair regras globais simples é inviável. Cada árvore contém múltiplos caminhos de decisão baseados em limiares para as 6 features selecionadas.
+    * **Exemplo de Caminho (Ilustrativo):** `IF P2_i (Experiência) > 6 anos AND P2_g_Nivel == 'Sênior' AND Regiao_Mapeada == 'Sudeste' THEN probabilidade_Salario_Alto aumenta.`
+    * **Interpretabilidade Adicional:** Ferramentas como SHAP ou LIME, não mencionadas no relatório, poderiam oferecer maior detalhamento sobre as contribuições de features para previsões individuais ou para o comportamento geral do modelo.
+
+b.  **Como as 'Regras' (Implícitas) Ajudam a Entender as Decisões:**
+    A lógica do modelo, inferida a partir da importância das features e dos gráficos do relatório (Seções 3.3, 3.4, 3.5), sugere que:
+    * Divisões primárias ocorrem com base em `P2_i` (Experiência).
+    * `P2_f_Cargo_Atual` e `P2_g_Nivel` segmentam ainda mais os dados.
+    * As demais features (`P1_l`, `P1_a_1`, `Regiao_Mapeada`) refinam as probabilidades dentro desses subgrupos, capturando nuances específicas.
+
+### V. A Interação entre Fatores Chave na Predição Salarial
+
+a.  **Capacidade de Modelar Interações:**
+    O LightGBM é inerentemente capaz de modelar interações complexas e não lineares entre features.
+
+b.  **Discussão sobre Interações Prováveis (Considerando Correlações e o Modelo):**
+    * **Experiência (`P2_i`), Senioridade (`P2_g_Nivel`) e Cargo (`P2_f_Cargo_Atual`):** Estas três features, fortemente correlacionadas entre si e com o alvo, provavelmente interagem de forma sinérgica. O efeito da experiência no salário pode ser potencializado por um nível de senioridade ou cargo mais alto.
+    * **Nível de Ensino (`P1_l`) com Experiência/Cargo:** O "retorno" de um maior nível de ensino pode ser mais pronunciado para profissionais com mais experiência ou em cargos que valorizam essa qualificação.
+    * **Região (`Regiao_Mapeada`) com Cargo/Nível:** A importância da `Regiao_Mapeada`, apesar da baixa correlação inicial, sugere que ela interage significativamente. Um cargo de "Gerente" (`P2_f_Cargo_Atual`, `P2_g_Nivel`) pode ter um diferencial salarial muito maior em uma capital (`Regiao_Mapeada`) do que em uma cidade do interior.
+    * **Faixa Etária (`P1_a_1`) e Experiência (`P2_i`):** Embora correlacionadas, o modelo pode identificar que, para uma mesma experiência, faixas etárias diferentes podem ter salários distintos, ou vice-versa, capturando maturidade ou outros fatores não diretamente medidos pela experiência.
+
+### VI. Síntese: Conectando a Interpretação do Modelo à Pergunta Central da Pesquisa
+
+a.  **Principais Descobertas da Interpretação do Modelo:**
+    1.  O modelo `LGBMClassifier` (Acurácia Teste: 0.8335, ROC AUC Teste: 0.9234) é eficaz na predição de faixas salariais.
+    2.  **Tempo de Experiência, Cargo Atual e Nível de Senioridade** são os determinantes mais fortes, com altas correlações iniciais com o alvo e maior importância no modelo.
+    3.  Nível de Ensino e Faixa Etária também são preditores relevantes.
+    4.  A Região onde mora, embora com baixa correlação linear inicial, contribui para o modelo, provavelmente através de interações ou efeitos não-lineares.
+    5.  O modelo captura interações complexas entre esses fatores para distinguir as classes salariais.
+    6.  A definição do ponto de corte (`point_of_cut_fixed`) para as classes 'Salário Alto'/'Baixo' é crucial para a análise.
+
+b.  **Relação com a Pergunta Orientadora:**
+    A pergunta ("Quais fatores e suas interações influenciam a classificação em 'Salário Alto' vs. 'Salário Baixo'?") é respondida:
+    * **Fatores Primários:** Experiência, cargo e senioridade são os principais.
+    * **Fatores Secundários/Moduladores:** Nível de ensino, faixa etária e região.
+    * **Interações Fundamentais:** O valor de cada fator é frequentemente dependente dos outros (ex: o impacto da experiência é modulado pelo cargo e pela região).
+
+c.  **Limitações da Interpretação/Modelo:**
+    1.  **Interpretabilidade Detalhada:** Sem SHAP/LIME, a compreensão exata das contribuições para previsões individuais é limitada.
+    2.  **Causalidade:** O modelo identifica associações preditivas, não causa e efeito.
+    3.  **Simplificação Binária:** A divisão em duas faixas salariais oculta nuances da distribuição completa de salários.
+    4.  **Features Eliminadas:** A eliminação de features como Gênero (`P1_b`) pelo RFECV significa que elas não melhoraram o poder preditivo *deste modelo específico*, mas não invalida sua importância em outras análises, especialmente de equidade ou com diferentes configurações de modelo/feature. A baixa correlação inicial de Gênero com o alvo é consistente com sua eliminação.
+
+Esta versão integrada fornece uma visão mais completa, começando com as relações lineares/monotônicas e depois explorando como o modelo LightGBM utiliza essas e outras informações de forma mais complexa.
 
 -------------------------------------------------------------------------------------------------------------------------
 
