@@ -6871,10 +6871,20 @@ Este relatório adaptado foca nos resultados e no contexto da Rede Neural v2, ut
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # _Interpretação dos modelos_
 
+[Interpretação dos modelo 1º pergunta orientada a dados](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
+	- [Interpretação do modelo 1_1](#interpretação-do-modelo-1_1)
+	- [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+[Interpretação dos modelo 2º pergunta orientada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
+	- [Interpretação do modelo 1_2](#interpretação-do-modelo-1_2)
+	- [Interpretação do modelo 2_2](#interpretação-do-modelo-2_2)
+[Interpretação dos modelo 3º pergunta orientada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
+	- [Interpretação do modelo 1_3](#interpretação-do-modelo-1_3)
+	- [Interpretação do modelo 2_3](#interpretação-do-modelo-2_3)
+
 
 ## Interpretação dos modelo 1º pergunta orientada a dados
 
-## Interpretação do modelo 1
+## Interpretação do modelo 1_1
 
 ### I. Especificação do Modelo e Parâmetros Chave
 
@@ -7032,29 +7042,123 @@ A interpretação do modelo fornece as seguintes respostas:
 5.  **Interpretabilidade do Ensemble:** Embora uma árvore possa ser visualizada, a lógica completa do Random Forest (100 árvores) é mais complexa. A importância das features e o heatmap de interação fornecem boas aproximações, mas não capturam todas as sutilezas. Técnicas como SHAP poderiam oferecer insights mais granulares por instância.
 6.  **Representatividade dos Dados:** A qualidade e representatividade do dataset original (`dados_limpos.csv`) são cruciais. Se houver vieses nos dados, o modelo os aprenderá.
 
+-------------------------------------------------------------------------------------------------------------------------
+
+
+## Interpretação do modelo 2_1
+
+### I. Especificação do Modelo e Parâmetros Chave
+
+a.  **Tipo de Modelo de Machine Learning:**
+    O modelo implementado no código é um **`GradientBoostingClassifier`** da biblioteca `sklearn.ensemble`. Este é um modelo de ensemble que constrói árvores de decisão de forma sequencial, onde cada nova árvore tenta corrigir os erros cometidos pelas árvores anteriores.
+
+b.  **Principais Hiperparâmetros do Modelo Final Treinado e Relevância:**
+    O modelo final foi otimizado usando `RandomizedSearchCV`. Com base na saída do notebook, os melhores hiperparâmetros encontrados foram:
+    * **`subsample`: 0.8**
+        * *Relevância*: Esta é a fração de amostras a ser usada para ajustar cada árvore individual. Um valor menor que 1.0 introduz estocasticidade, o que pode ajudar a reduzir a variância e prevenir o overfitting. 80% das amostras são usadas para cada árvore.
+    * **`n_estimators`: 100**
+        * *Relevância*: O número de árvores (estágios de boosting) a serem construídas. Um número maior de árvores geralmente leva a um melhor desempenho, até um certo ponto, mas também aumenta o tempo de treinamento.
+    * **`min_samples_split`: 2**
+        * *Relevância*: O número mínimo de amostras necessárias para dividir um nó interno de uma árvore. Um valor pequeno como 2 permite que as árvores cresçam bastante, capturando detalhes finos, mas pode levar a overfitting se não controlado por outros parâmetros como `max_depth` ou `min_samples_leaf`.
+    * **`min_samples_leaf`: 2**
+        * *Relevância*: O número mínimo de amostras que um nó folha (terminal) deve ter. Este parâmetro ajuda a suavizar o modelo e reduzir o overfitting, garantindo que cada decisão final seja baseada em pelo menos 2 amostras.
+    * **`max_depth`: 6**
+        * *Relevância*: A profundidade máxima de cada árvore de decisão individual. Limitar a profundidade ajuda a controlar a complexidade do modelo e a prevenir o overfitting, pois árvores muito profundas podem memorizar o ruído nos dados de treinamento.
+    * **`learning_rate`: 0.2**
+        * *Relevância*: Também conhecido como "encolhimento" (shrinkage), este parâmetro reduz a contribuição de cada árvore. Taxas de aprendizado menores geralmente requerem um `n_estimators` maior, mas podem levar a uma melhor generalização. Um valor de 0.2 é relativamente alto, sugerindo uma convergência mais rápida.
+    * **`random_state`: 42** (usado na instanciação inicial e no `RandomizedSearchCV`)
+        * *Relevância*: Garante a reprodutibilidade dos resultados. O modelo se comportará da mesma maneira em execuções subsequentes.
+
+### II. Fatores Preditivos Dominantes: Uma Análise de 'Feature Importances'
+
+a.  **Feature Importances Globais do Modelo:**
+    O notebook `modelo-1-2-arvore-classificatoria-v5.ipynb` **não calcula explicitamente nem exibe as `feature_importances_` do modelo `GradientBoostingClassifier` treinado (`best_gb`)**. A análise de importância de features no notebook é realizada *antes* da modelagem, utilizando o **Coeficiente V de Cramer** para medir a associação entre as variáveis categóricas e a faixa salarial agrupada.
+    Embora o V de Cramer meça a força da associação bivariada e não a importância que o modelo GBT aprendeu, ele pode nos dar uma indicação dos atributos que provavelmente serão influentes.
+
+    Com base na análise de V de Cramer realizada no notebook, as features mais associadas à "Faixa salarial agrupada" (em ordem decrescente de importância) foram:
+    1.  **Nível de senioridade**: 0.5506
+    2.  **Tempo de experiência na área de dados**: 0.2984
+    3.  **Nível de ensino alcançado**: 0.2277
+    4.  **Cargo atual**: 0.1862
+    5.  **Setor de atuação da empresa**: 0.0938
+    6.  **UF onde mora**: 0.0787
+    7.  **Área de formação acadêmica**: 0.0698
+    8.  **Gênero do profissional**: 0.0437
+    9.  **Cor/Raça/Etnia**: 0.0428
+
+b.  **Classificação de 'Formação Acadêmica' e 'Experiência Profissional':**
+    * **Experiência Profissional**: Representada diretamente por "Tempo de experiência na área de dados" (importância V de Cramer: 0.2984, 2º lugar) e fortemente correlacionada com "Nível de senioridade" (importância V de Cramer: 0.5506, 1º lugar). Claramente, a experiência profissional é um dos fatores mais dominantes.
+    * **Formação Acadêmica**: Representada por "Nível de ensino alcançado" (importância V de Cramer: 0.2277, 3º lugar) e "Área de formação acadêmica" (importância V de Cramer: 0.0698, 7º lugar). O nível de ensino alcançado tem uma associação moderada, enquanto a área específica de formação tem uma associação mais fraca com a faixa salarial agrupada, segundo o V de Cramer.
+
+c.  **Interpretação no Contexto da Disparidade Salarial:**
+    A análise de V de Cramer sugere que a **experiência** (manifestada como tempo na área e senioridade) é o principal fator associado à variação salarial. Isso está alinhado com a expectativa de que profissionais mais experientes e em níveis hierárquicos mais altos tendem a receber salários maiores. O **nível de escolaridade** também é um fator relevante, indicando que maior qualificação formal está associada a melhores salários. A área de formação específica parece ter um papel menos preponderante. O `report.md` corrobora isso ao mencionar que "profissionais que possuem certificações específicas em grandes empresas costumam receber remunerações mais altas" e que a "experiência, formação acadêmica, setor de atuação e habilidades técnicas" influenciam as diferenças salariais. O modelo GBT, se treinado com essas features, provavelmente aprenderia a dar pesos significativos a elas.
+
+### III. Desvendando a Lógica do Modelo: 'Regras de Raciocínio' e Caminhos de Decisão
+
+a.  **Elucidando a Lógica do `GradientBoostingClassifier`:**
+    Um `GradientBoostingClassifier` constrói um ensemble de árvores de decisão. Cada árvore é treinada para corrigir os erros residuais das árvores anteriores. A previsão final é uma combinação ponderada das previsões de todas as árvores.
+    * **Extração de Regras Explícitas:** Extrair regras if-then simples de um modelo GBT com muitas árvores (100 neste caso, com `max_depth=6`) é complexo. Não há uma única "árvore" que represente o modelo.
+    * **Caminhos de Decisão:** Cada árvore individual possui caminhos de decisão. Por exemplo, uma árvore poderia ter um caminho como:
+        * `IF Nível de senioridade_encoded <= 1.5 (Júnior ou Pleno) AND Tempo de experiência_encoded <= 2.5 (até ~4 anos) THEN predict_class_A`
+        * `ELSE IF Nível de senioridade_encoded > 1.5 (Sênior) AND Nível de ensino_encoded >= 3 (Mestrado ou Doutorado) THEN predict_class_B`
+        O GBT agrega muitos desses caminhos de forma ponderada.
+    * **Interpretabilidade via SHAP/LIME:** O notebook fornecido não implementa técnicas como SHAP ou LIME. Essas ferramentas seriam ideais para entender as contribuições de cada feature para previsões específicas (LIME) ou para o comportamento geral do modelo (SHAP). Sem elas, a interpretação da lógica detalhada do GBT é limitada.
+    * **Compreensão Baseada na Importância (V de Cramer como Proxy):** Podemos inferir que o modelo provavelmente usa "Nível de senioridade" e "Tempo de experiência" para fazer as primeiras e mais impactantes divisões nos dados, pois estas foram as features com maior associação com o alvo. Subsequentemente, "Nível de ensino" e "Cargo atual" seriam usados para refinar essas divisões.
+
+b.  **Como as 'Regras' Ajudam a Entender as Decisões:**
+    Se tivéssemos as regras ou os valores SHAP, poderíamos ver explicitamente como o modelo pondera a formação acadêmica versus a experiência. Por exemplo:
+    * Um profissional com "Doutorado" (alta formação) mas "Menos de 1 ano" de experiência (baixa experiência) poderia ser classificado em uma faixa salarial mais baixa do que um profissional com "Graduação" mas "7-10 anos" de experiência.
+    * O modelo aprenderia limiares para cada feature (e suas interações) que melhor separam as faixas salariais. Por exemplo, a partir de `X` anos de experiência, o impacto de ter um mestrado no salário pode aumentar significativamente.
+
+### IV. A Interação entre Formação Acadêmica e Experiência Profissional na Disparidade Salarial: Insights Orientados pelo Modelo
+
+a.  **Evidências de Efeitos de Interação:**
+    * **Implícito no GBT:** Modelos baseados em árvores como o Gradient Boosting são inerentemente capazes de capturar efeitos de interação entre features. Uma divisão em uma feature (ex: experiência) cria subgrupos, e dentro desses subgrupos, o efeito de outra feature (ex: formação) pode ser diferente. O modelo GBT, ao construir árvores sequencialmente, pode aprender interações complexas.
+    * **Ausência de Termos Explícitos:** O código não cria explicitamente features de interação (ex: `experiencia * formacao`). No entanto, o `OneHotEncoder` transforma features categóricas em múltiplas colunas binárias, e o GBT pode então aprender interações entre essas colunas binárias e outras features.
+    * **Análise do `report.md`:** O `report.md` na seção "Analises exploratorias de dados" -> "1º Pergunta orientada a dados" -> "Analise exploratoria de dados bases integradas" menciona gráficos como "Salário Médio Estimado vs. Anos de Experiência por Nível de Ensino" e "Relação 3D entre Salário, Experiência e Nível de Ensino". Essas visualizações exploratórias já sugerem uma interação:
+        * "As linhas [de salário médio] tendem a se divergir mais à medida que os anos de experiência aumentam. Isso significa que a diferença salarial entre os níveis de ensino se torna mais pronunciada para profissionais mais experientes." (Interpretação do gráfico de linhas no `report.md`).
+        * "Para alcançar os salários mais altos, geralmente é necessária uma combinação de alto nível de ensino *e* experiência substancial." (Interpretação do gráfico 3D no `report.md`).
+    * **O Modelo GBT provavelmente aprendeu essas interações observadas na EDA.** Por exemplo, o modelo pode ter aprendido que o "retorno" de um doutorado é maior para alguém com 5 anos de experiência do que para alguém com 1 ano.
+
+b.  **Limiares e Criticidade:**
+    * O modelo GBT aprende os limiares ótimos para cada divisão nas árvores. Ele poderia, por exemplo, identificar que abaixo de 2 anos de experiência, o nível de formação tem um impacto menor no salário, mas acima de 5 anos de experiência, ter um mestrado ou doutorado se torna um diferenciador mais crítico para alcançar faixas salariais mais altas.
+    * Da mesma forma, para cargos de alta senioridade, um nível de formação avançado pode ser um requisito ou um fator que impulsiona significativamente o salário, enquanto para cargos juniores, a experiência prática inicial pode ser mais valorizada que a diferença entre uma graduação e uma pós-graduação.
+
+### V. Síntese: Conectando a Interpretação do Modelo à Pergunta Central da Pesquisa
+
+a.  **Principais Descobertas da Interpretação do Modelo (com base no GBT e proxy de V de Cramer):**
+    1.  O modelo `GradientBoostingClassifier` foi treinado para prever faixas salariais agrupadas.
+    2.  A experiência profissional (especialmente "Nível de senioridade" e "Tempo de experiência") e o "Nível de ensino alcançado" são os fatores mais fortemente associados (e provavelmente os mais importantes para o modelo GBT) com a disparidade salarial.
+    3.  O GBT é capaz de capturar interações complexas entre formação e experiência implicitamente através de sua estrutura baseada em árvores.
+
+b.  **Relação com a Pergunta Orientadora:**
+    A pergunta é: "Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial?"
+    * **Influência Direta:** Tanto a formação acadêmica quanto a experiência profissional influenciam diretamente a faixa salarial. Maior experiência e maior nível de formação tendem a levar a salários mais altos.
+    * **Interação:** O modelo GBT, ao aprender com os dados, implicitamente modela essa interação. A EDA no `report.md` sugere que o valor da formação acadêmica no salário pode ser potencializado pela experiência. Ou seja, um diploma avançado pode render mais (em termos salariais) para alguém que já acumulou alguns anos de experiência, em comparação com um recém-formado com o mesmo diploma. Da mesma forma, a progressão na carreira através da experiência pode ser mais rápida ou levar a tetos salariais mais altos para aqueles com formação mais robusta. O modelo GBT aprenderia a "premiar" essas combinações favoráveis.
+
+c.  **Limitações da Interpretação/Modelo:**
+    1.  **Ausência de `feature_importances_` Diretas:** A falta do cálculo explícito da importância das features do modelo GBT treinado no notebook limita a confirmação direta de quais features o *modelo* considerou mais importantes, dependendo-se do V de Cramer como proxy.
+    2.  **Interpretabilidade do GBT:** Modelos GBT são caixas-pretas em maior grau que árvores de decisão únicas. Sem ferramentas como SHAP ou LIME, entender *exatamente* como as interações são modeladas é desafiador.
+    3.  **Agrupamento da Variável Alvo:** A variável "Faixa salarial agrupada" simplifica o problema, mas pode mascarar nuances dentro das faixas agrupadas. As interações podem ser diferentes para distinguir salários muito altos versus moderadamente altos, por exemplo.
+    4.  **Causalidade vs. Correlação:** O modelo identifica associações e padrões preditivos, mas não estabelece causalidade. Por exemplo, maior experiência leva a maior salário, ou pessoas que recebem maiores salários permanecem mais tempo na área? Provavelmente um ciclo virtuoso, mas o modelo não distingue isso.
+    5.  **Features Não Utilizadas ou Latentes:** Outros fatores mencionados no `report.md`, como "habilidades técnicas específicas" ou "qualidade da instituição de ensino", não foram explicitamente modelados como features de entrada e podem interagir com formação e experiência.
 
 
 
-## Interpretação do modelo 2
-
-Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
-processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
-o *feature importances* para tentar entender quais atributos o modelo se baseia no
-processo de tomada de decisão.
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Interpretação dos modelo 2º pergunta orientada a dados
 
-### Interpretação do modelo 1
+### Interpretação do modelo 1_2
 
 Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
 processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
 o *feature importances* para tentar entender quais atributos o modelo se baseia no
 processo de tomada de decisão.
 
-### Interpretação do modelo 2
+-------------------------------------------------------------------------------------------------------------------------
+
+### Interpretação do modelo 2_2
 
 Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
 processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
@@ -7062,19 +7166,21 @@ o *feature importances* para tentar entender quais atributos o modelo se baseia 
 processo de tomada de decisão.
 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ## Interpretação dos modelo 3º pergunta orientada a dados
 
-### Interpretação do modelo 1
+### Interpretação do modelo 1_3
 
 Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
 processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
 o *feature importances* para tentar entender quais atributos o modelo se baseia no
 processo de tomada de decisão.
 
-### Interpretação do modelo 2
+-------------------------------------------------------------------------------------------------------------------------
+
+### Interpretação do modelo 2_3
 
 Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
 processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
@@ -7083,6 +7189,8 @@ processo de tomada de decisão.
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Análise comparativa dos modelos
+
 # Análise comparativa dos modelos da 1º pergunta orientada a dados
 
 Discuta sobre as forças e fragilidades de cada modelo. Exemplifique casos em que um
