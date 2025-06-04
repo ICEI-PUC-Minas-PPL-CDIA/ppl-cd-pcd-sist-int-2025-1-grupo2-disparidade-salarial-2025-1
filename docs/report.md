@@ -7245,7 +7245,7 @@ a.  **Features Selecionadas (RFECV) e Seus Significados (conforme Relatório de 
     5.  `P1_a_1`: Faixa etária
     6.  `Regiao_Mapeada`: Região onde mora
 
-    *Nota: `P1_b` (Gênero), que apresentou correlação inicial muito fraca com o alvo, foi eliminada pelo RFECV, o que é consistente com sua baixa associação linear/monotônica individual.*
+>Nota: `P1_b` (Gênero), que apresentou correlação inicial muito fraca com o alvo, foi eliminada pelo RFECV, o que é consistente com sua baixa associação linear/monotônica individual.
 
 b.  **Análise de Importância de Features no Modelo LightGBM (conforme Relatório de Resultados, Seção 3.2):**
     O LightGBM atribuiu a seguinte ordem de importância (provavelmente baseada em "ganho") para as features selecionadas:
