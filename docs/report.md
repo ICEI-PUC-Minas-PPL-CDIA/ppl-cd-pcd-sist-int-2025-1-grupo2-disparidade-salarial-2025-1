@@ -6542,10 +6542,7 @@ RandomForestRegressor(
 ## 🧾 Conclusão
 **Embora o modelo apresente desempenho moderado (R² = 0.38), ele oferece bons insights sobre os fatores que mais influenciam o salário na área de dados no Brasil. A predominância das variáveis individuais em relação às regionais sugere que decisões salariais estão mais associadas a fatores pessoais do que à estrutura educacional da região.**
 
-
-## Resultados obtidos com o Modelo 2 da 2º pergunta orietada a dados
-
-# Relatório de Resultados e Insights (Random Forest Classifier)
+# Relatório de Resultados e Insights (Modelo Random Forest Classifier)
 
 **1. Resumo do Experimento**
 Foi treinado um modelo de classificação RandomForest para prever faixas salariais a partir de variáveis relacionadas à experiência, nível profissional e dados regionais de educação. O modelo foi avaliado em um conjunto de teste com 3 exemplos, cada um representando uma faixa salarial distinta.
