@@ -7478,7 +7478,7 @@ Esta interpretação visa cobrir os aspectos mais relevantes do seu modelo RNA v
 
 # Análise comparativa dos modelos da 1º pergunta orientada a dados
 
-### 3.1. Discussão de Forças e Fragilidades de Cada Modelo
+## Discussão de Forças e Fragilidades de Cada Modelo
 
 #### Modelo A: `RandomForestClassifier` (Classificação Binária)
 
@@ -7571,7 +7571,7 @@ Esta interpretação visa cobrir os aspectos mais relevantes do seu modelo RNA v
 
 ---
 
-### 3.2. Exemplificação de Casos de Superioridade (Imaginação e Extrapolação Fundamentada)
+### Exemplificação de Casos de Superioridade (Imaginação e Extrapolação Fundamentada)
 
 #### Cenários de Superioridade para o Modelo A (RandomForestClassifier - Binário):
 
