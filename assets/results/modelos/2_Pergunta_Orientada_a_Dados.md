@@ -58,14 +58,3 @@ Importância das variáveis: Todas as features tiveram importância zero, sugeri
 Tamanho da amostra: O principal motivo para o baixo desempenho é o número extremamente reduzido de exemplos (apenas 6 no total, 3 no teste). Modelos de machine learning geralmente precisam de dezenas ou centenas de exemplos por classe para aprender padrões úteis.
 
 Avisos de métricas: O relatório de classificação apresenta avisos sobre métricas indefinidas, pois algumas classes não foram previstas pelo modelo.
-
-**4. Recomendações**
-Aumentar a base de dados: Para obter resultados significativos, é fundamental aumentar o número de exemplos por classe.
-
-Agrupar classes: Se houver muitas faixas salariais com poucos exemplos, considere agrupar em menos categorias (ex: baixo, médio, alto).
-
-Validação cruzada: Com poucos dados, utilize validação cruzada para melhor avaliação do modelo.
-
-Revisar features: Certifique-se de que as variáveis utilizadas realmente influenciam o salário.
-
-## ⚠️ Atenção: Os resultados acima não devem ser interpretados como conclusivos devido ao tamanho reduzido da amostra. Este experimento serve apenas como um teste de pipeline/modelagem.
