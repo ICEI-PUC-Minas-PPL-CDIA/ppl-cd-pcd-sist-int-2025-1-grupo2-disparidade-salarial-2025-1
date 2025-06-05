@@ -17,16 +17,6 @@ Foi treinado um modelo de classificação RandomForest para prever faixas salari
 | **Real: R$ 2k-3k**     |        0          |        1          |        0          |
 | **Real: R$ 3k-4k**     |        0          |        1          |        0          |
 
-
-| Métrica                          | Valor  |
-| :------------------------------- | :----- |
-| **Acurácia no Teste** | 0.8335 |
-| Precisão Média (Macro Avg)       | 0.8331 |
-| Precisão Média (Weighted Avg)    | 0.8335 |
-| F1-Score (Ponderado)             | 0.8335 |
-| **ROC AUC (Binário)** | 0.9234 |
-
-
 **Matriz de Confusão**
 
 | Classe             | Predito: R$ 1k-2k | Predito: R$ 2k-3k | Predito: R$ 3k-4k |
