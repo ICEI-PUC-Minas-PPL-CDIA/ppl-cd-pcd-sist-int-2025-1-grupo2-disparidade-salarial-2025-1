@@ -7261,6 +7261,7 @@ O RandomForestClassifier toma decisões combinando várias árvores de decisão,
 A análise da importância das features mostra quais atributos mais influenciaram as decisões do modelo — sendo essencial para interpretar o “raciocínio” do sistema inteligente.
 
 No caso apresentado, todas as importâncias ficaram em 0%, indicando que o modelo não encontrou padrões relevantes nos dados, provavelmente devido ao baixo volume de dados ou falta de variabilidade nas features.
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
