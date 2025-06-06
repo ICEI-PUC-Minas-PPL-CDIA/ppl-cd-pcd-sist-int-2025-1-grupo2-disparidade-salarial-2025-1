@@ -7738,15 +7738,13 @@ e extrapolar um pouco o que os dados sugerem.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Análise comparativa dos modelos da 3º pergunta orientada a dados
 
-# Análise Comparativa dos Modelos – 1ª Pergunta Orientada a Dados
-
 ## 3.1 Discussão de Forças e Fragilidades de Cada Modelo
 
 ---
 
 ### Modelo 1: LightGBM  
 **Versão**: v7 – Classificação Binária com RFECV e Optuna  
-**Fonte do Código**: `Conheça_o_Colab_(2).ipynb` (e relatórios associados)
+**Fonte do Código**: `Conheça_o_Colab_(2).ipynb` 
 
 #### 🔹 Forças do Modelo 1
 
@@ -7801,7 +7799,7 @@ e extrapolar um pouco o que os dados sugerem.
 
 ### Modelo 2: Rede Neural  
 **Versão**: RNA v2 – Classificação Binária com RayTune  
-**Fonte do Código**: `Conheça_o_Colab (3).ipynb` (e formulário de resultados associado)
+**Fonte do Código**: `Conheça_o_Colab (3).ipynb` 
 
 #### 🔹 Forças do Modelo 2
 
