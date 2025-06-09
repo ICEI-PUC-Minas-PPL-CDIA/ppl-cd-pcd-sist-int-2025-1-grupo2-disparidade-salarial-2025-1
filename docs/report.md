@@ -409,7 +409,24 @@ Nome: `salary_midpoint`, `dtype: object`
 *   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
 *   [3º Pergunta orientada a dados ](#3º-pergunta-orientada-a-dados)
-
+	*   [Explicação do código](#1.-Importação-de-Bibliotecas)
+ 	*   [Gráfico histograma e KDE dos salarios numericos](#Análise-do-histograma-e-KDE-dos-salarios-numericos)
+  	*   [Gráfico histograma e estimativa de densidade do kernel (KDE) de salarios:](#Análise-histograma-e-estimativa-de-densidade-do-kernel-(KDE)-de-salarios:)
+   	*   [Gráfico ECDF de salários](#Análise-do-Gráfico-ECDF-de-salarios)
+	*   [Gráfico Q-Q plot de salários](#Análise-do-Gráfico-Q-Q-plot-de-salarios)
+	*   [Gráfico Histograma e KDE de experiência em anos](#Análise-do-Gráfico-(Histograma-e-KDE-de-'experiencia_anos'))
+	*   [Gráfico Boxplot de experiência em anos](#Análise-do-Gráfico-(Boxplot-de-'experiencia_anos'))
+	*   [Gráfico](#Análise-do-Gráfico-(Distribuição-de-P2_g-–-Nível-de-Senioridade))
+	*   [Gráfico Distribuição](#Análise-do-Gráfico-(Distribuição-de-Regiao_Mapeada))
+	*   [Gráfico Histrogrma soreposto com curva KDE](#histograma-sobreposto-com-curvas-de-densidade-(KDE))
+	*   [Gráfico de barras empilhadas](#Análise-do-Gráfico-(Gráfico-de-Barras-Empilhadas))
+	*   [Gráfico de barras agrupadas por gênero](#Análise-do-Gráfico-(Gráfico-de-Barras-Agrupadas-por-Gênero))
+	*   [Gráfico de barras agrupadas por escolaridade](#Análise-do-Gráfico-(Gráfico-de-Barras-Agrupadas:-Senioridade-por-Escolaridade))
+	*   [Grafico Experiência vs Salário por nível de senioridade](#Análise-do-Gráfico-de-Dispersão:-Experiência-vs.-Limite-Inferior-do-Salário-por-Nível-de-Senioridade)
+	*   [Gráfico Experiência vs Limite do salário](#Análise-do-Gráfico-de-Dispersão:-Experiência-vs.-Limite-Inferior-do-Salário)
+	*   [Gráfico Limite sálario por nivel de ensino e faixa salarial](#Análise-do-Gráfico-de-Boxplots:-Limite-Inferior-do-Salário-por-Nível-de-Ensino-e-Faixa-Salarial-(Alvo))
+	*   [Gráfico violin plot: experiência por nível de senioridade e faixa salarial](#Análise-do-Gráfico-de-Violin-Plots-Divididos:-Experiência-(anos)-por-Nível-de-Senioridade-e-Faixa-Salarial-(Alvo))
+	*   [Gráfico Nível de ensino por regiao e faixa salarial](#Análise-do-Gráfico-"Nível-de-Ensino-por-Região-e-Faixa-Salarial-(Alvo)")		
 
 # 1º Pergunta orientada a dados 
 **Pergunta Orientada a Dados:** *Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?*
@@ -2106,7 +2123,7 @@ tech_counts.plot(kind='barh')
 # 3º Pergunta orientada a dados
 **Pergunta Orientada a Dados:**
 *Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
-
+---
 ## 1. Importação de Bibliotecas
 O script inicia com a importação de diversas bibliotecas Python, cada uma com uma finalidade específica no processo de manipulação e análise de dados.
 
@@ -3698,12 +3715,12 @@ As diferenças que permanecem após controlar senioridade e experiência apontam
 
 ---
 
-# Análise do Gráfico "Nível de Ensino por Região e Faixa Salarial (Alvo)"
+## Análise do Gráfico "Nível de Ensino por Região e Faixa Salarial (Alvo)"
 ![Nivel de ensino por regiao e faixa salarial (alvo)](https://github.com/user-attachments/assets/65516cef-91cd-4308-a150-582c26d0bb50)
 
 ---
 
-## O que o Gráfico Mostra:
+### O que o Gráfico Mostra:
 
 Este gráfico consiste em múltiplos subplots, cada um representando uma região do Brasil (Sudeste, Sul, Nordeste, Centro-Oeste).  
 A região Norte e "Desconhecida" não aparecem nestes subplots, provavelmente devido a um menor número de respondentes ou por decisão de focar nas regiões com mais dados.  
@@ -3715,11 +3732,11 @@ Legenda (Comum ao gráfico geral):
 - Vermelho: "Salário Baixo"  
 - Azul: "Salário Alto"  
 
-## Interpretação:
+### Interpretação:
 
 Para cada região, pode-se observar quantos profissionais de cada nível de ensino se enquadram na faixa de "Salário Baixo" versus "Salário Alto".
 
-## Informações Extraídas do Gráfico (Comparando as Regiões):
+### Informações Extraídas do Gráfico (Comparando as Regiões):
 
 - **Predominância da Região Sudeste:**  
 O eixo X da contagem para o Sudeste vai até valores muito mais altos (ex: 1000) em comparação com as outras regiões (Sul até ~400, Nordeste e Centro-Oeste até ~200 ou menos), refletindo a maior concentração de profissionais nesta região, como visto em gráficos anteriores.
@@ -3739,7 +3756,7 @@ Centro-Oeste: Similar ao Nordeste, as contagens em "Salário Alto" são mais mod
 Em regiões como Sudeste e Sul, ter Mestrado ou Doutorado parece estar mais consistentemente associado à faixa de "Salário Alto" (barras azuis proporcionalmente grandes ou maiores que as vermelhas).  
 Nas regiões Nordeste e Centro-Oeste, o número absoluto de profissionais com Mestrado/Doutorado é menor, mas aqueles que existem também tendem a estar em "Salário Alto", embora a oportunidade geral pareça mais restrita.
 
-## Conexão com a Pergunta Orientada a Dados (Disparidades Salariais):
+### Conexão com a Pergunta Orientada a Dados (Disparidades Salariais):
 
 - **Região como Moduladora do Retorno da Educação:**  
 Fica claro que o "retorno" salarial (chance de estar em "Salário Alto") para um determinado nível de ensino não é o mesmo em todas as regiões. Profissionais com Pós-graduação no Sudeste ou Sul parecem ter uma probabilidade maior de alcançar salários altos do que seus pares com a mesma formação no Nordeste ou Centro-Oeste.  
