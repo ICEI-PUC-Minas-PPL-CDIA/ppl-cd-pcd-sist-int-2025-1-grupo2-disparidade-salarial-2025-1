@@ -409,7 +409,7 @@ Nome: `salary_midpoint`, `dtype: object`
 *   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
 *   [3º Pergunta orientada a dados ](#3º-pergunta-orientada-a-dados)
-    * [Análise Univariada](#-5-Visualizacao-dos-dados-(Análise-Univariada)
+    * [Análise Univariada](#-5-Visualizacao-dos-dados-(Análise-Univariada))
         * [Gráfico: Histograma e KDE de Salários Numéricos](#grafico-histograma-e-kde-de-salarios-numericos)
         * [Gráfico: ECDF de Salários Numéricos](#grafico-ecdf-de-salarios-numericos)
         * [Gráfico: QQ-Plot de Salários Numéricos](#grafico-qq-plot-de-salarios-numericos)
