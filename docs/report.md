@@ -409,7 +409,7 @@ Nome: `salary_midpoint`, `dtype: object`
 *   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
 * [3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
-    * [Explicação do código](#1-importacao-de-bibliotecas)
+    * [Explicação do código](#1-importação-de-bibliotecas)
     * [Análise Univariada](#análise-univariada)
         * [Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
         * [Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
@@ -419,13 +419,13 @@ Nome: `salary_midpoint`, `dtype: object`
         * [Gráfico: Boxplot de experiência em anos](#análise-do-gráfico-boxplot-de-experiencia_anos)
         * [Gráfico: Distribuição de Nível de Senioridade](#análise-do-gráfico-distribuição-de-p2_g--nível-de-senioridade)
         * [Gráfico: Distribuição de Região](#análise-do-gráfico-distribuição-de-regiao_mapeada)
-    * [Análise Bivariada](#6-visualizacao-dos-dados-análise-bivariada)
+    * [Análise Bivariada](#6-visualizacao-dos-dados-analise-bivariada)
         * [Gráfico: Histograma sobreposto com curva KDE](#análise-do-gráfico-grafico-de-barras-sobreposto)
         * [Gráfico: Barras empilhadas](#análise-do-gráfico-gráfico-de-barras-empilhadas)
         * [Gráfico: Barras agrupadas por gênero](#análise-do-gráfico-gráfico-de-barras-agrupadas-por-gênero)
         * [Gráfico: Barras agrupadas por escolaridade](#análise-do-gráfico-gráfico-de-barras-agrupadas-senioridade-por-escolaridade)
         * [Gráfico: Experiência vs. Limite do salário](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário)
-    * [Análise Multivariada](#7-visualizacao-dos-dados-análise-multivariada)
+    * [Análise Multivariada](#7-visualizacao-dos-dados-analise-multivariada)
         * [Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
         * [Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
         * [Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
@@ -2127,7 +2127,7 @@ tech_counts.plot(kind='barh')
 **Pergunta Orientada a Dados:**
 *Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 ---
-## 1. Importação de Bibliotecas
+##1. Importação de Bibliotecas
 O script inicia com a importação de diversas bibliotecas Python, cada uma com uma finalidade específica no processo de manipulação e análise de dados.
 
 * Snippet de código
