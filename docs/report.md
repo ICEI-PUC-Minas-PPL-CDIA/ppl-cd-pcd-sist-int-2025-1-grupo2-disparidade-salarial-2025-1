@@ -32,32 +32,32 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
 
 *   [1. RESUMO](#resumo)
 *   [2. INTRODUÇÃO](#introdução)
-    *   [2.1 Contextualização](#contextualização)
-    *   [2.2 Problema](#problema)
-    *   [2.3 Objetivo geral](#objetivo-geral)
-    *   [2.4 Objetivo específico](#objetivos-específicos)
-    *   [2.5 Justificativas](#justificativas)
+    *   [2.1. Contextualização](#contextualização)
+    *   [2.2. Problema](#problema)
+    *   [2.3. Objetivo geral](#objetivo-geral)
+    *   [2.4. Objetivo específico](#objetivos-específicos)
+    *   [2.5. Justificativas](#justificativas)
 *   [3. PÚBLICO ALVO](#público-alvo)
 *   [4. DICIONÁRIO DE DADOS](#dicionário-de-dados)
 *   [5. DESCRIÇÃO DE DADOS](#descrição-de-dados)
 *   [6. PREPARAÇÃO DE DADOS](#preparação-dos-dados)
 *   [7. ENRIQUECIMENTO DE DADOS](#enriquecimento-de-dados)
 *   [8. Analises exploratorias de dados](#analises-exploratorias-de-dados) 
-    *   [8.1 1º Pergunta Orientada a Dados](#1º-pergunta-orientada-a-dados)
-    *   [8.2 2º Pergunta Orientada a Dados](#2º-pergunta-orientada-a-dados)
-    *   [8.3 3º Pergunta Orientada a Dados](#3º-pergunta-orientada-a-dados)
+    *   [8.1. 1º Pergunta Orientada a Dados](#1º-pergunta-orientada-a-dados)
+    *   [8.2. 2º Pergunta Orientada a Dados](#2º-pergunta-orientada-a-dados)
+    *   [8.3. 3º Pergunta Orientada a Dados](#3º-pergunta-orientada-a-dados)
 *   [9. INDUÇÃO DE MODELOS](#indução-de-modelos)
-    *   [9.1 Modelos 1° pergunta orietada a dados](#modelos-1º-pergunta-orietada-a-dados)
-    *   [9.2 Modelos 2° pergunta orietada a dados](#modelos-2º-pergunta-orietada-a-dados)
-    *   [9.3 Modelos 3° pergunta orietada a dados](#modelos-3º-pergunta-orietada-a-dados)
+    *   [9.1. Modelos 1° pergunta orietada a dados](#modelos-1º-pergunta-orietada-a-dados)
+    *   [9.2. Modelos 2° pergunta orietada a dados](#modelos-2º-pergunta-orietada-a-dados)
+    *   [9.3. Modelos 3° pergunta orietada a dados](#modelos-3º-pergunta-orietada-a-dados)
 *   [10. RESULTADOS](#resultados)
-    *   [10.1 Resultados obtidos com os Modelos 1º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1º-pergunta-orietada-a-dados)
-    *   [10.2 Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
-    *   [10.3 Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
+    *   [10.1. Resultados obtidos com os Modelos 1º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1º-pergunta-orietada-a-dados)
+    *   [10.2. Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
+    *   [10.3. Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
 *   [11. Interpretação do modelo](#interpretação-dos-modelos)
-    *   [11.1 Interpretação dos Modelos 1° pergunta orietada a dados](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
-    *   [11.2 Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
-    *   [11.3 Interpretação dos Modelos 3° pergunta orietada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
+    *   [11.1. Interpretação dos Modelos 1° pergunta orietada a dados](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
+    *   [11.2. Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
+    *   [11.3. Interpretação dos Modelos 3° pergunta orietada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
 *   [12. ANÁLISE COMPARATIVA DOS MODELOS](#análise-comparativa-dos-modelos)
 *   [13. CONCLUSÃO](#-conclusão)
 *   [14. REFERÊNCIAS](#referências)
@@ -7901,13 +7901,13 @@ Uma conclusão deve ter 3 partes:
 
 # REFERÊNCIAS 
 
-DATA HACKERS. State of Data Brazil 2023. Disponível em: https://www.kaggle.com/datasets/datahackers/state-of-data-brazil-2023. Acesso em: 5 mar. 2025.
+DATA HACKERS. **State of Data Brazil 2023**. Disponível em: https://www.kaggle.com/datasets/datahackers/state-of-data-brazil-2023. Acesso em: 5 mar. 2025.
 
-BAIN & COMPANY; DATA HACKERS. State of Data 2024. [S.l.]: Bain & Company, 2024. Disponível em: <https://www.stateofdata.com.br/>. Acesso em: 6 mar. 2025.
+BAIN & COMPANY; DATA HACKERS. **State of Data 2024**. [S.l.]: Bain & Company, 2024. Disponível em: <https://www.stateofdata.com.br/>. Acesso em: 6 mar. 2025.
 
-H2R PESQUISAS; TOTVS. Estudo Panorama das Carreiras 2030: o que esperar das profissões até o fim da década. Setembro/2023. Acesso em: 6 mar. 2025
+H2R PESQUISAS; TOTVS. **Estudo Panorama das Carreiras 2030: o que esperar das profissões até o fim da década**. Setembro/2023. Acesso em: 6 mar. 2025
 
-INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). Censo da Educação Superior. Brasília, DF: INEP,[2022]. Disponível em: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior. Acesso em: 15 mar. 2025.
+INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). **Censo da Educação Superior. Brasília**, DF: INEP,[2022]. Disponível em: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior. Acesso em: 15 mar. 2025.
 
 
 # APÊNDICES
