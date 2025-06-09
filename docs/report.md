@@ -23,7 +23,7 @@ _Curso de Ciência de Dados, Unidade Praça da Liberdade_
 _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Minas Gerais (PUC MINAS), Belo Horizonte – MG – Brasil_
 
 ---
-## Sumário
+<h1 align="center">SUMÁRIO</h1>
 
 *   [Resumo](#resumo)
 *   [Introdução](#introdução)
