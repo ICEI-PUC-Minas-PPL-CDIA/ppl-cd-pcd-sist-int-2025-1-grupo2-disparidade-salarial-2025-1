@@ -408,26 +408,28 @@ Nome: `salary_midpoint`, `dtype: object`
 
 *   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
-*   [3º Pergunta orientada a dados ](#3º-pergunta-orientada-a-dados)
-    * [Análise Univariada](#-5-Visualizacao-dos-dados-(Análise-Univariada))
-        * [Gráfico: Histograma e KDE de Salários Numéricos](#grafico-histograma-e-kde-de-salarios-numericos)
-        * [Gráfico: ECDF de Salários Numéricos](#grafico-ecdf-de-salarios-numericos)
-        * [Gráfico: QQ-Plot de Salários Numéricos](#grafico-qq-plot-de-salarios-numericos)
-        * [Gráfico: Histograma e KDE de Anos de Experiência](#grafico-histograma-e-kde-de-anos-de-experiencia)
-        * [Gráfico: Boxplot de Anos de Experiência](#grafico-boxplot-de-anos-de-experiencia)
-        * [Gráfico: Distribuição por Nível de Senioridade](#grafico-distribuicao-por-nivel-de-senioridade)
-        * [Gráfico: Distribuição por Região Mapeada](#grafico-distribuicao-por-regiao-mapeada)
-    * [Análise Bivariada](#analise-bivariada)
-        * [Gráfico: Violin Plot do Salário por Faixa Salarial Definida](#grafico-violin-plot-do-salario-por-faixa-salarial-definida)
-        * [Gráfico: Proporção de Faixa Salarial por Faixa Etária](#grafico-proporcao-de-faixa-salarial-por-faixa-etaria)
-        * [Gráfico: Contagem de Faixa Salarial por Gênero](#grafico-contagem-de-faixa-salarial-por-genero)
-        * [Gráfico: Distribuição de Senioridade por Nível de Escolaridade](#grafico-distribuicao-de-senioridade-por-nivel-de-escolaridade)
-    * [Análise Multivariada](#analise-multivariada)
-        * [Gráfico: Experiência vs. Salário por Nível de Senioridade](#grafico-experiencia-vs-salario-por-nivel-de-senioridade)
-        * [Gráfico: Experiência vs. Salário por Nível de Ensino e Faixa Salarial](#grafico-experiencia-vs-salario-por-nivel-de-ensino-e-faixa-salarial)
-        * [Gráfico: Boxplots de Salário por Nível de Ensino e Faixa Salarial](#grafico-boxplots-de-salario-por-nivel-de-ensino-e-faixa-salarial)
-        * [Gráfico: Violin Plots de Experiência por Senioridade e Faixa Salarial](#grafico-violin-plots-de-experiencia-por-senioridade-e-faixa-salarial)
-        * [Gráfico: Nível de Ensino por Região e Faixa Salarial](#grafico-nivel-de-ensino-por-regiao-e-faixa-salarial))		
+* [3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
+    * [Explicação do código](#explicação-do-código)
+    * [Análise Univariada](#análise-univariada)
+        * [Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
+        * [Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
+        * [Gráfico: ECDF de salários](#análise-do-gráfico-ecdf-de-salarios)
+        * [Gráfico: Q-Q plot de salários](#análise-do-gráfico-q-q-plot-de-salarios)
+        * [Gráfico: Histograma e KDE de experiência em anos](#análise-do-gráfico-histograma-e-kde-de-experiencia_anos)
+        * [Gráfico: Boxplot de experiência em anos](#análise-do-gráfico-boxplot-de-experiencia_anos)
+        * [Gráfico: Distribuição de Nível de Senioridade](#análise-do-gráfico-distribuição-de-p2_g-–-nível-de-senioridade)
+        * [Gráfico: Distribuição de Região](#análise-do-gráfico-distribuição-de-regiao_mapeada)
+    * [Análise Bivariada](#análise-bivariada)
+        * [Gráfico: Histograma sobreposto com curva KDE](#histograma-sobreposto-com-curvas-de-densidade-kde)
+        * [Gráfico: Barras empilhadas](#análise-do-gráfico-gráfico-de-barras-empilhadas)
+        * [Gráfico: Barras agrupadas por gênero](#análise-do-gráfico-gráfico-de-barras-agrupadas-por-gênero)
+        * [Gráfico: Barras agrupadas por escolaridade](#análise-do-gráfico-gráfico-de-barras-agrupadas-senioridade-por-escolaridade)
+        * [Gráfico: Experiência vs. Limite do salário](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário)
+    * [Análise Multivariada](#análise-multivariada)
+        * [Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
+        * [Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
+        * [Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
+        * [Gráfico: Nível de ensino por região e faixa salarial](#análise-do-gráfico-nível-de-ensino-por-região-e-faixa-salarial-alvo)		
 
 # 1º Pergunta orientada a dados 
 **Pergunta Orientada a Dados:** *Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?*
@@ -2498,7 +2500,7 @@ if df_eda.empty or 'faixa_salarial_eda_2cat' not in df_eda.columns:
 
 ---
 
-# 5 Visualizacao dos dados (Análise Univariada)
+#5 Visualizacao dos dados (Análise Univariada)
 Esta seção do script inicializa a análise exploratória de dados univariada, onde cada variável é analisada individualmente. O foco aqui é entender a distribuição e as características de cada atributo.
 
 ---
