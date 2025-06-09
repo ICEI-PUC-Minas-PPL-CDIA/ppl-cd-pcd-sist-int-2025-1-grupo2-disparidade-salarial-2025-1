@@ -1,5 +1,8 @@
 # Disparidade Salarial dos Profissionais de Dados no Brasil
 
+---
+
+<h1 align="center">INTEGRANTES</h1>
 
 **Pedro Dias Soares, [pdsoares@sga.pucminas.br]** 
 
@@ -9,7 +12,7 @@
 
 ---
 
-Professores:
+<h1 align="center">PROFESSORES</h1>
 
 **Hugo Bastos de Paula**
 
