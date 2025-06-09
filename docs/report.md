@@ -1,8 +1,8 @@
-# Disparidade Salarial dos Profissionais de Dados no Brasil
+<h1 align="center">Disparidade Salarial dos Profissionais de Dados no Brasil</h1>
 
 ---
 
-<h1 align="center">INTEGRANTES</h1>
+<h2 align="center">INTEGRANTES</h2>
 
 **Pedro Dias Soares, [pdsoares@sga.pucminas.br]** 
 
@@ -12,7 +12,7 @@
 
 ---
 
-<h1 align="center">PROFESSORES</h1>
+<h2 align="center">PROFESSORES</h2>
 
 **Hugo Bastos de Paula**
 
@@ -21,14 +21,14 @@
 
 ---
 
-<h1 align="center">CURSO E INSTITUIÇÃO</h1>
+<h2 align="center">CURSO E INSTITUIÇÃO</h2>
 
 _Curso de Ciência de Dados, Unidade Praça da Liberdade_
 
 _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Minas Gerais (PUC MINAS), Belo Horizonte – MG – Brasil_
 
 ---
-<h1 align="center">SUMÁRIO</h1>
+<h2 align="center">SUMÁRIO</h2>
 
 *   [1. RESUMO](#resumo)
 *   [2. INTRODUÇÃO](#introdução)
