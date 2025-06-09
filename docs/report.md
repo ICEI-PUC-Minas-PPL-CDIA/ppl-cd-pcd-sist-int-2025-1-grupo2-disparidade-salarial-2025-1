@@ -409,23 +409,23 @@ Nome: `salary_midpoint`, `dtype: object`
 *   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
 * [3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
-    * [Explicação do código](#explicação-do-código)
+    * [Explicação do código](#1-importacao-de-bibliotecas)
     * [Análise Univariada](#análise-univariada)
         * [Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
         * [Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
         * [Gráfico: ECDF de salários](#análise-do-gráfico-ecdf-de-salarios)
-        * [Gráfico: Q-Q plot de salários](#análise-do-gráfico-q-q-plot-de-salarios)
+        * [Gráfico: QQ plot de salários](#análise-do-gráfico-qq-plot-de-salarios)
         * [Gráfico: Histograma e KDE de experiência em anos](#análise-do-gráfico-histograma-e-kde-de-experiencia_anos)
         * [Gráfico: Boxplot de experiência em anos](#análise-do-gráfico-boxplot-de-experiencia_anos)
-        * [Gráfico: Distribuição de Nível de Senioridade](#análise-do-gráfico-distribuição-de-p2_g-–-nível-de-senioridade)
+        * [Gráfico: Distribuição de Nível de Senioridade](#análise-do-gráfico-distribuição-de-p2_g--nível-de-senioridade)
         * [Gráfico: Distribuição de Região](#análise-do-gráfico-distribuição-de-regiao_mapeada)
-    * [Análise Bivariada](#análise-bivariada)
-        * [Gráfico: Histograma sobreposto com curva KDE](#histograma-sobreposto-com-curvas-de-densidade-kde)
+    * [Análise Bivariada](#6-visualizacao-dos-dados-análise-bivariada)
+        * [Gráfico: Histograma sobreposto com curva KDE](#análise-do-gráfico-grafico-de-barras-sobreposto)
         * [Gráfico: Barras empilhadas](#análise-do-gráfico-gráfico-de-barras-empilhadas)
         * [Gráfico: Barras agrupadas por gênero](#análise-do-gráfico-gráfico-de-barras-agrupadas-por-gênero)
         * [Gráfico: Barras agrupadas por escolaridade](#análise-do-gráfico-gráfico-de-barras-agrupadas-senioridade-por-escolaridade)
         * [Gráfico: Experiência vs. Limite do salário](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário)
-    * [Análise Multivariada](#análise-multivariada)
+    * [Análise Multivariada](#7-visualizacao-dos-dados-análise-multivariada)
         * [Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
         * [Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
         * [Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
@@ -3029,11 +3029,11 @@ O Sudeste e o Sul concentram os principais centros urbanos e tecnológicos, com 
 
 ---
 
-# 6 Visualizacao dos dados (Análise Bivariada)
+#6 Visualizacao dos dados (Análise Bivariada)
 
 ---
 
-### Análise do Gráfico (Violin Plot)
+### Análise do Gráfico (Grafico de barras sobreposto)
 
 ![Histograma_sobreposto_salario](https://github.com/user-attachments/assets/7e26cf54-1306-4748-a3c1-7bcd87a12005)
 
@@ -3041,35 +3041,34 @@ O Sudeste e o Sul concentram os principais centros urbanos e tecnológicos, com 
 
 #### O que o Gráfico Mostra
 
-Este gráfico de violino compara a distribuição da variável `salary_numeric_lower_bound` (limite inferior da faixa salarial) entre duas categorias definidas em `faixa_salarial_eda_2cat`: **"Salário Baixo"** e **"Salário Alto"**.
+Este histograma sobreposto compara a distribuição de frequência da variável `salary_numeric_lower_bound` (limite inferior da faixa salarial) entre duas categorias: **"Salário Baixo"** (vermelho) e **"Salário Alto"** (azul). As curvas suaves sobrepostas são as Estimativas de Densidade do Kernel (KDE), que ajudam a visualizar a forma da distribuição de cada grupo.
 
-- **Eixo Y (`salary_numeric_lower_bound`)**: Representa os valores do limite inferior da faixa salarial.  
-- **Eixo X (`faixa_salarial_eda_2cat`)**: Mostra as duas categorias de agrupamento salarial.  
-- **Forma do Violino**: Cada violino representa uma curva de densidade espelhada (KDE), indicando a distribuição de salários. A largura em um ponto indica a densidade de profissionais com aquele salário.
+- **Eixo X (`salary_numeric_lower_bound`)**: Representa os valores do limite inferior da faixa salarial em Reais (R$).
+- **Eixo Y (`Count`)**: Mostra a contagem (frequência) de profissionais em cada faixa salarial.
+- **Cores (Legenda)**: Separam os dados entre os grupos "Salário Baixo" e "Salário Alto".
 
-> **Observação**: Os violin plots geralmente contêm elementos internos como box plots com linha de mediana e quartis.
+> **Observação**: A altura de cada barra indica quantos profissionais estão naquele intervalo de salário específico para cada categoria.
 
 ---
 
 #### Informações Extraídas do Gráfico
 
-**Distribuições Salariais Distintas**  
-Como esperado, as categorias "Salário Baixo" e "Salário Alto" apresentam distribuições distintas:
+**Distribuições Salariais Claramente Separadas**
+O gráfico mostra uma divisão nítida e quase sem sobreposição entre os dois grupos.
 
-- **Salário Baixo**:
-  - Maior concentração de salários abaixo de R$ 10.000.
-  - Violino mais largo em faixas salariais inferiores.
-  - Mediana baixa.
-  - Distribuição possivelmente multimodal com inchaços em faixas salariais específicas.
+- **Salário Baixo (Vermelho)**:
+    - **Concentração Massiva**: A grande maioria dos profissionais deste grupo tem salários com limite inferior **abaixo de R$ 10.000**.
+    - **Picos Múltiplos**: A distribuição é multimodal, com picos notáveis em torno de R$ 5.000, R$ 7.500 e um pico muito grande próximo de R$ 9.000, sugerindo faixas salariais comuns para níveis de entrada ou júnior.
+    - **Cauda Curta**: Praticamente não há ocorrências acima de R$ 10.000.
 
-- **Salário Alto**:
-  - Distribuição ampla, alcançando salários acima de R$ 40.000.
-  - Mediana significativamente mais elevada.
-  - Cauda longa com outliers.
-  - Distribuição também multimodal, indicando subgrupos com diferentes níveis de alta remuneração.
+- **Salário Alto (Azul)**:
+    - **Ponto de Partida**: A distribuição deste grupo começa efetivamente em torno de R$ 10.000.
+    - **Distribuição Ampla**: Os salários se espalham por uma faixa muito mais larga, indo de R$ 10.000 até mais de R$ 40.000.
+    - **Picos Diversificados**: Também é multimodal, com um pico principal logo após R$ 10.000 e outros picos menores em salários mais altos (ex: ~R$ 18.000), indicando diferentes níveis de senioridade ou especialização dentro deste grupo.
+    - **Cauda Longa à Direita**: A presença de profissionais em faixas salariais muito elevadas indica uma grande variabilidade e a existência de outliers com alta remuneração.
 
-**Disparidade Visualizada**  
-O gráfico deixa clara a disparidade salarial entre os dois grupos definidos.
+**Disparidade Visualizada**
+A separação visual entre as duas distribuições é a principal mensagem do gráfico, ilustrando uma forte segmentação no mercado de dados.
 
 ---
 
@@ -3081,50 +3080,39 @@ O gráfico deixa clara a disparidade salarial entre os dois grupos definidos.
 
 #### Caracterizando os Grupos "Salário Baixo" e "Salário Alto"
 
-1. **Proficiência Técnica**  
-   - Espera-se maior proficiência (experiência, senioridade, habilidades avançadas) no grupo "Salário Alto".
-   - Grupo "Salário Baixo" pode representar perfis iniciantes ou em transição de carreira.
+1.  **Proficiência Técnica**
+    - O grupo **"Salário Baixo"**, concentrado abaixo de R$ 10.000, provavelmente representa profissionais de nível júnior, estagiários ou em transição de carreira, com menor experiência e complexidade técnica.
+    - O grupo **"Salário Alto"**, com sua ampla e variada distribuição, deve abranger desde perfis plenos até sêniores, especialistas e gestores, onde a proficiência técnica avançada é um forte diferencial.
 
-2. **Formalidade no Emprego**  
-   - Diferenças em tipo de contrato (CLT, PJ), setor e porte da empresa podem explicar parte da diferença entre os grupos.
+2.  **Formalidade no Emprego**
+    - A natureza do contrato (CLT, PJ), o porte da empresa e o setor de atuação certamente influenciam em qual grupo um profissional se encaixa. Contratos PJ em empresas de tecnologia podem explicar parte da cauda longa no grupo de "Salário Alto".
 
-3. **Características Regionais**  
-   - Profissionais com "Salário Alto" tendem a se concentrar em regiões com mercados mais aquecidos (ex: Sudeste).
-   - Pode haver variações regionais dentro de cada violino.
+3.  **Características Regionais**
+    - É muito provável que profissionais no grupo "Salário Alto" estejam concentrados em pólos tecnológicos e grandes centros urbanos (como Sudeste), onde a demanda e o custo de vida são maiores.
 
-4. **Características Demográficas**  
-   - Escolaridade, idade e outros fatores demográficos podem variar entre os grupos.  
-   - Grupo com salários mais altos pode ter maior proporção de profissionais com pós-graduação.
+4.  **Características Demográficas**
+    - Fatores como nível de escolaridade (graduação vs. pós-graduação) e idade (proxy para experiência) devem ser significativamente diferentes entre os dois grupos. O grupo "Salário Alto" tende a ter maior proporção de profissionais com mais idade e maior nível educacional.
 
 ---
 
 #### Interação dos Fatores Dentro de Cada Categoria
 
-Mesmo dentro de cada categoria ("Salário Alto" ou "Salário Baixo"), há variabilidade:
+Mesmo dentro de cada grupo, a variabilidade (os vários picos) sugere interações complexas:
 
-- **No grupo "Salário Alto"**:
-  - Quem está na base do violino pode ter perfis diferentes de quem está no topo.
-  - Diferenças regionais ou contratuais (ex: PJ no Norte vs. CLT no Sudeste).
-
-- **No grupo "Salário Baixo"**:
-  - Pode haver diferenças entre iniciantes e profissionais com perfil mais técnico porém com barreiras regionais ou contratuais.
+-   **No grupo "Salário Alto"**: Os diferentes picos podem representar subgrupos. Por exemplo, um pico para sêniores CLT no Sudeste e outro pico para especialistas PJ trabalhando remotamente para o exterior.
+-   **No grupo "Salário Baixo"**: Os picos podem diferenciar estágios, analistas júnior I e analistas júnior II, ou refletir diferenças salariais para a mesma função em regiões distintas do país.
 
 ---
 
 #### Considerações Adicionais
 
-- **Definição das Categorias**  
-  Importante entender o critério para definir "Salário Baixo" e "Salário Alto" — isso impacta a análise.
+-   **Definição das Categorias**
+    O critério exato usado para criar as categorias "Salário Baixo" e "Salário Alto" é fundamental. A análise depende de como essa fronteira (aparentemente em R$ 10.000) foi definida.
 
-- **Potencial para Modelagem**  
-  Essas categorias podem ser usadas como variável-alvo em um modelo preditivo para entender quais fatores são determinantes para pertencer a cada grupo.
+-   **Potencial para Modelagem**
+    Essas duas categorias são uma excelente variável-alvo para um modelo de classificação. O objetivo do modelo seria prever a qual grupo um profissional pertence com base em sua proficiência, demografia, região e tipo de contrato.
 
->Em resumo: O gráfico de violino evidencia de forma visual a segmentação dos profissionais entre duas grandes faixas salariais, servindo como ponto de partida para entender a disparidade salarial. O próximo passo da análise deve ser a decomposição desses grupos segundo:
-
-- Proficiência técnica  
-- Formalidade no emprego  
-- Características regionais  
-- Fatores demográficos  
+> **Em resumo**: O histograma sobreposto evidencia uma clara segmentação do mercado de dados em dois universos salariais distintos. Ele serve como um poderoso ponto de partida visual para investigar quais são os fatores determinantes que colocam um profissional em um ou outro grupo, respondendo diretamente à pergunta orientadora da análise.  
 ---
 ### Análise do Gráfico (Gráfico de Barras Empilhadas)
 
@@ -3409,7 +3397,7 @@ Cada nível de escolaridade possui barras que indicam a distribuição dos profi
 
 ---
 
-# 7 Visualizacao dos dados (Análise multivariada)
+#7 Visualizacao dos dados (Análise multivariada)
 
 ### Análise do Gráfico de Dispersão: Experiência vs. Limite Inferior do Salário por Nível de Senioridade
 
