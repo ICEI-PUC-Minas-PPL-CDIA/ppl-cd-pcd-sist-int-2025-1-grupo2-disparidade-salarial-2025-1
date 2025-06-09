@@ -30,7 +30,8 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [2.1 Contextualização](#contextualização)
     *   [2.2 Problema](#problema)
     *   [2.3 Objetivo geral](#objetivo-geral)
-    *   [2.4 Justificativas](#justificativas)
+    *   [2.4 Objetivo específico](#objetivos-específicos)
+    *   [2.5 Justificativas](#justificativas)
 *   [3. PÚBLICO ALVO](#público-alvo)
 *   [4. DICIONÁRIO DE DADOS](#dicionário-de-dados)
 *   [5. DESCRIÇÃO DE DADOS](#descrição-de-dados)
@@ -65,7 +66,7 @@ A disparidade salarial entre profissionais de dados no Brasil é influenciada po
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Introdução
+# Introdução
 
 O Brasil experimentou um crescimento exponencial na indústria de dados devido à transformação digital do país e à crescente necessidade de trabalhadores qualificados. Embora as oportunidades sejam abundantes, os salários variam amplamente entre os trabalhadores, com fatores como experiência, gênero, educação, localização geográfica e tipo de empresa influenciando essa disparidade.
 
@@ -77,7 +78,7 @@ Este estudo investiga os principais elementos que estão associados à variaçã
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-###    Contextualização
+##    Contextualização
 
 A desigualdade salarial é um desafio enfrentado no mercado de trabalho brasileiro, impactando diversos setores da economia.
 
@@ -91,17 +92,17 @@ Diante do exposto, buscamos por meio desta análise de dados, investigar os fato
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-###    Problema
+##    Problema
 
 O agente em questão busca estabelecer quais são os fatores determinantes para a variação salarial entre profissionais de dados no Brasil. Constantemente, empresas brasileiras enfrentam dificuldades em determinar um salário justo ao profissional de dados por não considerarem os requisitos e as variáveis necessárias para isso. Nesse contexto, a análise busca entender o papel de fatores como experiência e nível educacional nas diferenças salariais, visando fornecer um padrão para que o mercado profissional da área seja mais equilibrado no país.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-###    Objetivo geral
+##    Objetivo geral
 
 **Desenvolver um sistema inteligente para compreender os fatores que influenciam a variação salarial dos profissionais de dados no Brasil, e para auxiliar na equiparação salarial desses, utilizando técnicas de ciência de dados para identificar padrões e tendências.**
 
-####    Objetivos específicos
+##    Objetivos específicos
 
 1. **Exploração e Análise dos Dados:**
     - Extrair da base de dados State of Data Brazil 2023 e bases auxiliares, dados suficientes para identificar variáveis relevantes associadas aos salários.
@@ -120,13 +121,13 @@ O agente em questão busca estabelecer quais são os fatores determinantes para 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-###    Justificativas
+##    Justificativas
 
 A desigualdade salarial na área de dados é um tema relevante, impactando profissionais e empresas. Este estudo busca identificar os principais fatores associados aos salários, com foco na experiência, senioridade e setor de atuação. O estudo se destina a profissionais da área que podem utilizar os resultados para planejar suas carreiras, e às empresas, que podem aprimorar suas políticas salariais com base em dados concretos. A pesquisa se apoia em bases de dados reconhecidas, como a State of Data Brazil 2023 da Data Hackers, garantindo a validade e confiabilidade das análises realizadas.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-##    Público alvo
+#    Público alvo
 
 Os principais perfis de usuários da aplicação são:
 
@@ -181,7 +182,7 @@ A aplicação tem como objetivo fornecer insights sobre disparidade salarial na 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-###    Dicionário de dados
+#    Dicionário de dados
 
 O banco de dados "State of Data Brazil 2023" é o resultado de uma pesquisa conduzida pela comunidade Data Hackers em parceria com a Bain & Company, que visa mapear o mercado brasileiro de dados. A pesquisa contou com a participação de mais de 5.200 profissionais da área, que responderam a perguntas sobre diversos temas, por exemplo:
 
@@ -195,7 +196,7 @@ O banco de dados "State of Data Brazil 2023" é o resultado de uma pesquisa cond
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-###    Descrição de dados
+#    Descrição de dados
 1. State_of_Data_BR_2023
 A pesquisa State_of_Data_BR_2023 é realizada anualmente com o objetivo de mapear o perfil dos profissionais de dados no Brasil. Ela abrange informações como salários, ferramentas utilizadas, nível de experiência, formação acadêmica e outros aspectos relevantes.
 
@@ -278,11 +279,11 @@ Nome: `salary_midpoint`, `dtype: object`
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## Preparação dos dados
+# Preparação dos dados
 
 
 
-### Atributos relevantes da base de dados principal para 1ºpergunta orientada
+## Atributos relevantes da base de dados principal para 1ºpergunta orientada
 **Pergunta orientada a dados:** *Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?*
 
 
@@ -304,7 +305,7 @@ Nome: `salary_midpoint`, `dtype: object`
 
 ---
 
-### Atributos relevantes da base de dados principal para 2ª pergunta orientada
+## Atributos relevantes da base de dados principal para 2ª pergunta orientada
 **Pergunta orientada a dados:** *Qual é a relação entre o tempo de experiência na área de dados, o nível de senioridade e a faixa salarial dos profissionais no Brasil?*
 
 | Atributo | Nome | Tipo | Subtipo | Descrição | Relevância |
@@ -316,7 +317,7 @@ Nome: `salary_midpoint`, `dtype: object`
 
 ---
 
-### Atributos relevantes da base de dados principal para 3ª pergunta orientada
+## Atributos relevantes da base de dados principal para 3ª pergunta orientada
 **Pergunta orientada a dados::** *Como fatores como  formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 
 | Atributo                                           | Código de Referência | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância  |
@@ -334,9 +335,9 @@ Nome: `salary_midpoint`, `dtype: object`
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## Enriquecimento de dados
+# Enriquecimento de dados
 
-### Base de dados auxiliar para 1º pergunta orientada a dados
+## Base de dados auxiliar para 1º pergunta orientada a dados
 **Pergunta orientada a dados:** *Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?*
 - Microdados do Censo da Educação Superior
 - Link: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior
@@ -344,14 +345,14 @@ Nome: `salary_midpoint`, `dtype: object`
 - [Base de dados](/assets/data/bases_principais/bases_auxiliar/1_pergunta_orientada_a_dados/MICRODADOS_ED_SUP_IES_2023.CSV)
 
 
-### Base de dados auxiliar para 2º pergunta orientada a dados
+## Base de dados auxiliar para 2º pergunta orientada a dados
 **Pergunta orientada a dados:** *Qual é a relação entre o tempo de experiência na área de dados, o nível de senioridade e a faixa salarial dos profissionais no Brasil?*
 - Relatórios de Transparência Salarial e Critérios Remuneratórios
 - Link: [https://relatoriodetransparenciasalarial.trabalho.gov.br/](https://relatoriodetransparenciasalarial.trabalho.gov.br/)
   
 - [Base de dados](/assets/data/bases_principais/bases_auxiliar/2_pergunta_orientada_a_dados/)
 
-### Base de dados auxiliar para a 3º pergunta orientada a dados
+## Base de dados auxiliar para a 3º pergunta orientada a dados
 **Pergunta orientada a dados:** *Como fatores como formalidade no emprego e características demográficas (gênero e raça) interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 - Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD-C)
 - Link: https://basedosdados.org/dataset/9fa532fb-5681-4903-b99d-01dc45fd527a?table=a04fc85d-908a-4393-b51d-1bd517a40210
