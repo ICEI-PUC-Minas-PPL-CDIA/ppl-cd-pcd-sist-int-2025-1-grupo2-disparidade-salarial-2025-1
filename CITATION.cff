@@ -1,16 +1,27 @@
 cff-version: 1.0.1
 message: Por favor, cite o repositório utilizando estes metadados.
-title: Repositório modelo para a disciplina de Projeto em Ciência de Dados I - Sistemas Inteligentes.
+title: Disparidade Salarial dos Profissionais de Dados no Brasil
 authors:
-   - name-suffix: Professor
+   - name-suffix: Aluno
     affiliation: PUC Minas
-    family-names: de Paula
-    given-names: Hugo
+    family-names: Soares
+    given-names: Pedro
+    orcid: "[https://orcid.org/0009-0004-7584-8126]"
+  - name-suffix: Aluno
+    affiliation: PUC Minas
+    family-names: ...
+    given-names: Enzo
+    orcid: "[]"
+  - name-suffix: Aluno
+    affiliation: PUC Minas
+    family-names: ...
+    given-names: Gabriel
+    orcid: "[]"
 keywords:
   - Ciência de Dados
   - Jupyter Notebooks
   - Aprendizado de Máquina
-repository-code:
+repository-code: 'https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1'
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2023-06-30
+date-released: 2025-06-27
