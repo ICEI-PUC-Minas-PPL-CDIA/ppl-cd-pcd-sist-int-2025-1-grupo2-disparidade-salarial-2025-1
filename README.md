@@ -1,4 +1,4 @@
-# DISPARIDADE SALARIAL DOS PROFISSIONAIS DE DADOS DO BRASIL
+<h1 align="center">DISPARIDADE SALARIAL DOS PROFISSIONAIS DE DADOS DO BRASIL</h1>
 
 A disparidade salarial entre profissionais de dados no Brasil é influenciada por diversos fatores pessoais, educacionais e de mercado. Este estudo busca identificar quais variáveis impactam a remuneração desses profissionais, analisando dados da pesquisa State of Data Brazil 2023 e de bases auxiliares. 
 
@@ -6,7 +6,7 @@ Para isso, são exploradas características como experiência, formação acadê
 
 ---
 
-## Integrantes
+<h2 align="center">Integrantes</h2>
 
 **Pedro Dias Soares, [pdsoares@sga.pucminas.br]**
 
@@ -17,7 +17,7 @@ Para isso, são exploradas características como experiência, formação acadê
 
 ---
 
-## Professor
+<h2 align="center">Professores</h2>
 
 * Hugo Bastos de Paula
 
@@ -25,16 +25,14 @@ Para isso, são exploradas características como experiência, formação acadê
 
 ---
 
-## Instruções de utilização
-
+<h2 align="center">Instruções de utilização</h2>
 
 Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
 
-(Precisa-se fazer ❌)
 
 ---
 
-## Histórico de versões
+<h2 align="center">Histórico de versões</h2>
 
 * 0.1.0
     * Relatório final ❌
