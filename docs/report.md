@@ -42,7 +42,7 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
 *   [5. DESCRIÇÃO DE DADOS](#descrição-de-dados)
 *   [6. PREPARAÇÃO DE DADOS](#preparação-dos-dados)
 *   [7. ENRIQUECIMENTO DE DADOS](#enriquecimento-de-dados)
-*   [8. Analises exploratorias de dados](#analises-exploratorias-de-dados) 
+*   [8. ANÁLISES EXPLORATÓRIAS DE DADOS](#analises-exploratorias-de-dados) 
     *   [8.1. 1º Pergunta Orientada a Dados](#1º-pergunta-orientada-a-dados)
     *   [8.2. 2º Pergunta Orientada a Dados](#2º-pergunta-orientada-a-dados)
     *   [8.3. 3º Pergunta Orientada a Dados](#3º-pergunta-orientada-a-dados)
@@ -54,7 +54,7 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [10.1. Resultados obtidos com os Modelos 1º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-1º-pergunta-orietada-a-dados)
     *   [10.2. Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
     *   [10.3. Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
-*   [11. Interpretação do modelo](#interpretação-dos-modelos)
+*   [11. INTERPRETAÇÃO DOS MODELOS](#interpretação-dos-modelos)
     *   [11.1. Interpretação dos Modelos 1° pergunta orietada a dados](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
     *   [11.2. Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
     *   [11.3. Interpretação dos Modelos 3° pergunta orietada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
@@ -323,7 +323,7 @@ Nome: `salary_midpoint`, `dtype: object`
 ---
 
 ## Atributos relevantes da base de dados principal para 3ª pergunta orientada
-**Pergunta orientada a dados::** *Como fatores como  formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
+**Pergunta orientada a dados::** *Como fatores como  formalidade no emprego , características demográficas se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 
 | Atributo                                           | Código de Referência | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância  |
 |----------------------------------------------------|-----------------------|--------------|-------------------------------------|-----------------------------------------------------------------------------------------------|------------|
@@ -2131,7 +2131,7 @@ tech_counts.plot(kind='barh')
 
 # 3º Pergunta orientada a dados
 **Pergunta Orientada a Dados:**
-*Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
+Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?
 ---
 ## 1. Importação de Bibliotecas
 O script inicia com a importação de diversas bibliotecas Python, cada uma com uma finalidade específica no processo de manipulação e análise de dados.
