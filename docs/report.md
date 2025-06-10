@@ -3800,16 +3800,16 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
 *   [2º Pergunta orientada a dados ](#modelos-2º-pergunta-orietada-a-dados)
 
 * [3ª Pergunta orientada a dados](#3ª-pergunta-orientada-a-dados)
-    * [Modelo 3.1: Relatório Técnico de Classificação Salarial](#modelo-31-relatório-técnico-de-classificação-salarial)
+    * [Modelo 3.1: Relatório Técnico de Classificação Salarial](#modelo-31-relatorio-tecnico-de-classificacao-salarial)
         * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-31)
         * [Metodologia](#2-metodologia-modelo-31)
-        * [Fluxo de Execução do Código](#3-fluxo-de-execução-do-código-modelo-31))
-    * [Modelo 3.2: Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)](#modelo-32-rede-neural-com-embeddings-e-otimização-via-ray-tune-rna-v2)
+        * [Fluxo de Execução do Código](#3-fluxo-de-execucao-do-código-modelo-31))
+    * [Modelo 3.2: Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)](#modelo-32-rede-neural-com-embeddings-e-otimizacao-via-ray-tune-rna-v2)
         * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-32)
         * [Processo de Amostragem de Dados](#2-processo-de-amostragem-de-dados-modelo-32)
-        * [Parâmetros Utilizados (Principais)](#3-parâmetros-utilizados-principais---modelo-32)
-        * [Resultados da Avaliação (RNA V2)](#4-resultados-da-avaliação-rna-v2---modelo-32)
-        * [Explicação do Código (Fluxo Principal para RNA v2)](#5-explicação-do-código-fluxo-principal-para-rna-v2----modelo-32)
+        * [Parâmetros Utilizados (Principais)](#3-parametros-utilizados-principais---modelo-32)
+        * [Resultados da Avaliação (RNA V2)](#4-resultados-da-avaliacao-rna-v2---modelo-32)
+        * [Explicação do Código (Fluxo Principal para RNA v2)](#5-explicacao-do-codigo-fluxo-principal-para-rna-v2----modelo-32)
 
 
 
