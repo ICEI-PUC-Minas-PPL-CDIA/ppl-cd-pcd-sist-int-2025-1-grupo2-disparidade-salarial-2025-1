@@ -3799,24 +3799,17 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
  
 *   [2º Pergunta orientada a dados ](#modelos-2º-pergunta-orietada-a-dados)
 
-* [Modelo 3.1: Relatório Técnico de Classificação Salarial](#modelos-3º-pergunta-orietada-a-dados)
-    * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-31)
-    * [Metodologia](#2-metodologia-modelo-31)
-        * [Processo de Amostragem de Dados (Particionamento e Cross-Validation)](#21-processo-de-amostragem-de-dados-particionamento-e-cross-validation)
-        * [Análise de Correlação das Features Iniciais com o Alvo](#22-análise-de-correlação-das-features-iniciais-com-o-alvo)
-        * [Parâmetros e Ferramentas Utilizados](#23-parâmetros-e-ferramentas-utilizados)
-    * [Fluxo de Execução do Código](#3-fluxo-de-execução-do-código-modelo-31)
-        * [Carregamento e preparação inicial dos dados](#31-carregamento-e-preparação-inicial-dos-dados)
-        * [Engenharia da variável alvo (`target_col_agrupada_name`)](#32-engenharia-da-variável-alvo-target_col_agrupada_name)
-        * [Preparação das features (`X_initial`) e codificação do alvo (`y_full`)](#33-preparação-das-features-x_initial-e-codificação-do-alvo-y_full)
-        * [Pré-processamento das features](#34-pré-processamento-das-features)
-        * [Divisão treino-teste principal](#35-divisão-treino-teste-principal)
-        * [Seleção de features com RFECV](#36-seleção-de-features-com-rfecv)
-        * [Otimização de hiperparâmetros com Optuna](#37-otimização-de-hiperparâmetros-com-optuna)
-        * [Treinamento do modelo final](#38-treinamento-do-modelo-final)
-        * [Avaliação do modelo final](#39-avaliação-do-modelo-final)
-        * [Retorno de resultados](#310-retorno-de-resultados)
-	
+* [3ª Pergunta orientada a dados](#3ª-pergunta-orientada-a-dados)
+    * [Modelo 3.1: Relatório Técnico de Classificação Salarial](#modelo-31-relatório-técnico-de-classificação-salarial)
+        * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-31)
+        * [Metodologia](#2-metodologia-modelo-31)
+        * [Fluxo de Execução do Código](#3-fluxo-de-execução-do-código-modelo-31))
+    * [Modelo 3.2: Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)](#modelo-32-rede-neural-com-embeddings-e-otimização-via-ray-tune-rna-v2)
+        * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-32)
+        * [Processo de Amostragem de Dados](#2-processo-de-amostragem-de-dados-modelo-32)
+        * [Parâmetros Utilizados (Principais)](#3-parâmetros-utilizados-principais---modelo-32)
+        * [Resultados da Avaliação (RNA V2)](#4-resultados-da-avaliação-rna-v2---modelo-32)
+        * [Explicação do Código (Fluxo Principal para RNA v2)](#5-explicação-do-código-fluxo-principal-para-rna-v2----modelo-32)
 
 
 
