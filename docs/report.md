@@ -323,7 +323,7 @@ Nome: `salary_midpoint`, `dtype: object`
 ---
 
 ## Atributos relevantes da base de dados principal para 3ª pergunta orientada
-**Pergunta orientada a dados::** *Como fatores como  formalidade no emprego , características demográficas se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
+**Pergunta orientada a dados:** *Como fatores como  formalidade no emprego , características demográficas se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 
 | Atributo                                           | Código de Referência | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância  |
 |----------------------------------------------------|-----------------------|--------------|-------------------------------------|-----------------------------------------------------------------------------------------------|------------|
@@ -430,7 +430,6 @@ Nome: `salary_midpoint`, `dtype: object`
         * [Gráfico: Barras empilhadas](#análise-do-gráfico-gráfico-de-barras-empilhadas)
         * [Gráfico: Barras agrupadas por gênero](#análise-do-gráfico-gráfico-de-barras-agrupadas-por-gênero)
         * [Gráfico: Barras agrupadas por escolaridade](#análise-do-gráfico-gráfico-de-barras-agrupadas-senioridade-por-escolaridade)
-        * [Gráfico: Experiência vs. Limite do salário](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário)
     * [Análise Multivariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#7-visualizacao-dos-dados-an%C3%A1lise-multivariada)
         * [Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
         * [Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
@@ -3801,6 +3800,10 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
 *   [2º Pergunta orientada a dados ](#modelos-2º-pergunta-orietada-a-dados)
 
 *   [3º Pergunta orientada a dados ](#modelos-3º-pergunta-orietada-a-dados)
+	* [Modelo 1 Análise de Disparidade Salarial de Profissionais de Dados no Brasil Utilizando o Modelo LightGBM](#1-justificativa-e-objetivo-modelo-31)
+
+		*   [](#)
+
 
 
 # Modelos 1º pergunta orietada a dados
@@ -4725,17 +4728,20 @@ RandomForestRegressor(
 
 # Modelos 3º pergunta orietada a dados 
 
-## 3º Pergunta orientada a dados
-*  Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?
-## 1. Justificativa e Objetivo
+## **1 JUSTIFICATIVA E OBJETIVO (Modelo 3.1)**
 
 O objetivo deste modelo é classificar a faixa salarial de indivíduos em duas categorias: "Salário Baixo" e "Salário Alto". A transição de uma classificação multiclasse (3 faixas) para uma binária visa simplificar o problema e potencialmente melhorar a distinção entre os grupos salariais, buscando um equilíbrio na distribuição das amostras entre as classes definidas por um ponto de corte específico. A última execução utilizou um ponto de corte fixo (presumivelmente R$7.500,00 com base nos resultados) para a variável `salary_numeric_lower_bound` para realizar essa divisão.
 
-## 2. Processo de Amostragem de Dados (Particionamento e Cross-Validation)
+**O projeto busca responder à seguinte pergunta orientada a dados:** *Como fatores como formalidade no emprego, características demográficas e regionais interagem entre si e com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?.*
+
+---
+## **2 METODOLOGIA (Modelo 3.1)**
+
+### **2.1 Processo de Amostragem de Dados (Particionamento e Cross-Validation)**
 
 O processo de amostragem e validação do modelo é crucial para garantir sua generalização e evitar overfitting. As seguintes etapas são empregadas no código:
 
-### 2.1. Particionamento Inicial (Treino e Teste Principal)
+#### **2.1.1 Particionamento inicial (Treino e Teste Principal)**
 
 * **Método**: `train_test_split` da biblioteca `sklearn.model_selection`.
 * **Divisão**: O conjunto de dados processado (`X_initial`, `y_full`) é dividido em:
@@ -4746,7 +4752,7 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
     * `random_state=42`: Garante a reprodutibilidade da divisão. O mesmo estado aleatório resultará sempre na mesma divisão dos dados.
     * `stratify=y_full`: Realiza uma divisão estratificada. Isso significa que a proporção das classes da variável alvo (`y_full`, que contém "Salário Baixo" e "Salário Alto" codificados) é mantida tanto no conjunto de treino quanto no de teste. Isso é especialmente importante para dados desbalanceados ou quando se quer garantir que ambas as classes estejam representadas adequadamente em ambas as partições.
 
-### 2.2. Validação Cruzada Estratificada para RFECV (Recursive Feature Elimination with Cross-Validation)
+#### **2.1.2 Validação cruzada estratificada para RFECV (Recursive Feature Elimination with Cross-Validation)**
 
 * **Método**: `StratifiedKFold` da `sklearn.model_selection`, utilizado dentro do `RFECV`.
 * **Objetivo**: Selecionar o subconjunto ótimo de features de forma robusta, avaliando o desempenho do modelo com diferentes combinações de features em múltiplas dobras (folds) do conjunto de treinamento.
@@ -4756,7 +4762,7 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
     * `random_state=42`: Garante a reprodutibilidade do embaralhamento e da divisão em folds.
 * **Funcionamento do `RFECV`**: Treina o estimador (`lgb.LGBMClassifier`) recursivamente, removendo features e avaliando o desempenho (definido por `rfecv_scoring`, padrão `'accuracy'`) através da validação cruzada estratificada. Isso ajuda a encontrar o número de features que maximiza a métrica de scoring.
 
-### 2.3. Validação Cruzada Estratificada para Otimização de Hiperparâmetros com Optuna
+#### **2.1.3 Validação cruzada estratificada para otimização de hiperparâmetros com Optuna**
 
 * **Método**: `StratifiedKFold` utilizado dentro da função `objective_optuna_cv`.
 * **Objetivo**: Avaliar o desempenho de diferentes combinações de hiperparâmetros do `lgb.LGBMClassifier` de forma robusta, treinando e validando em múltiplas dobras do conjunto de treinamento selecionado pelo RFECV (`X_train_optuna_selected`, `y_train_optuna`).
@@ -4766,7 +4772,7 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
     * `random_state=trial.number`: O estado aleatório é vinculado ao número do "trial" do Optuna, promovendo diversidade nas divisões entre diferentes trials.
 * **Funcionamento**: Para cada "trial" do Optuna (combinação de hiperparâmetros), o modelo é treinado e avaliado `n_cv_folds_optuna` vezes. A métrica de desempenho (acurácia média dos folds) é retornada ao Optuna, que busca maximizá-la.
 
-### 2.4. Partição Interna para Early Stopping no Treinamento Final
+#### **2.1.4 Partição interna para Early Stopping no treinamento final**
 
 * **Método**: `train_test_split` para criar um conjunto de validação interna.
 * **Divisão**: O conjunto `X_train_optuna_selected` (que é 75% do total) é novamente dividido:
@@ -4778,22 +4784,20 @@ O processo de amostragem e validação do modelo é crucial para garantir sua ge
     * `random_state=42`
     * `stratify=y_train_optuna`
 
-### Justificativa das Escolhas de Amostragem:
+#### **2.1.5 Justificativa das escolhas de amostragem**
 
 * **Divisão Treino/Teste Principal**: Essencial para avaliar o desempenho final do modelo em dados não vistos. A proporção 75/25 é comum.
 * **Estratificação**: Crucial para problemas de classificação, especialmente com classes desbalanceadas (embora o objetivo seja reduzir o desbalanceamento), para garantir que as proporções das classes sejam mantidas nas divisões, levando a estimativas de desempenho mais confiáveis.
 * **Validação Cruzada (RFECV e Optuna)**: Reduz a variância da estimativa de desempenho e torna a seleção de features e hiperparâmetros mais robusta, diminuindo a chance de escolhas baseadas em uma divisão particular dos dados. `StratifiedKFold` é usado para manter a proporção das classes em cada fold.
 * **Conjunto de Validação Interna para Early Stopping**: Permite que o modelo pare de treinar no momento ótimo, evitando o overfitting aos dados de `X_train_final`, usando `X_val_internal` como um proxy para dados não vistos durante essa fase.
 
----
-### 3. Análise de Correlação das Features Iniciais com o Alvo
-(ESTE BLOCO SERIA INSERIDO APÓS A SEÇÃO "2. Processo de Amostragem de Dados" E ANTES DA SEÇÃO "3. Parâmetros Utilizados" DO SEU TEXTO ORIGINAL, QUE SERIA RENOMEADA PARA SEÇÃO 4)
+### **2.2 Análise de Correlação das Features Iniciais com o Alvo**
 
 Antes da seleção de features pelo RFECV, foi realizada uma análise de correlação das features iniciais (após limpeza e transformações como UF para Região) com a variável alvo (`TARGET_SALARIO_CODIFICADO`). As features consideradas nesta fase foram: `P1_a_1` (Faixa Etária), `P1_b` (Gênero), `P1_l` (Nível de Ensino), `P2_i` (Tempo de Experiência), `P2_g_Nivel` (Nível de Senioridade), `P2_f_Cargo_Atual` (Cargo Atual), e `Regiao_Mapeada`.
 
 **Suposição da Codificação do Alvo para Interpretação da Correlação:** Para a análise abaixo, assume-se que "Salário Baixo" foi codificado com um valor numérico MAIOR e "Salário Alto" com um valor numérico MENOR (ex: Salário Alto -> 0, Salário Baixo -> 1). Se a codificação for inversa, a interpretação dos sinais de correlação de Pearson e Spearman também se inverte. A Correlação de Distância (dcor) mede apenas a força da dependência (0 a 1), não a direção.
 
-**Resumo das Correlações com `TARGET_SALARIO_CODIFICADO` (Dados Completos Processados):**
+**Tabela 1 –** Resumo das correlações com `TARGET_SALARIO_CODIFICADO` (Dados Completos Processados)
 
 | Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior) |
 | :----------------- | :------ | :------- | :----------- | :----------------------------------------------------------------- |
@@ -4804,6 +4808,7 @@ Antes da seleção de features pelo RFECV, foi realizada uma análise de correla
 | `P1_l`               | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
 | `P1_b`               | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                           |
 | `Regiao_Mapeada`     | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente.                            |
+**Fonte:** Elaborado pelo autor (2024).
 
 **Observações da Análise de Correlação:**
 * **Consistência**: As correlações mostraram-se bastante consistentes entre os dados completos, treino e teste.
@@ -4818,7 +4823,7 @@ Antes da seleção de features pelo RFECV, foi realizada uma análise de correla
 Para uma visualização completa das inter-relações entre todas as features iniciais e a variável alvo, os seguintes mapas de calor (gerados a partir dos dados completos processados, antes da divisão treino/teste e RFECV) são os mais relevantes. Recomenda-se visualizá-los em um ambiente gráfico.
 
 1.  **Mapa de Calor da Correlação de Pearson:**
-     ![Image](https://github.com/user-attachments/assets/ef5f53bd-a116-4c75-a6c0-e5de9fc3c1af)
+    ![Image](https://github.com/user-attachments/assets/ef5f53bd-a116-4c75-a6c0-e5de9fc3c1af)
     * Descrição: Este gráfico exibe a força e a direção das relações *lineares* entre cada par de variáveis. Cores mais intensas (vermelho para positivo, azul para negativo) indicam correlações lineares mais fortes.
 
 2.  **Mapa de Calor da Correlação de Spearman:**
@@ -4826,38 +4831,35 @@ Para uma visualização completa das inter-relações entre todas as features in
     * Descrição: Este gráfico mostra a força e a direção das relações *monotônicas* (onde as variáveis tendem a se mover juntas, mas não necessariamente a uma taxa constante). É útil para identificar tendências consistentes que podem não ser estritamente lineares.
 
 3.  **Mapa de Calor da Correlação de Distância (dcor):**
-     ![Image](https://github.com/user-attachments/assets/1aaf66f2-fbe0-49b1-92a3-f8ac9902724c)
+    ![Image](https://github.com/user-attachments/assets/1aaf66f2-fbe0-49b1-92a3-f8ac9902724c)
     * Descrição: Este gráfico indica a força da dependência (linear ou não linear) entre os pares de variáveis, com valores variando de 0 (independência) a 1 (dependência perfeita). Cores mais claras (amarelo, no esquema 'viridis') indicam maior dependência. Ele não mostra a direção da relação.
 
----
+### **2.3 Parâmetros e Ferramentas Utilizados**
 
-
----
-
-## 4. Parâmetros Utilizados (Principais)
-
-### 4.1.1 Criação da Variável Alvo (`target_col_agrupada_name`)
+#### **2.3.1 Criação da variável alvo (`target_col_agrupada_name`)**
 
 * **`salary_group_labels = ["Salário Baixo", "Salário Alto"]`**: Define os nomes das duas categorias da variável alvo.
 * **`point_of_cut_fixed`**: Um valor monetário específico (ex: `7500.0` na última execução que produziu o suporte 622/567) usado para dividir `salary_numeric_lower_bound`. Salários `<= point_of_cut_fixed` são "Salário Baixo/Médios", e `> point_of_cut_fixed` são "Salário Alto". **Este é o parâmetro chave que você tem ajustado para controlar a distribuição das classes.**
-* O gráfico abaixo mostra a distruibuicao da faixa salarial, onde é notável que uma divisao de `<= point_of_cut_fixed` (Salários Baixos/Medios) e `> point_of_cut_fixed` (salários Altos), produziram um suporte 622/567 .
-  ![Image](https://github.com/user-attachments/assets/cc8fdd29-49bd-4b07-82a3-803c81bcb2a7)
+* O gráfico abaixo mostra a distribuição da faixa salarial, onde é notável que uma divisão de `<= point_of_cut_fixed` (Salários Baixos/Medios) e `> point_of_cut_fixed` (salários Altos), produziram um suporte 622/567.
+    ![Image](https://github.com/user-attachments/assets/cc8fdd29-49bd-4b07-82a3-803c81bcb2a7)
 * **`pd.cut(..., include_lowest=True, duplicates='drop')`**: Usado para realizar a divisão com base no `point_of_cut_fixed`.
 
-## 4.1.2 Utilizacao das variáveis preditivas 
+#### **2.3.2 Utilização das variáveis preditivas**
 
-| Atributo                                           | Código de Referência | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância  |
-|----------------------------------------------------|-----------------------|--------------|-------------------------------------|-----------------------------------------------------------------------------------------------|------------|
-| Faixa etária                                       | P1a1                  | Qualitativo  | Ordinal                             | Faixa etária do respondente                                                                   | Alta       |
-| Gênero                                             | P1b                   | Qualitativo  | Nominal (Multivalorado)             | Identidade de gênero do respondente                                                           | Alta       |
-| Nivel de ensino alcançado                          | P1l                   | Qualitativo  | Ordinal                             | Nível de ensino do respondente (graduação, mestrado, etc.)                                    | Alta       |
-| Faixa salarial mensal                              | P2h                   | Qualitativo  | Ordinal                             | Faixa salarial mensal do respondente                                                          | Alta       |
-| Tempo de experiência na área de dados              | P2i                   | Quantitativo | Discreto                            | Tempo de experiência do respondente na área de dados (em anos)                                | Alta       |
-| UF onde mora                                       | P1i1                  | Qualitativo  | Nominal (Multivalorado)             | Unidade Federativa onde o respondente reside                                                  | Alta       |
-| Cargo atual                                        | P2f                   | Qualitativo  | Nominal (Multivalorado)             | Cargo atual ocupado pelo respondente                                                          | Alta       |
-| Nível de senioridade                               | P2g                   | Qualitativo  | Ordinal                             | Nível de senioridade do respondente (Júnior, Pleno, Sênior)                                   | Alta       |
+**Tabela 2 –** Descrição das variáveis preditivas utilizadas
 
-### 4.2. `RFECV`
+| Atributo | Código de Referência | Tipo | Subtipo | Descrição | Relevância |
+|---|---|---|---|---|---|
+| Faixa etária | P1a1 | Qualitativo | Ordinal | Faixa etária do respondente | Alta |
+| Gênero | P1b | Qualitativo | Nominal (Multivalorado) | Identidade de gênero do respondente | Alta |
+| Nivel de ensino alcançado | P1l | Qualitativo | Ordinal | Nível de ensino do respondente (graduação, mestrado, etc.) | Alta |
+| Faixa salarial mensal | P2h | Qualitativo | Ordinal | Faixa salarial mensal do respondente | Alta |
+| Tempo de experiência na área de dados | P2i | Quantitativo | Discreto | Tempo de experiência do respondente na área de dados (em anos) | Alta |
+| UF onde mora | P1i1 | Qualitativo | Nominal (Multivalorado) | Unidade Federativa onde o respondente reside | Alta |
+| Cargo atual | P2f | Qualitativo | Nominal (Multivalorado) | Cargo atual ocupado pelo respondente | Alta |
+| Nível de senioridade | P2g | Qualitativo | Ordinal | Nível de senioridade do respondente (Júnior, Pleno, Sênior) | Alta |
+
+#### **2.3.3 Parâmetros do `RFECV`**
 
 * `estimator=lgb.LGBMClassifier(random_state=42, n_jobs=-1, verbose=-1)`: Modelo base para a seleção de features.
 * `step=rfecv_step` (padrão `1`): Número de features a serem removidas em cada iteração.
@@ -4865,7 +4867,7 @@ Para uma visualização completa das inter-relações entre todas as features in
 * `scoring=rfecv_scoring` (padrão `'accuracy'`): Métrica para avaliar o subconjunto de features.
 * `min_features_to_select=1`: Número mínimo de features a serem selecionadas.
 
-### 4.3. `Optuna` (Otimização de Hiperparâmetros para `lgb.LGBMClassifier`)
+#### **2.3.4 Parâmetros da otimização com `Optuna`**
 
 * `n_trials=n_optuna_trials` (padrão `100`): Número de combinações de hiperparâmetros a serem testadas.
 * `timeout=optuna_timeout` (padrão `1800` segundos): Tempo máximo para a otimização.
@@ -4887,20 +4889,19 @@ Para uma visualização completa das inter-relações entre todas as features in
     * `metric`: Definido como `'binary_logloss'` para avaliação interna e early stopping.
     * `num_class`: Omitido para classificação binária no LightGBM (ou definido como 1 implicitamente).
 
-### 4.4. Treinamento do Modelo Final (`best_lgbm`)
+#### **2.3.5 Parâmetros do treinamento do modelo final (`best_lgbm`)**
 
 * Usa os `best_params_optuna` encontrados.
 * `early_stopping(callbacks=[lgb.early_stopping(25, verbose=False)])`: Para o treinamento se a métrica no conjunto de validação interna (`X_val_internal`) não melhorar por 25 rodadas. O número de árvores final foi 105 na sua última execução.
+---
+## **3 FLUXO DE EXECUÇÃO DO CÓDIGO (Modelo 3.1)**
 
-## 5. Explicação do Código (Fluxo Principal)
+### **3.1 Carregamento e preparação inicial dos dados**
 
-### Pergunta orientada a dados : **Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?**
-  * O fluxo de execução do código principal pode ser resumido nas seguintes etapas:
+* Leitura do arquivo Excel (`Main_database (2).xlsx`).
+* Limpeza dos nomes das colunas para remover caracteres especiais e espaços (função `clean_col_name`).
+* Mapeamento heurístico de colunas importantes (faixa salarial original, experiência, senioridade, etc.) para nomes padronizados internos (armazenados em `col_mapping`).
 
-1.  **Carregamento e Preparação Inicial dos Dados**:
-    * Leitura do arquivo Excel (`Main_database (2).xlsx`).
-    * Limpeza dos nomes das colunas para remover caracteres especiais e espaços (função `clean_col_name`).
-    * Mapeamento heurístico de colunas importantes (faixa salarial original, experiência, senioridade, etc.) para nomes padronizados internos (armazenados em `col_mapping`).
 ```python
 import pandas as pd
 import numpy as np
@@ -4926,696 +4927,189 @@ warnings.filterwarnings("ignore", category=optuna.exceptions.ExperimentalWarning
 # Certifique-se de que a pasta para salvar visualizações existe
 os.makedirs('visualizacoes_classificacao_salario_v7_rfecv', exist_ok=True)
 ```
+### **3.2 Engenharia da variável alvo (`target_col_agrupada_name`)**
 
-2.  **Engenharia da Variável Alvo (`target_col_agrupada_name`)**:
-    * A coluna da faixa salarial original (ex: `P2_h`) é processada para extrair um valor numérico (`salary_numeric_lower_bound`) usando `extract_salary_lower_bound`.
-    * **Divisão em Duas Categorias**: Um **ponto de corte fixo** (`point_of_cut_fixed`, que você estava ajustando, por exemplo, para R$7.500,00 na última execução) é usado para dividir `salary_numeric_lower_bound` em "Salário Baixo" e "Salário Alto" usando `pd.cut`. Esta etapa inclui lógica para lidar com casos onde o ponto de corte é extremo (menor/igual ao mínimo ou maior/igual ao máximo) e um fallback para `pd.qcut` (divisão pela mediana) se o `pd.cut` falhar.
-    * A distribuição de `salary_numeric_lower_bound` é plotada para auxiliar na escolha/ajuste do `point_of_cut_fixed`.
-    * Amostras com valor nulo na nova variável alvo são removidas.
-
-```python
-# (Dentro da função train_classification_model_salary_range_v7_final)
-
-        # ... (Após mapeamento de colunas e limpeza da coluna de experiência) ...
-
-        original_salary_col_name = col_mapping["target_original_salary_range"]
-        df_main_processed = df_main.dropna(subset=[original_salary_col_name]).copy()
-        if df_main_processed.empty: print(f"Erro: DataFrame vazio após NaNs na faixa salarial original."); return None
-
-        # Extrai o limite inferior numérico da faixa salarial
-        df_main_processed['salary_numeric_lower_bound'] = df_main_processed[original_salary_col_name].apply(extract_salary_lower_bound)
-        df_main_processed.dropna(subset=['salary_numeric_lower_bound'], inplace=True)
-
-        if df_main_processed.empty:
-            print(f"Erro: DataFrame vazio após remover NaNs de 'salary_numeric_lower_bound'."); return None
-
-        # --- CRIAÇÃO DA VARIÁVEL ALVO COM 2 CATEGORIAS E PONTO DE CORTE FIXO ---
-        salary_group_labels = ["Salário Baixo", "Salário Alto"]
-        target_col_agrupada_name = col_mapping["target"] # Definido anteriormente no mapeamento
-
-        if df_main_processed.shape[0] < 2:
-            print(f"Erro: Dados insuficientes ({df_main_processed.shape[0]}) para criar faixas."); return None
-
-        min_salary = df_main_processed['salary_numeric_lower_bound'].min()
-        max_salary = df_main_processed['salary_numeric_lower_bound'].max()
-
-        if min_salary == max_salary:
-            print(f"Aviso: Todos os valores de 'salary_numeric_lower_bound' são iguais ({min_salary}). Apenas uma categoria ('{salary_group_labels[0]}') será criada.")
-            df_main_processed[target_col_agrupada_name] = salary_group_labels[0]
-        else:
-            # AJUSTE ESTE VALOR PARA CONTROLAR A DISTRIBUIÇÃO DAS CLASSES
-            # Se "Salário Baixo" tiver muitas amostras, DIMINUA este valor.
-            # Se "Salário Baixo" tiver poucas amostras, AUMENTE este valor.
-            # Exemplos baseados no seu histograma: 7500, 8000, 9000.
-            point_of_cut_fixed = 7500.0  # <-- PONTO DE CORTE AJUSTÁVEL
-
-            print(f"Info: Usando ponto de corte fixo para salários: {point_of_cut_fixed:.2f}")
-            print(f"       Salários <= {point_of_cut_fixed:.2f} serão '{salary_group_labels[0]}' (Salário Baixo)")
-            print(f"       Salários >  {point_of_cut_fixed:.2f} serão '{salary_group_labels[1]}' (Salário Alto)")
-
-            final_bins = []
-            final_labels = []
-
-            if point_of_cut_fixed <= min_salary:
-                print(f"Aviso: Ponto de corte fixo ({point_of_cut_fixed:.2f}) é <= ao mínimo ({min_salary:.2f}). Todos os dados cairão em '{salary_group_labels[1]}'.")
-                final_bins = [min_salary, max_salary]
-                final_labels = [salary_group_labels[1]]
-            elif point_of_cut_fixed >= max_salary:
-                print(f"Aviso: Ponto de corte fixo ({point_of_cut_fixed:.2f}) é >= ao máximo ({max_salary:.2f}). Todos os dados cairão em '{salary_group_labels[0]}'.")
-                final_bins = [min_salary, max_salary]
-                final_labels = [salary_group_labels[0]]
-            else:
-                final_bins = [min_salary, point_of_cut_fixed, max_salary]
-                final_labels = salary_group_labels
-
-            unique_sorted_bins = sorted(list(set(final_bins)))
-
-            if len(unique_sorted_bins) < 2:
-                print(f"Erro crítico: Não foi possível definir pelo menos 2 bins únicos ({unique_sorted_bins}) com o ponto de corte fixo."); return None
-
-            # Ajuste para o caso de unique_sorted_bins ter apenas 2 elementos e final_labels ter 2 labels
-            # Isso pode acontecer se o ponto de corte for igual ao min ou max, ou muito próximo.
-            if len(unique_sorted_bins) == 2 and len(final_labels) == 2:
-                print(f"Aviso: Ponto de corte fixo resultou em apenas 2 bins efetivos ({unique_sorted_bins}). Será criada apenas 1 categoria.")
-                # Decide qual label usar baseado na posição do ponto de corte
-                if point_of_cut_fixed <= min_salary + 1e-9: # Se o corte é no mínimo ou abaixo, todos são "Alto"
-                    final_labels = [salary_group_labels[1]]
-                elif point_of_cut_fixed >= max_salary - 1e-9: # Se o corte é no máximo ou acima, todos são "Baixo"
-                    final_labels = [salary_group_labels[0]]
-                else: # Se o corte está entre min e max mas resultou em 1 categoria (devido a 'duplicates=drop' ou bins muito próximos)
-                      # Tenta inferir a categoria predominante ou a que faz mais sentido.
-                      # Aqui, uma heurística simples: se o ponto de corte está mais perto do mínimo,
-                      # significa que a maior parte dos dados está acima, então seriam "Salário Alto".
-                      # Se está mais perto do máximo, a maioria é "Salário Baixo".
-                      # Isso é uma simplificação e pode precisar de ajuste mais fino dependendo do caso de uso.
-                    if (point_of_cut_fixed - min_salary) < (max_salary - point_of_cut_fixed):
-                        # Ponto de corte mais próximo do mínimo -> maioria é Alto
-                        final_labels = [salary_group_labels[1]]
-                    else:
-                        # Ponto de corte mais próximo do máximo -> maioria é Baixo
-                        final_labels = [salary_group_labels[0]]
-
-
-            bins_to_use = unique_sorted_bins
-            labels_to_use = final_labels
-
-            try:
-                df_main_processed[target_col_agrupada_name] = pd.cut(
-                    df_main_processed['salary_numeric_lower_bound'],
-                    bins=bins_to_use,
-                    labels=labels_to_use,
-                    include_lowest=True, # Garante que o valor mínimo seja incluído no primeiro bin
-                    duplicates='drop'    # Remove bins duplicados se existirem
-                )
-            except Exception as e:
-                print(f"Erro durante pd.cut com ponto de corte fixo: {e}")
-                print(f"  Bins usados: {bins_to_use}, Labels usados: {labels_to_use}")
-                print("  Tentando fallback para divisão pela mediana (pd.qcut)...")
-                try:
-                    df_main_processed[target_col_agrupada_name] = pd.qcut(
-                        df_main_processed['salary_numeric_lower_bound'],
-                        q=2, labels=salary_group_labels, duplicates='drop'
-                    )
-                    num_qcut_cats = len(df_main_processed[target_col_agrupada_name].cat.categories)
-                    if num_qcut_cats < 2: # Se qcut também falhar em criar 2 categorias
-                        print("Fallback com qcut também resultou em menos de 2 categorias. Agrupando em uma única categoria.")
-                        df_main_processed[target_col_agrupada_name] = salary_group_labels[0] # Ou a categoria mais apropriada
-                except Exception as e_qcut_fallback:
-                     print(f"Erro no fallback com pd.qcut: {e_qcut_fallback}. Não foi possível criar a variável alvo."); return None
-
-        print(f"Nova coluna alvo '{target_col_agrupada_name}' criada. Contagens no DataFrame processado completo:\\n{df_main_processed[target_col_agrupada_name].value_counts(dropna=False).sort_index()}")
-
-        print("\nDiagnóstico da distribuição de 'salary_numeric_lower_bound':")
-        print(df_main_processed['salary_numeric_lower_bound'].describe())
-        plt.figure(figsize=(10,4))
-        sns.histplot(df_main_processed['salary_numeric_lower_bound'], kde=True, bins=50)
-        plt.title("Distribuição de 'salary_numeric_lower_bound'")
-        plt.savefig('visualizacoes_classificacao_salario_v7_rfecv/distribuicao_salario_numerico.png')
-        # plt.show() # Removido ou comentado para execução em lote/sem interface gráfica
-        plt.close()
-
-        df_main_processed.dropna(subset=[target_col_agrupada_name], inplace=True)
-        if df_main_processed.empty:
-            print("Erro: DataFrame vazio após remover NaNs na coluna alvo agrupada. Verifique a criação das categorias."); return None
-        print(f"Linhas após remover NaN na coluna alvo AGRUPADA: {df_main_processed.shape[0]}")
-        # --- FIM DAS MODIFICAÇÕES NA VARIÁVEL ALVO ---
-```
-3.  **Preparação das Features (`X_initial`) e Codificação do Alvo (`y_full`)**:
-    * As features relevantes (idade, gênero, UF, ensino, cargo, senioridade, experiência) são selecionadas.
-    * A coluna 'UF' é transformada na feature 'Regiao\_Mapeada'.
-    * A variável alvo (`target_col_agrupada_name`) é codificada numericamente (0 e 1) usando `LabelEncoder`, e é determinado se o problema é de classificação binária.
+* A coluna da faixa salarial original (ex: `P2_h`) é processada para extrair um valor numérico (`salary_numeric_lower_bound`) usando `extract_salary_lower_bound`.
+* **Divisão em Duas Categorias**: Um **ponto de corte fixo** (`point_of_cut_fixed`), como R$7.500,00, é usado para dividir `salary_numeric_lower_bound` em "Salário Baixo" e "Salário Alto" usando `pd.cut`. Esta etapa inclui lógica para lidar com casos onde o ponto de corte é extremo e um fallback para `pd.qcut` (divisão pela mediana) se o `pd.cut` falhar.
+* A distribuição de `salary_numeric_lower_bound` é plotada para auxiliar na escolha/ajuste do `point_of_cut_fixed`.
+* Amostras com valor nulo na nova variável alvo são removidas.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após a engenharia da variável alvo e remoção de NaNs na coluna alvo agrupada) ...
-
-        # Seleciona as colunas de features iniciais com base no mapeamento
-        # required_cols_internal_for_features foi definido anteriormente como:
-        # ["faixa_etaria", "genero", "nivel_ensino", "tempo_experiencia_P2i", 
-        #  "nivel_senioridade_P2g", "uf_mora_P1i1", "cargo_atual_P2f"]
-        feature_cols_to_use_initial = [
-            col_mapping[col_internal] for col_internal in required_cols_internal_for_features 
-            if col_internal in col_mapping and col_mapping[col_internal] in df_main_processed.columns
-        ]
-        X_initial = df_main_processed[feature_cols_to_use_initial].copy()
-
-        # Mapeia UF para Região e remove a coluna original de UF
-        uf_col_original_name_mapped = col_mapping.get("uf_mora_P1i1")
-        if uf_col_original_name_mapped and uf_col_original_name_mapped in X_initial.columns:
-            X_initial['Regiao_Mapeada'] = map_uf_to_region(X_initial[uf_col_original_name_mapped])
-            X_initial.drop(columns=[uf_col_original_name_mapped], inplace=True)
-
-        # Codifica a variável alvo
-        # 'le' e 'is_binary_classification' são declaradas como globais para serem acessadas
-        # pela função objective_optuna_cv que é definida no escopo global do script,
-        # mas chamada dentro desta função principal.
-        global le, is_binary_classification 
-        le = LabelEncoder()
-        y_full = pd.Series(le.fit_transform(df_main_processed[target_col_agrupada_name]), index=df_main_processed.index)
-        
-        print(f"Alvo AGRUPADA '{target_col_agrupada_name}' codificada. Classes: {list(le.classes_)} -> {list(le.transform(le.classes_))}")
-
-        if len(le.classes_) < 2:
-            print(f"ERRO CRÍTICO: A variável alvo final tem menos de 2 classes ({len(le.classes_)}: {list(le.classes_)}). Não é possível treinar o modelo de classificação."); return None
-        
-        is_binary_classification = len(le.classes_) == 2
-
-        if is_binary_classification:
-            print("Classificação Binária Detectada.")
-        else:
-            print(f"Classificação Multiclasse Detectada ({len(le.classes_)} classes).")
-
-        initial_feature_columns_after_region = X_initial.columns.tolist()
-        print(f"Features para processamento inicial (antes RFECV): {initial_feature_columns_after_region}")
+# ... (Código para extração de salário e criação da variável alvo com pd.cut) ...
+# Esta seção contém a lógica detalhada para definir as faixas salariais
+# com base no 'point_of_cut_fixed' e tratar casos extremos.
 ```
-4.  **Pré-processamento das Features**:
-    * **Valores Ausentes**:
-        * Features numéricas (como tempo de experiência): imputados com a mediana.
-        * Features categóricas: imputados com a string "Missing\_Val\_Cat".
-    * **Outliers**: Para features numéricas, outliers são identificados usando o critério de 1.5\*IQR e as linhas contendo outliers são removidas.
-    * **Codificação de Categóricas**: Features categóricas são convertidas para o tipo `category` do pandas.
-    * **Escalonamento**: Features numéricas são padronizadas usando `StandardScaler`.
+### **3.3 Preparação das features (`X_initial`) e codificação do alvo (`y_full`)**
+
+* As features relevantes (idade, gênero, UF, ensino, cargo, senioridade, experiência) são selecionadas.
+* A coluna 'UF' é transformada na feature 'Regiao_Mapeada'.
+* A variável alvo (`target_col_agrupado_name`) é codificada numericamente (0 e 1) usando `LabelEncoder`.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após a preparação de X_initial e y_full) ...
+# ... (Após a engenharia da variável alvo e remoção de NaNs na coluna alvo) ...
 
-        # Identifica features numéricas e categóricas em X_initial
-        # initial_feature_columns_after_region já contém os nomes das colunas em X_initial
-        numerical_features_initial = X_initial.select_dtypes(include=np.number).columns.tolist()
-        categorical_features_initial = X_initial.select_dtypes(exclude=np.number).columns.tolist()
+# Seleciona as colunas de features iniciais com base no mapeamento
+feature_cols_to_use_initial = [
+    col_mapping[col_internal] for col_internal in required_cols_internal_for_features 
+    if col_internal in col_mapping and col_mapping[col_internal] in df_main_processed.columns
+]
+X_initial = df_main_processed[feature_cols_to_use_initial].copy()
 
-        print(f"Features numéricas identificadas: {numerical_features_initial}")
-        print(f"Features categóricas identificadas: {categorical_features_initial}")
+# Mapeia UF para Região e remove a coluna original de UF
+uf_col_original_name_mapped = col_mapping.get("uf_mora_P1i1")
+if uf_col_original_name_mapped and uf_col_original_name_mapped in X_initial.columns:
+    X_initial['Regiao_Mapeada'] = map_uf_to_region(X_initial[uf_col_original_name_mapped])
+    X_initial.drop(columns=[uf_col_original_name_mapped], inplace=True)
 
-        # Tratamento de Ausentes (Features Numéricas)
-        for col in numerical_features_initial:
-            if X_initial[col].isnull().sum() > 0:
-                print(f"Imputando NaNs na feature numérica '{col}' com a mediana.")
-                X_initial.loc[:, col] = X_initial[col].fillna(X_initial[col].median())
+# Codifica a variável alvo
+global le, is_binary_classification
+le = LabelEncoder()
+y_full = pd.Series(le.fit_transform(df_main_processed[target_col_agrupada_name]), index=df_main_processed.index)
 
-        # Tratamento de Outliers (Features Numéricas)
-        outliers_indices = pd.Series(False, index=X_initial.index)
-        if numerical_features_initial:
-            print("Processando outliers para features numéricas...")
-            for col in numerical_features_initial:
-                Q1 = X_initial[col].quantile(0.25); Q3 = X_initial[col].quantile(0.75); IQR = Q3 - Q1
-                lim_inf = Q1 - 1.5 * IQR; lim_sup = Q3 + 1.5 * IQR
-                col_outliers = (X_initial[col] < lim_inf) | (X_initial[col] > lim_sup)
-                if col_outliers.sum() > 0: print(f"  Feature '{col}': {col_outliers.sum()} outliers detectados.")
-                outliers_indices = outliers_indices | col_outliers # Acumula os índices de outliers de todas as colunas numéricas
-            
-            if outliers_indices.sum() > 0:
-                print(f"Total de amostras com outliers: {outliers_indices.sum()}")
-                # Remove as linhas (amostras) que contêm outliers
-                X_initial = X_initial[~outliers_indices]; 
-                y_full = y_full[~outliers_indices] # Mantém y_full sincronizado com X_initial
-                print(f"Shape de X_initial e y_full após remover outliers: {X_initial.shape}, {y_full.shape}")
-                if X_initial.empty: print("ERRO: Todos os dados removidos como outliers."); return None
-            else: print("Nenhum outlier encontrado em features numéricas.")
-        else: print("Nenhuma feature numérica para checar outliers.")
-
-        # Tratamento de Ausentes (Features Categóricas) e conversão para tipo 'category'
-        for col_name in categorical_features_initial:
-            if col_name not in X_initial.columns: continue # Caso a coluna tenha sido removida (pouco provável aqui)
-            
-            # Converte para string para facilitar a busca por valores ausentes textuais
-            processed_series = X_initial[col_name].astype(str) 
-            missing_vals = ['nan', 'none', '<na>', '', 'missing', 'missing_category_value', 'missing_val_cat', 'null']
-            temp_lower_stripped = processed_series.str.lower().str.strip()
-            
-            # Identifica tanto NaNs originais quanto strings que representam ausência
-            is_missing = temp_lower_stripped.isin(missing_vals) | X_initial[col_name].isnull() 
-            
-            if is_missing.any():
-                # Usa .loc para evitar SettingWithCopyWarning e garantir a modificação no DataFrame original
-                X_initial.loc[is_missing, col_name] = "Missing_Val_Cat" 
-            
-            # Converte a coluna para o tipo 'category' do pandas
-            X_initial[col_name] = X_initial[col_name].astype("category")
-
-        # Escalonamento (Features Numéricas)
-        # O scaler é inicializado como scaler_rfecv, mas ele é ajustado aqui nos dados X_initial (que ainda não foram divididos)
-        # e será usado posteriormente.
-        scaler_rfecv = StandardScaler()
-        # Re-identifica as features numéricas caso alguma tenha sido removida ou alterada
-        numerical_features_present_after_outliers = [col for col in numerical_features_initial if col in X_initial.columns]
-        
-        if numerical_features_present_after_outliers:
-             # Usa .loc para garantir a atribuição correta e evitar warnings
-             X_initial.loc[:, numerical_features_present_after_outliers] = scaler_rfecv.fit_transform(X_initial[numerical_features_present_after_outliers])
-             print(f"Features numéricas ({numerical_features_present_after_outliers}) em X_initial escalonadas.")
-        else:
-            print("Nenhuma feature numérica presente em X_initial para escalonar.")
-
-        # Verifica novamente se y_full tem classes suficientes após a remoção de outliers
-        if y_full.nunique() < 2:
-            print(f"ERRO CRÍTICO: A variável alvo final tem menos de 2 classes únicas ({y_full.nunique()}: {y_full.unique()}) após processamento. Não é possível treinar o modelo."); return None
+is_binary_classification = len(le.classes_) == 2
 ```
-5.  **Divisão Treino-Teste Principal**:
-    * Os dados processados (`X_initial`, `y_full`) são divididos em 75% para treino/otimização (`X_train_optuna`, `y_train_optuna`) e 25% para teste final (`X_test`, `y_test`), de forma estratificada.
+### **3.4 Pré-processamento das features**
+
+* **Valores Ausentes**: Features numéricas são imputadas com a mediana; categóricas com uma string constante ("Missing_Val_Cat").
+* **Outliers**: Linhas com outliers em features numéricas (critério 1.5*IQR) são removidas.
+* **Codificação e Escalonamento**: Features categóricas são convertidas para o tipo `category`; numéricas são padronizadas com `StandardScaler`.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após o pré-processamento completo de X_initial e y_full) ...
-
-        # Verifica se y_full ainda tem classes suficientes para estratificação após todos os processamentos anteriores
-        if y_full.nunique() < 2:
-            print(f"ERRO CRÍTICO: A variável alvo final tem menos de 2 classes únicas ({y_full.nunique()}: {y_full.unique()}) "
-                  "antes da divisão treino-teste. Não é possível treinar o modelo.")
-            return None
-
-        # Divisão dos dados em conjuntos de treino para Optuna/RFECV e conjunto de teste
-        # test_size=0.25 significa 75% para treino e 25% para teste.
-        # random_state=42 garante a reprodutibilidade da divisão.
-        # stratify=y_full garante que a proporção das classes da variável alvo seja mantida
-        # tanto no conjunto de treino quanto no de teste.
-        X_train_optuna, X_test, y_train_optuna, y_test = train_test_split(
-            X_initial, y_full, 
-            test_size=0.25, 
-            random_state=42, 
-            stratify=y_full
-        )
-        
-        print(f"Dados divididos em treino ({X_train_optuna.shape[0]}) e teste ({X_test.shape[0]})")
+# ... (Código para tratamento de valores ausentes, remoção de outliers, 
+#      e escalonamento de features numéricas com StandardScaler) ...
 ```
-6.  **Seleção de Features com RFECV**:
-    * As features categóricas no conjunto de treino do RFECV são convertidas para códigos numéricos.
-    * `RFECV` é aplicado usando `lgb.LGBMClassifier` e `StratifiedKFold` (3 folds) para encontrar o subconjunto ótimo de features baseado na acurácia.
-    * `X_train_optuna` e `X_test` são atualizados para conter apenas as features selecionadas.
+### **3.5 Divisão treino-teste principal**
+
+* Os dados processados (`X_initial`, `y_full`) são divididos em 75% para treino/otimização (`X_train_optuna`, `y_train_optuna`) e 25% para teste final (`X_test`, `y_test`), de forma estratificada.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após a divisão treino-teste principal) ...
-
-        print("\nIniciando Seleção de Features com RFECV...")
-        start_time_rfecv = time.time()
-        
-        # Cria uma cópia de X_train_optuna para o RFECV para não modificar o original ainda
-        X_train_optuna_for_rfecv = X_train_optuna.copy()
-        
-        # Identifica colunas categóricas que precisam ser codificadas para o RFECV
-        categorical_cols_for_rfecv_encoding = X_train_optuna_for_rfecv.select_dtypes(include='category').columns
-        print(f"Colunas categóricas para codificação numérica no RFECV: {list(categorical_cols_for_rfecv_encoding)}")
-        
-        # Codifica as features categóricas para o RFECV usando .cat.codes
-        # Isso transforma as categorias em inteiros (0, 1, 2, ...)
-        for col in categorical_cols_for_rfecv_encoding:
-            X_train_optuna_for_rfecv[col] = X_train_optuna_for_rfecv[col].cat.codes
-
-        # Define o estimador para o RFECV
-        estimator_rfecv = lgb.LGBMClassifier(random_state=42, n_jobs=-1, verbose=-1)
-        
-        # Define a estratégia de validação cruzada para o RFECV
-        # rfecv_folds é um parâmetro da função, por padrão 3
-        cv_rfecv = StratifiedKFold(n_splits=rfecv_folds, shuffle=True, random_state=42)
-        
-        # Inicializa o RFECV
-        # step=rfecv_step (padrão 1) indica quantas features remover a cada iteração.
-        # scoring=rfecv_scoring (padrão 'accuracy') é a métrica para avaliar o subconjunto de features.
-        # min_features_to_select=1 garante que pelo menos uma feature seja selecionada.
-        # verbose=1 mostra o progresso.
-        rfecv_selector = RFECV(
-            estimator=estimator_rfecv, 
-            step=rfecv_step, 
-            cv=cv_rfecv,
-            scoring=rfecv_scoring, 
-            min_features_to_select=1, 
-            n_jobs=-1, # Usa todos os processadores disponíveis
-            verbose=1
-        )
-
-        # Ajusta o RFECV aos dados de treino (com features categóricas codificadas)
-        rfecv_selector.fit(X_train_optuna_for_rfecv, y_train_optuna)
-
-        end_time_rfecv = time.time()
-        print(f"RFECV concluído em {(end_time_rfecv - start_time_rfecv):.2f} segundos.")
-        print(f"Número ótimo de features selecionadas: {rfecv_selector.n_features_}")
-
-        # Obtém os nomes das features selecionadas pelo RFECV
-        # rfecv_selector.support_ é uma máscara booleana das features selecionadas
-        selected_features_names = X_train_optuna.columns[rfecv_selector.support_].tolist()
-        print(f"Features selecionadas: {selected_features_names}")
-
-        if not selected_features_names:
-            print("ERRO CRÍTICO: Nenhuma feature selecionada pelo RFECV."); return None
-
-        # Atualiza X_train_optuna e X_test para conter apenas as features selecionadas
-        # Mantém os dtypes originais de X_train_optuna (com 'category' para categóricas)
-        X_train_optuna_selected = X_train_optuna[selected_features_names].copy()
-        X_test_selected = X_test[selected_features_names].copy() # Aplica a mesma seleção ao conjunto de teste
-
-        print(f"Features finais (selecionadas) para modelagem: {X_train_optuna_selected.columns.tolist()}")
-        print(f"Dtypes de X_train_optuna_selected:\\n{X_train_optuna_selected.dtypes}")
+X_train_optuna, X_test, y_train_optuna, y_test = train_test_split(
+    X_initial, y_full, 
+    test_size=0.25, 
+    random_state=42, 
+    stratify=y_full
+)
 ```
-7.  **Otimização de Hiperparâmetros com Optuna**:
-    * A função `objective_optuna_cv` é definida para avaliar cada conjunto de hiperparâmetros sugeridos pelo Optuna.
-    * Esta função utiliza `StratifiedKFold` (padrão de 5 folds, se possível) para treinar e validar o `lgb.LGBMClassifier`.
-    * O Optuna executa `n_optuna_trials` (padrão 100) para encontrar os hiperparâmetros que maximizam a acurácia média da validação cruzada.
-    * Os parâmetros `objective` e `metric` do LightGBM são ajustados para `'binary'` e `'binary_logloss'` respectivamente, pois a classificação é binária.
+### **3.6 Seleção de features com RFECV**
+
+* `RFECV` é aplicado usando `lgb.LGBMClassifier` e `StratifiedKFold` (3 folds) para encontrar o subconjunto ótimo de features baseado na acurácia.
+* `X_train_optuna` e `X_test` são atualizados para conter apenas as features selecionadas.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após a seleção de features com RFECV e criação de X_train_optuna_selected, X_test_selected) ...
-
-        # Determina o número de folds para a validação cruzada interna do Optuna
-        # Limita o número de folds pela contagem da classe minoritária em y_train_optuna
-        min_class_count_cv = y_train_optuna.value_counts().min()
-        n_cv_folds_optuna = min(5, min_class_count_cv) if min_class_count_cv >= 2 else 1
-        
-        if n_cv_folds_optuna < 2 and X_train_optuna_selected.shape[0] > 10:
-             print(f"Aviso: Classe minoritária ({min_class_count_cv}) impede CV com mais de 1 fold. Optuna rodará sem CV interno robusto.")
-             n_cv_folds_optuna = 1 # Garante que seja pelo menos 1 para o lambda
-        elif X_train_optuna_selected.shape[0] <=10: # Muito poucos dados para treinar
-             print("ERRO CRÍTICO: Dados de treino insuficientes após seleções/processamento."); return None
-        if n_cv_folds_optuna == 0: n_cv_folds_optuna = 1 # Prevenção caso min_class_count_cv seja 0 ou 1
-
-        # A função objective_optuna_cv foi definida anteriormente no script.
-        # Ela usa as variáveis globais 'is_binary_classification' e 'le' que foram
-        # definidas após a codificação da variável alvo y_full.
-
-        study_name = f'LGBM_Salary_Clf_Optuna_CV_v7_final_rfecv_trials{n_optuna_trials}'
-        study = optuna.create_study(direction='maximize', study_name=study_name)
-        
-        if n_cv_folds_optuna >=2:
-            print(f"\nIniciando otimização com Optuna ({n_optuna_trials} trials) e {n_cv_folds_optuna}-Fold CV...")
-        else:
-            print(f"\nIniciando otimização com Optuna ({n_optuna_trials} trials) e validação simples (holdout)...")
-
-        # Executa a otimização
-        # A função lambda passa os dados e o número de folds para objective_optuna_cv
-        study.optimize(
-            lambda trial: objective_optuna_cv(
-                trial, 
-                X_train_optuna_selected, # Usa as features selecionadas pelo RFECV
-                y_train_optuna, 
-                n_cv_splits_internal=n_cv_folds_optuna
-            ),
-            n_trials=n_optuna_trials, 
-            timeout=optuna_timeout
-        )
-
-        print("\nOtimização com Optuna concluída!")
-        best_optuna_score = study.best_trial.value if study.best_trial else -1.0
-        print(f"Melhor Acurácia Média no CV/Val do Optuna: {best_optuna_score:.4f}")
-        best_params_optuna = study.best_trial.params if study.best_trial else {}
-        print(f"Melhores hiperparâmetros (Optuna): {best_params_optuna}")
+# ... (Código de inicialização e ajuste do RFECV) ...
+rfecv_selector.fit(X_train_optuna_for_rfecv, y_train_optuna)
+selected_features_names = X_train_optuna.columns[rfecv_selector.support_].tolist()
+X_train_optuna_selected = X_train_optuna[selected_features_names].copy()
+X_test_selected = X_test[selected_features_names].copy()
 ```
-8.  **Treinamento do Modelo Final**:
-    * O conjunto `X_train_optuna_selected` é dividido em um conjunto de treino final (80%) e um conjunto de validação interna (20%).
-    * O modelo `lgb.LGBMClassifier` é treinado nesses dados usando os melhores hiperparâmetros encontrados pelo Optuna e `early_stopping` (25 rodadas de paciência) para evitar overfitting, usando o conjunto de validação interna.
+### **3.7 Otimização de hiperparâmetros com Optuna**
+
+* A função `objective_optuna_cv` avalia cada conjunto de hiperparâmetros sugeridos pelo Optuna, usando `StratifiedKFold` (padrão 5 folds).
+* O Optuna executa `n_optuna_trials` (padrão 100) para encontrar os hiperparâmetros que maximizam a acurácia média da validação cruzada.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após a otimização com Optuna e obtenção de best_params_optuna) ...
-
-        # Divide X_train_optuna_selected e y_train_optuna em conjuntos finais de treino e validação interna
-        # Esta validação interna é para o early stopping do modelo final.
-        X_train_final, X_val_internal, y_train_final, y_val_internal = train_test_split(
-            X_train_optuna_selected, y_train_optuna, 
-            test_size=0.20, # 20% para validação interna, 80% para treino final
-            random_state=42, 
-            stratify=y_train_optuna # Mantém a proporção das classes
-        )
-
-        # Define o objetivo e a métrica para o modelo final, baseado se é binário ou multiclasse
-        lgbm_final_objective = 'binary' if is_binary_classification else 'multiclass'
-        lgbm_final_metric = 'binary_logloss' if is_binary_classification else 'multi_logloss'
-
-        # Cria a instância final do LGBMClassifier com os melhores parâmetros do Optuna
-        best_lgbm = lgb.LGBMClassifier(
-            objective=lgbm_final_objective, 
-            metric=lgbm_final_metric,
-            random_state=42, 
-            n_jobs=-1, 
-            verbose=-1, # Suprime a maioria dos logs do LightGBM durante o fit
-            **best_params_optuna # Desempacota os melhores hiperparâmetros encontrados
-        )
-        
-        # Se for multiclasse, define o número de classes explicitamente
-        if not is_binary_classification:
-            best_lgbm.set_params(num_class=len(le.classes_)) # le.classes_ vem do LabelEncoder
-
-        print("Treinando o modelo final com early stopping...")
-        # Treina o modelo final
-        # eval_set é usado para early stopping
-        # callbacks=[lgb.early_stopping(25, verbose=False)] para o treinamento se a métrica em
-        # X_val_internal não melhorar por 25 rodadas. verbose=False para não imprimir logs do early stopping.
-        best_lgbm.fit(
-            X_train_final, y_train_final, 
-            eval_set=[(X_val_internal, y_val_internal)],
-            eval_metric=lgbm_final_metric, 
-            callbacks=[lgb.early_stopping(25, verbose=False)] 
-        )
-
-        # Obtém o número de árvores efetivamente usado pelo modelo final (devido ao early stopping)
-        final_model_iter = best_lgbm.best_iteration_ if hasattr(best_lgbm, 'best_iteration_') and best_lgbm.best_iteration_ is not None else best_params_optuna.get('n_estimators')
-        print(f"Modelo final treinado. Número de árvores: {final_model_iter}")
-
-        # Avalia a acurácia do modelo final no seu próprio conjunto de treinamento (para referência)
-        y_pred_train_final = best_lgbm.predict(X_train_final)
-        accuracy_train_final = accuracy_score(y_train_final, y_pred_train_final)
-        print(f"Acurácia do Modelo Final no seu Conjunto de Treinamento (X_train_final): {accuracy_train_final:.4f}")
+study = optuna.create_study(direction='maximize')
+study.optimize(
+    lambda trial: objective_optuna_cv(
+        trial,
+        X_train_optuna_selected,
+        y_train_optuna,
+        n_cv_splits_internal=n_cv_folds_optuna
+    ),
+    n_trials=n_optuna_trials,
+    timeout=optuna_timeout
+)
+best_params_optuna = study.best_trial.params
 ```
-9.  **Avaliação do Modelo Final**:
-    * O modelo treinado é usado para fazer previsões no conjunto de teste (`X_test_selected`).
-    * São calculadas e exibidas diversas métricas: acurácia, relatório de classificação (precisão, recall, F1-score por classe), matriz de confusão e ROC AUC.
-    * A matriz de confusão normalizada e um gráfico de importância das features do modelo final são plotados e salvos.
+### **3.8 Treinamento do modelo final**
+
+* O conjunto `X_train_optuna_selected` é dividido em treino final (80%) e validação interna (20%).
+* O modelo `lgb.LGBMClassifier` é treinado com os melhores hiperparâmetros e `early_stopping` para evitar overfitting.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após o treinamento do modelo final, best_lgbm) ...
+X_train_final, X_val_internal, y_train_final, y_val_internal = train_test_split(
+    X_train_optuna_selected, y_train_optuna,
+    test_size=0.20,
+    random_state=42,
+    stratify=y_train_optuna
+)
 
-        print("\nAvaliação do modelo final no conjunto de teste (com features selecionadas)...")
-        
-        # Faz previsões no conjunto de teste
-        y_pred_test = best_lgbm.predict(X_test_selected)
-        
-        # Faz previsões de probabilidade para todas as classes (necessário para ROC AUC)
-        y_pred_proba_all_classes_test = best_lgbm.predict_proba(X_test_selected)
+best_lgbm = lgb.LGBMClassifier(objective='binary', metric='binary_logloss', **best_params_optuna)
 
-        # Calcula as métricas
-        accuracy_test = accuracy_score(y_test, y_pred_test)
-        f1_test = f1_score(y_test, y_pred_test, average='weighted') # Ponderado para levar em conta desbalanceamento
-
-        # Gera o relatório de classificação como dicionário e string
-        report_dict_test = classification_report(y_test, y_pred_test, target_names=le.classes_, zero_division=0, output_dict=True)
-        report_str_test = classification_report(y_test, y_pred_test, target_names=le.classes_, zero_division=0)
-
-        conf_matrix_test = confusion_matrix(y_test, y_pred_test)
-        
-        roc_auc_test = 0.0
-        if len(le.classes_) >= 2: # ROC AUC só faz sentido com pelo menos 2 classes
-            if is_binary_classification:
-                # Para binário, usa a probabilidade da classe positiva (geralmente a classe 1)
-                roc_auc_test = roc_auc_score(y_test, y_pred_proba_all_classes_test[:, 1]) if y_pred_proba_all_classes_test.shape[1] == 2 else 0.0
-            else:
-                # Para multiclasse, usa 'ovr' (One-vs-Rest) e média ponderada
-                 roc_auc_test = roc_auc_score(y_test, y_pred_proba_all_classes_test, multi_class='ovr', average='weighted')
-
-        # Extrai precisões do relatório para resumo
-        macro_avg_precision_test = report_dict_test.get('macro avg', {}).get('precision', 0.0)
-        weighted_avg_precision_test = report_dict_test.get('weighted avg', {}).get('precision', 0.0)
-
-        print(f"\n--- Resultados da Avaliação no CONJUNTO DE TESTE (v7 - Final - {'Binário' if is_binary_classification else 'Multiclasse'}) ---")
-        print(f"Acurácia no Teste: {accuracy_test:.4f}")
-        print(f"Precisão Média (Macro Avg) no Teste: {macro_avg_precision_test:.4f}")
-        print(f"Precisão Média (Weighted Avg) no Teste: {weighted_avg_precision_test:.4f}")
-        print(f"F1-Score (Ponderado) no Teste: {f1_test:.4f}")
-        print(f"ROC AUC ({'Binário' if is_binary_classification else 'Ponderado OVR'}) no Teste: {roc_auc_test:.4f}")
-        print("\nRelatório de Classificação (Teste):\n", report_str_test)
-
-        # Plotagem e salvamento da Matriz de Confusão Normalizada
-        conf_matrix_normalized_test = None
-        # Verifica se a normalização é possível (evita divisão por zero se uma classe não tiver amostras verdadeiras)
-        if len(le.classes_) > 1 and conf_matrix_test.sum(axis=1, keepdims=True).all() > 0 :
-            conf_matrix_normalized_test = conf_matrix_test.astype('float') / conf_matrix_test.sum(axis=1, keepdims=True)
-            plt.figure(figsize=(max(8, len(le.classes_)*1.5), max(6, len(le.classes_)*1.2)))
-            sns.heatmap(conf_matrix_normalized_test, annot=True, fmt=".2%", cmap="Blues", xticklabels=le.classes_, yticklabels=le.classes_)
-            plt.title(f'Matriz de Confusão Normalizada (Teste - v7 Final - {"Binário" if is_binary_classification else "Multiclasse"})')
-            plt.ylabel('Classe Verdadeira'); plt.xlabel('Classe Prevista')
-            plt.savefig('visualizacoes_classificacao_salario_v7_rfecv/matriz_confusao_norm_v7_final_teste.png')
-            plt.show() # No notebook, isso exibe o gráfico
-            plt.close()
-        elif len(le.classes_) > 1:
-            print("Aviso: Não foi possível normalizar a matriz de confusão (alguma classe pode não ter amostras verdadeiras no conjunto de teste).")
-
-        # Plotagem e salvamento da Importância das Features
-        feature_importance_df = None
-        if hasattr(best_lgbm, 'feature_importances_') and X_train_final.shape[1] > 0: # X_train_final tem as features selecionadas
-            feature_importance_df = pd.DataFrame({
-                'feature': X_train_final.columns, # Nomes das features usadas no modelo final
-                'importance': best_lgbm.feature_importances_
-            }).sort_values(by='importance', ascending=False)
-            
-            print("\nImportância das Features (após RFECV, modelo Optuna com ES):\n", feature_importance_df.head(min(15, len(X_train_final.columns))))
-            
-            plt.figure(figsize=(10, max(6, len(feature_importance_df.head(min(15, len(X_train_final.columns)))) * 0.5)))
-            sns.barplot(x='importance', y='feature', data=feature_importance_df.head(min(15, len(X_train_final.columns))))
-            plt.title(f'Top {min(15, len(X_train_final.columns))} Features (v7 Final - {"Binário" if is_binary_classification else "Multiclasse"})')
-            plt.tight_layout()
-            plt.savefig('visualizacoes_classificacao_salario_v7_rfecv/feature_importance_v7_final.png')
-            plt.show() # No notebook, isso exibe o gráfico
-            plt.close()
+best_lgbm.fit(
+    X_train_final, y_train_final,
+    eval_set=[(X_val_internal, y_val_internal)],
+    callbacks=[lgb.early_stopping(25, verbose=False)]
+)
 ```
-10. **Salvamento de Resultados e Modelo**:
-    * Um arquivo de texto com os resultados detalhados e os parâmetros é salvo.
-    * O modelo treinado, o `LabelEncoder`, as features selecionadas e o `StandardScaler` são salvos em um arquivo `.pkl` usando `pickle` para uso futuro (ex: previsões em novos dados ou análises adicionais).
+### **3.9 Avaliação do modelo final**
+
+* O modelo treinado é usado para fazer previsões no conjunto de teste (`X_test_selected`).
+* São calculadas e exibidas métricas: acurácia, relatório de classificação, matriz de confusão e ROC AUC.
+* Gráficos de matriz de confusão e importância de features são gerados.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após a avaliação do modelo final) ...
+y_pred_test = best_lgbm.predict(X_test_selected)
+y_pred_proba_all_classes_test = best_lgbm.predict_proba(X_test_selected)
 
-        results_filename_txt = "modelo_classificacao_faixa_salarial_v7_final_rfecv_resultados.txt"
-        model_filename_pkl = 'modelo_lgbm_classificacao_faixa_salarial_v7_final_rfecv.pkl'
-        
-        with open(results_filename_txt, "w", encoding="utf-8") as f:
-            f.write(f"Modelo: LightGBM (Optuna, RFECV, ES) para classificação de Faixa Salarial (v7 Final - {'Binário' if is_binary_classification else f'Multiclasse ({len(le.classes_)} classes)'})\\n")
-            f.write(f"Coluna Alvo Agrupada: {target_col_agrupada_name} com classes: {list(le.classes_)}\\n")
-            # initial_feature_columns_after_region contém as features antes do RFECV, após mapeamento de UF
-            f.write(f"Features Iniciais para processamento ({len(initial_feature_columns_after_region)}): {initial_feature_columns_after_region}\\n")
-            f.write(f"Features Selecionadas pelo RFECV ({rfecv_selector.n_features_}): {selected_features_names}\\n\\n")
-            
-            f.write(f"Melhores parâmetros (Optuna): {best_params_optuna}\\n")
-            f.write(f"Número de árvores usadas pelo modelo final: {final_model_iter}\\n\\n")
-            
-            f.write(f"Acurácia Média CV/Val (Optuna): {best_optuna_score:.4f}\\n")
-            f.write(f"Acurácia do Modelo Final no seu Conjunto de Treinamento (X_train_final): {accuracy_train_final:.4f}\\n\\n")
-            
-            f.write(f"RESULTADOS NO CONJUNTO DE TESTE:\\n")
-            f.write(f"  Acurácia no Teste: {accuracy_test:.4f}\\n")
-            f.write(f"  Precisão Média (Macro Avg) no Teste: {macro_avg_precision_test:.4f}\\n")
-            f.write(f"  Precisão Média (Weighted Avg) no Teste: {weighted_avg_precision_test:.4f}\\n")
-            f.write(f"  F1-Score (Ponderado) no Teste: {f1_test:.4f}\\n")
-            f.write(f"  ROC AUC ({'Binário' if is_binary_classification else 'Ponderado OVR'}) no Teste: {roc_auc_test:.4f}\\n\\n")
-            
-            f.write("Relatório de Classificação (Teste):\\n"); f.write(report_str_test)
-            f.write("\\nMatriz de Confusão (Teste - Absoluta):\\n"); f.write(str(conf_matrix_test)) # Salva a matriz de confusão absoluta
-            
-            if feature_importance_df is not None:
-                 f.write("\\n\\nImportância das Features:\\n"); f.write(feature_importance_df.to_string())
+accuracy_test = accuracy_score(y_test, y_pred_test)
+report_str_test = classification_report(y_test, y_pred_test, target_names=le.classes_)
+roc_auc_test = roc_auc_score(y_test, y_pred_proba_all_classes_test[:, 1])
 
-        # Salva o modelo e outros objetos necessários para inferência/análise futura
-        with open(model_filename_pkl, 'wb') as f: 
-            pickle.dump({
-                'model': best_lgbm, 
-                'label_encoder': le, 
-                'selected_features': selected_features_names,
-                'scaler_rfecv_fitted_on_initial_numerical': scaler_rfecv, # O scaler ajustado em X_initial
-                'original_columns_for_scaler': numerical_features_present_after_outliers, # Colunas em que o scaler foi ajustado
-                'is_binary_classification': is_binary_classification,
-                'target_col_name': target_col_agrupada_name
-            }, f)
-        print(f"Modelo e metadados salvos em {model_filename_pkl}")
-
-        # Retorna um dicionário com os principais resultados
-        return {
-            'accuracy_train_final': accuracy_train_final,
-            'optuna_best_cv_score': best_optuna_score,
-            'accuracy_test': accuracy_test,
-            'macro_avg_precision_test': macro_avg_precision_test,
-            'weighted_avg_precision_test': weighted_avg_precision_test,
-            'f1_score_test': f1_test,
-            'roc_auc_test': roc_auc_test,
-            'selected_features_count': rfecv_selector.n_features_,
-            'selected_features_names': selected_features_names,
-            'best_params': best_params_optuna, 
-            'model_object_path': model_filename_pkl,
-            'final_model_best_iteration': final_model_iter,
-            'classification_report_dict_test': report_dict_test,
-            'is_binary_classification': is_binary_classification,
-            'target_classes': list(le.classes_)
-        }
-
-    except Exception as e:
-        print(f"Ocorreu um erro inesperado na função principal: {e}")
-        traceback.print_exc(); return None
+# ... (plotagem de gráficos) ...
 ```
-11. **Retorno de Resultados**:
-    * A função retorna um dicionário contendo as principais métricas e informações da execução.
+### **3.10 Retorno de resultados**
+
+* A função principal retorna um dicionário contendo as métricas de performance, parâmetros utilizados e caminhos para os artefatos salvos.
 
 ```python
 # (Dentro da função train_classification_model_salary_range_v7_final)
-        # ... (Após o salvamento do modelo e dos resultados em arquivo) ...
-
-        # Retorna um dicionário com os principais resultados e informações da execução
-        return {
-            'accuracy_train_final': accuracy_train_final,
-            'optuna_best_cv_score': best_optuna_score,
-            'accuracy_test': accuracy_test,
-            'macro_avg_precision_test': macro_avg_precision_test,
-            'weighted_avg_precision_test': weighted_avg_precision_test,
-            'f1_score_test': f1_test,
-            'roc_auc_test': roc_auc_test,
-            'selected_features_count': rfecv_selector.n_features_,
-            'selected_features_names': selected_features_names,
-            'best_params': best_params_optuna, 
-            'model_object_path': model_filename_pkl, # Caminho para o arquivo .pkl salvo
-            'final_model_best_iteration': final_model_iter, # Número de árvores do modelo final
-            'classification_report_dict_test': report_dict_test, # Relatório de classificação como dicionário
-            'is_binary_classification': is_binary_classification, # Flag se é binário
-            'target_classes': list(le.classes_) # Nomes das classes do alvo
-        }
-
-    # Bloco try-except principal da função
-    except Exception as e:
-        print(f"Ocorreu um erro inesperado na função principal: {e}")
-        traceback.print_exc()
-        return None # Retorna None em caso de erro para indicar falha na execução
+return {
+    'accuracy_test': accuracy_test,
+    'roc_auc_test': roc_auc_test,
+    'best_params': best_params_optuna,
+    'model_object_path': model_filename_pkl,
+    # ... (outras métricas) ...
+}
 ```
-Este processo estruturado visa garantir que o modelo seja treinado de forma eficiente, otimizado para o melhor desempenho possível nos dados disponíveis e avaliado de maneira justa em dados não vistos, fornecendo insights sobre a importância das features no problema de classificação da faixa salarial.
-
 > Este fluxo demonstra uma abordagem robusta para modelagem, incluindo pré-processamento cuidadoso, seleção de features, otimização de hiperparâmetros e avaliação rigorosa usando múltiplas técnicas de particionamento de dados.
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Indução de modelos
 
 ## Modelos 3º pergunta orietada a dados
 
-### Modelo 3.1(segundo modelo da 3° pergunta orientada a dados): Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)
+### Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) 
 
-### 1. Justificativa e Objetivo
+## **1 JUSTIFICATIVA E OBJETIVO (modelo 3.2)** 
 
-O objetivo deste modelo é classificar a faixa salarial de indivíduos em duas categorias: "Salário Baixo" e "Salário Alto", utilizando uma abordagem de rede neural artificial (RNA)[cite: 2]. A intenção é explorar se uma arquitetura de RNA, com capacidade de aprender interações complexas e representações ricas para features categóricas (via embeddings), pode oferecer um desempenho comparável ou superior aos modelos baseados em árvores (como o LightGBM anteriormente explorado) para a mesma pergunta orientada a dados[cite: 1].
+O objetivo deste modelo é classificar a faixa salarial de indivíduos em duas categorias: "Salário Baixo" e "Salário Alto", utilizando uma abordagem de rede neural artificial (RNA). A intenção é explorar se uma arquitetura de RNA, com capacidade de aprender interações complexas e representações ricas para features categóricas (via embeddings), pode oferecer um desempenho comparável ou superior aos modelos baseados em árvores (como o LightGBM anteriormente explorado) para a mesma pergunta orientada a dados.
 
-A classificação binária ("Salário Baixo" vs. "Salário Alto") visa simplificar o problema e potencialmente melhorar a distinção entre os grupos salariais[cite: 3]. O modelo busca um equilíbrio na distribuição das amostras entre as classes definidas por um ponto de corte específico[cite: 3]. Na última execução do modelo de referência (LightGBM), um ponto de corte fixo de R$ 7.500,00 foi utilizado para a variável `salary_numeric_lower_bound` para realizar essa divisão[cite: 4, 41]. Este mesmo ponto de corte é mantido para a RNA.
+A classificação binária ("Salário Baixo" vs. "Salário Alto") visa simplificar o problema e potencialmente melhorar a distinção entre os grupos salariais. O modelo busca um equilíbrio na distribuição das amostras entre as classes definidas por um ponto de corte específico. Na última execução do modelo de referência (LightGBM), um ponto de corte fixo de R$ 7.500,00 foi utilizado para a variável `salary_numeric_lower_bound` para realizar essa divisão. Este mesmo ponto de corte é mantido para a RNA.
 
-## 2. Processo de Amostragem de Dados (Particionamento e Validação Interna para HPO e Treino Final)
+## **2 PROCESSO DE AMOSTRAGEM DE DADOS (modelo 3.2)**
 
-O processo de amostragem e validação do modelo de rede neural é crucial para garantir sua generalização e evitar overfitting[cite: 5].
+O processo de amostragem e validação do modelo de rede neural é crucial para garantir sua generalização e evitar overfitting.
 
-### 2.1. Particionamento Inicial (Treino HPO e Teste Final)
+### **2.1 Particionamento inicial (Treino HPO e Teste Final)**
 
-* **Método**: `train_test_split` da biblioteca `sklearn.model_selection`[cite: 6].
+* **Método**: `train_test_split` da biblioteca `sklearn.model_selection`.
 * **Divisão**: O conjunto de dados processado (`X_initial_nn`, `y_full_nn` - que já passou por limpeza, tratamento de outliers e mapeamento de features) é dividido em:
-    * Conjunto de Treinamento para HPO e posterior treino final (`X_train_nn_full`, `y_train_nn_full`): 75% dos dados[cite: 7].
-    * Conjunto de Teste Final (`X_test_nn_full`, `y_test_nn_full`): 25% dos dados[cite: 8].
+    * Conjunto de Treinamento para HPO e posterior treino final (`X_train_nn_full`, `y_train_nn_full`): 75% dos dados.
+    * Conjunto de Teste Final (`X_test_nn_full`, `y_test_nn_full`): 25% dos dados.
 * **Parâmetros Utilizados**:
-    * `test_size=0.25`: Reserva 25% dos dados para o conjunto de teste final[cite: 9].
-    * `random_state=42`: Garante a reprodutibilidade da divisão[cite: 10].
-    * `stratify=y_full_nn`: Realiza uma divisão estratificada, mantendo a proporção das classes da variável alvo em ambas as partições[cite: 11].
+    * `test_size=0.25`: Reserva 25% dos dados para o conjunto de teste final.
+    * `random_state=42`: Garante a reprodutibilidade da divisão.
+    * `stratify=y_full_nn`: Realiza uma divisão estratificada, mantendo a proporção das classes da variável alvo em ambas as partições.
 
-### 2.2. Particionamento Interno para Otimização de Hiperparâmetros com Ray Tune (Keras)
+### **2.2 Particionamento interno para otimização de hiperparâmetros com Ray Tune (Keras)**
 
 * **Método**: `train_test_split` para criar um conjunto de validação interna a partir do `X_train_nn_full`.
 * **Divisão**: O `X_train_nn_full` (75% do total) é novamente dividido:
@@ -5623,43 +5117,43 @@ O processo de amostragem e validação do modelo de rede neural é crucial para 
     * Conjunto de Validação Interno para HPO (`X_val_hpo_nn_list_for_tune`, `y_val_hpo_nn_arr_for_tune`): 20% de `X_train_nn_full`.
 * **Objetivo**: Este conjunto de validação interno é usado por cada *trial* do Ray Tune para avaliar o desempenho do modelo Keras com uma dada combinação de hiperparâmetros. O callback `EarlyStopping` do Keras monitora a `val_accuracy` neste conjunto, e o `ReportCheckpointCallback` reporta essa métrica ao Ray Tune.
 
-### 2.3. Particionamento Interno para Early Stopping no Treinamento Final da RNA
+### **2.3 Particionamento interno para Early Stopping no treinamento final da RNA**
 
 * **Método**: `train_test_split` para criar um conjunto de validação interna a partir do `X_train_nn_full` (que corresponde a `X_train_nn_inputs_final_list` e `y_train_nn_final_arr` no código da RNA v2).
 * **Divisão**: O conjunto `X_train_nn_full` (75% do total) é dividido novamente para o treinamento do *modelo final* com os melhores hiperparâmetros:
     * Conjunto de Treinamento Final Efetivo (`X_final_train_list`, `y_final_train_arr`): 85% de `X_train_nn_full`.
     * Conjunto de Validação para Early Stopping Final (`X_final_val_list`, `y_final_val_arr`): 15% de `X_train_nn_full`.
-* **Objetivo**: Este conjunto de validação é usado para o `EarlyStopping` do Keras durante o treinamento do modelo RNA final com os melhores hiperparâmetros encontrados pelo Ray Tune, ajudando a evitar overfitting no conjunto de treinamento final[cite: 31, 32].
+* **Objetivo**: Este conjunto de validação é usado para o `EarlyStopping` do Keras durante o treinamento do modelo RNA final com os melhores hiperparâmetros encontrados pelo Ray Tune, ajudando a evitar overfitting no conjunto de treinamento final.
 
-### Justificativa das Escolhas de Amostragem:
+### **2.4 Justificativa das escolhas de amostragem**
 
-* **Divisão Treino/Teste Principal**: Essencial para avaliar o desempenho final do modelo em dados completamente não vistos durante o treinamento ou HPO[cite: 33]. A proporção 75/25 é comum[cite: 34].
-* **Estratificação**: Crucial para problemas de classificação binária para garantir que as proporções das classes sejam mantidas nas divisões, levando a estimativas de desempenho e HPO mais confiáveis[cite: 34].
+* **Divisão Treino/Teste Principal**: Essencial para avaliar o desempenho final do modelo em dados completamente não vistos durante o treinamento ou HPO. A proporção 75/25 é comum.
+* **Estratificação**: Crucial para problemas de classificação binária para garantir que as proporções das classes sejam mantidas nas divisões, levando a estimativas de desempenho e HPO mais confiáveis.
 * **Conjunto de Validação Interna para HPO**: Permite que o Ray Tune avalie cada combinação de hiperparâmetros de forma justa, usando um subconjunto dos dados de treino para validação, com `EarlyStopping` para otimizar o tempo de cada trial.
-* **Conjunto de Validação Interna para Treinamento Final**: Permite que o modelo final pare de treinar no momento ótimo, evitando o overfitting aos dados de treinamento final[cite: 37].
+* **Conjunto de Validação Interna para Treinamento Final**: Permite que o modelo final pare de treinar no momento ótimo, evitando o overfitting aos dados de treinamento final.
 
----
-## 3. Parâmetros Utilizados (Principais)
+## **3 PARÂMETROS UTILIZADOS (PRINCIPAIS) - (modelo 3.2)**
 
-### 3.1. Criação da Variável Alvo (`target_col_agrupada_name`)
+### **3.1 Criação da variável alvo (`target_col_agrupada_name`)**
 
-* **`salary_group_labels = ["Salário Baixo", "Salário Alto"]`**: Define os nomes das duas categorias da variável alvo[cite: 38].
-* **`point_of_cut_fixed = 7500.0`**: Valor monetário usado para dividir `salary_numeric_lower_bound`[cite: 39]. Salários `<= 7500.0` são "Salário Baixo", e `> 7500.0` são "Salário Alto"[cite: 40]. Este ponto de corte produziu um suporte de 2268 para "Salário Baixo" e 2485 para "Salário Alto" no dataset processado.
+* **`salary_group_labels = ["Salário Baixo", "Salário Alto"]`**: Define os nomes das duas categorias da variável alvo.
+* **`point_of_cut_fixed = 7500.0`**: Valor monetário usado para dividir `salary_numeric_lower_bound`. Salários `<= 7500.0` são "Salário Baixo", e `> 7500.0` são "Salário Alto". Este ponto de corte produziu um suporte de 2268 para "Salário Baixo" e 2485 para "Salário Alto" no dataset processado.
 * A coluna alvo é codificada numericamente usando `LabelEncoder` (ex: "Salário Alto" -> 0, "Salário Baixo" -> 1).
 
-### 3.2. Features Preditivas Utilizadas e Pré-processamento para RNA
+### **3.2 Features preditivas utilizadas e pré-processamento para RNA**
 
 Para o modelo de Rede Neural v2, utilizou-se diretamente o conjunto de 7 features iniciais relevantes, sem a etapa de RFECV baseada em LightGBM, para permitir que a RNA aprendesse as relações e a importância das features diretamente. As features são:
 
-| Atributo                      | Código de Referência Original | Tipo         | Subtipo              | Descrição                                                      |
-| :---------------------------- | :---------------------------- | :----------- | :------------------- | :------------------------------------------------------------- |
-| Faixa etária                  | P1_a_1                        | Qualitativo  | Ordinal (tratada como cat.) | Faixa etária do respondente                                    |
-| Gênero                        | P1_b                          | Qualitativo  | Nominal (tratada como cat.) | Identidade de gênero do respondente                            |
-| Nível de ensino alcançado     | P1_l                          | Qualitativo  | Ordinal (tratada como cat.) | Nível de ensino do respondente (graduação, mestrado, etc.) |
-| Tempo de experiência na área de dados | P2_i                       | Quantitativo | Discreto             | Tempo de experiência do respondente na área de dados (em anos) |
-| Nível de senioridade          | P2_g                          | Qualitativo  | Ordinal (tratada como cat.) | Nível de senioridade do respondente (Júnior, Pleno, Sênior) |
-| Cargo atual                   | P2_f                          | Qualitativo  | Nominal (tratada como cat.) | Cargo atual ocupado pelo respondente                           |
-| Região Mapeada                | Derivada de P1_i_1            | Qualitativo  | Nominal (tratada como cat.) | Região do Brasil onde o respondente reside                     |
+**Tabela 1 – Features preditivas utilizadas no modelo RNA v2**
+| Atributo | Código de Referência Original | Tipo | Subtipo | Descrição |
+| :--- | :--- | :--- | :--- | :--- |
+| Faixa etária | P1_a_1 | Qualitativo | Ordinal (tratada como cat.) | Faixa etária do respondente |
+| Gênero | P1_b | Qualitativo | Nominal (tratada como cat.) | Identidade de gênero do respondente |
+| Nível de ensino alcançado | P1_l | Qualitativo | Ordinal (tratada como cat.) | Nível de ensino do respondente (graduação, mestrado, etc.) |
+| Tempo de experiência na área de dados | P2_i | Quantitativo | Discreto | Tempo de experiência do respondente na área de dados (em anos) |
+| Nível de senioridade | P2_g | Qualitativo | Ordinal (tratada como cat.) | Nível de senioridade do respondente (Júnior, Pleno, Sênior) |
+| Cargo atual | P2_f | Qualitativo | Nominal (tratada como cat.) | Cargo atual ocupado pelo respondente |
+| Região Mapeada | Derivada de P1_i_1 | Qualitativo | Nominal (tratada como cat.) | Região do Brasil onde o respondente reside |
 
 **Pré-processamento para RNA:**
 * **Features Numéricas (`P2_i` - experiência):**
@@ -5667,12 +5161,12 @@ Para o modelo de Rede Neural v2, utilizou-se diretamente o conjunto de 7 feature
     * Outliers identificados usando 1.5\*IQR e as linhas contendo outliers são removidas do conjunto de dados antes do split principal.
     * Escalonadas usando `StandardScaler`.
 * **Features Categóricas (todas as outras listadas acima):**
-    * Valores ausentes preenchidos com a string "Missing\_Val\_Cat\_NN".
+    * Valores ausentes preenchidos com a string "Missing_Val_Cat_NN".
     * Codificadas usando `LabelEncoder` individualmente para cada feature.
     * Para o conjunto de teste, categorias não vistas durante o ajuste do `LabelEncoder` (no treino) são mapeadas para um novo índice numérico (índice "UNK" - desconhecido).
     * Utilizadas como entrada para camadas de `Embedding` na rede neural. A `input_dim` de cada camada de Embedding é a cardinalidade da feature + 1 (para o índice UNK).
 
-### 3.3. Arquitetura da Rede Neural (Keras - `create_keras_model_v2`)
+### **3.3 Arquitetura da Rede Neural (Keras - `create_keras_model_v2`)**
 
 * **Múltiplos Inputs:** Um input para cada feature categórica (para as camadas de Embedding) e um input para todas as features numéricas concatenadas.
 * **Camadas de Embedding:** Para cada feature categórica, uma camada `Embedding` transforma o índice numérico em um vetor denso. A dimensão de saída de cada embedding (`output_dim`) é um hiperparâmetro otimizado pelo Ray Tune. Regularização L2 é aplicada às embeddings.
@@ -5686,7 +5180,7 @@ Para o modelo de Rede Neural v2, utilizou-se diretamente o conjunto de 7 feature
     * Função de Perda: `binary_crossentropy`.
     * Métricas: `accuracy`.
 
-### 3.4. Otimização de Hiperparâmetros com Ray Tune (Keras)
+### **3.4 Otimização de hiperparâmetros com Ray Tune (Keras)**
 
 * **`n_ray_tune_samples_nn`**: Número de combinações de hiperparâmetros a serem testadas (ex: 75 na última execução).
 * **`ray_tune_timeout_nn`**: Tempo máximo para a otimização (ex: 5400 segundos).
@@ -5714,15 +5208,15 @@ Para o modelo de Rede Neural v2, utilizou-se diretamente o conjunto de 7 feature
     * `num_hidden_layers`: 1
     * Outros parâmetros específicos para dropout, L2, e dimensões de embedding também foram definidos.
 
-### 3.5. Treinamento do Modelo Final (RNA v2)
+### **3.5 Treinamento do modelo final (RNA v2)**
 
 * Utiliza os melhores hiperparâmetros encontrados pelo Ray Tune.
 * O modelo Keras é treinado no conjunto de treino HPO completo (`X_train_nn_full`, que corresponde a 75% dos dados após tratamento de outliers), com um novo split de validação (15% de `X_train_nn_full`) para `EarlyStopping` (com paciência aumentada e `ReduceLROnPlateau`).
 * O número de épocas efetivas é determinado pelo `EarlyStopping`. Na última execução, o modelo final parou na época 40 (restaurando pesos da época 20).
 
-## 4. Resultados da Avaliação (RNA v2 - Exemplo da Última Execução)
+## **4 RESULTADOS DA AVALIAÇÃO (RNA V2) - (modelo 3.2)**
 
-A avaliação foi realizada no conjunto de teste (25% dos dados).
+A avaliação foi realizada no conjunto de teste (25% dos dados), com base em um exemplo da última execução.
 
 * **Melhor Acurácia na Validação (HPO da RNA):** 0.8345
 * **Acurácia no Teste:** 0.8377
@@ -5732,9 +5226,9 @@ A avaliação foi realizada no conjunto de teste (25% dos dados).
     * Salário Alto: precision 0.85, recall 0.84, f1-score 0.84
     * Salário Baixo: precision 0.83, recall 0.84, f1-score 0.83
 
-## 5. Explicação do Código (Fluxo Principal para RNA v2)
+## **5 EXPLICAÇÃO DO CÓDIGO (FLUXO PRINCIPAL PARA RNA V2) -  (modelo 3.2)**
 
-### Pergunta orientada a dados: Como fatores como formalidade no emprego, características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?
+A pergunta orientada a dados é: **Como fatores como formalidade no emprego, características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?**
 
 O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 
@@ -5770,7 +5264,7 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
     * Resultados detalhados são salvos em arquivo de texto.
     * O modelo Keras treinado e os objetos de pré-processamento (scalers, encoders, informações de embedding) são salvos em arquivos (`.keras` e `.pkl`).
 
->Este processo visa construir um modelo de rede neural otimizado e avaliado de forma robusta, fornecendo insights sobre os fatores que determinam as faixas salariais, focando na capacidade da RNA de aprender representações e interações complexas.
+> Este processo visa construir um modelo de rede neural otimizado e avaliado de forma robusta, fornecendo insights sobre os fatores que determinam as faixas salariais, focando na capacidade da RNA de aprender representações e interações complexas.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Resultados
