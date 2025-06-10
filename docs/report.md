@@ -3790,7 +3790,7 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
 		*   [Explicação do Código1.1](#explicação-do-código1-1)
 
 	*   [Modelo 2 Análise de Disparidade Salarial de Profissionais de Dados no Brasil Utilizando o Arvore de decisão por classificação](#modelo-1-análise-de-disparidade-salarial-de-profissionais-de-dados-no-brasil-utilizando-o-arvore-de-decisão-por-classificação)
-  
+
 		*   [Justificativa1.2](#justificativa1-2)
 		*   [Processo de Amostragem de Dados (Particionamento e Cross-Validation1.2)](#processo-de-amostragem-de-dados1-2)
 		*   [Parâmetros utilizados1.2](#parâmetros-utilizados1-2)
@@ -3799,17 +3799,17 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
  
 *   [2º Pergunta orientada a dados ](#modelos-2º-pergunta-orietada-a-dados)
 
-* [3ª Pergunta orientada a dados](#3ª-pergunta-orientada-a-dados)
-    * [Modelo 3.1: Relatório Técnico de Classificação Salarial](#modelo-31-relatorio-tecnico-de-classificacao-salarial)
+* [3ª Pergunta orientada a dados](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#modelos-3%C2%BA-pergunta-orietada-a-dados)
+    * [Modelo 3.1: Relatório Técnico de Classificação Salarial](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#modelos-3%C2%BA-pergunta-orietada-a-dados)
         * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-31)
         * [Metodologia](#2-metodologia-modelo-31)
-        * [Fluxo de Execução do Código](#3-fluxo-de-execucao-do-código-modelo-31))
-    * [Modelo 3.2: Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)](#modelo-32-rede-neural-com-embeddings-e-otimizacao-via-ray-tune-rna-v2)
+        * [Fluxo de Execução do Código](#3-fluxo-de-execucao-do-código-modelo-31)
+    * [Modelo 3.2: Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#modelos-3%C2%BA-pergunta-orietada-a-dados-1)
         * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-32)
         * [Processo de Amostragem de Dados](#2-processo-de-amostragem-de-dados-modelo-32)
-        * [Parâmetros Utilizados (Principais)](#3-parametros-utilizados-principais---modelo-32)
-        * [Resultados da Avaliação (RNA V2)](#4-resultados-da-avaliacao-rna-v2---modelo-32)
-        * [Explicação do Código (Fluxo Principal para RNA v2)](#5-explicacao-do-codigo-fluxo-principal-para-rna-v2----modelo-32)
+        * [Parâmetros Utilizados (Principais)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#3-par%C3%A2metros-utilizados-principais---modelo-32)
+        * [Resultados da Avaliação (RNA V2)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#4-resultados-da-avalia%C3%A7%C3%A3o-rna-v2---modelo-32)
+        * [Explicação do Código (Fluxo Principal para RNA v2)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#5-explica%C3%A7%C3%A3o-do-c%C3%B3digo-fluxo-principal-para-rna-v2----modelo-32)
 
 
 
