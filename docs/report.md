@@ -3799,10 +3799,24 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
  
 *   [2º Pergunta orientada a dados ](#modelos-2º-pergunta-orietada-a-dados)
 
-*   [3º Pergunta orientada a dados ](#modelos-3º-pergunta-orietada-a-dados)
-	* [Modelo 1 Análise de Disparidade Salarial de Profissionais de Dados no Brasil Utilizando o Modelo LightGBM](#1-justificativa-e-objetivo-modelo-31)
-
-		*   [](#)
+* [Modelo 3.1: Relatório Técnico de Classificação Salarial](#modelos-3º-pergunta-orietada-a-dados)
+    * [Justificativa e Objetivo](#1-justificativa-e-objetivo-modelo-31)
+    * [Metodologia](#2-metodologia-modelo-31)
+        * [Processo de Amostragem de Dados (Particionamento e Cross-Validation)](#21-processo-de-amostragem-de-dados-particionamento-e-cross-validation)
+        * [Análise de Correlação das Features Iniciais com o Alvo](#22-análise-de-correlação-das-features-iniciais-com-o-alvo)
+        * [Parâmetros e Ferramentas Utilizados](#23-parâmetros-e-ferramentas-utilizados)
+    * [Fluxo de Execução do Código](#3-fluxo-de-execução-do-código-modelo-31)
+        * [Carregamento e preparação inicial dos dados](#31-carregamento-e-preparação-inicial-dos-dados)
+        * [Engenharia da variável alvo (`target_col_agrupada_name`)](#32-engenharia-da-variável-alvo-target_col_agrupada_name)
+        * [Preparação das features (`X_initial`) e codificação do alvo (`y_full`)](#33-preparação-das-features-x_initial-e-codificação-do-alvo-y_full)
+        * [Pré-processamento das features](#34-pré-processamento-das-features)
+        * [Divisão treino-teste principal](#35-divisão-treino-teste-principal)
+        * [Seleção de features com RFECV](#36-seleção-de-features-com-rfecv)
+        * [Otimização de hiperparâmetros com Optuna](#37-otimização-de-hiperparâmetros-com-optuna)
+        * [Treinamento do modelo final](#38-treinamento-do-modelo-final)
+        * [Avaliação do modelo final](#39-avaliação-do-modelo-final)
+        * [Retorno de resultados](#310-retorno-de-resultados)
+	
 
 
 
