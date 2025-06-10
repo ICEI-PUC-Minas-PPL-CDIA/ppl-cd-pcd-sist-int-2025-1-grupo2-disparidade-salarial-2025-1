@@ -4735,6 +4735,9 @@ RandomForestRegressor(
 
 # Modelos 3º pergunta orietada a dados 
 
+### Arvore de decisao LightGBM (Optuna)
+
+---
 ## **1 JUSTIFICATIVA E OBJETIVO (Modelo 3.1)**
 
 O objetivo deste modelo é classificar a faixa salarial de indivíduos em duas categorias: "Salário Baixo" e "Salário Alto". A transição de uma classificação multiclasse (3 faixas) para uma binária visa simplificar o problema e potencialmente melhorar a distinção entre os grupos salariais, buscando um equilíbrio na distribuição das amostras entre as classes definidas por um ponto de corte específico. A última execução utilizou um ponto de corte fixo (presumivelmente R$7.500,00 com base nos resultados) para a variável `salary_numeric_lower_bound` para realizar essa divisão.
@@ -4815,7 +4818,6 @@ Antes da seleção de features pelo RFECV, foi realizada uma análise de correla
 | `P1_l`               | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
 | `P1_b`               | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                           |
 | `Regiao_Mapeada`     | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente.                            |
-**Fonte:** Elaborado pelo autor (2024).
 
 **Observações da Análise de Correlação:**
 * **Consistência**: As correlações mostraram-se bastante consistentes entre os dados completos, treino e teste.
@@ -5095,6 +5097,7 @@ return {
 
 ### Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) 
 
+---
 ## **1 JUSTIFICATIVA E OBJETIVO (modelo 3.2)** 
 
 O objetivo deste modelo é classificar a faixa salarial de indivíduos em duas categorias: "Salário Baixo" e "Salário Alto", utilizando uma abordagem de rede neural artificial (RNA). A intenção é explorar se uma arquitetura de RNA, com capacidade de aprender interações complexas e representações ricas para features categóricas (via embeddings), pode oferecer um desempenho comparável ou superior aos modelos baseados em árvores (como o LightGBM anteriormente explorado) para a mesma pergunta orientada a dados.
