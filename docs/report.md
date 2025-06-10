@@ -415,7 +415,7 @@ Nome: `salary_midpoint`, `dtype: object`
 *   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
 * [3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
-    * [Explicação do código](#1-importação-de-bibliotecas)
+    * [Explicação do código](#1-importacao-de-bibliotecas)
     * [Análise Univariada](#5-visualizacao-dos-dados-analise-univariada)
         * [Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
         * [Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
@@ -2133,7 +2133,7 @@ tech_counts.plot(kind='barh')
 **Pergunta Orientada a Dados:**
 *Como fatores como formalidade no emprego , características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 ---
-##1. Importação de Bibliotecas
+## 1. Importação de Bibliotecas
 O script inicia com a importação de diversas bibliotecas Python, cada uma com uma finalidade específica no processo de manipulação e análise de dados.
 
 * Snippet de código
