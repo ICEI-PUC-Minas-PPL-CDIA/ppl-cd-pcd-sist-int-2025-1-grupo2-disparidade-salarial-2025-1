@@ -416,7 +416,7 @@ Nome: `salary_midpoint`, `dtype: object`
   
 * [3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
     * [Explicação do código](#1-importação-de-bibliotecas)
-    * [Análise Univariada](#análise-univariada)
+    * [Análise Univariada](#5-visualizacao-dos-dados-analise-univariada)
         * [Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
         * [Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
         * [Gráfico: ECDF de salários](#análise-do-gráfico-ecdf-de-salarios)
@@ -2506,7 +2506,7 @@ if df_eda.empty or 'faixa_salarial_eda_2cat' not in df_eda.columns:
 
 ---
 
-#5 Visualizacao dos dados (Análise Univariada)
+# 5 Visualizacao dos dados (Análise Univariada)
 Esta seção do script inicializa a análise exploratória de dados univariada, onde cada variável é analisada individualmente. O foco aqui é entender a distribuição e as características de cada atributo.
 
 ---
@@ -3035,7 +3035,7 @@ O Sudeste e o Sul concentram os principais centros urbanos e tecnológicos, com 
 
 ---
 
-#6 Visualizacao dos dados (Análise Bivariada)
+# 6 Visualizacao dos dados (Análise Bivariada)
 
 ---
 
@@ -3403,7 +3403,7 @@ Cada nível de escolaridade possui barras que indicam a distribuição dos profi
 
 ---
 
-#7 Visualizacao dos dados (Análise multivariada)
+# 7 Visualizacao dos dados (Análise multivariada)
 
 ### Análise do Gráfico de Dispersão: Experiência vs. Limite Inferior do Salário por Nível de Senioridade
 
