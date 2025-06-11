@@ -5260,16 +5260,17 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 *   [Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
 
 *   [Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
-	* [Árvore de Decisão LightGBM (Modelo 3.1)](#arvóre-de-decição-ligthgbm-modelo-31)
-		* [1. RESULTADOS E DISCUSSÃO](#1-resultados-e-discussão)
-		* [2. CONFIGURAÇÃO DO MODELO](#2-configuração-do-modelo)
-		* [3. ANÁLISE DOS RESULTADOS E INSIGHTS](#3-análise-dos-resultados-e-insights)
-		* [4. CONSIDERAÇÕES FINAIS](#4-considerações-finais)
-	* [Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) - (Modelo 3.2)](#arvóre-de-decição-ligthgbm-modelo-31)
-   		* [1. RESULTADOS E DISCUSSÃO](#1-resultados-e-discussão)
-		* [2. CONFIGURAÇÃO DO MODELO](#2-configuração-do-modelo)
-		* [3. ANÁLISE DOS RESULTADOS E INSIGHTS](#3-análise-dos-resultados-e-insights)
-		* [4. CONSIDERAÇÕES FINAIS](#4-considerações-finais)
+	* [Árvore de Decisão LightGBM (Modelo 3.1)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#arv%C3%B3re-de-deci%C3%A7%C3%A3o-ligthgbm-modelo-31)
+		* [1. RESULTADOS E DISCUSSÃO](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-resultados-e-discuss%C3%A3o)
+		* [2. CONFIGURAÇÃO DO MODELO](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#2-configura%C3%A7%C3%A3o-do-modelo)
+		* [3. ANÁLISE DOS RESULTADOS E INSIGHTS](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#3-an%C3%A1lise-dos-resultados-e-insights)
+		* [4. CONSIDERAÇÕES FINAIS](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#4-considera%C3%A7%C3%B5es-finais)
+	* [Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) - (Modelo 3.2)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#rede-neural-com-embeddings-e-otimiza%C3%A7%C3%A3o-via-ray-tune-rna-v2---modelo-32)
+   		* [1. RESULTADOS E DISCUSSÃO](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-resultados-e-discuss%C3%A3o-do-modelo-de-rede-neural-v8)
+		* [2. Gráficos de correlaçao](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#2-an%C3%A1lise-explorat%C3%B3ria-e-correla%C3%A7%C3%A3o-de-atributos)
+		* [3. OTIMIZAÇÃO E TREINAMENTO DO MODELO](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#3-otimiza%C3%A7%C3%A3o-e-treinamento-do-modelo)
+		* [4. Avaliaçao](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#4-avalia%C3%A7%C3%A3o-do-modelo-final)
+  		* [5. CONSIDERAÇÕES FINAIS](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#5-considera%C3%A7%C3%B5es-finais)
 
 # Resultados obtidos com os Modelos 1º pergunta orietada a dados
 
