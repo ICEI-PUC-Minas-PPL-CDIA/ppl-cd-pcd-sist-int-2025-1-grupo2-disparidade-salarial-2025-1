@@ -5282,8 +5282,6 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 
 * Codigo udcionado no algoritimo do modelo para definir as Acurácias do Modelo no Conjunto de Treinamento; do Modelo no Conjunto de Teste e Diferença de Acurácia.
 
-Claro, aqui está o seu código Python formatado em um bloco Markdown, pronto para ser copiado.
-
 ```python
 # --- Etapa 9: Análise Final de Acurácia e Overfitting ---
 
@@ -5312,7 +5310,7 @@ if abs(diff_accuracy) > 0.05:
     print("Isso pode ser um indicativo de que o modelo está com um leve overfitting.")
 else:
     print("\\nO modelo apresenta boa generalização, com uma diferença mínima entre a performance de treino e teste.")
-    
+
 ```
 
 ## Métricas de Desempenho:
