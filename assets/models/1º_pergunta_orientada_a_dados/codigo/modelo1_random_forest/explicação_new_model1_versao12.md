@@ -190,3 +190,79 @@ O script gera e salva diversas visualizações para ajudar na compreensão e ava
         * Um heatmap que mostra a probabilidade média de ter "Salário Alto" para diferentes combinações de `formacao_academica_encoded` e `experiencia_profissional_encoded`. Isso ajuda a identificar interações entre essas duas features importantes.
     8.  **Gráfico de Dispersão para as Duas Features Mais Importantes (`dispersao_top2_features.png`):**
         * Se houver pelo menos duas features, um gráfico de dispersão é criado usando as duas features mais importantes do conjunto de teste. Os pontos são coloridos pela probabilidade prevista de "Salário Alto", permitindo visualizar como essas duas features, em conjunto, se relacionam com a previsão.
+
+
+#### Codigo adcionado no algoritimo do modelo para definir as Acurácias do Modelo no Conjunto de Treinamento; do Modelo no Conjunto de Teste e Diferença de Acurácia.
+
+```python
+# --- Etapa 9: Análise Final de Acurácia e Overfitting ---
+
+# Acurácia no conjunto de treinamento
+# A variável y_pred_train foi calculada na Etapa 6 com o modelo calibrado
+acc_train = accuracy_score(y_train, y_pred_train)
+
+# Acurácia no conjunto de teste
+# A variável y_pred_final foi calculada com o limiar otimizado
+acc_test = accuracy_score(y_test, y_pred_final)
+
+# Diferença entre as acurácias para verificar overfitting
+diff_accuracy = acc_train - acc_test
+
+print("\\n" + "="*50)
+print("  ANÁLISE FINAL DE ACURÁCIA E OVERFITTING")
+print("="*50)
+print(f"- Acurácia do Modelo no Conjunto de Treinamento: {acc_train:.4f} ({acc_train:.2%})")
+print(f"- Acurácia do Modelo no Conjunto de Teste:       {acc_test:.4f} ({acc_test:.2%})")
+print(f"- Diferença de Acurácia (Treino - Teste):      {diff_accuracy:.4f} ({diff_accuracy:.2%})")
+print("="*50)
+
+# Comentário sobre a diferença
+if abs(diff_accuracy) > 0.05:
+    print("\\nAviso: A diferença entre a performance de treino e teste é superior a 5%.")
+    print("Isso pode ser um indicativo de que o modelo está com um leve overfitting.")
+else:
+    print("\\nO modelo apresenta boa generalização, com uma diferença mínima entre a performance de treino e teste.")
+
+```
+### **1. Cálculo das Acurácias**
+
+* **`acc_train = accuracy_score(y_train, y_pred_train)`**
+    * **O quê:** Calcula a acurácia do modelo usando os dados de **treinamento**.
+    * **Como:** Ele compara os resultados que o modelo previu para os dados de treino (`y_pred_train`) com as respostas corretas que ele já conhecia (`y_train`).
+    * **Para quê:** Mostra o quão bem o modelo "aprendeu" ou "decorou" os dados com os quais foi treinado. Uma acurácia muito alta aqui pode ser um sinal de alerta.
+
+* **`acc_test = accuracy_score(y_test, y_pred_final)`**
+    * **O quê:** Calcula a acurácia do modelo usando os dados de **teste**.
+    * **Como:** Compara os resultados que o modelo previu para dados novos e nunca vistos antes (`y_pred_final`) com as respostas corretas desses dados (`y_test`).
+    * **Para quê:** Esta é a métrica mais importante, pois mede a capacidade do modelo de **generalizar** seu aprendizado para situações do mundo real.
+
+* **`diff_accuracy = acc_train - acc_test`**
+    * **O quê:** Calcula a diferença entre a acurácia de treino e a acurácia de teste.
+    * **Para quê:** Essa diferença é o principal indicador de overfitting.
+
+### **2. Apresentação dos Resultados**
+
+* **`print(...)`**
+    * As várias linhas `print` simplesmente formatam e exibem os resultados calculados de uma maneira clara e legível.
+    * Elas criam um cabeçalho ("ANÁLISE FINAL...") e mostram os valores de acurácia e a diferença entre eles, tanto em formato decimal (`.4f`) quanto em percentual (`.2%`).
+
+### **3. Análise de Overfitting (A Parte Mais Importante)**
+
+O "overfitting" acontece quando um modelo aprende os dados de treino tão bem que ele acaba decorando os ruídos e os detalhes específicos daquele conjunto de dados, em vez de aprender o padrão geral. Como consequência, ele se sai muito bem nos dados de treino, mas falha ao fazer previsões para novos dados.
+
+* **`if abs(diff_accuracy) > 0.05:`**
+    * **O quê:** O código verifica se o valor absoluto (sem sinal negativo) da diferença entre as acurácias é maior que 0.05 (ou 5%).
+    * **Se for verdade:** Ele imprime um **aviso de overfitting**. Uma diferença de mais de 5% entre a performance no treino e no teste sugere que o modelo não está generalizando bem.
+    * **Se for falso (`else`):** Ele imprime uma mensagem positiva, indicando que o modelo tem uma boa capacidade de generalização, pois sua performance é consistente tanto nos dados que ele já conhecia quanto em dados novos.
+
+---
+
+### **Resumo Prático**
+
+Imagine que você estudou para uma prova apenas resolvendo uma lista de 20 exercícios (dados de treino).
+
+* **Acurácia de Treino:** Seria sua nota se a prova fosse exatamente os mesmos 20 exercícios. Você provavelmente gabaritaria: **100%**.
+* **Acurácia de Teste:** Seria sua nota na prova real, que tem exercícios parecidos, mas não iguais (dados de teste). Se você apenas decorou a lista, sua nota seria baixa: **50%**.
+* **Diferença (Overfitting):** A grande diferença (100% - 50% = 50%) mostra que você não aprendeu o conceito, apenas decorou as respostas.
+
+Este bloco de código faz exatamente essa análise, de forma automática, para o modelo de Machine Learning.
