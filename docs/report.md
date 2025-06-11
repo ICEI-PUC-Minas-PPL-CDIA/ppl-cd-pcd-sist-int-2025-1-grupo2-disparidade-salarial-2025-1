@@ -5260,7 +5260,16 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 *   [Resultados obtidos com os Modelos 2º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-2º-pergunta-orietada-a-dados)
 
 *   [Resultados obtidos com os Modelos 3º pergunta orietada a dados](#resultados-obtidos-com-os-modelos-3º-pergunta-orietada-a-dados)
-
+	* [Árvore de Decisão LightGBM (Modelo 3.1)](#arvóre-de-decição-ligthgbm-modelo-31)
+		* [1. RESULTADOS E DISCUSSÃO](#1-resultados-e-discussão)
+		* [2. CONFIGURAÇÃO DO MODELO](#2-configuração-do-modelo)
+		* [3. ANÁLISE DOS RESULTADOS E INSIGHTS](#3-análise-dos-resultados-e-insights)
+		* [4. CONSIDERAÇÕES FINAIS](#4-considerações-finais)
+	* [Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) - (Modelo 3.2)](#arvóre-de-decição-ligthgbm-modelo-31)
+   		* [1. RESULTADOS E DISCUSSÃO](#1-resultados-e-discussão)
+		* [2. CONFIGURAÇÃO DO MODELO](#2-configuração-do-modelo)
+		* [3. ANÁLISE DOS RESULTADOS E INSIGHTS](#3-análise-dos-resultados-e-insights)
+		* [4. CONSIDERAÇÕES FINAIS](#4-considerações-finais)
 
 # Resultados obtidos com os Modelos 1º pergunta orietada a dados
 
@@ -6160,7 +6169,7 @@ A seguir, são apresentadas as análises dos resultados visuais obtidos.
 A matriz de confusão, apresentada na Figura 1, visualiza o desempenho do modelo em termos de classificações corretas e incorretas para cada classe.
 
 Figura 1 – Matriz de confusão normalizada para o conjunto de teste
-[LOCAL DA IMAGEM: matriz_confusao_norm_v7_final_teste.png]
+![Image](https://github.com/user-attachments/assets/2e9d9ea5-2a0b-42ae-bd7e-5d4cc188a293)
 
 As porcentagens na diagonal principal representam as taxas de acerto (recall). O modelo classificou corretamente 84,08% dos casos que eram "Salário Alto" e 82,54% dos casos que eram "Salário Baixo". Os erros, representados fora da diagonal principal, mostram que aproximadamente 15,92% dos "Salário Alto" foram classificados incorretamente como "Salário Baixo", e 17,46% dos "Salário Baixo" foram classificados como "Salário Alto". O desempenho é similar e bom para ambas as classes, com uma taxa de erro relativamente equilibrada.
 
@@ -6169,7 +6178,7 @@ As porcentagens na diagonal principal representam as taxas de acerto (recall). O
 A Figura 2 ilustra quais atributos tiveram o maior impacto nas decisões do modelo.
 
 Figura 2 – Importância dos atributos (features) do modelo LightGBM
-[LOCAL DA IMAGEM: feature_importance_v7_final.png]
+![Image](https://github.com/user-attachments/assets/48fd3daf-dc28-4a8f-bc89-9459b1945aee)
 
 Observa-se que a experiência (`P2_i`), o cargo atual (`P2_f_Cargo_Atual`) e o nível de senioridade (`P2_g_Nivel`) são os preditores mais fortes da faixa salarial. O nível de ensino (`P1_l`), a faixa etária (`P1_a_1`) e a região (`Regiao_Mapeada`) também apresentam contribuições significativas, sugerindo a influência de fatores demográficos e geográficos na remuneração.
 
@@ -6178,7 +6187,7 @@ Observa-se que a experiência (`P2_i`), o cargo atual (`P2_f_Cargo_Atual`) e o n
 A Figura 3 exibe a distribuição das faixas salariais para os 15 cargos mais frequentes na amostra.
 
 Figura 3 – Distribuição de faixa salarial por Top 15 cargos
-[LOCAL DA IMAGEM: insight_cargo_vs_faixa_salarial_2cat.png]
+![Image](https://github.com/user-attachments/assets/ba7c4d30-870f-48f7-951f-cc2263f9c65a)
 
 A análise indica que cargos como "Cientista de Dados" e "Engenheiro/Arquiteto de Dados" possuem predominância de "Salário Alto". Em contrapartida, cargos como "Analista de Dados/Data Analyst" e "Analista de BI" concentram a maior parte dos profissionais na faixa de "Salário Baixo". Este resultado pode guiar investigações sobre a valorização de diferentes especialidades no mercado de dados.
 
@@ -6187,7 +6196,7 @@ A análise indica que cargos como "Cientista de Dados" e "Engenheiro/Arquiteto d
 A relação entre o nível de senioridade e a faixa salarial é detalhada na Figura 4.
 
 Figura 4 – Distribuição de faixa salarial por nível de senioridade
-[LOCAL DA IMAGEM: insight_nivel_vs_faixa_salarial_2cat.png]
+![Image](https://github.com/user-attachments/assets/3ee422da-3ebc-4ab5-92d0-208953caf231)
 
 Como esperado, o nível "Júnior" está quase exclusivamente associado a "Salário Baixo", enquanto o nível "Sênior" apresenta predominância de "Salário Alto". O nível "Pleno", que concentra o maior número de respondentes, tem uma maioria na categoria "Salário Baixo". O gráfico demonstra a progressão salarial esperada com o avanço na carreira.
 
@@ -6196,10 +6205,10 @@ Como esperado, o nível "Júnior" está quase exclusivamente associado a "Salár
 As Figuras 5 e 6 apresentam a distribuição do tempo de experiência para cada faixa salarial por meio de um boxplot e um violin plot, respectivamente.
 
 Figura 5 – Boxplot do tempo de experiência por faixa salarial
-[LOCAL DA IMAGEM: insight_experiencia_vs_faixa_salarial_2cat_boxplot.png]
+![Image](https://github.com/user-attachments/assets/390ae2c5-36e8-4af9-9eda-ba46a1abaf7b)
 
 Figura 6 – Violin plot do tempo de experiência por faixa salarial
-[LOCAL DA IMAGEM: insight_experiencia_vs_faixa_salarial_2cat_violin.png]
+![Image](https://github.com/user-attachments/assets/c8674650-d96c-4932-972b-c8d1a0ac64f9)
 
 A análise dos gráficos revela que a mediana de experiência para a faixa de "Salário Baixo" é significantemente inferior à da faixa de "Salário Alto" (aproximadamente 1-2 anos contra cerca de 5 anos). O violin plot (Figura 6) sugere que a distribuição para "Salário Alto" é mais ampla e possui múltiplas concentrações, indicando que diferentes níveis de experiência podem alcançar remunerações mais altas, possivelmente a depender de outros fatores como cargo ou empresa.
 
@@ -6213,83 +6222,76 @@ Os resultados indicam que o modelo LightGBM possui bom potencial preditivo para 
 
 ###  Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) - (Modelo 3.2)
 ---
-## 1 AVALIAÇÃO DO MODELO DE REDE NEURAL (RNA V2)
+## 1 RESULTADOS E DISCUSSÃO DO MODELO DE REDE NEURAL (V8)
 
-Esta seção apresenta os resultados da avaliação do modelo de Rede Neural Artificial (RNA v2), desenvolvido para a classificação de faixa salarial. A análise inclui as métricas de desempenho e a interpretação dos padrões identificados pelo modelo.
+Esta seção detalha os resultados da avaliação e treinamento de um modelo de Rede Neural Artificial (RNA) para a classificação de faixas salariais. A análise inclui a performance do modelo final, os hiperparâmetros otimizados por meio do Ray Tune, e a interpretação dos gráficos de correlação e importância de atributos.
 
-### 1.1 DESEMPENHO DO MODELO
+## 2 ANÁLISE EXPLORATÓRIA E CORRELAÇÃO DE ATRIBUTOS
 
-O desempenho do modelo foi aferido após a etapa de otimização de hiperparâmetros (HPO) e validado no conjunto de teste. A Tabela 1 consolida as principais métricas de performance.
+Antes do treinamento do modelo, foi realizada uma análise de correlação entre os atributos para entender as relações lineares (Pearson) e não lineares (Correlação de Distância) existentes nos dados.
 
-Tabela 1 – Métricas de avaliação do modelo RNA v2
+Figura 1 – Heatmap de Correlação de Pearson entre os atributos
+![Image](https://github.com/user-attachments/assets/f29ed58e-2175-4b2f-b5c9-e963f07fb542)
+
+A análise de Correlação de Pearson (Figura 1) indica correlações lineares moderadas entre o tempo de experiência (`P2_i`), o nível de senioridade (`P2_g_Nivel`) e o nível de ensino (`P1_l`), o que é um comportamento esperado. A correlação de distância, que poderia capturar relações não lineares, não pôde ser gerada devido a um erro na biblioteca `dcor` (`module 'dcor' has no attribute 'pairwise'`).
+
+## 3 OTIMIZAÇÃO E TREINAMENTO DO MODELO
+
+O modelo de rede neural foi otimizado utilizando a biblioteca Ray Tune, que explorou 75 combinações de hiperparâmetros em um tempo limite de 2 horas. O objetivo foi maximizar a acurácia no conjunto de validação.
+
+### 3.1 Melhores hiperparâmetros
+
+O processo de otimização identificou o seguinte conjunto de hiperparâmetros como o de melhor desempenho:
+
+* **num_hidden_layers**: 2
+* **dense_units_1**: 64
+* **dropout_1**: 0.35
+* **dense_units_2**: 32
+* **dropout_2**: 0.15
+* **learning_rate_nn**: 0.000487
+* **batch_size**: 64
+* **optimizer**: 'nadam'
+* **l2_strength_embedding**: 0.000478
+* **l2_strength_dense**: 0.000139
+* **early_stopping_patience**: 10
+* **Demais hiperparâmetros**: Conforme log do Ray Tune.
+
+## 4 AVALIAÇÃO DO MODELO FINAL
+
+Após a otimização, o modelo final foi treinado com todos os dados de treino e avaliado no conjunto de teste. A Tabela 1 resume as principais métricas de performance.
+
+Tabela 1 – Métricas de avaliação do modelo final no conjunto de teste
 ------------------------------------------------------------------
 | Métrica                       | Valor          |
 |-------------------------------|----------------|
-| Melhor Acurácia Validação HPO | 0.8345         |
-| Acurácia no Teste             | 0.8377         |
-| Precisão Média (Macro Avg)    | 0.8377         |
-| F1-Score (Ponderado) Teste    | 0.8377         |
-| ROC AUC (Binário) Teste       | 0.9263         |
+| Acurácia no Teste             | 0.8452         |
+| F1-Score (Ponderado) no Teste | 0.8451         |
+| ROC AUC no Teste              | 0.9272         |
 ------------------------------------------------------------------
 
-A Tabela 2 detalha o relatório de classificação no conjunto de teste, apresentando as métricas de Precision, Recall e F1-score para cada classe.
+A acurácia final de **0.8452** e a ROC AUC de **0.9272** indicam um modelo com forte capacidade preditiva e boa distinção entre as classes "Salário Alto" e "Salário Baixo". O F1-Score ponderado, próximo à acurácia, sugere um bom equilíbrio entre precisão e recall.
 
-Tabela 2 – Relatório de classificação detalhado do modelo RNA v2 no conjunto de teste
-------------------------------------------------------------------------------------
-| Classe        | Precision      | Recall         | F1-score       | Support        |
-|:--------------|:---------------|:---------------|:---------------|:---------------|
-| Salário Alto  | 0.85           | 0.84           | 0.84           | 622            |
-| Salário Baixo | 0.83           | 0.84           | 0.83           | 567            |
-|               |                |                |                |                |
-| accuracy      |                |                | 0.84           | 1189           |
-| macro avg     | 0.84           | 0.84           | 0.84           | 1189           |
-| weighted avg  | 0.84           | 0.84           | 0.84           | 1189           |
-------------------------------------------------------------------------------------
+### 4.1 Matriz de confusão
 
----
-## 2 ANÁLISE DOS RESULTADOS
+A matriz de confusão (Figura 2) visualiza o desempenho da classificação para cada classe no conjunto de teste.
 
-A análise a seguir explora os resultados visuais gerados a partir do desempenho do modelo RNA v2 e do contexto dos dados utilizados para o seu treinamento.
+Figura 2 – Matriz de Confusão para o conjunto de teste (RNA Final)
+![Image](https://github.com/user-attachments/assets/f91e740a-ee5d-4e1d-881e-c7785dad2b9a)
 
-### 2.1 Matriz de confusão
+A matriz demonstra que o modelo possui um desempenho equilibrado. Para a classe "Salário Alto", o modelo classificou corretamente 519 das 622 instâncias (recall de 83.4%). Para a classe "Salário Baixo", foram 489 acertos em 567 instâncias (recall de 86.2%). Os erros de classificação entre as classes são relativamente simétricos.
 
-A matriz de confusão normalizada (Figura 1) demonstra a performance do modelo RNA v2 na classificação de cada classe. Os valores na diagonal principal correspondem à taxa de acerto (recall).
+## 4.2 ANÁLISE DE IMPORTÂNCIA DOS ATRIBUTOS
 
-Figura 1 – Matriz de confusão normalizada para o conjunto de teste (RNA v2)
-[LOCAL DA IMAGEM: matriz_confusao_norm_RNA.png]
+A importância dos atributos foi calculada utilizando a técnica de "Permutation Importance", que mede a queda na acurácia do modelo ao embaralhar aleatoriamente os valores de cada atributo, um por vez.
 
-O modelo identificou corretamente cerca de 83,6% dos casos de "Salário Alto" e 84,0% dos casos de "Salário Baixo", valores consistentes com o recall de 0.84 reportado na Tabela 2. As taxas de erro entre confundir as duas classes são similares, indicando um desempenho equilibrado. Cerca de 16,4% dos "Salário Alto" foram classificados incorretamente, enquanto o erro para "Salário Baixo" foi de aproximadamente 16,0%.
+Figura 3 – Importância de Atributos por Permutação (no Conjunto de Teste)
+![Image](https://github.com/user-attachments/assets/4d0ece44-1cab-4fd5-852e-b64a9f6dfc92)
 
-### 2.2 Importância dos atributos
+A análise (Figura 3) revela que o **Nível de Senioridade (`P2_g_Nivel`)** é, de longe, o atributo mais influente para a predição da faixa salarial, causando a maior queda de acurácia quando seus valores são permutados. Em seguida, o **Cargo Atual (`P2_f_Cargo_Atual`)** e o **Tempo de Experiência (`P2_i`)** aparecem como os próximos preditores mais relevantes. Atributos como Faixa Etária, Região e Nível de Ensino possuem uma importância secundária, enquanto Gênero (`P1_b`) apresentou um impacto nulo na performance do modelo.
 
-A determinação da importância dos atributos (features) em redes neurais difere de modelos baseados em árvores e geralmente requer técnicas específicas, como Permutation Importance ou SHAP (SHapley Additive exPlanations). Embora uma análise quantitativa não tenha sido executada, espera-se que atributos ligados à proficiência técnica, como `P2_i` (Tempo de experiência), `P2_f_Cargo_Atual` (Cargo atual) e `P2_g_Nivel` (Nível de senioridade), apresentem um impacto significativo no poder preditivo do modelo, juntamente com características demográficas como `P1_l` (Nível de ensino) e `P1_a_1` (Faixa etária), e geográficas, como `Regiao_Mapeada`.
+## 5 CONSIDERAÇÕES FINAIS
 
-### 2.3 Distribuição salarial por cargo
-
-A Figura 2 apresenta a distribuição real da faixa salarial para os 15 cargos mais frequentes no conjunto de dados, fornecendo o contexto que o modelo de rede neural buscou aprender.
-
-Figura 2 – Distribuição de faixa salarial (Real) por Top 15 cargos
-[LOCAL DA IMAGEM: dist_salario_top15_cargos_RNA_contexto.png]
-
-A análise do gráfico permite identificar cargos com predominância de faixas salariais específicas. Cargos como "Cientista de Dados" e "Engenheiro de Dados" apresentam uma maior proporção de profissionais na faixa "Salário Alto", ao passo que "Analista de Dados" concentra uma maior quantidade na faixa "Salário Baixo".
-
-### 2.4 Distribuição salarial por nível de senioridade
-
-De forma análoga, a Figura 3 ilustra a distribuição real da faixa salarial conforme o nível de senioridade.
-
-Figura 3 – Distribuição de faixa salarial (Real) por nível de senioridade
-[LOCAL DA IMAGEM: dist_salario_senioridade_RNA_contexto.png]
-
-O gráfico demonstra uma clara progressão salarial associada ao aumento da senioridade. Profissionais de nível "Júnior" estão majoritariamente na faixa "Salário Baixo", enquanto profissionais de nível "Sênior" possuem uma proporção maior na faixa "Salário Alto", um padrão que a rede neural utiliza como um forte indicador para a classificação.
-
-### 2.5 Distribuição da experiência por faixa salarial
-
-A Figura 4 exibe a distribuição do tempo de experiência para cada faixa salarial real, utilizando um boxplot e um violin plot.
-
-Figura 4 – Distribuição do tempo de experiência por faixa salarial (Real)
-[LOCAL DA IMAGEM: dist_experiencia_salario_RNA_contexto.png]
-
-Os gráficos mostram que indivíduos na faixa "Salário Alto" tendem a possuir, na mediana, mais tempo de experiência. A dispersão dos dados, visível no violin plot, também indica que a variabilidade da experiência é diferente entre as duas faixas. Este atributo é, portanto, fundamental para a distinção das classes pelo modelo.
+O modelo de Rede Neural Artificial V8, após otimização de hiperparâmetros, demonstrou ser robusto e preciso, com uma acurácia de 84,52% no conjunto de teste. A análise de importância dos atributos confirmou que fatores diretamente ligados à progressão de carreira (nível, cargo e experiência) são os principais determinantes da faixa salarial, conforme aprendido pelo modelo. Os resultados indicam que o modelo é confiável para a tarefa de classificação proposta.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # _Interpretação dos modelos_
