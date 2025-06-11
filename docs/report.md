@@ -5280,7 +5280,7 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 - Acurácia do Modelo no Conjunto de Teste: 0.8152 (81.52%)
 - Diferença de Acurácia (Treino - Teste):  0.0177 (1.77%)
 
-#### Codigo udcionado no algoritimo do modelo para definir as Acurácias do Modelo no Conjunto de Treinamento; do Modelo no Conjunto de Teste e Diferença de Acurácia.
+#### Codigo adcionado no algoritimo do modelo para definir as Acurácias do Modelo no Conjunto de Treinamento; do Modelo no Conjunto de Teste e Diferença de Acurácia.
 
 ```python
 # --- Etapa 9: Análise Final de Acurácia e Overfitting ---
