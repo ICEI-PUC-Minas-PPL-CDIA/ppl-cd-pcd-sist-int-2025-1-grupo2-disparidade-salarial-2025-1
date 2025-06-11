@@ -1201,7 +1201,7 @@ O gráfico de boxplot anexado ilustra a relação entre o "Tempo de Experiência
 *   **Progressão Salarial com Experiência:** O gráfico demonstra claramente que a mediana salarial tende a aumentar consistentemente com o aumento do tempo de experiência na área de dados.
 *   **Aumento da Variabilidade Salarial:** À medida que a experiência aumenta, não só a mediana salarial cresce, mas também a dispersão dos salários (indicada pela largura da caixa e pela presença de outliers). Isso sugere que, com mais experiência, as faixas salariais se tornam mais amplas.
 *   **Potencial de Alta Remuneração:** Em todos os níveis de experiência, existem profissionais (outliers) que ganham significativamente mais do que a mediana do seu grupo. Esse potencial para salários muito altos é particularmente evidente nas faixas de maior experiência.
-*   **Outliers Inferiores:** A presença de outliers na extremidade inferior, especialmente nas faixas de maior experiência, pode indicar diversos cenários, como transições de carreira, atuação em setores ou regiões com menor remuneração, ou outros fatores não capturados apenas pela variável "tempo de experiência".
+*   **Outliers Inferiores:** A presença de outliers na extremidade inferior, especialmente nas faixas de maior experiência, pode indicar diversos cenários, como transições de carreira, atuação em setores ou regiões com menor remuneração, ou outros fatores não capturados somente  pela variável "tempo de experiência".
 
 Este gráfico é uma ferramenta visual eficaz para entender como a remuneração na área de dados evolui com a experiência, destacando a valorização progressiva dos profissionais à medida que acumulam mais anos de atuação.
 
@@ -1357,7 +1357,7 @@ O gráfico apresentado é um conjunto de boxplots (diagramas de caixa) que visua
 
 1.  **Início de Carreira (Faixas de Menor Experiência - caixas à esquerda):**
     *   **Estudantes de Graduação:** Apresentam as menores medianas salariais em todas as faixas de experiência que participam.
-    *   **Graduação/Bacharelado e Pós-graduação:** Para pouca experiência, as medianas salariais são semelhantes e mais altas que as dos estudantes. A pós-graduação parece oferecer uma ligeira vantagem inicial sobre apenas a graduação.
+    *   **Graduação/Bacharelado e Pós-graduação:** Para pouca experiência, as medianas salariais são semelhantes e mais altas que as dos estudantes. A pós-graduação parece oferecer uma ligeira vantagem inicial sobre somente a graduação.
     *   **Mestrado e Doutorado:** Mesmo com pouca experiência, profissionais com mestrado e, especialmente, doutorado, tendem a ter medianas salariais iniciais mais altas em comparação com os níveis de ensino inferiores.
 
 2.  **Meio de Carreira (Faixas de Experiência Intermediárias - caixas centrais):**
@@ -1379,9 +1379,9 @@ O gráfico apresentado é um conjunto de boxplots (diagramas de caixa) que visua
 
 **Conclusões Gerais:**
 
-Este gráfico é particularmente elucidativo ao mostrar que tanto a formação acadêmica quanto a experiência profissional são fatores cruciais na determinação salarial, e eles interagem de forma positiva.
-*   Para alcançar os patamares salariais mais elevados na área de dados, a combinação de um alto nível de ensino (especialmente Mestrado ou Doutorado) com uma experiência profissional substancial parece ser o caminho mais promissor.
-*   Enquanto a experiência por si só eleva os salários em todos os níveis de formação, o nível de formação parece definir diferentes "faixas" ou "tetos" potenciais de remuneração que são então explorados e alcançados através da experiência.
+Este gráfico é particularmente elucidativo ao mostrar que tanto a formação acadêmica quanto a experiência profissional são fatores cruciais na determinação salarial, e eles interagem positivamente.
+*   Para alcançar os patamares salariais mais elevados na área de dados, a combinação de um alto nível de ensino (especialmente Mestrado ou Doutorado) com uma experiência profissional substancial parece ser o caminho mais promissor.
+*   Enquanto a experiência por si só eleva os salários em todos os níveis de formação, o nível de formação parece definir diferentes "faixas" ou "tetos" potenciais de remuneração então explorados e alcançados através da experiência.
 
 
 ## Grafico Distribuição de Profissionais por Área de Formação Acadêmica
@@ -1411,23 +1411,23 @@ O gráfico em anexo é um gráfico de barras horizontais que ilustra a "Distribu
 4.  **Estatística/ Matemática / Matemática Computacional/ Ciências Atuariais:**
     *   Com pouco mais de 200 profissionais, esta área, que possui fundamentos quantitativos essenciais para a ciência de dados, aparece em quarto lugar em termos de volume.
 
-5.  **Outra opção:**
-    *   Uma categoria genérica que agrupa formações não especificadas nas demais, com pouco menos de 200 profissionais.
+5.  **Outra opção:**
+    *   Uma categoria genérica que agrupa formações não especificadas nas demais, com pouco menos de 200 profissionais.
 
-6.  **Áreas Menos Representadas:**
-    *   As demais áreas listadas apresentam contagens significativamente menores (abaixo de 100 profissionais cada):
-        *   Química / Física
-        *   Ciências Biológicas/ Farmácia/ Medicina/ Área da Saúde
-        *   Marketing / Publicidade / Comunicação / Jornalismo
-        *   Ciências Sociais
-    *   Isso indica que, embora profissionais dessas áreas também atuem no campo de dados, eles representam uma parcela menor do total.
+6.  **Áreas Menos Representadas:**
+    *   As demais áreas listadas apresentam contagens significativamente menores (abaixo de 100 profissionais cada):
+        *   Química / Física
+        *   Ciências Biológicas/ Farmácia/ Medicina/ Área da Saúde
+        *   Marketing / Publicidade / Comunicação / Jornalismo
+        *   Ciências Sociais
+    *   Isso indica que, embora profissionais dessas áreas também atuem no campo de dados, eles representam uma parcela menor do total.
 
 **Conclusões Gerais:**
 
-*   **Predominância de Formações Técnicas e Quantitativas:** As áreas de Computação/TI, Engenharias e, em menor grau, Estatística/Matemática, dominam o cenário de formação dos profissionais de dados, o que é esperado dada a natureza técnica e analítica da área.
-*   **Relevância de Formações em Negócios:** A presença significativa de profissionais com background em Economia, Administração e áreas afins destaca a importância do entendimento do contexto de negócios para a aplicação eficaz de técnicas de dados.
-*   **Multidisciplinaridade Crescente, Mas Concentrada:** Embora a área de dados seja conhecida por sua multidisciplinaridade, este gráfico mostra que a maioria dos profissionais ainda provém de um conjunto relativamente concentrado de formações mais tradicionais para o setor de tecnologia e análise.
-*   **Oportunidades para Diversas Formações:** A presença, mesmo que minoritária, de profissionais de áreas como Ciências Sociais, Saúde e Comunicação sugere que há espaço para diferentes perspectivas e habilidades no campo de dados, embora a transição possa ser menos comum ou exigir aquisição de habilidades técnicas adicionais.
+*   **Predominância de Formações Técnicas e Quantitativas:** As áreas de Computação/TI, Engenharias e, em menor grau, Estatística/Matemática, dominam o cenário de formação dos profissionais de dados, o que é esperado dada a natureza técnica e analítica da área.
+*   **Relevância de Formações em Negócios:** A presença significativa de profissionais com background em Economia, Administração e áreas afins destaca a importância do entendimento do contexto de negócios para a aplicação eficaz de técnicas de dados.
+*   **Multidisciplinaridade Crescente, Mas Concentrada:** Embora a área de dados seja conhecida por sua multidisciplinaridade, este gráfico evidencia que a maioria dos profissionais ainda provém de um conjunto relativamente concentrado de formações mais tradicionais para o setor de tecnologia e análise.
+*   **Oportunidades para Diversas Formações:** A presença, mesmo que minoritária, de profissionais de áreas como Ciências Sociais, Saúde e Comunicação sugere haver espaço para diferentes perspectivas e habilidades no campo de dados, embora a transição possa ser menos comum ou exigir aquisição de habilidades técnicas adicionais.
 
 Este gráfico oferece um panorama claro sobre as origens acadêmicas mais comuns dos profissionais que atualmente trabalham com dados, ressaltando a forte base em tecnologia e engenharias.
 
@@ -1468,8 +1468,8 @@ O gráfico apresentado é um gráfico de barras horizontais que ilustra a "Distr
 7.  **de R$1.001/mês a R$2.000/mês:**
     *   A contagem é pouco acima de 100.
 
-8.  **Faixas Salariais Mais Altas (de R$16.001/mês a Acima de R$40.001/mês):**
-    *   As faixas salariais mais altas apresentam contagens progressivamente menores. Isso indica que há menos profissionais ganhando salários mais elevados.
+8.  **Faixas Salariais Mais Altas (de R$16.001/mês a Acima de R$40.001/mês):**
+    *   As faixas salariais mais altas apresentam contagens progressivamente menores. Isso indica haver menos profissionais ganhando salários mais elevados.
     *   As faixas de R$16.001/mês a R$20.000/mês e de R$20.001/mês a R$25.000/mês são as mais representadas entre as faixas salariais mais altas.
 
 9.  **Menos de R$1.000/mês:**
@@ -1481,7 +1481,7 @@ O gráfico apresentado é um gráfico de barras horizontais que ilustra a "Distr
 *   **Distribuição Assimétrica:** A distribuição salarial é assimétrica, com uma cauda longa para a direita, indicando que, embora a maioria ganhe entre R$6.001 e R$16.000, alguns profissionais ganham significativamente mais.
 *   **Minoria nas Faixas Mais Baixas:** Poucos profissionais relatam ganhar menos de R$2.000 por mês.
 
-Este gráfico fornece uma visão geral da distribuição de salários entre os profissionais de dados, mostrando onde a maioria se concentra e como os salários se distribuem nas faixas mais altas e mais baixas.
+Este gráfico fornece uma visão geral da distribuição de salários entre os profissionais de dados, evidenciando onde a maioria se concentra e como os salários se distribuem nas faixas mais altas e mais baixas.
 
 
 ## Grafico Distribuição de Profissionais por Nível de Ensino
@@ -1510,23 +1510,23 @@ O gráfico anexado é um gráfico de barras horizontais que mostra a "Distribui�
 2.  **Pós-graduação:**
     *   A segunda maior concentração de profissionais está neste nível, com uma contagem superior a 1000, mas inferior à da graduação (aproximadamente 1050). Este grupo inclui provavelmente especializações e MBAs (pós-graduação lato sensu).
 
-3.  **Estudante de Graduação:**
-    *   Este grupo representa a terceira maior contagem, com aproximadamente 450 profissionais. Isso mostra uma presença significativa de indivíduos que ainda estão cursando a graduação, mas já atuam na área de dados.
+3.  **Estudante de Graduação:**
+    *   Este grupo representa a terceira maior contagem, com aproximadamente 450 profissionais. Isso mostra uma presença significativa de indivíduos que continuam cursando a graduação, mas já atuam na área de dados.
 
-4.  **Mestrado:**
-    *   Profissionais com mestrado (pós-graduação stricto sensu) somam cerca de 350, representando o quarto maior grupo.
+4.  **Mestrado:**
+    *   Profissionais com mestrado (pós-graduação stricto sensu) somam cerca de 350, representando o quarto maior grupo.
 
-5.  **Doutorado ou Phd:**
-    *   Este é o grupo com a menor representatividade, com uma contagem de aproximadamente 100 profissionais. Embora seja o nível de ensino mais alto, é o menos comum entre os profissionais de dados no dataset.
+5.  **Doutorado ou Phd:**
+    *   Este é o grupo com a menor representatividade, com uma contagem de aproximadamente 100 profissionais. Embora seja o nível de ensino mais alto, é o menos comum entre os profissionais de dados no dataset.
 
 **Conclusões Gerais:**
 
-*   **Base Educacional Sólida:** A grande maioria dos profissionais de dados possui pelo menos uma graduação completa, com um número expressivo também tendo concluído algum tipo de pós-graduação (lato sensu ou stricto sensu).
-*   **Entrada Precoce no Mercado:** A presença considerável de estudantes de graduação sugere que muitos iniciam suas carreiras na área de dados antes mesmo de concluir a formação universitária inicial.
-*   **Funil Educacional:** Observa-se um afunilamento no número de profissionais à medida que o nível de ensino se torna mais avançado (Mestrado e, especialmente, Doutorado). Isso é comum em diversas áreas, refletindo o menor número de pessoas que prosseguem para os níveis mais altos de qualificação acadêmica.
-*   **Valorização de Diferentes Níveis:** O gráfico demonstra que há profissionais de dados em todos os principais níveis de ensino, desde estudantes até doutores, indicando que o mercado absorve talentos com diferentes graus de formação.
+*   **Base Educacional Sólida:** A grande maioria dos profissionais de dados possui pelo menos uma graduação completa, com um número expressivo também tendo concluído algum tipo de pós-graduação (lato sensu ou stricto sensu).
+*   **Entrada Precoce no Mercado:** A presença considerável de estudantes de graduação sugere que muitos iniciam suas carreiras na área de dados antes mesmo de concluir a formação universitária inicial.
+*   **Funil Educacional:** Observa-se um afunilamento no número de profissionais à medida que o nível de ensino se torna mais avançado (Mestrado e, especialmente, Doutorado). Isso é comum em diversas áreas, refletindo o menor número de pessoas que prosseguem para os níveis mais altos de qualificação acadêmica.
+*   **Valorização de Diferentes Níveis:** O gráfico demonstra haver profissionais de dados em todos os principais níveis de ensino, desde estudantes até doutores, indicando que o mercado absorve talentos com diferentes graus de formação.
 
-Este gráfico oferece uma visão clara do perfil educacional dos profissionais de dados, destacando a importância da graduação e da pós-graduação, ao mesmo tempo que mostra a participação de estudantes e o menor, porém qualificado, contingente de mestres e doutores.
+Este gráfico oferece uma visão clara do perfil educacional dos profissionais de dados, destacando a importância da graduação e da pós-graduação, ao mesmo tempo que mostra participar estudantes e o menor, porém qualificado, contingente de mestres e doutores.
 
 
 ## Grafico Distribuição do Salário Estimado
@@ -1557,17 +1557,17 @@ O gráfico anexado é um histograma que representa a "Distribuição do Salário
 3.  **Cauda à Direita (Assimetria Positiva):**
     *   A distribuição é assimétrica à direita (ou positivamente assimétrica). Isso significa que, embora a maioria dos salários esteja concentrada nas faixas mais baixas e médias, há uma "cauda" de profissionais que recebem salários consideravelmente mais altos, estendendo-se para além de R$20.000, R$30.000 e até R$40.000. As frequências nessas faixas mais altas são progressivamente menores.
 
-4.  **Intervalos de Salário:**
-    *   A primeira barra, de R$0 a aproximadamente R$2.500, tem uma frequência em torno de 400.
-    *   Após o pico principal em torno de R$5.000, há uma queda na frequência antes de subir novamente para o segundo pico em torno de R$11.000.
-    *   Depois do terceiro pico em torno de R$15.000, as frequências diminuem consideravelmente, indicando que menos profissionais se encontram nas faixas salariais mais elevadas.
+4.  **Intervalos de Salário:**
+    *   A primeira barra, de R$0 a aproximadamente R$2.500, tem uma frequência em torno de 400.
+    *   Após o pico principal em torno de R$5.000, há uma queda na frequência antes de subir novamente para o segundo pico em torno de R$11.000.
+    *   Depois do terceiro pico em torno de R$15.000, as frequências diminuem consideravelmente, indicando que menos profissionais se encontram nas faixas salariais mais elevadas.
 
 **Conclusões Gerais:**
 
-*   **Distribuição Salarial Heterogênea:** A presença de múltiplos picos sugere que pode haver subgrupos distintos dentro da população de profissionais de dados com diferentes níveis salariais predominantes. Isso pode ser influenciado por fatores como nível de experiência, área de atuação, nível de ensino, região geográfica, etc.
-*   **Maioria em Faixas Médias-Baixas:** Uma grande proporção dos profissionais aufere salários nas faixas que vão até aproximadamente R$16.000, com picos notáveis em torno de R$5.000 e R$11.000.
-*   **Potencial para Altos Salários:** A cauda longa à direita indica que, embora menos comuns, existem salários significativamente altos na área de dados, ultrapassando R$40.000.
-*   **Necessidade de Análise Multivariada:** A forma multimodal do histograma sugere que analisar apenas a distribuição geral do salário pode não contar a história completa. Seria interessante investigar quais fatores contribuem para os diferentes picos observados, como feito nas análises anteriores que segmentaram por experiência e nível de ensino.
+*   **Distribuição Salarial Heterogênea:** A presença de múltiplos picos sugere que pode haver subgrupos distintos na população de profissionais de dados com diferentes níveis salariais predominantes. Isso pode ser influenciado por fatores como nível de experiência, área de atuação, nível de ensino, região geográfica, etc.
+*   **Maioria em Faixas Médias-Baixas:** Uma grande proporção dos profissionais aufere salários nas faixas que vão até aproximadamente R$16.000, com picos notáveis em torno de R$5.000 e R$11.000.
+*   **Potencial para Altos Salários:** A cauda longa à direita indica que, embora menos comuns, existem salários significativamente altos na área de dados, ultrapassando R$40.000.
+*   **Necessidade de Análise Multivariada:** A forma multimodal do histograma sugere que analisar somente a distribuição geral do salário pode não contar a história completa. Seria interessante investigar quais fatores contribuem para os diferentes picos observados, como feito nas análises anteriores que segmentaram por experiência e nível de ensino.
 
 Este histograma fornece uma visão geral da estrutura salarial dos profissionais de dados, destacando as faixas de remuneração mais comuns e a existência de um segmento com ganhos consideravelmente mais altos.
 
@@ -1654,18 +1654,18 @@ O gráfico em anexo é um gráfico de barras verticais que apresenta o "Top 10 U
 6.  **SC (Santa Catarina):**
     *   Possui uma contagem ligeiramente inferior ao RS, em torno de 160-170 profissionais.
 
-7.  **DF (Distrito Federal):**
-    *   Apresenta uma contagem próxima a 90-100 profissionais.
+7.  **DF (Distrito Federal):**
+    *   Apresenta uma contagem próxima a 90-100 profissionais.
 
-8.  **BA (Bahia), CE (Ceará), PE (Pernambuco):**
-    *   Estas três UFs da região Nordeste encerram o top 10, com contagens menores e relativamente próximas entre si, todas abaixo de 100 (aproximadamente entre 70 e 85 profissionais cada).
+8.  **BA (Bahia), CE (Ceará), PE (Pernambuco):**
+    *   Estas três UFs da região Nordeste encerram o top 10, com contagens menores e relativamente próximas entre si, todas abaixo de 100 (aproximadamente entre 70 e 85 profissionais cada).
 
 **Conclusões Gerais:**
 
-*   **Concentração Regional Sudeste-Sul:** A grande maioria dos profissionais de dados está concentrada na região Sudeste (SP, MG, RJ) e Sul (PR, RS, SC), com São Paulo liderando de forma proeminente.
-*   **Disparidade Geográfica:** Existe uma notável disparidade na distribuição geográfica dos profissionais de dados, com um número muito maior de profissionais em São Paulo em comparação com todos os outros estados.
-*   **Presença em Outras Regiões:** Embora em menor número, o Distrito Federal (Centro-Oeste) e estados do Nordeste (BA, CE, PE) também figuram no top 10, indicando a presença de polos de profissionais de dados nessas regiões, ainda que menos expressivos em volume.
-*   **Implicações para o Mercado:** Essa concentração pode refletir onde estão as maiores oportunidades de emprego, os principais centros de formação ou os ecossistemas de inovação e tecnologia mais desenvolvidos no país.
+*   **Concentração Regional Sudeste-Sul:** A grande maioria dos profissionais de dados está concentrada na região Sudeste (SP, MG, RJ) e Sul (PR, RS, SC), com São Paulo liderando proeminentemente.
+*   **Disparidade Geográfica:** Existe uma notável disparidade na distribuição geográfica dos profissionais de dados, com um número muito maior de profissionais em São Paulo em comparação com todos os outros estados.
+*   **Presença em Outras Regiões:** Embora em menor número, o Distrito Federal (Centro-Oeste) e estados do Nordeste (BA, CE, PE) também figuram no top 10, indicando a presença de polos de profissionais de dados nessas regiões, ainda que menos expressivos em volume.
+*   **Implicações para o Mercado:** Essa concentração pode refletir onde estão as maiores oportunidades de emprego, os principais centros de formação ou os ecossistemas de inovação e tecnologia mais desenvolvidos no país.
 
 Este gráfico fornece uma visão clara da distribuição geográfica dos profissionais de dados no Brasil, destacando a liderança de São Paulo e a importância das regiões Sudeste e Sul como principais centros para esses profissionais.
 
@@ -1678,24 +1678,24 @@ O gráfico apresentado é um heatmap (mapa de calor) que visualiza a matriz de c
 
 **Elementos do Gráfico:**
 
-*   **Título:** "Heatmap de Correlação entre Salário, Experiência (anos) e Nível de Ensino (ordinal)".
-*   **Eixos (Linhas e Colunas):** As mesmas três variáveis são listadas tanto nas linhas quanto nas colunas:
-    *   Salario_Estimado
-    *   Experiencia_Anos_Estimados
-    *   Nivel_Ensino_Ordinal
-*   **Células da Matriz:** Cada célula na interseção de uma linha e uma coluna mostra o coeficiente de correlação de Pearson entre as duas variáveis correspondentes. O valor do coeficiente é exibido numericamente dentro da célula.
-*   **Escala de Cores (Barra Lateral):** À direita do heatmap, uma barra de cores indica como os valores de correlação são mapeados para as cores. A escala varia de aproximadamente 0.2 (azul escuro) a 1.0 (vermelho escuro).
-    *   Cores mais quentes (tendendo ao vermelho) indicam correlações positivas mais fortes.
-    *   Cores mais frias (tendendo ao azul) indicam correlações positivas mais fracas (neste caso, todas as correlações são positivas).
-    *   Se houvesse correlações negativas, elas normalmente seriam representadas por uma gama diferente de cores.
+*   **Título:** "Heatmap de Correlação entre Salário, Experiência (anos) e Nível de Ensino (ordinal)".
+*   **Eixos (Linhas e Colunas):** As mesmas três variáveis são listadas tanto nas linhas quanto nas colunas:
+    *   Salario_Estimado
+    *   Experiencia_Anos_Estimados
+    *   Nivel_Ensino_Ordinal
+*   **Células da Matriz:** Cada célula na interseção de uma linha e uma coluna mostra o coeficiente de correlação de Pearson entre as duas variáveis correspondentes. O valor do coeficiente é exibido numericamente dentro da célula.
+*   **Escala de Cores (Barra Lateral):** À direita do heatmap, uma barra de cores indica como os valores de correlação são mapeados para as cores. A escala varia de aproximadamente 0.2 (azul escuro) a 1.0 (vermelho escuro).
+    *   Cores mais quentes (tendendo ao vermelho) indicam correlações positivas mais fortes.
+    *   Cores mais frias (tendendo ao azul) indicam correlações positivas mais fracas (neste caso, todas as correlações são positivas).
+    *   Se houvesse correlações negativas, elas seriam normalmente representadas por uma gama diferente de cores.
 
 **Interpretação dos Coeficientes de Correlação:**
 
 Os coeficientes de correlação variam de -1 a +1:
-*   +1 indica uma correlação linear positiva perfeita.
-*   -1 indica uma correlação linear negativa perfeita.
-*   0 indica ausência de correlação linear.
-*   Valores próximos de +1 ou -1 indicam correlações fortes, enquanto valores próximos de 0 indicam correlações fracas.
+*   +1 indica uma correlação linear positiva perfeita.
+*   -1 indica uma correlação linear negativa perfeita.
+*   0 indica ausência de correlação linear.
+*   Valores próximos de +1 ou -1 indicam correlações fortes, enquanto valores próximos de 0 indicam correlações fracas.
 
 **Análise das Correlações Específicas:**
 
@@ -1726,7 +1726,7 @@ Os coeficientes de correlação variam de -1 a +1:
 *   **Influência do Nível de Ensino no Salário:** O nível de ensino ("Nivel_Ensino_Ordinal") também tem uma correlação positiva com o salário (0.30), mas essa relação é menos acentuada do que a da experiência.
 *   **Relação entre Experiência e Nível de Ensino:** A correlação entre experiência e nível de ensino é a mais fraca entre os pares (0.24), sugerindo que esses dois fatores, embora ambos influenciem o salário, não estão fortemente interligados entre si no dataset.
 
-Este heatmap fornece uma visão concisa de como essas três variáveis chave estão linearmente relacionadas, destacando a importância da experiência e, em menor grau, do nível de ensino, na determinação do salário estimado dos profissionais de dados.
+Este heatmap fornece uma visão concisa de como essas três variáveis-chave estão linearmente relacionadas, destacando a importância da experiência e, em menor grau, do nível de ensino, na determinação do salário estimado dos profissionais de dados.
 
 
 ## Grafico Salário Médio Estimado vs. Anos de Experiência por Nível de Ensino
@@ -1754,20 +1754,20 @@ O gráfico apresentado é um gráfico de linhas que ilustra a relação entre o 
 1.  **Progressão Salarial com Experiência (Geral):**
     *   Para *todos* os níveis de ensino, há uma clara tendência ascendente: o salário médio estimado aumenta consistentemente com o aumento dos anos de experiência. As linhas sobem da esquerda para a direita.
 
-2.  **Impacto do Nível de Ensino no Salário Inicial (Ponto de Partida):**
-    *   Mesmo com pouca ou nenhuma experiência (extrema esquerda do gráfico), os níveis de ensino mais altos tendem a começar com salários médios estimados mais elevados.
-        *   "Doutorado ou Phd" e "Mestrado" iniciam com os maiores salários médios, seguidos por "Pós-graduação", "Graduação/Bacharelado", e por último "Estudante de Graduação".
+2.  **Impacto do Nível de Ensino no Salário Inicial (Ponto de Partida):**
+    *   Mesmo com pouca ou nenhuma experiência (extrema esquerda do gráfico), os níveis de ensino mais altos tendem a começar com salários médios estimados mais elevados.
+        *   "Doutorado ou Phd" e "Mestrado" iniciam com os maiores salários médios, seguidos por "Pós-graduação", "Graduação/Bacharelado", e por último "Estudante de Graduação".
 
-3.  **Diferenças Salariais Ampliadas com a Experiência:**
-    *   As linhas tendem a se divergir mais à medida que os anos de experiência aumentam. Isso significa que a diferença salarial entre os níveis de ensino se torna mais pronunciada para profissionais mais experientes.
-    *   Por exemplo, a diferença salarial entre um "Doutorado ou Phd" e um "Graduado/Bacharel" com 1 ano de experiência é menor do que a diferença entre esses mesmos dois níveis com 5 ou 8 anos de experiência.
+3.  **Diferenças Salariais Ampliadas com a Experiência:**
+    *   As linhas tendem a se divergir mais à medida que os anos de experiência aumentam. Isso significa que a diferença salarial entre os níveis de ensino se torna mais pronunciada para profissionais mais experientes.
+    *   Por exemplo, a diferença salarial entre um "Doutorado ou Phd" e um "Graduado/Bacharel" com 1 ano de experiência é menor do que a diferença entre esses mesmos dois níveis com 5 ou 8 anos de experiência.
 
-4.  **Hierarquia dos Níveis de Ensino:**
-    *   Ao longo da maior parte da trajetória de experiência, a hierarquia salarial geralmente segue a ordem do nível de ensino: Doutorado > Mestrado > Pós-graduação > Graduação > Estudante de Graduação.
-    *   Há um cruzamento ou proximidade muito grande entre as linhas de "Graduação/Bacharelado" e "Pós-graduação" em certos pontos, sugerindo que, para algumas faixas de experiência, a diferença salarial média entre ter apenas graduação e ter uma pós-graduação (lato sensu, provavelmente) pode não ser tão acentuada como a diferença para mestrado ou doutorado.
+4.  **Hierarquia dos Níveis de Ensino:**
+    *   Ao longo da maior parte da trajetória de experiência, a hierarquia salarial segue geralmente a ordem do nível de ensino: Doutorado > Mestrado > Pós-graduação > Graduação > Estudante de Graduação.
+    *   Há um cruzamento ou proximidade muito grande entre as linhas de "Graduação/Bacharelado" e "Pós-graduação" em certos pontos, sugerindo que, para algumas faixas de experiência, a diferença salarial média entre ter somente graduação e ter uma pós-graduação (lato sensu, provavelmente) pode não ser tão acentuada como a diferença para mestrado ou doutorado.
 
-5.  **Retorno da Experiência por Nível de Ensino:**
-    *   As inclinações das linhas sugerem que o "retorno" por ano adicional de experiência pode variar entre os níveis de ensino. As linhas para "Doutorado ou Phd" e "Mestrado" parecem ter inclinações consistentemente acentuadas, indicando um forte crescimento salarial com a experiência.
+5.  **Retorno da Experiência por Nível de Ensino:**
+    *   As inclinações das linhas sugerem que o "retorno" por ano adicional de experiência pode variar entre os níveis de ensino. As linhas para "Doutorado ou Phd" e "Mestrado" parecem ter inclinações consistentemente acentuadas, indicando um forte crescimento salarial com a experiência.
 
 6.  **Variabilidade (Áreas Sombreadas):**
     *   As áreas sombreadas para "Doutorado ou Phd" e "Mestrado", especialmente nos níveis mais altos de experiência, parecem ser mais largas. Isso pode indicar uma maior variabilidade nos salários para esses grupos (ou seja, alguns doutores/mestres experientes ganham muito bem, enquanto outros podem ter salários mais próximos dos demais grupos, aumentando a dispersão) ou menor número de amostras nessas categorias, levando a maior incerteza na estimativa da média.
@@ -1779,7 +1779,7 @@ O gráfico apresentado é um gráfico de linhas que ilustra a relação entre o 
 *   **Efeito Combinado:** O maior potencial salarial é observado em profissionais que combinam um alto nível de ensino (Mestrado ou Doutorado) com um volume significativo de anos de experiência.
 *   **Investimento em Educação:** Níveis mais altos de educação formal tendem a proporcionar um ponto de partida salarial mais elevado e mantêm uma trajetória de crescimento salarial superior ao longo da carreira, em média.
 
-Este gráfico sintetiza de forma eficaz como a formação acadêmica e a experiência profissional interagem para moldar a progressão salarial na área de dados, reforçando a importância de ambos os fatores para o desenvolvimento de carreira e potencial de ganhos.
+Este gráfico sintetiza eficazmente como a formação acadêmica e a experiência profissional interagem para moldar a progressão salarial na área de dados, reforçando a importância de ambos os fatores para o desenvolvimento de carreira e potencial de ganhos.
 
 
 ## Grafico Relação 3D entre Salário, Experiência e Nível de Ensino
@@ -1878,7 +1878,7 @@ O gráfico apresentado é um gráfico de dispersão (scatter plot) que busca exp
 **Conclusões Gerais:**
 
 *   O gráfico sugere que a proporção de docentes com doutorado na UF de residência de um profissional de dados **não é um fator determinante primário** para o salário estimado desse profissional. A qualidade do ambiente acadêmico local, se proxy pela qualificação dos docentes, não se traduz diretamente em maiores salários individuais para os profissionais de dados ali residentes.
-*   Fatores individuais como **nível de ensino alcançado e, principalmente, anos de experiência**, parecem ter uma influência mais visível na determinação salarial, como indicado pela distribuição das cores e tamanhos dos pontos em relação ao eixo do salário.
+*   Fatores individuais, como **nível de ensino alcançado e, principalmente, anos de experiência**, parecem ter uma influência mais visível na determinação salarial, como indicado pela distribuição das cores e tamanhos dos pontos em relação ao eixo do salário.
 *   Outros fatores não representados neste gráfico específico, como o setor de atuação da empresa, o cargo específico, as habilidades individuais, a demanda do mercado local na UF e o custo de vida, provavelmente desempenham papéis mais significativos na definição dos salários dos profissionais de dados.
 
 Este gráfico é útil para descartar uma relação causal ou correlacional forte entre a proporção de docentes com doutorado na UF e os salários dos profissionais de dados, direcionando a atenção para outros fatores mais diretamente ligados ao perfil do profissional e ao mercado de trabalho.
@@ -1932,7 +1932,7 @@ O gráfico interativo apresentado é um gráfico de dispersão 3D (3D Scatter Pl
 *   Profissionais com níveis de ensino mais baixos podem encontrar um "teto" salarial mais baixo, mesmo com muita experiência, em comparação com aqueles com formação mais avançada e experiência similar.
 *   Da mesma forma, profissionais com alta qualificação acadêmica, mas pouca experiência prática, podem não atingir os salários mais altos até acumularem mais tempo de atuação no mercado.
 
-Este tipo de gráfico é uma ferramenta poderosa para a análise exploratória de dados (AED), pois permite uma compreensão mais intuitiva de relações multivariadas complexas, mostrando como diferentes fatores se combinam para influenciar um resultado específico como o salário.
+Este tipo de gráfico é uma ferramenta poderosa para a análise exploratória de dados (AED), ao permitir uma compreensão mais intuitiva de relações multivariadas complexas, mostrando como diferentes fatores se combinam para influenciar um resultado específico como o salário.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # 2º Pergunta orientada a dados 
