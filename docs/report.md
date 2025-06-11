@@ -5276,9 +5276,44 @@ O fluxo de execução do código para o modelo de Rede Neural (RNA v2) é:
 | weighted avg | **0.81** | **0.82** | **0.82** | **990** |
 
 - Acurácia do Modelo: 0.82
-- Acurácia do Modelo no Conjunto de Treinamento: -
-- Acurácia do Modelo no Conjunto de Teste: -
-- Diferença de Acurácia (Treino - Teste): -
+- Acurácia do Modelo no Conjunto de Treinamento: 0.8328 (83.28%)
+- Acurácia do Modelo no Conjunto de Teste: 0.8152 (81.52%)
+- Diferença de Acurácia (Treino - Teste):  0.0177 (1.77%)
+
+* Codigo udcionado no algoritimo do modelo para definir as Acurácias do Modelo no Conjunto de Treinamento; do Modelo no Conjunto de Teste e Diferença de Acurácia.
+
+Claro, aqui está o seu código Python formatado em um bloco Markdown, pronto para ser copiado.
+
+```python
+# --- Etapa 9: Análise Final de Acurácia e Overfitting ---
+
+# Acurácia no conjunto de treinamento
+# A variável y_pred_train foi calculada na Etapa 6 com o modelo calibrado
+acc_train = accuracy_score(y_train, y_pred_train)
+
+# Acurácia no conjunto de teste
+# A variável y_pred_final foi calculada com o limiar otimizado
+acc_test = accuracy_score(y_test, y_pred_final)
+
+# Diferença entre as acurácias para verificar overfitting
+diff_accuracy = acc_train - acc_test
+
+print("\\n" + "="*50)
+print("  ANÁLISE FINAL DE ACURÁCIA E OVERFITTING")
+print("="*50)
+print(f"- Acurácia do Modelo no Conjunto de Treinamento: {acc_train:.4f} ({acc_train:.2%})")
+print(f"- Acurácia do Modelo no Conjunto de Teste:       {acc_test:.4f} ({acc_test:.2%})")
+print(f"- Diferença de Acurácia (Treino - Teste):      {diff_accuracy:.4f} ({diff_accuracy:.2%})")
+print("="*50)
+
+# Comentário sobre a diferença
+if abs(diff_accuracy) > 0.05:
+    print("\\nAviso: A diferença entre a performance de treino e teste é superior a 5%.")
+    print("Isso pode ser um indicativo de que o modelo está com um leve overfitting.")
+else:
+    print("\\nO modelo apresenta boa generalização, com uma diferença mínima entre a performance de treino e teste.")
+    
+```
 
 ## Métricas de Desempenho:
 
