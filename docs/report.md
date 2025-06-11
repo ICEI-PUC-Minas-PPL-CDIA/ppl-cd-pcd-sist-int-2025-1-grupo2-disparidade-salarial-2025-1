@@ -6076,322 +6076,220 @@ Avisos de métricas: O relatório de classificação apresenta avisos sobre mét
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Resultados obtidos com os Modelos 3º pergunta orietada a dados
 
+### Arvóre de decição LigthGBM (Modelo 3.1) 
+---
+## 1 RESULTADOS E DISCUSSÃO 
 
-### Relatório de Resultados e Insights: Classificação Binária de Faixa Salarial (v7)
+Esta seção detalha os resultados obtidos com o modelo LightGBM para a classificação binária da faixa salarial ("Salário Alto" vs. "Salário Baixo"). A análise abrange métricas de desempenho, a importância dos atributos (features) e a interpretação dos gráficos gerados para extrair insights.
 
-Este relatório detalha os resultados da última execução do modelo LightGBM para classificação binária da faixa salarial ("Salário Alto" vs. "Salário Baixo"). A análise inclui métricas de desempenho, a importância das features e uma interpretação dos gráficos gerados para extrair insights.
+### 1.1 DESEMPENHO DO MODELO
 
-### 1. Resumo do Desempenho do Modelo
+O modelo final demonstrou um desempenho robusto na tarefa de classificação. A seguir, são apresentadas as principais características e métricas de desempenho.
 
-O modelo final demonstrou um desempenho robusto na classificação das faixas salariais.
+* Tipo de Classificação: Binária
+* Classes da Variável Alvo (codificadas): ['Salário Alto', 'Salário Baixo'] (onde "Salário Alto" corresponde à classe 0 e "Salário Baixo" à classe 1 após LabelEncoding)
+* Acurácia Média na Validação Cruzada (Optuna): 0.8505
+* Acurácia do Modelo Final no Conjunto de Treinamento: 0.8583
+* Número de Árvores no Modelo Final (após early stopping): 105
 
-* **Tipo de Classificação**: Binário
-* **Classes da Variável Alvo (codificadas)**: `['Salário Alto', 'Salário Baixo']` (onde "Salário Alto" é a classe 0 e "Salário Baixo" é a classe 1 após LabelEncoding)
-* **Acurácia Média no CV/Val do Optuna**: 0.8505
-* **Acurácia do Modelo Final no Conjunto de Treinamento (`X_train_final`)**: 0.8583
-* **Número de Árvores no Modelo Final (após early stopping)**: 105
+### 1.2 Avaliação no conjunto de teste
 
-### 1.1. Resultados da Avaliação no Conjunto de Teste
+Os resultados da avaliação do modelo final, aplicados sobre o conjunto de teste, são apresentados na Tabela 1.
 
-| Métrica                          | Valor  |
-| :------------------------------- | :----- |
-| **Acurácia no Teste** | 0.8335 |
-| Precisão Média (Macro Avg)       | 0.8331 |
-| Precisão Média (Weighted Avg)    | 0.8335 |
-| F1-Score (Ponderado)             | 0.8335 |
-| **ROC AUC (Binário)** | 0.9234 |
+Tabela 1 – Métricas de avaliação do modelo no conjunto de teste
+------------------------------------------------------------------
+| Métrica                       | Valor          |
+|-------------------------------|----------------|
+| Acurácia no Teste             | 0.8335         |
+| Precisão Média (Macro Avg)    | 0.8331         |
+| Precisão Média (Weighted Avg) | 0.8335         |
+| F1-Score (Ponderado)          | 0.8335         |
+| ROC AUC (Binário)             | 0.9234         |
+------------------------------------------------------------------
 
-**Interpretação das Métricas de Teste:**
-* A **Acurácia de 0.8335** indica que o modelo classificou corretamente aproximadamente 83.35% das instâncias no conjunto de teste.
-* O **ROC AUC de 0.9234** é um excelente indicador da capacidade do modelo de distinguir entre as classes "Salário Alto" e "Salário Baixo". Um valor próximo de 1 sugere uma alta performance na separação das classes.
-* As precisões médias e o F1-Score ponderado, todos em torno de 0.83, mostram um bom equilíbrio geral entre precisão e recall.
+A acurácia de 0.8335 indica que o modelo classificou corretamente aproximadamente 83,35% das instâncias no conjunto de teste. O valor de ROC AUC, 0.9234, é um excelente indicador da capacidade do modelo em distinguir entre as classes, sugerindo alta performance na separação. As precisões médias e o F1-Score ponderado, todos em torno de 0.83, mostram um bom equilíbrio geral entre precisão e recall.
 
-### 1.2. Relatório de Classificação Detalhado (Conjunto de Teste)
+### 1.3 Relatório de classificação detalhado
 
-| Classe        | Precision | Recall | F1-score | Support |
-| :------------ | :-------- | :----- | :------- | :------ |
-| Salário Alto  | 0.84      | 0.84   | 0.84     | 622     |
-| Salário Baixo | 0.83      | 0.83   | 0.83     | 567     |
-|               |           |        |          |         |
-| accuracy      |           |        | 0.83     | 1189    |
-| macro avg     | 0.83      | 0.83   | 0.83     | 1189    |
-| weighted avg  | 0.83      | 0.83   | 0.83     | 1189    |
+A Tabela 2 apresenta o relatório de classificação detalhado, que expande as métricas para cada uma das classes individualmente.
 
-**Interpretação do Relatório de Classificação:**
-* **Suporte (Support)**: Indica o número de amostras reais para cada classe no conjunto de teste. "Salário Alto" teve 622 instâncias e "Salário Baixo" teve 567. A distribuição está bem equilibrada, com uma diferença de apenas 55 amostras, o que é ótimo para a confiabilidade do modelo.
-* **Precisão (Precision)**:
-    * Para "Salário Alto" (0.84): De todas as vezes que o modelo previu "Salário Alto", ele estava correto em 84% dos casos.
-    * Para "Salário Baixo" (0.83): De todas as vezes que o modelo previu "Salário Baixo", ele estava correto em 83% dos casos.
-* **Recall (Revocação)**:
-    * Para "Salário Alto" (0.84): O modelo identificou corretamente 84% de todos os verdadeiros "Salário Alto".
-    * Para "Salário Baixo" (0.83): O modelo identificou corretamente 83% de todos os verdadeiros "Salário Baixo".
-* **F1-score**: É a média harmônica da precisão e do recall. Valores de 0.84 e 0.83 para as classes indicam um bom equilíbrio entre essas duas métricas para cada classe.
-* **Macro Avg vs Weighted Avg**: Como as classes estão bem equilibradas, as médias macro (calcula a métrica independentemente para cada classe e depois tira a média) e ponderada (leva em conta o suporte de cada classe) são muito próximas, o que é um bom sinal.
-
-## 2. Configuração do Modelo
-
-### 2.1. Features Selecionadas pelo RFECV
-As 6 features selecionadas foram: `['P1_a_1', 'P1_l', 'P2_i', 'P2_g_Nivel', 'P2_f_Cargo_Atual', 'Regiao_Mapeada']`
-*(Nota: A sua última saída do RFECV indicou 6 features, diferente de saídas anteriores que indicavam 7. Este relatório baseia-se na última informação de 6 features.)*
-
-### 2.2. Melhores Hiperparâmetros (Optuna) para LightGBM
-* `n_estimators`: 1100 (modelo final usou 105 árvores devido ao early stopping)
-* `learning_rate`: 0.06509228494862056
-* `num_leaves`: 80
-* `max_depth`: 12
-* `min_child_samples`: 25
-* `subsample`: 0.5
-* `colsample_bytree`: 0.6000000000000001
-* `reg_alpha`: 1.5671157141467156
-* `reg_lambda`: 14.655960291115573
-* `min_split_gain`: 0.3854595582770911
-* `min_child_weight`: 0.1393188921160219
-
-## 3. Análise e Insights dos Gráficos Gerados
-
-A seguir, uma interpretação dos gráficos que seu script gera. *Para incluir os gráficos diretamente neste relatório Markdown, você precisaria converter este texto para um formato que suporte a incorporação de imagens (como HTML ou PDF) e inserir os arquivos .png gerados.*
-
-### 3.1. Matriz de Confusão Normalizada (Teste)
+Tabela 2 – Relatório de classificação detalhado no conjunto de teste
+------------------------------------------------------------------------------------
+| Classe        | Precision      | Recall         | F1-score       | Support        |
+|:--------------|:---------------|:---------------|:---------------|:---------------|
+| Salário Alto  | 0.84           | 0.84           | 0.84           | 622            |
+| Salário Baixo | 0.83           | 0.83           | 0.83           | 567            |
+|               |                |                |                |                |
+| accuracy      |                |                | 0.83           | 1189           |
+| macro avg     | 0.83           | 0.83           | 0.83           | 1189           |
+| weighted avg  | 0.83           | 0.83           | 0.83           | 1189           |
+------------------------------------------------------------------------------------
 
 
-* **Nome do arquivo**: `matriz_confusao_norm_v7_final_teste.png`
-* **O que ela informa**: A matriz de confusão mostra o desempenho do modelo em termos de classificações corretas e incorretas para cada classe. As porcentagens na diagonal principal representam as taxas de acerto (recall) para cada classe.
-    * **Salário Alto (Verdadeiro) -> Salário Alto (Previsto)**: Aproximadamente 84.08% (diagonal superior esquerda na sua imagem `download (77).png`). O modelo acertou 84.08% dos casos que eram de fato "Salário Alto".
-    * **Salário Baixo (Verdadeiro) -> Salário Baixo (Previsto)**: Aproximadamente 82.54% (diagonal inferior direita na sua imagem `download (77).png`). O modelo acertou 82.54% dos casos que eram de fato "Salário Baixo".
-    * **Fora da diagonal**: Representam os erros.
-        * ~15.92% dos "Salário Alto" foram incorretamente classificados como "Salário Baixo".
-        * ~17.46% dos "Salário Baixo" foram incorretamente classificados como "Salário Alto".
-* **Possíveis Insights**:
-    * O modelo tem um desempenho similar e bom para ambas as classes, com recall em torno de 83-84%.
-    * Há uma taxa de erro relativamente equilibrada entre confundir "Salário Alto" com "Baixo" e vice-versa.
-    * O equilíbrio na distribuição de suporte (622 vs 567) ajuda a dar confiança de que o modelo não está excessivamente enviesado para uma classe.
+O suporte (Support) indica uma distribuição bem equilibrada entre as classes no conjunto de teste (622 instâncias para "Salário Alto" e 567 para "Salário Baixo"). A precisão (Precision) para a classe "Salário Alto" foi de 0.84, indicando que 84% das predições para esta classe estavam corretas. De forma similar, o recall de 0.84 demonstra que o modelo identificou corretamente 84% de todos os casos reais de "Salário Alto". Resultados análogos foram observados para a classe "Salário Baixo". Os valores do F1-score e a proximidade entre as métricas "macro avg" e "weighted avg" reforçam o bom equilíbrio do modelo.
 
-![Image](https://github.com/user-attachments/assets/2e9d9ea5-2a0b-42ae-bd7e-5d4cc188a293)
+---
+## 2 CONFIGURAÇÃO DO MODELO
 
+### 2.1 Atributos selecionados
 
-## 3.2. Importância das Features
+O processo de seleção de atributos com o método RFECV (Recursive Feature Elimination with Cross-Validation) indicou um conjunto final de 6 atributos, a saber: ['P1_a_1', 'P1_l', 'P2_i', 'P2_g_Nivel', 'P2_f_Cargo_Atual', 'Regiao_Mapeada'].
 
-**Nome do arquivo:** `feature_importance_v7_final.png`
+### 2.2 Hiperparâmetros do modelo
 
-**O que ela informa:** Este gráfico de barras horizontais mostra quais features tiveram o maior impacto nas decisões do modelo LightGBM. A importância é geralmente calculada com base em quantas vezes uma feature foi usada para dividir os dados nas árvores do modelo e o quanto essa divisão melhorou a métrica (ganho).
-Na sua última saída, as features mais importantes foram:
-`P2_i` (Tempo de experiência)
-`P2_f_Cargo_Atual` (Cargo atual)
-`P2_g_Nivel` (Nível de senioridade)
-`P1_l` (Nível de ensino)
-`P1_a_1` (Faixa etária)
-`Regiao_Mapeada` (Região onde mora)
+Os hiperparâmetros do modelo LightGBM foram otimizados com a ferramenta Optuna. Os valores selecionados foram:
+* n_estimators: 1100 (valor inicial, com o modelo final utilizando 105 árvores devido ao early stopping)
+* learning_rate: 0.06509228494862056
+* num_leaves: 80
+* max_depth: 12
+* min_child_samples: 25
+* subsample: 0.5
+* colsample_bytree: 0.6
+* reg_alpha: 1.5671157141467156
+* reg_lambda: 14.655960291115573
+* min_split_gain: 0.3854595582770911
+* min_child_weight: 0.1393188921160219
 
-**Possíveis Insights:**
-* Experiência (`P2_i`) e Cargo (`P2_f_Cargo_Atual`) são os preditores mais fortes da faixa salarial, o que é intuitivo.
-* Nível de senioridade (`P2_g_Nivel`), nível de ensino (`P1_l`) e faixa etária (`P1_a_1`) também têm contribuições significativas.
-* A `Regiao_Mapeada` tem uma importância considerável, sugerindo disparidades regionais nos salários.
-* Features como `P1_b` (Gênero), que foi eliminada pelo RFECV na última execução (6 features selecionadas), teriam menor impacto direto na predição deste modelo específico, embora possam interagir com outras features ou ter impacto em análises mais aprofundadas de equidade.
+----
+## 3 ANÁLISE DOS RESULTADOS E INSIGHTS
 
-![Image](https://github.com/user-attachments/assets/48fd3daf-dc28-4a8f-bc89-9459b1945aee)
- 
- ---
- 
-## 3.3. Distribuição de Faixa Salarial por Top 15 Cargos
+A seguir, são apresentadas as análises dos resultados visuais obtidos.
 
-**Nome do arquivo:** `insight_cargo_vs_faixa_salarial_2cat.png`
- 
-**O que ela informa:** É um gráfico de contagem (countplot) que mostra, para os 15 cargos mais frequentes, quantas pessoas se enquadram em "Salário Baixo" e "Salário Alto".
- 
-**Possíveis Insights:**
-* **Cargos com Predominância de "Salário Alto":** Cientista de Dados, Engenheiro/Arquiteto de Dados, Analista de Negócios/Business Analyst (embora este também tenha muitos "Salário Baixo", a proporção de "Salário Alto" é notável).
-* **Cargos com Predominância de "Salário Baixo":** Analista de Dados/Data Analyst, Analista de BI/BI Analyst, "Outra Opção", Desenvolvedor/Engenheiro de Software/Analista de Sistemas.
-* **Insights Específicos:**
-    * "Analista de Dados/Data Analyst" é um cargo muito comum, mas a grande maioria está na faixa "Salário Baixo".
-    * "Cientista de Dados/Data Scientist" tem uma proporção significativamente maior de "Salário Alto" em comparação com "Analista de Dados".
-    * Cargos como "Professor/Pesquisador" e "Estatístico" aparecem com poucas amostras no Top 15, mas os que aparecem tendem a "Salário Alto".
-* Isso pode guiar investigações sobre quais cargos estão associados a melhores remunerações e onde há maior concentração de salários mais baixos.
- 
-![Image](https://github.com/user-attachments/assets/ba7c4d30-870f-48f7-951f-cc2263f9c65a)
- 
- ---
- 
-## 3.4. Distribuição de Faixa Salarial por Nível de Senioridade
- 
-**Nome do arquivo:** `insight_nivel_vs_faixa_salarial_2cat.png`
- 
-**O que ela informa:** Um countplot mostrando a distribuição de "Salário Baixo" e "Salário Alto" para cada nível de senioridade (`P2_g_Nivel`).
- 
-**Possíveis Insights:**
-* **Sênior:** Predominantemente "Salário Alto", com uma contagem quase igual de "Salário Baixo". Isso pode indicar que mesmo em níveis sênior, uma parcela considerável ainda se enquadra no que foi definido como "Salário Baixo" pelo ponto de corte.
-* **Pleno:** Uma grande maioria na categoria "Salário Baixo", com uma pequena parcela em "Salário Alto". Este é o nível com maior número de respondentes.
-* **Júnior:** Quase exclusivamente "Salário Baixo", com pouquíssimas ou nenhuma ocorrência em "Salário Alto".
-* Este gráfico claramente demonstra a progressão salarial esperada com o aumento da senioridade. O caso "Sênior" com uma quantidade relevante de "Salário Baixo" pode merecer uma investigação mais aprofundada (talvez o ponto de corte para "Salário Alto" seja muito exigente, ou há seniors em áreas/empresas que pagam menos).
+### 3.1 Matriz de confusão
 
-![Image](https://github.com/user-attachments/assets/3ee422da-3ebc-4ab5-92d0-208953caf231)
- 
- ---
- 
-## 3.5. Boxplot e Violin Plot de Tempo de Experiência por Faixa Salarial
- 
-**Nomes dos arquivos:** `insight_experiencia_vs_faixa_salarial_2cat_boxplot.png` e `insight_experiencia_vs_faixa_salarial_2cat_violin.png`.
- 
-**O que eles informam:**
-* **Boxplot:** Mostra a distribuição do tempo de experiência (em anos) para cada faixa salarial. Exibe a mediana (linha no meio da caixa), os quartis (bordas da caixa - IQR), e possíveis outliers (pontos).
-* **Violin Plot:** Similar ao boxplot, mas também mostra a densidade da distribuição da experiência para cada faixa salarial (a "largura" do violino indica onde os dados estão mais concentrados).
- 
-**Possíveis Insights:**
-* **Salário Baixo:**
-     * A mediana da experiência é baixa (parece estar entre 1 e 2 anos no boxplot).
-     * A maioria dos dados está concentrada em poucos anos de experiência (0-3 anos, aproximadamente, como visto pela largura do violino e a caixa do boxplot).
-     * Há alguns outliers com mais experiência que ainda estão na faixa de "Salário Baixo".
-* **Salário Alto:**
-     * A mediana da experiência é significativamente mais alta (parece estar em torno de 5 anos no boxplot).
-     * A distribuição da experiência é mais ampla e espalhada para cima, com uma concentração notável em torno de 2-3 anos e depois novamente em níveis mais altos de experiência. O violin plot mostra múltiplas "modas" ou concentrações.
-     * O IQR (caixa do boxplot) é maior, indicando maior variabilidade na experiência para quem está em "Salário Alto".
-* **Comparação:** Claramente, indivíduos com "Salário Alto" tendem a ter mais tempo de experiência. O violin plot para "Salário Alto" é interessante, pois sugere que há diferentes "grupos" de experiência que alcançam salários altos – talvez alguns com menos anos, mas em posições/empresas específicas, e um grupo maior com experiência mais consolidada. Os outliers de "Salário Baixo" com alta experiência podem ser casos de transição de carreira, atuação em setores/regiões com menor remuneração, ou outras particularidades.
- 
-![Image](https://github.com/user-attachments/assets/390ae2c5-36e8-4af9-9eda-ba46a1abaf7b)
-![Image](https://github.com/user-attachments/assets/c8674650-d96c-4932-972b-c8d1a0ac64f9)
- 
- ---
- 
-## 4. Considerações Finais
- 
-Os resultados indicam que o modelo LightGBM tem um bom potencial para classificar faixas salariais. 
-A análise da importância das features e dos gráficos de distribuição fornece insights valiosos sobre os fatores que influenciam os salários e como eles se relacionam com as duas categorias definidas. 
-A escolha do `point_of_cut_fixed` é crucial para a definição das classes e afeta diretamente a interpretação e o balanceamento do suporte. 
-Ajustes iterativos nesse ponto de corte, com base na análise do histograma de salários e nos objetivos de balanceamento, são recomendados para refinar ainda mais o modelo e os insights.
+A matriz de confusão, apresentada na Figura 1, visualiza o desempenho do modelo em termos de classificações corretas e incorretas para cada classe.
+
+Figura 1 – Matriz de confusão normalizada para o conjunto de teste
+[LOCAL DA IMAGEM: matriz_confusao_norm_v7_final_teste.png]
+
+As porcentagens na diagonal principal representam as taxas de acerto (recall). O modelo classificou corretamente 84,08% dos casos que eram "Salário Alto" e 82,54% dos casos que eram "Salário Baixo". Os erros, representados fora da diagonal principal, mostram que aproximadamente 15,92% dos "Salário Alto" foram classificados incorretamente como "Salário Baixo", e 17,46% dos "Salário Baixo" foram classificados como "Salário Alto". O desempenho é similar e bom para ambas as classes, com uma taxa de erro relativamente equilibrada.
+
+### 3.2 Importância dos atributos
+
+A Figura 2 ilustra quais atributos tiveram o maior impacto nas decisões do modelo.
+
+Figura 2 – Importância dos atributos (features) do modelo LightGBM
+[LOCAL DA IMAGEM: feature_importance_v7_final.png]
+
+Observa-se que a experiência (`P2_i`), o cargo atual (`P2_f_Cargo_Atual`) e o nível de senioridade (`P2_g_Nivel`) são os preditores mais fortes da faixa salarial. O nível de ensino (`P1_l`), a faixa etária (`P1_a_1`) e a região (`Regiao_Mapeada`) também apresentam contribuições significativas, sugerindo a influência de fatores demográficos e geográficos na remuneração.
+
+### 3.3 Distribuição salarial por cargo
+
+A Figura 3 exibe a distribuição das faixas salariais para os 15 cargos mais frequentes na amostra.
+
+Figura 3 – Distribuição de faixa salarial por Top 15 cargos
+[LOCAL DA IMAGEM: insight_cargo_vs_faixa_salarial_2cat.png]
+
+A análise indica que cargos como "Cientista de Dados" e "Engenheiro/Arquiteto de Dados" possuem predominância de "Salário Alto". Em contrapartida, cargos como "Analista de Dados/Data Analyst" e "Analista de BI" concentram a maior parte dos profissionais na faixa de "Salário Baixo". Este resultado pode guiar investigações sobre a valorização de diferentes especialidades no mercado de dados.
+
+### 3.4 Distribuição salarial por nível de senioridade
+
+A relação entre o nível de senioridade e a faixa salarial é detalhada na Figura 4.
+
+Figura 4 – Distribuição de faixa salarial por nível de senioridade
+[LOCAL DA IMAGEM: insight_nivel_vs_faixa_salarial_2cat.png]
+
+Como esperado, o nível "Júnior" está quase exclusivamente associado a "Salário Baixo", enquanto o nível "Sênior" apresenta predominância de "Salário Alto". O nível "Pleno", que concentra o maior número de respondentes, tem uma maioria na categoria "Salário Baixo". O gráfico demonstra a progressão salarial esperada com o avanço na carreira.
+
+### 3.5 Distribuição da experiência por faixa salarial
+
+As Figuras 5 e 6 apresentam a distribuição do tempo de experiência para cada faixa salarial por meio de um boxplot e um violin plot, respectivamente.
+
+Figura 5 – Boxplot do tempo de experiência por faixa salarial
+[LOCAL DA IMAGEM: insight_experiencia_vs_faixa_salarial_2cat_boxplot.png]
+
+Figura 6 – Violin plot do tempo de experiência por faixa salarial
+[LOCAL DA IMAGEM: insight_experiencia_vs_faixa_salarial_2cat_violin.png]
+
+A análise dos gráficos revela que a mediana de experiência para a faixa de "Salário Baixo" é significantemente inferior à da faixa de "Salário Alto" (aproximadamente 1-2 anos contra cerca de 5 anos). O violin plot (Figura 6) sugere que a distribuição para "Salário Alto" é mais ampla e possui múltiplas concentrações, indicando que diferentes níveis de experiência podem alcançar remunerações mais altas, possivelmente a depender de outros fatores como cargo ou empresa.
+
+---
+## 4 CONSIDERAÇÕES FINAIS
+
+Os resultados indicam que o modelo LightGBM possui bom potencial preditivo para a classificação de faixas salariais. A análise dos atributos e das distribuições fornece insights valiosos sobre os fatores que influenciam a remuneração no setor de dados. A definição do ponto de corte que separa as classes ("Salário Alto" e "Salário Baixo") é um elemento crucial que afeta diretamente a interpretação dos resultados e o balanceamento do modelo, sendo um parâmetro que pode ser ajustado em iterações futuras para refinar a análise.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Indução de modelos
+## Resultados obtidos com os Modelos 3º pergunta orietada a dados
 
-# Modelo 4: Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2)
+###  Rede Neural com Embeddings e Otimização via Ray Tune (RNA v2) - (Modelo 3.2)
+---
+## 1 AVALIAÇÃO DO MODELO DE REDE NEURAL (RNA V2)
 
-## 1. Justificativa e Objetivo
+Esta seção apresenta os resultados da avaliação do modelo de Rede Neural Artificial (RNA v2), desenvolvido para a classificação de faixa salarial. A análise inclui as métricas de desempenho e a interpretação dos padrões identificados pelo modelo.
 
-O objetivo deste modelo é classificar a faixa salarial de indivíduos em duas categorias: "Salário Baixo" e "Salário Alto", utilizando uma abordagem de rede neural artificial (RNA). A intenção é explorar se uma arquitetura de RNA, com capacidade de aprender interações complexas e representações ricas para features categóricas (via embeddings), pode oferecer um desempenho comparável ou superior aos modelos baseados em árvores para a mesma pergunta orientada a dados.
+### 1.1 DESEMPENHO DO MODELO
 
-A classificação binária ("Salário Baixo" vs. "Salário Alto") visa simplificar o problema e potencialmente melhorar a distinção entre os grupos salariais. Foi utilizado um ponto de corte fixo de R$ 7.500,00 para a variável `salary_numeric_lower_bound` para realizar essa divisão. Com base nos logs anteriores, isso resultou em aproximadamente 2268 amostras para "Salário Baixo" e 2485 para "Salário Alto" no dataset processado antes da divisão treino/teste.
+O desempenho do modelo foi aferido após a etapa de otimização de hiperparâmetros (HPO) e validado no conjunto de teste. A Tabela 1 consolida as principais métricas de performance.
 
-## 2. Processo de Amostragem de Dados e Configuração do Modelo RNA v2
+Tabela 1 – Métricas de avaliação do modelo RNA v2
+------------------------------------------------------------------
+| Métrica                       | Valor          |
+|-------------------------------|----------------|
+| Melhor Acurácia Validação HPO | 0.8345         |
+| Acurácia no Teste             | 0.8377         |
+| Precisão Média (Macro Avg)    | 0.8377         |
+| F1-Score (Ponderado) Teste    | 0.8377         |
+| ROC AUC (Binário) Teste       | 0.9263         |
+------------------------------------------------------------------
 
-(Esta seção detalharia as etapas de particionamento de dados, pré-processamento específico para RNA como escalonamento e label encoding + embeddings, a arquitetura da rede neural Keras, e a otimização de hiperparâmetros com Ray Tune, conforme discutido e implementado no código da RNA v2).
+A Tabela 2 detalha o relatório de classificação no conjunto de teste, apresentando as métricas de Precision, Recall e F1-score para cada classe.
 
-### 2.1. Features Utilizadas (Entrada para a RNA v2)
-As features utilizadas diretamente pela Rede Neural v2 foram (após mapeamento e tratamento inicial):
-* Faixa etária (`P1_a_1`)
-* Gênero (`P1_b`)
-* Nível de ensino (`P1_l`)
-* Tempo de experiência na área de dados (`P2_i`)
-* Nível de senioridade (`P2_g_Nivel`)
-* Cargo atual (`P2_f_Cargo_Atual`)
-* Região Mapeada (derivada da UF)
-
-### 2.2. Melhores Hiperparâmetros (Ray Tune) para RNA v2 (Exemplo da Última Execução Bem-Sucedida)
-* `dense_units_1`: 64
-* `dense_units_2`: 128 (mas `num_hidden_layers`: 1, então esta não foi usada)
-* `dropout_1`: 0.45
-* `dropout_2`: 0.30 (não usada se `num_hidden_layers`: 1)
-* `learning_rate_nn`: 0.0002366...
-* `batch_size`: 32
-* `epochs`: 50 (controlado por EarlyStopping)
-* `num_hidden_layers`: 1
-* `early_stopping_patience`: 10
-* `l2_strength_embedding`: 0.0046...
-* `l2_strength_dense`: 4.19e-05
-* `optimizer`: 'adam'
-* `emb_dim_P1_a_1`: 8, `emb_dim_P1_b`: 4, `emb_dim_P1_l`: 4, `emb_dim_P2_g_Nivel`: 4, `emb_dim_P2_f_Cargo_Atual`: 9, `emb_dim_Regiao_Mapeada`: 4
-
-## 3. Resultados da Avaliação da Rede Neural v2 (RNA v2)
-
-Com base nos logs da última execução bem-sucedida:
-
-| Métrica                          | Valor  |
-| :------------------------------- | :----- |
-| **Melhor Acurácia Validação HPO**| 0.8345 |
-| **Acurácia no Teste** | 0.8377 |
-| Precisão Média (Macro Avg) Teste | 0.8377 (calculado a partir do relatório) |
-| F1-Score (Ponderado) Teste       | 0.8377 |
-| **ROC AUC (Binário) Teste** | 0.9263 |
-
-**Relatório de Classificação Detalhado (Teste - RNA v2):**
-
-| Classe        | Precision | Recall | F1-score | Support |
-| :------------ | :-------- | :----- | :------- | :------ |
-| Salário Alto  | 0.85      | 0.84   | 0.84     | 622     |
-| Salário Baixo | 0.83      | 0.84   | 0.83     | 567     |
-|               |           |        |          |         |
-| accuracy      |           |        | 0.84     | 1189    |
-| macro avg     | 0.84      | 0.84   | 0.84     | 1189    |
-| weighted avg  | 0.84      | 0.84   | 0.84     | 1189    |
-
-*(Nota: Os valores de Precision, Recall, F1-score para macro e weighted avg no relatório acima são ligeiramente diferentes dos que constavam no log de resumo para Precisão Média (Macro Avg). Utilizei os valores do relatório de classificação mais detalhado do seu último log para esta tabela.)*
-
-## 4. Análise e Insights dos Gráficos Gerados (Contexto RNA v2)
-
-### 4.1. Matriz de Confusão Normalizada (Teste - RNA v2)
-
-* **Nome do arquivo (gerado pelo script de plotagem adaptado)**: `matriz_confusao_norm_RNA.png` (substituindo a imagem `download.png` fornecida).
-* **O que ela informa**: A matriz de confusão mostra o desempenho do modelo RNA v2 em termos de classificações corretas e incorretas para cada classe no conjunto de teste. As porcentagens na diagonal principal representam as taxas de acerto (recall) para cada classe.
-    * **Salário Alto (Verdadeiro) -> Salário Alto (Previsto)**: Aproximadamente 83.60% (valor da imagem `download.png` que você forneceu). *Este valor deve ser consistente com o Recall de "Salário Alto" do relatório de classificação da RNA v2, que foi 0.84.*
-    * **Salário Baixo (Verdadeiro) -> Salário Baixo (Previsto)**: Aproximadamente 83.95% (valor da imagem `download.png` que você forneceu). *Este valor deve ser consistente com o Recall de "Salário Baixo" do relatório de classificação da RNA v2, que foi 0.84.*
-    * **Fora da diagonal**: Representam os erros.
-        * ~16.40% dos "Salário Alto" foram incorretamente classificados como "Salário Baixo" (pela imagem `download.png`).
-        * ~16.05% dos "Salário Baixo" foram incorretamente classificados como "Salário Alto" (pela imagem `download.png`).
-* **Possíveis Insights**:
-    * O modelo RNA v2 apresenta um bom equilíbrio no desempenho entre as classes, com recall em torno de 84% para ambas, conforme o relatório de classificação.
-    * As taxas de erro entre confundir "Salário Alto" com "Baixo" e vice-versa são relativamente similares.
-
-*(Placeholder para a imagem da matriz de confusão da RNA v2 - `download.png`)*
-![Matriz de Confusão RNA v2](download.png)
-
-### 4.2. Importância das Features (RNA v2)
-
-* **O que ela informa**: Para redes neurais, a "importância das features" não é obtida diretamente como em modelos baseados em árvores. Técnicas como Permutation Importance ou SHAP values podem ser aplicadas para estimar a contribuição de cada feature.
-* **Possíveis Insights (Geral, com base na expectativa e na seleção de features para a RNA v2)**:
-    * Espera-se que features ligadas à **proficiência técnica** como `P2_i` (Tempo de experiência), `P2_f_Cargo_Atual` (Cargo atual) e `P2_g_Nivel` (Nível de senioridade) tenham um impacto significativo.
-    * **Características demográficas** como `P1_l` (Nível de ensino), `P1_a_1` (Faixa etária) e `P1_b` (Gênero) também são consideradas pelo modelo e sua influência pode ser analisada com as técnicas mencionadas.
-    * A `Regiao_Mapeada` também é um fator que o modelo considera.
-    * A análise quantitativa exata da importância requereria a aplicação das técnicas mencionadas (Permutation Importance ou SHAP) no modelo RNA v2 treinado.
+Tabela 2 – Relatório de classificação detalhado do modelo RNA v2 no conjunto de teste
+------------------------------------------------------------------------------------
+| Classe        | Precision      | Recall         | F1-score       | Support        |
+|:--------------|:---------------|:---------------|:---------------|:---------------|
+| Salário Alto  | 0.85           | 0.84           | 0.84           | 622            |
+| Salário Baixo | 0.83           | 0.84           | 0.83           | 567            |
+|               |                |                |                |                |
+| accuracy      |                |                | 0.84           | 1189           |
+| macro avg     | 0.84           | 0.84           | 0.84           | 1189           |
+| weighted avg  | 0.84           | 0.84           | 0.84           | 1189           |
+------------------------------------------------------------------------------------
 
 ---
+## 2 ANÁLISE DOS RESULTADOS
 
-### 4.3. Distribuição de Faixa Salarial (Real) por Top 15 Cargos (Contexto RNA v2)
+A análise a seguir explora os resultados visuais gerados a partir do desempenho do modelo RNA v2 e do contexto dos dados utilizados para o seu treinamento.
 
-* **Nome do arquivo**: `dist_salario_top15_cargos_RNA_contexto.png`
-* **O que ela informa**: Mostra, para os 15 cargos mais frequentes no dataset, a contagem de profissionais que se enquadram na categoria "Salário Baixo" versus "Salário Alto" (com base na variável alvo real). Isso fornece o contexto dos dados que a RNA tentou modelar.
-* **Possíveis Insights**:
-    * Permite identificar cargos onde há uma predominância de profissionais em faixas salariais mais altas ou mais baixas.
-    * Por exemplo, cargos como "Cientista de Dados" e "Engenheiro de Dados" tendem a ter uma proporção maior de "Salário Alto", enquanto "Analista de Dados" pode ter uma maior concentração em "Salário Baixo".
-    * A RNA tenta aprender esses padrões para realizar suas classificações.
+### 2.1 Matriz de confusão
 
-*(Placeholder para a imagem `dist_salario_top15_cargos_RNA_contexto.png`)*
-![Distribuição de Faixa Salarial por Top 15 Cargos](dist_salario_top15_cargos_RNA_contexto.png)
+A matriz de confusão normalizada (Figura 1) demonstra a performance do modelo RNA v2 na classificação de cada classe. Os valores na diagonal principal correspondem à taxa de acerto (recall).
 
----
+Figura 1 – Matriz de confusão normalizada para o conjunto de teste (RNA v2)
+[LOCAL DA IMAGEM: matriz_confusao_norm_RNA.png]
 
-### 4.4. Distribuição de Faixa Salarial (Real) por Nível de Senioridade (Contexto RNA v2)
+O modelo identificou corretamente cerca de 83,6% dos casos de "Salário Alto" e 84,0% dos casos de "Salário Baixo", valores consistentes com o recall de 0.84 reportado na Tabela 2. As taxas de erro entre confundir as duas classes são similares, indicando um desempenho equilibrado. Cerca de 16,4% dos "Salário Alto" foram classificados incorretamente, enquanto o erro para "Salário Baixo" foi de aproximadamente 16,0%.
 
-* **Nome do arquivo**: `dist_salario_senioridade_RNA_contexto.png`
-* **O que ela informa**: Apresenta a distribuição de "Salário Baixo" e "Salário Alto" (variável alvo real) para cada nível de senioridade.
-* **Possíveis Insights**:
-    * Demonstra a progressão salarial esperada com o aumento da senioridade: Júniores majoritariamente em "Salário Baixo", Plenos com uma mistura, e Sêniores com uma proporção maior em "Salário Alto".
-    * A RNA utiliza o nível de senioridade como uma feature importante para distinguir as faixas salariais.
+### 2.2 Importância dos atributos
 
-*(Placeholder para a imagem `dist_salario_senioridade_RNA_contexto.png`)*
-![Distribuição de Faixa Salarial por Nível de Senioridade](dist_salario_senioridade_RNA_contexto.png)
+A determinação da importância dos atributos (features) em redes neurais difere de modelos baseados em árvores e geralmente requer técnicas específicas, como Permutation Importance ou SHAP (SHapley Additive exPlanations). Embora uma análise quantitativa não tenha sido executada, espera-se que atributos ligados à proficiência técnica, como `P2_i` (Tempo de experiência), `P2_f_Cargo_Atual` (Cargo atual) e `P2_g_Nivel` (Nível de senioridade), apresentem um impacto significativo no poder preditivo do modelo, juntamente com características demográficas como `P1_l` (Nível de ensino) e `P1_a_1` (Faixa etária), e geográficas, como `Regiao_Mapeada`.
 
----
+### 2.3 Distribuição salarial por cargo
 
-### 4.5. Boxplot e Violin Plot de Tempo de Experiência (Real) por Faixa Salarial (Contexto RNA v2)
+A Figura 2 apresenta a distribuição real da faixa salarial para os 15 cargos mais frequentes no conjunto de dados, fornecendo o contexto que o modelo de rede neural buscou aprender.
 
-* **Nome do arquivo**: `dist_experiencia_salario_RNA_contexto.png` (Esta imagem parece ser os dois plots combinados ou um deles. Assumirei que representa ambos os conceitos).
-* **O que eles informam**:
-    * Mostram a distribuição do tempo de experiência (em anos) para os profissionais classificados na variável alvo real como "Salário Baixo" versus "Salário Alto".
-    * Exibem medianas, quartis e a densidade da distribuição da experiência.
-* **Possíveis Insights**:
-    * Indivíduos na faixa "Salário Alto" tendem a ter, em média e mediana, mais tempo de experiência.
-    * A dispersão da experiência pode ser diferente entre as duas faixas salariais. O violin plot pode revelar se há concentrações específicas de anos de experiência que levam a salários mais altos.
-    * A experiência é uma das features mais importantes para a RNA, e estes gráficos ilustram o porquê.
+Figura 2 – Distribuição de faixa salarial (Real) por Top 15 cargos
+[LOCAL DA IMAGEM: dist_salario_top15_cargos_RNA_contexto.png]
 
-*(Placeholder para a imagem `dist_experiencia_salario_RNA_contexto.png`)*
-![Boxplot e Violin Plot de Tempo de Experiência por Faixa Salarial](dist_experiencia_salario_RNA_contexto.png)
+A análise do gráfico permite identificar cargos com predominância de faixas salariais específicas. Cargos como "Cientista de Dados" e "Engenheiro de Dados" apresentam uma maior proporção de profissionais na faixa "Salário Alto", ao passo que "Analista de Dados" concentra uma maior quantidade na faixa "Salário Baixo".
+
+### 2.4 Distribuição salarial por nível de senioridade
+
+De forma análoga, a Figura 3 ilustra a distribuição real da faixa salarial conforme o nível de senioridade.
+
+Figura 3 – Distribuição de faixa salarial (Real) por nível de senioridade
+[LOCAL DA IMAGEM: dist_salario_senioridade_RNA_contexto.png]
+
+O gráfico demonstra uma clara progressão salarial associada ao aumento da senioridade. Profissionais de nível "Júnior" estão majoritariamente na faixa "Salário Baixo", enquanto profissionais de nível "Sênior" possuem uma proporção maior na faixa "Salário Alto", um padrão que a rede neural utiliza como um forte indicador para a classificação.
+
+### 2.5 Distribuição da experiência por faixa salarial
+
+A Figura 4 exibe a distribuição do tempo de experiência para cada faixa salarial real, utilizando um boxplot e um violin plot.
+
+Figura 4 – Distribuição do tempo de experiência por faixa salarial (Real)
+[LOCAL DA IMAGEM: dist_experiencia_salario_RNA_contexto.png]
+
+Os gráficos mostram que indivíduos na faixa "Salário Alto" tendem a possuir, na mediana, mais tempo de experiência. A dispersão dos dados, visível no violin plot, também indica que a variabilidade da experiência é diferente entre as duas faixas. Este atributo é, portanto, fundamental para a distinção das classes pelo modelo.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # _Interpretação dos modelos_
