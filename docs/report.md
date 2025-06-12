@@ -59,6 +59,9 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [11.2. Interpretação dos Modelos 2° pergunta orietada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
     *   [11.3. Interpretação dos Modelos 3° pergunta orietada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
 *   [12. ANÁLISE COMPARATIVA DOS MODELOS](#análise-comparativa-dos-modelos)
+    *   [Análise comparativa dos modelos da 1º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-1º-pergunta-orientada-a-dados)
+    *   [Análise comparativa dos modelos da 2º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-2º-pergunta-orientada-a-dados)
+    *   [Análise comparativa dos modelos da 3º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-3º-pergunta-orientada-a-dados)
 *   [13. CONCLUSÃO](#-conclusão)
 *   [14. REFERÊNCIAS](#referências)
 *   [15. APÊNDICES](#apêndices)
@@ -6944,6 +6947,12 @@ Esta interpretação visa cobrir os aspectos mais relevantes do seu modelo RNA v
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Análise comparativa dos modelos
+
+*   [Análise comparativa dos modelos da 1º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-1º-pergunta-orientada-a-dados)
+*   [Análise comparativa dos modelos da 2º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-2º-pergunta-orientada-a-dados)
+*   [Análise comparativa dos modelos da 3º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-3º-pergunta-orientada-a-dados)
+
+
 
 # Análise comparativa dos modelos da 1º pergunta orientada a dados
 
