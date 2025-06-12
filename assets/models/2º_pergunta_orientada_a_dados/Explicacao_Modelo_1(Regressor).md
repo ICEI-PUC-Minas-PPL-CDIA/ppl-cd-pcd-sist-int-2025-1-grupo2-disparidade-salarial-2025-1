@@ -46,7 +46,7 @@
 ## 3. Integração com Dados Educacionais Regionais
 
 * **Agregação Regional:**
-    * A base `df_edu` é agrupada pela coluna `'NO_REGIAO_IES'`, somando:
+    * A base `df_edu` é agrupada pela coluna `'NO_REGIAO_IES'`,  somando:
         - Quantidade total de docentes (`QT_DOC_TOTAL`);
         - Técnicos administrativos (`QT_TEC_TOTAL`);
         - Docentes com mestrado e doutorado;
