@@ -1,0 +1,42 @@
+### Interpretação do modelo 2_2Add commentMore actions
+
+**Matriz de Confusão**
+
+| Classe         | Predito: R$ 1k-2k | Predito: R$ 2k-3k | Predito: R$ 3k-4k |
+|---------------|:-----------------:|:-----------------:|:-----------------:|
+| Real: R$ 1k-2k |        0          |        1          |        0          |
+| Real: R$ 2k-3k |        0          |        1          |        0          |
+| Real: R$ 3k-4k |        0          |        1          |        0          |
+
+**Relatório de Classificação**
+
+| Classe                          | Precision | Recall | F1-score | Suporte |
+|----------------------------------|:---------:|:------:|:--------:|:-------:|
+| de R$ 1.001/mês a R$ 2.000/mês   |   0.00    |  0.00  |   0.00   |    1    |
+| de R$ 2.001/mês a R$ 3.000/mês   |   0.33    |  1.00  |   0.50   |    1    |
+| de R$ 3.001/mês a R$ 4.000/mês   |   0.00    |  0.00  |   0.00   |    1    |
+| **Acurácia**                     |           |        |  0.33    |    3    |
+| **Macro avg**                    |   0.11    |  0.33  |   0.17   |    3    |
+| **Weighted avg**                 |   0.11    |  0.33  |   0.17   |    3    |
+
+**Importância das Variáveis**
+
+| Feature                    | Importância |
+|----------------------------|:----------:|
+| experiencia_num            |   0.00%    |
+| nivel_cod                  |   0.00%    |
+| docentes_regiao            |   0.00%    |
+| tecnicos_regiao            |   0.00%    |
+| docentes_mestrado_regiao   |   0.00%    |
+| num_ies_regiao             |   0.00%    |
+
+**Interpretação:**
+
+Uma importância de 0% significa que a feature raramente (ou nunca) foi usada para dividir os nós das árvores, ou que sua contribuição para a redução da impureza foi insignificante.
+Em modelos reais, espera-se que algumas features tenham importâncias significativamente maiores, indicando que são mais relevantes para a classificação.
+
+**Resumo**
+
+O RandomForestClassifier toma decisões combinando várias árvores de decisão, cada uma baseada em regras de splits em features diferentes.
+A análise da importância das features mostra quais atributos mais influenciaram as decisões do modelo — sendo essencial para interpretar o “raciocínio” do sistema inteligente.
+No caso apresentado, todas as importâncias ficaram em 0%, indicando que o modelo não encontrou padrões relevantes nos dados, provavelmente devido ao baixo volume de dados ou falta de variabilidade nas features.
