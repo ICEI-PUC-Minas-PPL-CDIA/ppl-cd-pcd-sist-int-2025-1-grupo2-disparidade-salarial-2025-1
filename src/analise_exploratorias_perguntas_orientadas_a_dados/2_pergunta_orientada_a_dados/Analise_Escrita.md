@@ -1,6 +1,6 @@
 ## Análise Exploratória: Relação entre Experiência, Senioridade e Salário
 
-# 1. Distribuição Salarial por Região
+# **1. Distribuição Salarial por Região**
 A primeira visualização (scatter plot) mostra claramente uma disparidade regional nos salários médios de profissionais de dados:
 
 Sudeste apresenta o maior salário médio (aproximadamente R$ 9.000) com o maior número de profissionais (cerca de 1.150)
@@ -13,7 +13,7 @@ Norte e Nordeste registram os menores salários médios (R$ 7.500 e R$ 7.000 res
 
 Esta distribuição regional é importante porque estabelece um contexto geográfico para as disparidades salariais que precisam ser consideradas ao analisar senioridade e experiência.
 
-# 2. Análise de Tempo de Experiência vs. Salário
+# 2. **Análise de Tempo de Experiência vs. Salário**
 Os dados da pesquisa mostram uma clara progressão salarial conforme aumenta o tempo de experiência:
 
 Profissionais com menos de 1 ano de experiência tendem a receber salários entre R$ 4.000-6.000 (média estimada R$ 5.000,50 como visto no exemplo do DataFrame)
@@ -22,7 +22,7 @@ Profissionais com 1 a 2 anos apresentam variação salarial entre R$ 6.000-8.000
 
 Profissionais com 3 a 4 anos mostram salários entre R$ 6.000-8.000 para Pleno e R$ 12.000-16.000 para Sênior
 
-# 3. Correlação entre Nível de Senioridade e Faixa Salarial
+# 3. **Correlação entre Nível de Senioridade e Faixa Salarial**
 Os dados revelam um padrão consistente de progressão salarial por nível:
 
 Júnior: Concentrados nas faixas de R$ 4.000-6.000 e R$ 6.000-8.000
@@ -31,14 +31,14 @@ Pleno: Predominantemente nas faixas de R$ 6.000-8.000 e R$ 8.000-12.000
 
 Sênior: Principalmente na faixa de R$ 12.000-16.000
 
-#4. Influência da Formação Acadêmica
+# 4. **Influência da Formação Acadêmica**
 A análise mostra que formação acadêmica interage com experiência e senioridade:
 
 Profissionais com Doutorado podem alcançar níveis salariais mais altos mesmo com menos tempo de experiência (exemplo: R$ 14.000,50 para Sênior com 3-4 anos)
 
 Estudantes de Graduação com experiência adequada (1-2 anos) podem atingir posições Pleno com faixas salariais de R$ 8.000-12.000
 
-#5. Conclusões Preliminares
+# 5. **Conclusões Preliminares**
 Existe uma relação direta e positiva entre tempo de experiência, nível de senioridade e faixa salarial
 
 A progressão de Júnior para Pleno mostra um aumento médio de 40-60% na remuneração
