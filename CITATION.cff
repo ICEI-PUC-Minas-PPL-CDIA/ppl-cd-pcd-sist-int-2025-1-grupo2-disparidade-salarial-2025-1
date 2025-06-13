@@ -4,19 +4,22 @@ title: Disparidade Salarial dos Profissionais de Dados no Brasil
 authors:
   - name-suffix: Aluno
     affiliation: PUC Minas
-    family-names: Soares
-    given-names: Pedro
-    orcid: "https://orcid.org/0009-0004-7584-8126"
-  - name-suffix: Aluno
-    affiliation: PUC Minas
     family-names: Gripp
     given-names: Enzo
+    email: eabgripp@sga.pucminas.br
     orcid: "https://orcid.org/0009-0000-2456-6082"
   - name-suffix: Aluno
     affiliation: PUC Minas
-    family-names: ...
+    family-names: Chaves
     given-names: Gabriel
     orcid: ""
+    email: gabriel.nascimento.1483087@sga.pucminas.br
+  - name-suffix: Aluno
+    affiliation: PUC Minas
+    family-names: Soares
+    given-names: Pedro
+    orcid: "https://orcid.org/0009-0004-7584-8126"
+    email: pdsoares@sga.pucminas.br
   - name-suffix: Professor
     affiliation: PUC Minas
     family-names: de Paula
