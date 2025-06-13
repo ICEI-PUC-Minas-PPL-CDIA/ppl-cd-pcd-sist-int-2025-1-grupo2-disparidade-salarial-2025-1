@@ -2,6 +2,21 @@ cff-version: 1.0.1
 message: Por favor, cite o repositório utilizando estes metadados.
 title: Disparidade Salarial dos Profissionais de Dados no Brasil
 authors:
+  - name-suffix: Aluno
+    affiliation: PUC Minas
+    family-names: Soares
+    given-names: Pedro
+    orcid: "https://orcid.org/0009-0004-7584-8126"
+  - name-suffix: Aluno
+    affiliation: PUC Minas
+    family-names: Gripp
+    given-names: Enzo
+    orcid: "https://orcid.org/0009-0000-2456-6082"
+  - name-suffix: Aluno
+    affiliation: PUC Minas
+    family-names: ...
+    given-names: Gabriel
+    orcid: ""
   - name-suffix: Professor
     affiliation: PUC Minas
     family-names: de Paula
@@ -10,21 +25,6 @@ authors:
     affiliation: PUC Minas
     family-names: Curto
     given-names: Hayala
-  - name-suffix: Aluno
-    affiliation: PUC Minas
-    family-names: Soares
-    given-names: Pedro
-    orcid: "[https://orcid.org/0009-0004-7584-8126]"
-  - name-suffix: Aluno
-    affiliation: PUC Minas
-    family-names: Gripp
-    given-names: Enzo
-    orcid: "[https://orcid.org/0009-0000-2456-6082]"
-  - name-suffix: Aluno
-    affiliation: PUC Minas
-    family-names: ...
-    given-names: Gabriel
-    orcid: "[]"
 keywords:
   - Ciência de Dados
   - Jupyter Notebooks
