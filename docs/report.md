@@ -6983,16 +6983,16 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 ## Artefatos relacionados a 3º pergunta orientada a dados
 ### Base de Dados Originais
-[Base de Dados Originais]()  ⚠️(3ºPerguntOrientadaaDados) 
+[Base de Dados Originais](/assets/data/bases_principais/base_principal_state_of_data)   
 
 ### Limpeza de Dados
-[Limpeza de Dados]() ⚠️(3ºPerguntOrientadaaDados) 
+[Limpeza de Dados](/assets/data/cleaned_data/3_pergunta_orientada_a_dados)  
 
 ### Analise Exploratória de Dados
-[Análise Exploratória de Dados]() ⚠️(3ºPerguntOrientadaaDados) 
+[Análise Exploratória de Dados](/assets/results/análise_exploratória_de_dados/3_pergunta_orientada_a_dados)  
 
 ### Indução a Modelos
-[Indução a Modelos]() ⚠️(3ºPerguntOrientadaaDados) 
+[Indução a Modelos](/assets/results/modelos/3_pergunta_orientada_a_dados) 
 
 ---
 
