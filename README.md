@@ -65,36 +65,36 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
         * Criação do descrição de dados.
 * 1.0
     * Definição das perguntas orientadas a dados.
-* 1.1 
-    * Preparação de dados.
-* 1.2
-    * Enriquecimeno de dados.
+      * 1.1 
+          * Preparação de dados.
+      * 1.2
+          * Enriquecimeno de dados.
 * 2.0
     * Criação do sumário das analises exploratórias
-* 2.1
-    * Desenvolvimento das analises exploratorias
-* 2.2
-    * Anexando resultados obtidos
-    * 2.2.1
-        * Explicando resultados obtidos.
+      * 2.1
+          * Desenvolvimento das analises exploratorias
+      * 2.2
+          * Anexando resultados obtidos
+             * 2.2.1
+                 * Explicando resultados obtidos.
 * 3.0
     * A partir dos resultados obtidos, inciamos o desenvolvimento do algoritimo de aprendizado de máquina, para previsão da variação salarial com base nos fatores identificados.
-* 3.1
-    * Criação do sumário de induções ao modelo
-* 3.2
-    * Realização de diversos testes de algoritimos e desenvolviento de diversas versões.
+      * 3.1
+          * Criação do sumário de induções ao modelo
+      * 3.2
+          * Realização de diversos testes de algoritimos e desenvolviento de diversas versões.
 * 4.0 
     * Implementação do algoritimo no colab e no kaggle notebook.
-* 4.1
-    * Manutenções e gerações de diversas versões do algoritimo.
-* 4.2
-    * Obtenção dos resultados 
+      * 4.1
+             * Manutenções e gerações de diversas versões do algoritimo.
+      * 4.2
+             * Obtenção dos resultados 
 * 5.0
     * Explicação dos resultados
-* 5.1 
-    * Explicação dos codigos do trabalho
-* 5.2 
-    * Interpretação dos modelos
-* 5.3 
-    * Analise comparativa dos modelos
+      * 5.1 
+             * Explicação dos codigos do trabalho
+      * 5.2 
+             * Interpretação dos modelos
+      * 5.3 
+             * Analise comparativa dos modelos
 * 6.0 Preenchimento do Citation.CFF
