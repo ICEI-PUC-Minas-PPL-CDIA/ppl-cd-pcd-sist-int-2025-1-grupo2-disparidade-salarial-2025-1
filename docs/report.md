@@ -6910,7 +6910,7 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 ## Códigos relacionados a 1º pergunta orientada a dados
 
 ### Limpeza de Dados
-- [Limpeza de Dados Base Principal State of Data](/src/code_data_cleanest/base_principal_state_of_data/1_pergunta_orientada_a_dados/versão_3) 
+- [Limpeza de Dados Base Principal State of Data](/src/code_data_cleanest/base_principal_state_of_data/1_pergunta_orientada_a_dados/versão_3)  
 - [Limpeza de Dados Base Auxiliar](/src/code_data_cleanest/base_auxiliares/1_pergunta_orientada_a_dados) 
 
 ### Analise Exploratória de Dados
@@ -6937,13 +6937,13 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 ## Códigos relacionados a 3º pergunta orientada a dados
 
 ### Limpeza de Dados
-[Limpeza de Dados](src/code_data_cleanest/base_principal_state_of_data/3_pergunta_orientada_a_dados/)   
+[Limpeza de Dados](/src/code_data_cleanest/base_principal_state_of_data/3_pergunta_orientada_a_dados/)   
 
 ### Analise Exploratória de Dados
-[Análise Exploratória de Dados](src/analise_exploratorias_perguntas_orientadas_a_dados/3_pergunta_orientada_a_dados/)  
+[Análise Exploratória de Dados](/src/analise_exploratorias_perguntas_orientadas_a_dados/3_pergunta_orientada_a_dados/)  
 
 ### Indução a Modelos
-[Indução a Modelos](src/modelos/modelo_3/)  
+[Indução a Modelos](/src/modelos/modelo_3)  
 
 ---
 
