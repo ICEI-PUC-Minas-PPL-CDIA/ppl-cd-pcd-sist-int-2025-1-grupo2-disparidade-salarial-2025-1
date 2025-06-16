@@ -98,30 +98,3 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 * 5.3 
     * Analise comparativa dos modelos
 * 6.0 Preenchimento do Citation.CFF
-
----
-
-
-(Modelo do professor adaptado)
-* 0.1.0
-    * Relatório final 
-* 0.0.10
-    * Modelo 
-* 0.0.9
-    * Modelo 1 
-* 0.0.8
-    * Analises exploratorias das perguntas orientada a dados usando os bancos de dados (principal e auxiliar)
-* 0.0.7
-    * Seleção de atributos(De acordo com os problemas dirigido por dados)
-* 0.0.6
-    * Definição de problemas dirigido por dados 
-* 0.0.5
-    * Tratamento dos dados 
-* 0.0.4
-    * Analise exploratória dos dados 
-* 0.0.3
-    * Seleção de atributos sobre o tema 
-* 0.0.2
-    * Introdução das bases de dados. 
-* 0.0.1
-    * Definição do tema. 
