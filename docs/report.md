@@ -6266,308 +6266,336 @@ No caso apresentado, todas as importâncias ficaram em 0%, indicando que o model
 
 ## Interpretação dos modelo 3º pergunta orientada a dados
 
-### Interpretação do modelo 1_3
+### Interpretação do modelo 3.1
 
-## Interpretação Completa do Modelo v7 (LightGBM com RFECV e Optuna) - Incluindo Análise de Correlação e Relatório de Resultados
+---
+### **1 ESPECIFICAÇÃO DO MODELO E PARÂMETROS CHAVE**
 
-### I. Especificação do Modelo e Parâmetros Chave
+#### **1.1 Tipo de Modelo de Machine Learning**
 
-a.  **Tipo de Modelo de Machine Learning:**
-    O modelo implementado é um **`LGBMClassifier`** da biblioteca `lightgbm`. Este é um framework de gradient boosting que utiliza árvores de decisão, reconhecido por sua eficiência e performance. O objetivo do modelo é realizar uma classificação binária, distinguindo entre 'Salário Alto' e 'Salário Baixo'.
-    * **Codificação da Variável Alvo**: 'Salário Alto' é a classe 0 e 'Salário Baixo' é a classe 1 (após LabelEncoding), conforme indicado no Relatório de Resultados.
+O modelo implementado é um **`LGBMClassifier`** da biblioteca `lightgbm`. Este é um framework de gradient boosting que utiliza árvores de decisão, reconhecido por sua eficiência e performance. O objetivo do modelo é realizar uma classificação binária, distinguindo entre 'Salário Alto' e 'Salário Baixo'.
 
-b.  **Principais Hiperparâmetros do Modelo Final Treinado e Relevância (conforme Relatório de Resultados, Seção 2.2):**
-    O modelo final foi otimizado usando `Optuna` para hiperparâmetros e `RFECV` para seleção de features.
-    * **`n_estimators` (configurado em Optuna): 1100**
-        * *Relevância*: Número máximo de árvores a serem construídas.
-        * *Nota*: O modelo final utilizou **105 árvores** devido ao mecanismo de **early stopping**.
-    * **`learning_rate`: 0.06509228494862056**
-        * *Relevância*: Controla a contribuição de cada árvore.
-    * **`num_leaves`: 80**
-        * *Relevância*: Número máximo de folhas por árvore.
-    * **`max_depth`: 12**
-        * *Relevância*: Profundidade máxima das árvores.
-    * **`min_child_samples`: 25**
-        * *Relevância*: Número mínimo de amostras necessárias em um nó folha.
-    * **`subsample`: 0.5**
-        * *Relevância*: Fração de amostras usadas para treinar cada árvore (50%).
-    * **`colsample_bytree`: 0.6000000000000001**
-        * *Relevância*: Fração de features usadas para treinar cada árvore (60%).
-    * **`reg_alpha` (L1 regularização): 1.5671157141467156**
-        * *Relevância*: Penaliza pesos grandes, podendo levar à esparsidade.
-    * **`reg_lambda` (L2 regularização): 14.655960291115573**
-        * *Relevância*: Penaliza pesos grandes quadraticamente.
-    * **`min_split_gain`: 0.3854595582770911**
-        * *Relevância*: Ganho mínimo necessário para uma divisão.
-    * **`min_child_weight`: 0.1393188921160219**
-        * *Relevância*: Peso mínimo (soma dos pesos de hessiana) em um nó filho.
+* **Codificação da Variável Alvo**: 'Salário Alto' é a classe 0 e 'Salário Baixo' é a classe 1 (após LabelEncoding), conforme indicado no Relatório de Resultados.
 
-### II. Análise de Correlação Inicial das Features com o Alvo
+#### **1.2 Principais Hiperparâmetros do Modelo Final Treinado e Relevância (conforme Relatório de Resultados, Seção 2.2)**
+
+O modelo final foi otimizado usando `Optuna` para hiperparâmetros e `RFECV` para seleção de features.
+
+* **`n_estimators`** (configurado em Optuna): 1100
+    * *Relevância*: Número máximo de árvores a serem construídas.
+    * *Nota*: O modelo final utilizou **105 árvores** devido ao mecanismo de **early stopping**.
+* **`learning_rate`**: 0.06509228494862056
+    * *Relevância*: Controla a contribuição de cada árvore.
+* **`num_leaves`**: 80
+    * *Relevância*: Número máximo de folhas por árvore.
+* **`max_depth`**: 12
+    * *Relevância*: Profundidade máxima das árvores.
+* **`min_child_samples`**: 25
+    * *Relevância*: Número mínimo de amostras necessárias em um nó folha.
+* **`subsample`**: 0.5
+    * *Relevância*: Fração de amostras usadas para treinar cada árvore (50%).
+* **`colsample_bytree`**: 0.6000000000000001
+    * *Relevância*: Fração de features usadas para treinar cada árvore (60%).
+* **`reg_alpha`** (L1 regularização): 1.5671157141467156
+    * *Relevância*: Penaliza pesos grandes, podendo levar à esparsidade.
+* **`reg_lambda`** (L2 regularização): 14.655960291115573
+    * *Relevância*: Penaliza pesos grandes quadraticamente.
+* **`min_split_gain`**: 0.3854595582770911
+    * *Relevância*: Ganho mínimo necessário para uma divisão.
+* **`min_child_weight`**: 0.1393188921160219
+    * *Relevância*: Peso mínimo (soma dos pesos de hessiana) em um nó filho.
+
+### **2 ANÁLISE DE CORRELAÇÃO INICIAL DAS FEATURES COM O ALVO**
 
 Antes da seleção de features pelo RFECV e do treinamento do modelo LightGBM final, foi realizada uma análise de correlação das features iniciais (após limpeza e transformações) com a variável alvo `TARGET_SALARIO_CODIFICADO`. As features consideradas nesta fase foram: `P1_a_1` (Faixa Etária), `P1_b` (Gênero), `P1_l` (Nível de Ensino), `P2_i` (Tempo de Experiência), `P2_g_Nivel` (Nível de Senioridade), `P2_f_Cargo_Atual` (Cargo Atual), e `Regiao_Mapeada`.
 
-a.  **Metodologia e Codificação do Alvo para Correlação:**
-    Para a interpretação da correlação, assume-se a codificação onde "Salário Baixo" recebeu um valor numérico MAIOR e "Salário Alto" um valor numérico MENOR (ex: Salário Alto -> 0, Salário Baixo -> 1). Com esta codificação, um coeficiente de correlação negativo entre uma feature e o alvo indica que um aumento no valor da feature tende a estar associado a "Salário Alto". A Correlação de Distância (dcor) mede a força da dependência (0 a 1), independentemente da direção.
+#### **2.1 Metodologia e Codificação do Alvo para Correlação**
 
-b.  **Resumo das Correlações das Features Iniciais com `TARGET_SALARIO_CODIFICADO`:**
+Para a interpretação da correlação, assume-se a codificação onde "Salário Baixo" recebeu um valor numérico MAIOR e "Salário Alto" um valor numérico MENOR (ex: Salário Alto -> 0, Salário Baixo -> 1). Com esta codificação, um coeficiente de correlação negativo entre uma feature e o alvo indica que um aumento no valor da feature tende a estar associado a "Salário Alto". A Correlação de Distância (dcor) mede a força da dependência (0 a 1), independentemente da direção.
 
-| Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
-| :----------------- | :------ | :------- | :----------- | :--------------------------------------------------------------------------- |
-| `P2_i`             | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.               |
-| `P2_g_Nivel`       | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto.     |
-| `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
-| `P1_a_1`           | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto.       |
-| `P1_l`             | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
-| `P1_b`             | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                                     |
-| `Regiao_Mapeada`   | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente (linear/monotônica).                  |
+#### **2.2 Resumo das Correlações das Features Iniciais com `TARGET_SALARIO_CODIFICADO`**
 
-c.  **Observações da Análise de Correlação Inicial:**
-    * **Consistência e Força:** `P2_i` (Tempo de Experiência) e `P2_g_Nivel` (Nível de Senioridade) exibiram as correlações (negativas, indicando associação com "Salário Alto") e dependências (dcor) mais fortes com a faixa salarial. `P2_f_Cargo_Atual` (Cargo Atual) e `P1_a_1` (Faixa Etária) seguiram com dependência moderada.
-    * **Relações Não Estritamente Lineares:** Para `P2_i`, os valores de Spearman e dcor ligeiramente maiores que Pearson sugerem que a relação, embora forte, pode ter componentes não perfeitamente lineares, mas é claramente monotônica.
-    * **Impacto Menor (Linear/Monotônico):** `P1_l` (Nível de Ensino) mostrou uma associação mais modesta. `P1_b` (Gênero) e `Regiao_Mapeada` (Região) apresentaram correlações lineares/monotônicas muito fracas com o alvo nesta análise inicial. Isso sugere que, individualmente e de forma linear/monotônica, Gênero e Região têm pouca influência na distinção das faixas salariais.
+**Tabela 1 – Resumo das Correlações das Features Iniciais com o Alvo**
+| Feature | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
+| :--- | :--- | :--- | :--- | :--- |
+| `P2_i` | -0.52 | -0.57 | 0.53 | Forte dependência. Maior experiência tende a salário mais alto. |
+| `P2_g_Nivel` | -0.44 | -0.44 | 0.45 | Moderada a forte dependência. Maior senioridade tende a salário mais alto. |
+| `P2_f_Cargo_Atual` | -0.32 | -0.31 | 0.33 | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
+| `P1_a_1` | -0.31 | -0.33 | 0.30 | Moderada dependência. Faixas etárias maiores tendem a salário mais alto. |
+| `P1_l` | -0.18 | -0.22 | 0.20 | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
+| `P1_b` | -0.07 | -0.07 | 0.08 | Dependência muito fraca. |
+| `Regiao_Mapeada` | -0.00 | 0.01 | 0.05 | Dependência muito fraca ou inexistente (linear/monotônica). |
 
-d.  **Insights dos Mapas de Calor de Correlação (Inter-feature):**
-    Os mapas de calor de correlação (Pearson, Spearman, dcor) são ferramentas visuais importantes para entender as inter-relações entre todas as features *antes* da modelagem.
-    * **Pearson e Spearman Heatmaps:** Estes gráficos revelam a força e direção das relações lineares (Pearson) e monotônicas (Spearman) entre pares de features. É esperado, por exemplo, observar correlações positivas entre `P2_i` (Experiência), `P1_a_1` (Faixa Etária) e `P2_g_Nivel` (Senioridade). Entender essas inter-correlações ajuda a contextualizar a importância que o modelo LightGBM atribui a cada uma, pois features correlacionadas podem ter suas importâncias "compartilhadas" ou uma pode "representar" a outra parcialmente.
-    * **Distance Correlation (dcor) Heatmap:** Este mapa destaca a força da dependência geral (linear ou não linear) entre as features, complementando as outras duas métricas ao identificar relações que podem não ser capturadas por medidas lineares ou monotônicas.
+#### **2.3 Observações da Análise de Correlação Inicial**
 
-### III. Fatores Preditivos Dominantes no Modelo LightGBM: Análise das Features Selecionadas e Sua Importância
+* **Consistência e Força:** `P2_i` (Tempo de Experiência) e `P2_g_Nivel` (Nível de Senioridade) exibiram as correlações (negativas, indicando associação com "Salário Alto") e dependências (dcor) mais fortes com a faixa salarial. `P2_f_Cargo_Atual` (Cargo Atual) e `P1_a_1` (Faixa Etária) seguiram com dependência moderada.
+* **Relações Não Estritamente Lineares:** Para `P2_i`, os valores de Spearman e dcor ligeiramente maiores que Pearson sugerem que a relação, embora forte, pode ter componentes não perfeitamente lineares, mas é claramente monotônica.
+* **Impacto Menor (Linear/Monotônico):** `P1_l` (Nível de Ensino) mostrou uma associação mais modesta. `P1_b` (Gênero) e `Regiao_Mapeada` (Região) apresentaram correlações lineares/monotônicas muito fracas com o alvo nesta análise inicial. Isso sugere que, individualmente e de forma linear/monotônica, Gênero e Região têm pouca influência na distinção das faixas salariais.
 
-a.  **Features Selecionadas (RFECV) e Seus Significados (conforme Relatório de Resultados, Seção 3.2):**
-    O processo de `RFECV` selecionou 6 features para o modelo final:
-    1.  `P2_i`: Tempo de experiência
-    2.  `P2_f_Cargo_Atual`: Cargo atual
-    3.  `P2_g_Nivel`: Nível de senioridade
-    4.  `P1_l`: Nível de ensino
-    5.  `P1_a_1`: Faixa etária
-    6.  `Regiao_Mapeada`: Região onde mora
+#### **2.4 Insights dos Mapas de Calor de Correlação (Inter-feature)**
 
->Nota: `P1_b` (Gênero), que apresentou correlação inicial muito fraca com o alvo, foi eliminada pelo RFECV, o que é consistente com sua baixa associação linear/monotônica individual.
+Os mapas de calor de correlação (Pearson, Spearman, dcor) são ferramentas visuais importantes para entender as inter-relações entre todas as features *antes* da modelagem.
 
-b.  **Análise de Importância de Features no Modelo LightGBM (conforme Relatório de Resultados, Seção 3.2):**
-    O LightGBM atribuiu a seguinte ordem de importância (provavelmente baseada em "ganho") para as features selecionadas:
-    1.  **`P2_i` (Tempo de experiência)**
-    2.  **`P2_f_Cargo_Atual` (Cargo atual)**
-    3.  **`P2_g_Nivel` (Nível de senioridade)**
-    4.  **`P1_l` (Nível de ensino)**
-    5.  **`P1_a_1` (Faixa etária)**
-    6.  **`Regiao_Mapeada` (Região onde mora)**
+* **Pearson e Spearman Heatmaps:** Estes gráficos revelam a força e direção das relações lineares (Pearson) e monotônicas (Spearman) entre pares de features. É esperado, por exemplo, observar correlações positivas entre `P2_i` (Experiência), `P1_a_1` (Faixa Etária) e `P2_g_Nivel` (Senioridade). Entender essas inter-correlações ajuda a contextualizar a importância que o modelo LightGBM atribui a cada uma, pois features correlacionadas podem ter suas importâncias "compartilhadas" ou uma pode "representar" a outra parcialmente.
+* **Distance Correlation (dcor) Heatmap:** Este mapa destaca a força da dependência geral (linear ou não linear) entre as features, complementando as outras duas métricas ao identificar relações que podem não ser capturadas por medidas lineares ou monotônicas.
 
-c.  **Interpretação no Contexto da Predição Salarial (Considerando Correlações e Importância no Modelo):**
-    * **Consistência entre Correlação e Importância:** As features com maior correlação inicial com o alvo (`P2_i`, `P2_g_Nivel`, `P2_f_Cargo_Atual`, `P1_a_1`) também figuram entre as mais importantes para o modelo LightGBM. Isso reforça a ideia de que são direcionadores chave da faixa salarial.
-    * **Papel da Experiência e Hierarquia:** `P2_i`, `P2_f_Cargo_Atual`, e `P2_g_Nivel` dominam tanto na correlação inicial quanto na importância para o modelo, sublinhando que a progressão na carreira e o acúmulo de experiência são cruciais para atingir salários mais altos.
-    * **Nível de Ensino e Faixa Etária (`P1_l`, `P1_a_1`):** Apresentaram correlações moderadas e são importantes para o modelo, embora com menor peso que o trio anterior. O modelo provavelmente as utiliza para refinar predições dentro de grupos definidos por experiência/cargo/nível.
-    * **Região Mapeada (`Regiao_Mapeada`):** Esta feature teve uma correlação linear/monotônica inicial quase nula com o alvo. No entanto, foi selecionada pelo RFECV e possui alguma importância (a menor entre as 6) no modelo LightGBM. Isso sugere que sua contribuição é provavelmente não-linear ou se manifesta através de interações com outras features que o modelo de árvore consegue capturar, mas que a análise de correlação bivariada simples não evidencia. Por exemplo, o impacto de um cargo pode variar significativamente apenas em certas regiões.
+### **3 FATORES PREDITIVOS DOMINANTES NO MODELO LIGHTGBM: ANÁLISE DAS FEATURES SELECIONADAS E SUA IMPORTÂNCIA**
 
-### IV. Desvendando a Lógica do Modelo: 'Regras de Raciocínio' e Caminhos de Decisão
+#### **3.1 Features Selecionadas (RFECV) e Seus Significados (conforme Relatório de Resultados, Seção 3.2)**
 
-a.  **Elucidando a Lógica do `LGBMClassifier`:**
-    O modelo final consiste em 105 árvores de decisão. Extrair regras globais simples é inviável. Cada árvore contém múltiplos caminhos de decisão baseados em limiares para as 6 features selecionadas.
-    * **Exemplo de Caminho (Ilustrativo):** `IF P2_i (Experiência) > 6 anos AND P2_g_Nivel == 'Sênior' AND Regiao_Mapeada == 'Sudeste' THEN probabilidade_Salario_Alto aumenta.`
-    * **Interpretabilidade Adicional:** Ferramentas como SHAP ou LIME, não mencionadas no relatório, poderiam oferecer maior detalhamento sobre as contribuições de features para previsões individuais ou para o comportamento geral do modelo.
+O processo de `RFECV` selecionou 6 features para o modelo final:
 
-b.  **Como as 'Regras' (Implícitas) Ajudam a Entender as Decisões:**
-    A lógica do modelo, inferida a partir da importância das features e dos gráficos do relatório (Seções 3.3, 3.4, 3.5), sugere que:
-    * Divisões primárias ocorrem com base em `P2_i` (Experiência).
-    * `P2_f_Cargo_Atual` e `P2_g_Nivel` segmentam ainda mais os dados.
-    * As demais features (`P1_l`, `P1_a_1`, `Regiao_Mapeada`) refinam as probabilidades dentro desses subgrupos, capturando nuances específicas.
+1.  `P2_i`: Tempo de experiência
+2.  `P2_f_Cargo_Atual`: Cargo atual
+3.  `P2_g_Nivel`: Nível de senioridade
+4.  `P1_l`: Nível de ensino
+5.  `P1_a_1`: Faixa etária
+6.  `Regiao_Mapeada`: Região onde mora
 
-### V. A Interação entre Fatores Chave na Predição Salarial
+> **Nota:** `P1_b` (Gênero), que apresentou correlação inicial muito fraca com o alvo, foi eliminada pelo RFECV, o que é consistente com sua baixa associação linear/monotônica individual.
 
-a.  **Capacidade de Modelar Interações:**
-    O LightGBM é inerentemente capaz de modelar interações complexas e não lineares entre features.
+#### **3.2 Análise de Importância de Features no Modelo LightGBM (conforme Relatório de Resultados, Seção 3.2)**
 
-b.  **Discussão sobre Interações Prováveis (Considerando Correlações e o Modelo):**
-    * **Experiência (`P2_i`), Senioridade (`P2_g_Nivel`) e Cargo (`P2_f_Cargo_Atual`):** Estas três features, fortemente correlacionadas entre si e com o alvo, provavelmente interagem de forma sinérgica. O efeito da experiência no salário pode ser potencializado por um nível de senioridade ou cargo mais alto.
-    * **Nível de Ensino (`P1_l`) com Experiência/Cargo:** O "retorno" de um maior nível de ensino pode ser mais pronunciado para profissionais com mais experiência ou em cargos que valorizam essa qualificação.
-    * **Região (`Regiao_Mapeada`) com Cargo/Nível:** A importância da `Regiao_Mapeada`, apesar da baixa correlação inicial, sugere que ela interage significativamente. Um cargo de "Gerente" (`P2_f_Cargo_Atual`, `P2_g_Nivel`) pode ter um diferencial salarial muito maior em uma capital (`Regiao_Mapeada`) do que em uma cidade do interior.
-    * **Faixa Etária (`P1_a_1`) e Experiência (`P2_i`):** Embora correlacionadas, o modelo pode identificar que, para uma mesma experiência, faixas etárias diferentes podem ter salários distintos, ou vice-versa, capturando maturidade ou outros fatores não diretamente medidos pela experiência.
+O LightGBM atribuiu a seguinte ordem de importância (provavelmente baseada em "ganho") para as features selecionadas:
 
-### VI. Síntese: Conectando a Interpretação do Modelo à Pergunta Central da Pesquisa
+1.  **`P2_i` (Tempo de experiência)**
+2.  **`P2_f_Cargo_Atual` (Cargo atual)**
+3.  **`P2_g_Nivel` (Nível de senioridade)**
+4.  **`P1_l` (Nível de ensino)**
+5.  **`P1_a_1` (Faixa etária)**
+6.  **`Regiao_Mapeada` (Região onde mora)**
 
-a.  **Principais Descobertas da Interpretação do Modelo:**
-    1.  O modelo `LGBMClassifier` (Acurácia Teste: 0.8335, ROC AUC Teste: 0.9234) é eficaz na predição de faixas salariais.
-    2.  **Tempo de Experiência, Cargo Atual e Nível de Senioridade** são os determinantes mais fortes, com altas correlações iniciais com o alvo e maior importância no modelo.
-    3.  Nível de Ensino e Faixa Etária também são preditores relevantes.
-    4.  A Região onde mora, embora com baixa correlação linear inicial, contribui para o modelo, provavelmente através de interações ou efeitos não-lineares.
-    5.  O modelo captura interações complexas entre esses fatores para distinguir as classes salariais.
-    6.  A definição do ponto de corte (`point_of_cut_fixed`) para as classes 'Salário Alto'/'Baixo' é crucial para a análise.
+#### **3.3 Interpretação no Contexto da Predição Salarial (Considerando Correlações e Importância no Modelo)**
 
-b.  **Relação com a Pergunta Orientadora:**
-    A pergunta ("Quais fatores e suas interações influenciam a classificação em 'Salário Alto' vs. 'Salário Baixo'?") é respondida:
-    * **Fatores Primários:** Experiência, cargo e senioridade são os principais.
-    * **Fatores Secundários/Moduladores:** Nível de ensino, faixa etária e região.
-    * **Interações Fundamentais:** O valor de cada fator é frequentemente dependente dos outros (ex: o impacto da experiência é modulado pelo cargo e pela região).
+* **Consistência entre Correlação e Importância:** As features com maior correlação inicial com o alvo (`P2_i`, `P2_g_Nivel`, `P2_f_Cargo_Atual`, `P1_a_1`) também figuram entre as mais importantes para o modelo LightGBM. Isso reforça a ideia de que são direcionadores chave da faixa salarial.
+* **Papel da Experiência e Hierarquia:** `P2_i`, `P2_f_Cargo_Atual`, e `P2_g_Nivel` dominam tanto na correlação inicial quanto na importância para o modelo, sublinhando que a progressão na carreira e o acúmulo de experiência são cruciais para atingir salários mais altos.
+* **Nível de Ensino e Faixa Etária (`P1_l`, `P1_a_1`):** Apresentaram correlações moderadas e são importantes para o modelo, embora com menor peso que o trio anterior. O modelo provavelmente as utiliza para refinar predições dentro de grupos definidos por experiência/cargo/nível.
+* **Região Mapeada (`Regiao_Mapeada`):** Esta feature teve uma correlação linear/monotônica inicial quase nula com o alvo. No entanto, foi selecionada pelo RFECV e possui alguma importância (a menor entre as 6) no modelo LightGBM. Isso sugere que sua contribuição é provavelmente não-linear ou se manifesta através de interações com outras features que o modelo de árvore consegue capturar, mas que a análise de correlação bivariada simples não evidencia. Por exemplo, o impacto de um cargo pode variar significativamente apenas em certas regiões.
 
-c.  **Limitações da Interpretação/Modelo:**
-    1.  **Interpretabilidade Detalhada:** Sem SHAP/LIME, a compreensão exata das contribuições para previsões individuais é limitada.
-    2.  **Causalidade:** O modelo identifica associações preditivas, não causa e efeito.
-    3.  **Simplificação Binária:** A divisão em duas faixas salariais oculta nuances da distribuição completa de salários.
-    4.  **Features Eliminadas:** A eliminação de features como Gênero (`P1_b`) pelo RFECV significa que elas não melhoraram o poder preditivo *deste modelo específico*, mas não invalida sua importância em outras análises, especialmente de equidade ou com diferentes configurações de modelo/feature. A baixa correlação inicial de Gênero com o alvo é consistente com sua eliminação.
+### **4 DESVENDANDO A LÓGICA DO MODELO: 'REGRAS DE RACIOCÍNIO' E CAMINHOS DE DECISÃO**
 
-Esta versão integrada fornece uma visão mais completa, começando com as relações lineares/monotônicas e depois explorando como o modelo LightGBM utiliza essas e outras informações de forma mais complexa.
+#### **4.1 Elucidando a Lógica do *`LGBMClassifier`***
+
+O modelo final consiste em 105 árvores de decisão. Extrair regras globais simples é inviável. Cada árvore contém múltiplos caminhos de decisão baseados em limiares para as 6 features selecionadas.
+
+* **Exemplo de Caminho (Ilustrativo):** `IF P2_i (Experiência) > 6 anos AND P2_g_Nivel == 'Sênior' AND Regiao_Mapeada == 'Sudeste' THEN probabilidade_Salario_Alto aumenta.`
+* **Interpretabilidade Adicional:** Ferramentas como SHAP ou LIME, não mencionadas no relatório, poderiam oferecer maior detalhamento sobre as contribuições de features para previsões individuais ou para o comportamento geral do modelo.
+
+#### **4.2 Como as 'Regras' (Implícitas) Ajudam a Entender as Decisões**
+
+A lógica do modelo, inferida a partir da importância das features e dos gráficos do relatório (Seções 3.3, 3.4, 3.5), sugere que:
+
+* Divisões primárias ocorrem com base em `P2_i` (Experiência).
+* `P2_f_Cargo_Atual` e `P2_g_Nivel` segmentam ainda mais os dados.
+* As demais features (`P1_l`, `P1_a_1`, `Regiao_Mapeada`) refinam as probabilidades dentro desses subgrupos, capturando nuances específicas.
+
+### **5 A INTERAÇÃO ENTRE FATORES CHAVE NA PREDIÇÃO SALARIAL**
+
+#### **5.1 Capacidade de Modelar Interações**
+
+O LightGBM é inerentemente capaz de modelar interações complexas e não lineares entre features.
+
+#### **5.2 Discussão sobre Interações Prováveis (Considerando Correlações e o Modelo)**
+
+* **Experiência (`P2_i`), Senioridade (`P2_g_Nivel`) e Cargo (`P2_f_Cargo_Atual`):** Estas três features, fortemente correlacionadas entre si e com o alvo, provavelmente interagem de forma sinérgica. O efeito da experiência no salário pode ser potencializado por um nível de senioridade ou cargo mais alto.
+* **Nível de Ensino (`P1_l`) com Experiência/Cargo:** O "retorno" de um maior nível de ensino pode ser mais pronunciado para profissionais com mais experiência ou em cargos que valorizam essa qualificação.
+* **Região (`Regiao_Mapeada`) com Cargo/Nível:** A importância da `Regiao_Mapeada`, apesar da baixa correlação inicial, sugere que ela interage significativamente. Um cargo de "Gerente" (`P2_f_Cargo_Atual`, `P2_g_Nivel`) pode ter um diferencial salarial muito maior em uma capital (`Regiao_Mapeada`) do que em uma cidade do interior.
+* **Faixa Etária (`P1_a_1`) e Experiência (`P2_i`):** Embora correlacionadas, o modelo pode identificar que, para uma mesma experiência, faixas etárias diferentes podem ter salários distintos, ou vice-versa, capturando maturidade ou outros fatores não diretamente medidos pela experiência.
+
+### **6 SÍNTESE: CONECTANDO A INTERPRETAÇÃO DO MODELO À PERGUNTA CENTRAL DA PESQUISA**
+
+#### **6.1 Principais Descobertas da Interpretação do Modelo**
+
+1.  O modelo `LGBMClassifier` (Acurácia Teste: 0.8335, ROC AUC Teste: 0.9234) é eficaz na predição de faixas salariais.
+2.  **Tempo de Experiência, Cargo Atual e Nível de Senioridade** são os determinantes mais fortes, com altas correlações iniciais com o alvo e maior importância no modelo.
+3.  Nível de Ensino e Faixa Etária também são preditores relevantes.
+4.  A Região onde mora, embora com baixa correlação linear inicial, contribui para o modelo, provavelmente através de interações ou efeitos não-lineares.
+5.  O modelo captura interações complexas entre esses fatores para distinguir as classes salariais.
+6.  A definição do ponto de corte (`point_of_cut_fixed`) para as classes 'Salário Alto'/'Baixo' é crucial para a análise.
+
+#### **6.2 Relação com a Pergunta Orientadora**
+
+A pergunta ("Quais fatores e suas interações influenciam a classificação em 'Salário Alto' vs. 'Salário Baixo'?") é respondida:
+
+* **Fatores Primários:** Experiência, cargo e senioridade são os principais.
+* **Fatores Secundários/Moduladores:** Nível de ensino, faixa etária e região.
+* **Interações Fundamentais:** O valor de cada fator é frequentemente dependente dos outros (ex: o impacto da experiência é modulado pelo cargo e pela região).
+
+#### **6.3 Limitações da Interpretação/Modelo**
+
+1.  **Interpretabilidade Detalhada:** Sem SHAP/LIME, a compreensão exata das contribuições para previsões individuais é limitada.
+2.  **Causalidade:** O modelo identifica associações preditivas, não causa e efeito.
+3.  **Simplificação Binária:** A divisão em duas faixas salariais oculta nuances da distribuição completa de salários.
+4.  **Features Eliminadas:** A eliminação de features como Gênero (`P1_b`) pelo RFECV significa que elas não melhoraram o poder preditivo *deste modelo específico*, mas não invalida sua importância em outras análises, especialmente de equidade ou com diferentes configurações de modelo/feature. A baixa correlação inicial de Gênero com o alvo é consistente com sua eliminação.
 
 -------------------------------------------------------------------------------------------------------------------------
 
 ### Interpretação do modelo 2_3
 
-## Interpretação Detalhada do Modelo de Rede Neural (RNA v2) para Classificação de Faixa Salarial
+# INTERPRETAÇÃO DETALHADA DO MODELO DE REDE NEURAL (RNA V2) PARA CLASSIFICAÇÃO DE FAIXA SALARIAL
+---
 
-### I. Justificativa, Objetivo e Configuração do Modelo RNA v2
+### **1 JUSTIFICATIVA, OBJETIVO E CONFIGURAÇÃO DO MODELO RNA V2**
 
-a.  **Justificativa e Objetivo do Modelo:**
-    O principal objetivo deste modelo de Rede Neural Artificial (RNA v2) é classificar a faixa salarial de indivíduos em duas categorias distintas: "Salário Baixo" e "Salário Alto". A intenção é investigar se uma arquitetura de RNA, com sua capacidade intrínseca de aprender interações complexas e representações ricas para features categóricas (através de camadas de embedding), pode oferecer um desempenho comparável ou superior aos modelos baseados em árvores (como o LightGBM previamente analisado) para a mesma pergunta orientada a dados. A abordagem de classificação binária visa simplificar o problema e potencialmente aprimorar a distinção entre os grupos salariais.
+#### **1.1 Justificativa e Objetivo do Modelo**
 
-b.  **Ponto de Corte e Balanceamento das Classes:**
-    Para a divisão das faixas salariais, foi utilizado um ponto de corte fixo de R$ 7.500,00 aplicado à variável `salary_numeric_lower_bound`. Conforme os logs do projeto, essa definição resultou em um dataset processado (antes da divisão treino/teste) com aproximadamente 2268 amostras para "Salário Baixo" e 2485 para "Salário Alto", indicando um bom equilíbrio entre as classes, o que é favorável para o treinamento do modelo.
+O principal objetivo deste modelo de Rede Neural Artificial (RNA v2) é classificar a faixa salarial de indivíduos em duas categorias distintas: "Salário Baixo" e "Salário Alto". A intenção é investigar se uma arquitetura de RNA, com sua capacidade intrínseca de aprender interações complexas e representações ricas para features categóricas (através de camadas de embedding), pode oferecer um desempenho comparável ou superior aos modelos baseados em árvores (como o LightGBM previamente analisado) para a mesma pergunta orientada a dados. A abordagem de classificação binária visa simplificar o problema e potencialmente aprimorar a distinção entre os grupos salariais.
 
-c.  **Features de Entrada para a RNA v2:**
-    O modelo RNA v2 utilizou o seguinte conjunto de 7 features (após mapeamento e tratamento inicial):
-    1.  `P1_a_1`: Faixa etária
-    2.  `P1_b`: Gênero
-    3.  `P1_l`: Nível de ensino
-    4.  `P2_i`: Tempo de experiência na área de dados
-    5.  `P2_g_Nivel`: Nível de senioridade
-    6.  `P2_f_Cargo_Atual`: Cargo atual
-    7.  `Regiao_Mapeada`: Região Mapeada (derivada da UF)
-    *Nota: É importante observar que esta RNA v2 inclui a feature `P1_b` (Gênero), que havia sido eliminada pelo processo de RFECV no modelo LightGBM anterior. A inclusão aqui permite à RNA explorar diretamente a influência desta feature.*
+#### **1.2 Ponto de Corte e Balanceamento das Classes**
 
-d.  **Arquitetura e Principais Hiperparâmetros (Otimizados com Ray Tune):**
-    A arquitetura da RNA v2 e seus hiperparâmetros foram otimizados usando Ray Tune. A última execução bem-sucedida resultou na seguinte configuração:
-    * **Arquitetura Geral:** Rede neural com camadas de embedding para features categóricas e camadas densas para processamento.
-    * `num_hidden_layers`: 1 (uma camada densa oculta)
-    * `dense_units_1`: 64 (número de neurônios na primeira camada densa oculta)
-    * (`dense_units_2`: 128, mas não utilizada devido a `num_hidden_layers: 1`)
-    * `dropout_1`: 0.45 (taxa de dropout na primeira camada densa para regularização)
-    * (`dropout_2`: 0.30, não utilizada)
-    * `optimizer`: 'adam'
-    * `learning_rate_nn`: 0.0002366... (taxa de aprendizado para o otimizador Adam)
-    * `batch_size`: 32
-    * `epochs`: 50 (número máximo de épocas, controlado por `early_stopping_patience`)
-    * `early_stopping_patience`: 10 (critério para interromper o treinamento se não houver melhora na métrica de validação)
-    * **Regularização L2:**
-        * `l2_strength_embedding`: 0.0046... (força da regularização L2 nas camadas de embedding)
-        * `l2_strength_dense`: 4.19e-05 (força da regularização L2 nas camadas densas)
-    * **Dimensões das Camadas de Embedding (para features categóricas):**
-        * `emb_dim_P1_a_1` (Faixa etária): 8
-        * `emb_dim_P1_b` (Gênero): 4
-        * `emb_dim_P1_l` (Nível de ensino): 4
-        * `emb_dim_P2_g_Nivel` (Nível de senioridade): 4
-        * `emb_dim_P2_f_Cargo_Atual` (Cargo atual): 9
-        * `emb_dim_Regiao_Mapeada` (Região Mapeada): 4
-    Estas dimensões de embedding permitem que a rede aprenda representações vetoriais densas para cada categoria das features, capturando semelhanças e relações entre elas.
+Para a divisão das faixas salariais, foi utilizado um ponto de corte fixo de R$ 7.500,00 aplicado à variável `salary_numeric_lower_bound`. Conforme os logs do projeto, essa definição resultou em um dataset processado (antes da divisão treino/teste) com aproximadamente 2268 amostras para "Salário Baixo" e 2485 para "Salário Alto", indicando um bom equilíbrio entre as classes, o que é favorável para o treinamento do modelo.
 
-### II. Resultados da Avaliação do Modelo RNA v2
+#### **1.3 Features de Entrada para a RNA v2**
 
-a.  **Métricas de Desempenho Agregadas (Conjunto de Teste):**
-    Com base nos logs da última execução bem-sucedida:
-    * Melhor Acurácia na Validação (durante HPO com Ray Tune): 0.8345
-    * **Acurácia no Teste:** 0.8377
-    * Precisão Média (Macro Avg) no Teste: 0.8377 (calculado a partir do relatório de classificação)
-    * F1-Score (Ponderado) no Teste: 0.8377
-    * **ROC AUC (Binário) no Teste:** 0.9263
-    A acurácia de aproximadamente 83.77% no teste e um ROC AUC de 0.9263 indicam que o modelo RNA v2 possui um bom poder preditivo e capacidade de discriminação entre as classes "Salário Alto" e "Salário Baixo".
+O modelo RNA v2 utilizou o seguinte conjunto de 7 features (após mapeamento e tratamento inicial):
+1.  `P1_a_1`: Faixa etária
+2.  `P1_b`: Gênero
+3.  `P1_l`: Nível de ensino
+4.  `P2_i`: Tempo de experiência na área de dados
+5.  `P2_g_Nivel`: Nível de senioridade
+6.  `P2_f_Cargo_Atual`: Cargo atual
+7.  `Regiao_Mapeada`: Região Mapeada (derivada da UF)
 
+> **Nota:** É importante observar que esta RNA v2 inclui a feature `P1_b` (Gênero), que havia sido eliminada pelo processo de RFECV no modelo LightGBM anterior. A inclusão aqui permite à RNA explorar diretamente a influência desta feature.
 
-b.  **Relatório de Classificação Detalhado (Teste - RNA v2) e Análise da Matriz de Confusão:**
+#### **1.4 Arquitetura e Principais Hiperparâmetros (Otimizados com Ray Tune)**
 
-    O relatório de classificação detalhado fornece insights sobre o desempenho por classe:
+A arquitetura da RNA v2 e seus hiperparâmetros foram otimizados usando Ray Tune. A última execução bem-sucedida resultou na seguinte configuração:
 
-| Feature            | Pearson | Spearman | dcor (Força) | Interpretação Consolidada (assumindo Salário Baixo como valor maior no alvo) |
-| :----------------- | :------ | :------- | :----------- | :--------------------------------------------------------------------------- |
-| `P2_i`             | -0.52   | -0.57    | 0.53         | Forte dependência. Maior experiência tende a salário mais alto.               |
-| `P2_g_Nivel`       | -0.44   | -0.44    | 0.45         | Moderada a forte dependência. Maior senioridade tende a salário mais alto.     |
-| `P2_f_Cargo_Atual` | -0.32   | -0.31    | 0.33         | Moderada dependência. "Melhores" cargos (assumindo codificação ordinal favorável) tendem a salário mais alto. |
-| `P1_a_1`           | -0.31   | -0.33    | 0.30         | Moderada dependência. Faixas etárias maiores tendem a salário mais alto.       |
-| `P1_l`             | -0.18   | -0.22    | 0.20         | Baixa a moderada dependência. Maior nível de ensino tende a salário mais alto. |
-| `P1_b`             | -0.07   | -0.07    | 0.08         | Dependência muito fraca.                                                     |
-| `Regiao_Mapeada`   | -0.00   | 0.01     | 0.05         | Dependência muito fraca ou inexistente (linear/monotônica).                  |
+* **Arquitetura Geral:** Rede neural com camadas de embedding para features categóricas e camadas densas para processamento.
+* **`num_hidden_layers`**: 1 (uma camada densa oculta)
+* **`dense_units_1`**: 64 (número de neurônios na primeira camada densa oculta)
+* (`dense_units_2`: 128, mas não utilizada devido a `num_hidden_layers: 1`)
+* **`dropout_1`**: 0.45 (taxa de dropout na primeira camada densa para regularização)
+* (`dropout_2`: 0.30, não utilizada)
+* **`optimizer`**: 'adam'
+* **`learning_rate_nn`**: 0.0002366... (taxa de aprendizado para o otimizador Adam)
+* **`batch_size`**: 32
+* **`epochs`**: 50 (número máximo de épocas, controlado por `early_stopping_patience`)
+* **`early_stopping_patience`**: 10 (critério para interromper o treinamento se não houver melhora na métrica de validação)
+* **Regularização L2:**
+    * `l2_strength_embedding`: 0.0046... (força da regularização L2 nas camadas de embedding)
+    * `l2_strength_dense`: 4.19e-05 (força da regularização L2 nas camadas densas)
+* **Dimensões das Camadas de Embedding (para features categóricas):**
+    * `emb_dim_P1_a_1` (Faixa etária): 8
+    * `emb_dim_P1_b` (Gênero): 4
+    * `emb_dim_P1_l` (Nível de ensino): 4
+    * `emb_dim_P2_g_Nivel` (Nível de senioridade): 4
+    * `emb_dim_P2_f_Cargo_Atual` (Cargo atual): 9
+    * `emb_dim_Regiao_Mapeada` (Região Mapeada): 4
+    
+Estas dimensões de embedding permitem que a rede aprenda representações vetoriais densas para cada categoria das features, capturando semelhanças e relações entre elas.
 
-    * **Interpretação:**
+### **2 RESULTADOS DA AVALIAÇÃO DO MODELO RNA V2**
 
-        * O modelo demonstra um desempenho equilibrado para ambas as classes, com Precision, Recall e F1-score em torno de 0.83-0.85.
+#### **2.1 Métricas de Desempenho Agregadas (Conjunto de Teste)**
 
-        * Para "Salário Alto": 85% das previsões de "Salário Alto" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Alto" (Recall).
+Com base nos logs da última execução bem-sucedida:
+* Melhor Acurácia na Validação (durante HPO com Ray Tune): 0.8345
+* **Acurácia no Teste:** 0.8377
+* Precisão Média (Macro Avg) no Teste: 0.8377 (calculado a partir do relatório de classificação)
+* F1-Score (Ponderado) no Teste: 0.8377
+* **ROC AUC (Binário) no Teste:** 0.9263
 
-        * Para "Salário Baixo": 83% das previsões de "Salário Baixo" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Baixo" (Recall).
+A acurácia de aproximadamente 83.77% no teste e um ROC AUC de 0.9263 indicam que o modelo RNA v2 possui um bom poder preditivo e capacidade de discriminação entre as classes "Salário Alto" e "Salário Baixo".
 
-    * **Matriz de Confusão Normalizada (Teste - RNA v2 - `matriz_confusao_norm_RNA.png`):**
+#### **2.2 Relatório de Classificação Detalhado (Teste - RNA v2) e Análise da Matriz de Confusão**
 
-        * A matriz de confusão visualiza esses resultados. Conforme o relatório fornecido, ela mostra que aproximadamente 83.60% dos verdadeiros "Salário Alto" foram corretamente previstos como "Salário Alto", e cerca de 83.95% dos verdadeiros "Salário Baixo" foram corretamente previstos como "Salário Baixo" (valores baseados na interpretação da imagem `download.png`, que devem ser consistentes com os Recalls de 0.84 acima).
+O relatório de classificação detalhado fornece insights sobre o desempenho por classe.
 
-        * As taxas de erro (classificações incorretas) são relativamente simétricas: ~16.40% dos "Salário Alto" classificados incorretamente como "Baixo", e ~16.05% dos "Salário Baixo" classificados incorretamente como "Alto". Isso indica que o modelo não tem um viés significativamente maior para errar em uma direção específica.
+* **Interpretação:**
+    * O modelo demonstra um desempenho equilibrado para ambas as classes, com Precision, Recall e F1-score em torno de 0.83-0.85.
+    * Para "Salário Alto": 85% das previsões de "Salário Alto" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Alto" (Recall).
+    * Para "Salário Baixo": 83% das previsões de "Salário Baixo" estavam corretas (Precision), e o modelo identificou 84% de todos os verdadeiros "Salário Baixo" (Recall).
 
-### III. Análise de Preditores e Lógica do Modelo RNA v2
+* **Matriz de Confusão Normalizada (Teste - RNA v2 - `matriz_confusao_norm_RNA.png`):**
+    * A matriz de confusão visualiza esses resultados. Conforme o relatório fornecido, ela mostra que aproximadamente 83.60% dos verdadeiros "Salário Alto" foram corretamente previstos como "Salário Alto", e cerca de 83.95% dos verdadeiros "Salário Baixo" foram corretamente previstos como "Salário Baixo" (valores baseados na interpretação da imagem, que devem ser consistentes com os Recalls de 0.84 acima).
+    * As taxas de erro (classificações incorretas) são relativamente simétricas: ~16.40% dos "Salário Alto" classificados incorretamente como "Baixo", e ~16.05% dos "Salário Baixo" classificados incorretamente como "Alto". Isso indica que o modelo não tem um viés significativamente maior para errar em uma direção específica.
 
-a.  **Importância das Features na RNA v2 (Métodos e Expectativas):**
-    Diferentemente de modelos baseados em árvores (como LightGBM), a obtenção da "importância das features" em redes neurais não é direta através de um atributo do modelo. Técnicas mais avançadas são necessárias, como:
-    * **Permutation Importance:** Avalia a queda no desempenho do modelo quando os valores de uma feature são permutados aleatoriamente.
-    * **SHAP (SHapley Additive exPlanations) values:** Fornece uma medida da contribuição de cada feature para cada predição individual.
-    O relatório fornecido não indica a aplicação dessas técnicas, mas aponta expectativas:
-    * **Expectativa de Impacto:** Espera-se que features ligadas à experiência e progressão na carreira, como `P2_i` (Tempo de experiência), `P2_f_Cargo_Atual` (Cargo atual), e `P2_g_Nivel` (Nível de senioridade), tenham um impacto significativo nas decisões do modelo.
-    * **Outras Features Consideradas:** Características como `P1_l` (Nível de ensino), `P1_a_1` (Faixa etária), `P1_b` (Gênero) e `Regiao_Mapeada` também são processadas pela rede, e sua influência específica precisaria ser quantificada pelas técnicas mencionadas. A inclusão de `P1_b` (Gênero) diretamente na RNA permite que o modelo aprenda sua relevância (ou falta dela) e suas interações.
+### **3 ANÁLISE DE PREDITORES E LÓGICA DO MODELO RNA V2**
 
-b.  **Elucidando a Lógica da Rede Neural (Embeddings, Camadas Densas):**
-    A RNA v2 processa as informações da seguinte maneira:
-    1.  **Camadas de Embedding:** As features categóricas (`P1_a_1`, `P1_b`, `P1_l`, `P2_g_Nivel`, `P2_f_Cargo_Atual`, `Regiao_Mapeada`) são primeiro transformadas em vetores densos de dimensão fixa (conforme `emb_dim_*`). Essas camadas de embedding aprendem representações significativas para cada categoria, capturando relações semânticas entre elas (ex: categorias de cargos similares podem ter vetores de embedding próximos no espaço vetorial).
-    2.  **Concatenação:** Os vetores de embedding resultantes e as features numéricas (se houvesse, mas aqui `P2_i` - Tempo de Experiência, embora numérico, pode ter sido tratado via embedding ou normalizado e concatenado) são combinados.
-    3.  **Camada Densa Oculta:** A informação combinada passa por uma camada densa (`dense_units_1: 64`) com função de ativação (provavelmente ReLU), onde o modelo aprende combinações não lineares das features representadas. O dropout (`dropout_1: 0.45`) é aplicado para regularização, prevenindo overfitting.
-    4.  **Camada de Saída:** Uma camada de saída com uma função de ativação sigmoide produz a probabilidade de a instância pertencer à classe "Salário Alto" (ou "Salário Baixo", dependendo da codificação da classe positiva).
+#### **3.1 Importância das Features na RNA v2 (Métodos e Expectativas)**
 
-### IV. Insights dos Dados de Contexto Utilizados pela RNA v2 (Baseado nos Gráficos)
+Diferentemente de modelos baseados em árvores (como LightGBM), a obtenção da "importância das features" em redes neurais não é direta através de um atributo do modelo. Técnicas mais avançadas são necessárias, como:
+
+* **Permutation Importance:** Avalia a queda no desempenho do modelo quando os valores de uma feature são permutados aleatoriamente.
+* **SHAP (SHapley Additive exPlanations) values:** Fornece uma medida da contribuição de cada feature para cada predição individual.
+
+O relatório fornecido não indica a aplicação dessas técnicas, mas aponta expectativas:
+
+* **Expectativa de Impacto:** Espera-se que features ligadas à experiência e progressão na carreira, como `P2_i` (Tempo de experiência), `P2_f_Cargo_Atual` (Cargo atual), e `P2_g_Nivel` (Nível de senioridade), tenham um impacto significativo nas decisões do modelo.
+* **Outras Features Consideradas:** Características como `P1_l` (Nível de ensino), `P1_a_1` (Faixa etária), `P1_b` (Gênero) e `Regiao_Mapeada` também são processadas pela rede, e sua influência específica precisaria ser quantificada pelas técnicas mencionadas. A inclusão de `P1_b` (Gênero) diretamente na RNA permite que o modelo aprenda sua relevância (ou falta dela) e suas interações.
+
+#### **3.2 Elucidando a Lógica da Rede Neural (Embeddings, Camadas Densas)**
+
+A RNA v2 processa as informações da seguinte maneira:
+1.  **Camadas de Embedding:** As features categóricas (`P1_a_1`, `P1_b`, `P1_l`, `P2_g_Nivel`, `P2_f_Cargo_Atual`, `Regiao_Mapeada`) são primeiro transformadas em vetores densos de dimensão fixa (conforme `emb_dim_*`). Essas camadas de embedding aprendem representações significativas para cada categoria, capturando relações semânticas entre elas (ex: categorias de cargos similares podem ter vetores de embedding próximos no espaço vetorial).
+2.  **Concatenação:** Os vetores de embedding resultantes e as features numéricas (se houvesse, mas aqui `P2_i` - Tempo de Experiência, embora numérico, pode ter sido tratado via embedding ou normalizado e concatenado) são combinados.
+3.  **Camada Densa Oculta:** A informação combinada passa por uma camada densa (`dense_units_1: 64`) com função de ativação (provavelmente ReLU), onde o modelo aprende combinações não lineares das features representadas. O dropout (`dropout_1: 0.45`) é aplicado para regularização, prevenindo overfitting.
+4.  **Camada de Saída:** Uma camada de saída com uma função de ativação sigmoide produz a probabilidade de a instância pertencer à classe "Salário Alto" (ou "Salário Baixo", dependendo da codificação da classe positiva).
+
+### **4 INSIGHTS DOS DADOS DE CONTEXTO UTILIZADOS PELA RNA V2 (BASEADO NOS GRÁFICOS)**
 
 Os gráficos mencionados no relatório ilustram as distribuições da variável alvo *real* em relação a algumas features chave. Eles fornecem o contexto dos padrões nos dados que a RNA v2 tenta aprender.
 
-a.  **Distribuição de Faixa Salarial (Real) por Top 15 Cargos (`dist_salario_top15_cargos_RNA_contexto.png`):**
-    * Este gráfico mostra, para os 15 cargos mais frequentes, a contagem de profissionais em "Salário Baixo" vs. "Salário Alto".
-    * **Insights:** Permite identificar cargos com predominância natural de salários mais altos (ex: Cientista de Dados, Engenheiro de Dados) ou mais baixos (ex: Analista de Dados). A RNA tenta aprender e generalizar esses padrões observados.
+#### **4.1 Distribuição de Faixa Salarial (Real) por Top 15 Cargos (`dist_salario_top15_cargos_RNA_contexto.png`)**
 
-b.  **Distribuição de Faixa Salarial (Real) por Nível de Senioridade (`dist_salario_senioridade_RNA_contexto.png`):**
-    * Apresenta a distribuição das faixas salariais reais para cada nível de senioridade.
-    * **Insights:** Demonstra a clara progressão salarial com o aumento da senioridade, um padrão forte que a RNA deve capturar. Júniores tendem a "Salário Baixo", Plenos são mistos, e Sêniores têm maior proporção em "Salário Alto".
+* Este gráfico mostra, para os 15 cargos mais frequentes, a contagem de profissionais em "Salário Baixo" vs. "Salário Alto".
+* **Insights:** Permite identificar cargos com predominância natural de salários mais altos (ex: Cientista de Dados, Engenheiro de Dados) ou mais baixos (ex: Analista de Dados). A RNA tenta aprender e generalizar esses padrões observados.
 
-c.  **Boxplot e Violin Plot de Tempo de Experiência (Real) por Faixa Salarial (`dist_experiencia_salario_RNA_contexto.png`):**
-    * Mostram a distribuição do tempo de experiência para as faixas salariais reais.
-    * **Insights:** Indivíduos na faixa "Salário Alto" claramente tendem a ter mais tempo de experiência (mediana mais alta, distribuições deslocadas para a direita). A forma do violin plot pode indicar diferentes concentrações de experiência que levam a salários mais altos, sugerindo relações não lineares que a RNA pode modelar.
+#### **4.2 Distribuição de Faixa Salarial (Real) por Nível de Senioridade (`dist_salario_senioridade_RNA_contexto.png`)**
 
-### V. A Interação entre Fatores Chave na Predição Salarial (Perspectiva da RNA)
+* Apresenta a distribuição das faixas salariais reais para cada nível de senioridade.
+* **Insights:** Demonstra a clara progressão salarial com o aumento da senioridade, um padrão forte que a RNA deve capturar. Júniores tendem a "Salário Baixo", Plenos são mistos, e Sêniores têm maior proporção em "Salário Alto".
 
-a.  **Capacidade da RNA de Modelar Interações Complexas:**
-    As redes neurais, especialmente com camadas de embedding e camadas densas não lineares, são inerentemente capazes de aprender interações complexas e de alta ordem entre as features de entrada.
-    * **Embeddings:** As camadas de embedding não apenas reduzem a dimensionalidade de features categóricas, mas também aprendem um espaço onde as interações entre categorias (e entre diferentes features categóricas após a concatenação) podem ser mais facilmente modeladas pelas camadas densas subsequentes.
+#### **4.3 Boxplot e Violin Plot de Tempo de Experiência (Real) por Faixa Salarial (`dist_experiencia_salario_RNA_contexto.png`)**
 
-b.  **Discussão sobre Interações Prováveis (Considerando as features de entrada e a natureza da RNA):**
-    A RNA v2 tem o potencial de aprender interações como:
-    * O impacto do **Nível de Ensino (`P1_l`)** pode variar dependendo do **Cargo Atual (`P2_f_Cargo_Atual`)** e do **Tempo de Experiência (`P2_i`)**.
-    * A combinação de **Nível de Senioridade (`P2_g_Nivel`)** e **Região Mapeada (`Regiao_Mapeada`)** pode influenciar o salário de forma diferente da soma de seus efeitos individuais.
-    * O **Gênero (`P1_b`)**, se relevante, pode interagir com o **Cargo** ou **Nível de Senioridade**, e a RNA pode modelar essas interações sutis caso existam nos dados e sejam preditivas.
-    * A rede aprende essas interações implicitamente através dos pesos ajustados durante o treinamento nas camadas densas.
+* Mostram a distribuição do tempo de experiência para as faixas salariais reais.
+* **Insights:** Indivíduos na faixa "Salário Alto" claramente tendem a ter mais tempo de experiência (mediana mais alta, distribuições deslocadas para a direita). A forma do violin plot pode indicar diferentes concentrações de experiência que levam a salários mais altos, sugerindo relações não lineares que a RNA pode modelar.
 
-### VI. Síntese: Conectando a Interpretação do Modelo à Pergunta Central da Pesquisa
+### **5 A INTERAÇÃO ENTRE FATORES CHAVE NA PREDIÇÃO SALARIAL (PERSPECTIVA DA RNA)**
 
-a.  **Principais Descobertas da Interpretação do Modelo RNA v2:**
-    1.  A RNA v2 alcançou um bom desempenho (Acurácia Teste: ~0.838, ROC AUC Teste: ~0.926), comparável em métricas globais ao modelo LightGBM v7.
-    2.  O modelo utiliza 7 features, incluindo Gênero, e emprega camadas de embedding para aprender representações ricas de features categóricas.
-    3.  A determinação exata da importância das features requer técnicas específicas (Permutation Importance, SHAP), mas espera-se que experiência, cargo e senioridade sejam influentes.
-    4.  A RNA é capaz de modelar interações complexas e não lineares, o que é uma de suas principais vantagens teóricas.
+#### **5.1 Capacidade da RNA de Modelar Interações Complexas**
 
-b.  **Comparativo Potencial com Modelos Anteriores (ex: LightGBM v7):**
-    * **Desempenho:** As métricas globais (Acurácia, ROC AUC) entre a RNA v2 e o LightGBM v7 parecem ser muito próximas. Uma análise mais detalhada (ex: custos de erro diferentes, desempenho em subgrupos específicos) poderia revelar vantagens de um sobre o outro.
-    * **Interpretabilidade:** Modelos baseados em árvores como o LightGBM geralmente oferecem interpretabilidade mais direta (feature importance nativa). Redes Neurais são mais "caixa-preta", exigindo esforço adicional para interpretação.
-    * **Tratamento de Features:** A RNA com embeddings oferece uma forma sofisticada de lidar com features categóricas. O LightGBM também lida bem com categóricas nativamente.
-    * **Recursos Computacionais:** O treinamento de RNAs e a otimização de hiperparâmetros (especialmente com Ray Tune) podem ser mais intensivos computacionalmente do que para modelos LightGBM.
+As redes neurais, especialmente com camadas de embedding e camadas densas não lineares, são inerentemente capazes de aprender interações complexas e de alta ordem entre as features de entrada.
 
-c.  **Relação com a Pergunta Orientadora:**
-    A pergunta ("Quais fatores e suas interações influenciam a classificação em 'Salário Alto' vs. 'Salário Baixo'?") é abordada pela RNA v2 através da sua capacidade de aprender complexas funções de mapeamento a partir das features de entrada. Embora a explicitação dessas relações seja menos direta, o desempenho do modelo sugere que ele está capturando padrões válidos nos dados relacionados a experiência, cargo, senioridade, educação, demografia e localização.
+* **Embeddings:** As camadas de embedding não apenas reduzem a dimensionalidade de features categóricas, mas também aprendem um espaço onde as interações entre categorias (e entre diferentes features categóricas após a concatenação) podem ser mais facilmente modeladas pelas camadas densas subsequentes.
 
-d.  **Limitações da Interpretação/Modelo RNA v2:**
-    1.  **Interpretabilidade da "Caixa-Preta":** Sem a aplicação de SHAP/Permutation Importance, a contribuição exata de cada feature e a natureza das interações aprendidas permanecem obscuras.
-    2.  **Sensibilidade a Hiperparâmetros:** Redes Neurais são notoriamente sensíveis à escolha da arquitetura e dos hiperparâmetros. A otimização com Ray Tune mitiga isso, mas o espaço de busca é vasto.
-    3.  **Custo Computacional:** Treinamento e HPO podem ser demorados e exigir mais recursos.
-    4.  **Simplificação Binária:** A classificação em duas faixas salariais, definida pelo ponto de corte de R$ 7.500,00, é uma simplificação.
-    5.  **Causalidade:** O modelo identifica associações preditivas, não relações causais.
+#### **5.2 Discussão sobre Interações Prováveis (Considerando as features de entrada e a natureza da RNA)**
 
-Esta interpretação visa cobrir os aspectos mais relevantes do seu modelo RNA v2 com base no relatório fornecido.
+A RNA v2 tem o potencial de aprender interações como:
+* O impacto do **Nível de Ensino (`P1_l`)** pode variar dependendo do **Cargo Atual (`P2_f_Cargo_Atual`)** e do **Tempo de Experiência (`P2_i`)**.
+* A combinação de **Nível de Senioridade (`P2_g_Nivel`)** e **Região Mapeada (`Regiao_Mapeada`)** pode influenciar o salário de forma diferente da soma de seus efeitos individuais.
+* O **Gênero (`P1_b`)**, se relevante, pode interagir com o **Cargo** ou **Nível de Senioridade**, e a RNA pode modelar essas interações sutis caso existam nos dados e sejam preditivas.
+* A rede aprende essas interações implicitamente através dos pesos ajustados durante o treinamento nas camadas densas.
+
+### **6 SÍNTESE: CONECTANDO A INTERPRETAÇÃO DO MODELO À PERGUNTA CENTRAL DA PESQUISA**
+
+#### **6.1 Principais Descobertas da Interpretação do Modelo RNA v2**
+
+1.  A RNA v2 alcançou um bom desempenho (Acurácia Teste: ~0.838, ROC AUC Teste: ~0.926), comparável em métricas globais ao modelo LightGBM v7.
+2.  O modelo utiliza 7 features, incluindo Gênero, e emprega camadas de embedding para aprender representações ricas de features categóricas.
+3.  A determinação exata da importância das features requer técnicas específicas (Permutation Importance, SHAP), mas espera-se que experiência, cargo e senioridade sejam influentes.
+4.  A RNA é capaz de modelar interações complexas e não lineares, o que é uma de suas principais vantagens teóricas.
+
+#### **6.2 Comparativo Potencial com Modelos Anteriores (ex: LightGBM v7)**
+
+* **Desempenho:** As métricas globais (Acurácia, ROC AUC) entre a RNA v2 e o LightGBM v7 parecem ser muito próximas. Uma análise mais detalhada (ex: custos de erro diferentes, desempenho em subgrupos específicos) poderia revelar vantagens de um sobre o outro.
+* **Interpretabilidade:** Modelos baseados em árvores como o LightGBM geralmente oferecem interpretabilidade mais direta (feature importance nativa). Redes Neurais são mais "caixa-preta", exigindo esforço adicional para interpretação.
+* **Tratamento de Features:** A RNA com embeddings oferece uma forma sofisticada de lidar com features categóricas. O LightGBM também lida bem com categóricas nativamente.
+* **Recursos Computacionais:** O treinamento de RNAs e a otimização de hiperparâmetros (especialmente com Ray Tune) podem ser mais intensivos computacionalmente do que para modelos LightGBM.
+
+#### **6.3 Relação com a Pergunta Orientadora**
+
+A pergunta ("Quais fatores e suas interações influenciam a classificação em 'Salário Alto' vs. 'Salário Baixo'?") é abordada pela RNA v2 através da sua capacidade de aprender complexas funções de mapeamento a partir das features de entrada. Embora a explicitação dessas relações seja menos direta, o desempenho do modelo sugere que ele está capturando padrões válidos nos dados relacionados a experiência, cargo, senioridade, educação, demografia e localização.
+
+#### **6.4 Limitações da Interpretação/Modelo RNA v2**
+
+1.  **Interpretabilidade da "Caixa-Preta":** Sem a aplicação de SHAP/Permutation Importance, a contribuição exata de cada feature e a natureza das interações aprendidas permanecem obscuras.
+2.  **Sensibilidade a Hiperparâmetros:** Redes Neurais são notoriamente sensíveis à escolha da arquitetura e dos hiperparâmetros. A otimização com Ray Tune mitiga isso, mas o espaço de busca é vasto.
+3.  **Custo Computacional:** Treinamento e HPO podem ser demorados e exigir mais recursos.
+4.  **Simplificação Binária:** A classificação em duas faixas salariais, definida pelo ponto de corte de R$ 7.500,00, é uma simplificação.
+5.  **Causalidade:** O modelo identifica associações preditivas, não relações causais.
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
