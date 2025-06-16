@@ -34,8 +34,6 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 
 <h2 align="center">Histórico de versões</h2>
 
-! Modelo alternativo (conferir com o professor) ! 
-(seguintos os objetivos específicos estabelecidos no início do trabalho)
 
 
 * 0.1
