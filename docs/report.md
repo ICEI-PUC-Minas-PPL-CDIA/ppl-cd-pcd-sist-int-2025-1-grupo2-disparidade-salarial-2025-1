@@ -370,9 +370,9 @@ Nome: `salary_midpoint`, `dtype: object`
 
 # Analises exploratorias de dados
 
-*   [1º Pergunta orientada a dados ](#1º-pergunta-orientada-a-dados)
+*   [1. 1º Pergunta orientada a dados ](#1º-pergunta-orientada-a-dados)
   
-	*   [Analise exploratoria de dados base de dados State of Data 2023](#analise-exploratoria-de-dados-base-de-dados-state-of-data-2023) 
+	*   [1.1Analise exploratoria de dados base de dados State of Data 2023](#analise-exploratoria-de-dados-base-de-dados-state-of-data-2023) 
 		   *    [Grafico Distribuição de Salários Mensais](#grafico-distribuição-de-salários-mensais) 
 		   *   	[Grafico Relação entre Salário e Tempo de Experiência](#grafico-relação-entre-salário-e-tempo-de-experiência) 
 		   *   	[Grafico Distribuição Salarial por Nível de Ensino](#grafico-distribuição-salarial-por-nível-de-ensino) 
@@ -385,7 +385,7 @@ Nome: `salary_midpoint`, `dtype: object`
 		   *   	[Grafico Sunburst da Distribuição de Profissionais de Dados](#grafico-sunburst-da-distribuição-de-profissionais-de-dados) 
 
 
-	*   [Analise exploratoria de dados base de dados Microdados](#analise-exploratoria-de-dados-base-de-dados-microdados) 
+	*   [1.2 Analise exploratoria de dados base de dados Microdados](#analise-exploratoria-de-dados-base-de-dados-microdados) 
 		   *   	[Grafico Distribuição Nacional de Níveis de Formação dos Docentes](#grafico-distribuição-nacional-de-níveis-de-formação-dos-docentes) 
 		   *   	[Grafico Top 10 Estados por Nível de Formação de Docentes](#grafico-top-10-estados-por-nível-de-formação-de-docentes) 
 		   *   	[Grafico Distribuição Etária Nacional dos Docentes](#grafico-distribuição-etária-nacional-dos-docentes) 
@@ -394,7 +394,7 @@ Nome: `salary_midpoint`, `dtype: object`
 		   *   	[Gráfico de Dispersão 3D Interativo - Mestrado, Doutorado e Média de Idade dos Docentes por UF](#grafico-gráfico-de-dispersão-3d-interativo---mestrado-doutorado-e-média-de-idade-dos-docentes-por-uf) 
 
 
-	*   [Analise exploratoria de dados bases integradas](#analise-exploratoria-de-dados-bases-integradas) 
+	*   [1.3 Analise exploratoria de dados bases integradas](#analise-exploratoria-de-dados-bases-integradas) 
 		   *   	[Grafico Salário Médio Estimado e Total de Docentes por UF](#grafico-salário-médio-estimado-e-total-de-docentes-por-uf) 
 		   *   	[Grafico Salário Estimado por Área de Formação - Top 5](#grafico-salário-estimado-por-área-de-formação---top-5) 
 		   *   	[Grafico Salário Estimado por Tempo de Experiência](#grafico-salário-estimado-por-tempo-de-experiência) 
@@ -413,28 +413,28 @@ Nome: `salary_midpoint`, `dtype: object`
 		   *   	[Grafico Salário Estimado vs. Proporção de Docentes com Doutorado na UF de Residência](#grafico-salário-estimado-vs-proporção-de-docentes-com-doutorado-na-uf-de-residência)
 		   *   	[Gráfico Relação 3D entre Salário, Experiência e Nível de Ensino](#gráfico-relação-3d-entre-salário-experiência-e-nível-de-ensino)
 
-*   [2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
+*   [2. 2º Pergunta orientada a dados ](#2º-pergunta-orientada-a-dados)
   
-* [3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
-    * [Análise Univariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-visualizacao-dos-dados-an%C3%A1lise-univariada)
-        * [Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
-        * [Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
-        * [Gráfico: ECDF de salários](#análise-do-gráfico-ecdf-de-salarios)
-        * [Gráfico: QQ plot de salários](#análise-do-gráfico-qq-plot-de-salarios)
-        * [Gráfico: Histograma e KDE de experiência em anos](#análise-do-gráfico-histograma-e-kde-de-experiencia_anos)
-        * [Gráfico: Boxplot de experiência em anos](#análise-do-gráfico-boxplot-de-experiencia_anos)
-        * [Gráfico: Distribuição de Nível de Senioridade](#análise-do-gráfico-distribuição-de-p2_g--nível-de-senioridade)
-        * [Gráfico: Distribuição de Região](#análise-do-gráfico-distribuição-de-regiao_mapeada)
-    * [Análise Bivariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#2-visualizacao-dos-dados-an%C3%A1lise-bivariada)
-        * [Gráfico: Histograma sobreposto com curva KDE](#análise-do-gráfico-grafico-de-barras-sobreposto)
-        * [Gráfico: Barras empilhadas](#análise-do-gráfico-gráfico-de-barras-empilhadas)
-        * [Gráfico: Barras agrupadas por gênero](#análise-do-gráfico-gráfico-de-barras-agrupadas-por-gênero)
-        * [Gráfico: Barras agrupadas por escolaridade](#análise-do-gráfico-gráfico-de-barras-agrupadas-senioridade-por-escolaridade)
-    * [Análise Multivariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#3-visualizacao-dos-dados-an%C3%A1lise-multivariada)
-        * [Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
-        * [Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
-        * [Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
-        * [Gráfico: Nível de ensino por região e faixa salarial](#análise-do-gráfico-nível-de-ensino-por-região-e-faixa-salarial-alvo)		
+* [3. 3º Pergunta orientada a dados](#3º-pergunta-orientada-a-dados)
+    * [3.1 Análise Univariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-visualizacao-dos-dados-an%C3%A1lise-univariada)
+        * [3.1.1 Gráfico: Histograma e KDE dos salários numéricos](#análise-do-histograma-e-kde-dos-salarios-numericos)
+        * [3.1.2 Gráfico: Histograma e KDE de salários](#análise-histograma-e-estimativa-de-densidade-do-kernel-kde-de-salarios)
+        * [3.1.3 Gráfico: ECDF de salários](#análise-do-gráfico-ecdf-de-salarios)
+        * [3.1.4 Gráfico: QQ plot de salários](#análise-do-gráfico-qq-plot-de-salarios)
+        * [3.1.5 Gráfico: Histograma e KDE de experiência em anos](#análise-do-gráfico-histograma-e-kde-de-experiencia_anos)
+        * [3.1.6 Gráfico: Boxplot de experiência em anos](#análise-do-gráfico-boxplot-de-experiencia_anos)
+        * [3.1.7 Gráfico: Distribuição de Nível de Senioridade](#análise-do-gráfico-distribuição-de-p2_g--nível-de-senioridade)
+        * [3.1.8 Gráfico: Distribuição de Região](#análise-do-gráfico-distribuição-de-regiao_mapeada)
+    * [3.2. Análise Bivariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#2-visualizacao-dos-dados-an%C3%A1lise-bivariada)
+        * [3.2.1 Gráfico: Histograma sobreposto com curva KDE](#análise-do-gráfico-grafico-de-barras-sobreposto)
+        * [3.2.2 Gráfico: Barras empilhadas](#análise-do-gráfico-gráfico-de-barras-empilhadas)
+        * [3.2.3 Gráfico: Barras agrupadas por gênero](#análise-do-gráfico-gráfico-de-barras-agrupadas-por-gênero)
+        * [3.2.4 Gráfico: Barras agrupadas por escolaridade](#análise-do-gráfico-gráfico-de-barras-agrupadas-senioridade-por-escolaridade)
+    * [3.3. Análise Multivariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#3-visualizacao-dos-dados-an%C3%A1lise-multivariada)
+        * [3.3.1 Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
+        * [3.3.2 Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
+        * [3.3.3 Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
+        * [3.3.4 Gráfico: Nível de ensino por região e faixa salarial](#análise-do-gráfico-nível-de-ensino-por-região-e-faixa-salarial-alvo)		
 
 # 1º Pergunta orientada a dados 
 **Pergunta Orientada a Dados:** *Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?*
@@ -5927,7 +5927,7 @@ O modelo de Rede Neural Artificial V8, após otimização de hiperparâmetros, d
 
 *   [Interpretação dos modelo 1º pergunta orientada a dados](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
 	*   [Interpretação do modelo 1_1](#interpretação-do-modelo-1_1)
-	*    [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+	*   [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
  
 *   [Interpretação dos modelo 2º pergunta orientada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
 	*    [Interpretação do modelo 1_2](#interpretação-do-modelo-1_2)
@@ -6583,11 +6583,11 @@ Esta interpretação visa cobrir os aspectos mais relevantes do seu modelo RNA v
 
 ## Discussão de Forças e Fragilidades de Cada Modelo
 
-#### Modelo A: `RandomForestClassifier` (Classificação Binária)
+### Modelo A: `RandomForestClassifier` (Classificação Binária)
 
 * **Fonte do Código:** `new-model1-versao12 (1).ipynb`
 
-##### Forças do Modelo A:
+#### Forças do Modelo A:
 
 * **Capacidade de Modelar Interações Complexas:**
     * O Random Forest é inerentemente bom em capturar interações não lineares entre features sem a necessidade de especificá-las manualmente. Isso é crucial para a 1ª pergunta orientada a dados do `report.md`, que foca na interação entre formação e experiência. O heatmap de interação gerado no código (`interacao_formacao_experiencia.png`) demonstra essa capacidade.
