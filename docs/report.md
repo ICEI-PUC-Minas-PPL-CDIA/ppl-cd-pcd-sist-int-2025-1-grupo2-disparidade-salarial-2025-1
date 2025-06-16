@@ -6871,13 +6871,10 @@ Modelos de rede neural, especialmente com conjuntos de dados pequenos ou com nú
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Distribuição do modelo 
+### Distribuição do modelo (opcional)
 
 Tende criar um pacote de distribuição para o modelo construído, para ser aplicado 
 em um sistema inteligente.
-
-
-https://github.com/pedrinndias/api-disparidade-salarial (Em desenvolvimento)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
