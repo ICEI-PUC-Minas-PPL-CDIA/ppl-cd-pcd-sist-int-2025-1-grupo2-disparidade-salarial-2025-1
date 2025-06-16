@@ -5934,8 +5934,8 @@ O modelo de Rede Neural Artificial V8, após otimização de hiperparâmetros, d
 	*    [2.2 Interpretação do modelo 2_2](#interpretação-do-modelo-2_2)
 	 
 *   [3. INTERPRETAÇÃO DOS MODELO 3º PERGUNTA ORIENTADA A DADOS](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
-	*    [3.1 Interpretação do modelo 1_3](#interpretação-do-modelo-1_3)
-	*    [3.2 Interpretação do modelo 2_3](#interpretação-do-modelo-2_3)
+	*    [3.1 Interpretação do modelo 3.1](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#interpreta%C3%A7%C3%A3o-do-modelo-31)
+	*    [3.2 Interpretação do modelo 3.2](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#interpreta%C3%A7%C3%A3o-detalhada-do-modelo-de-rede-neural-rna-v2-para-classifica%C3%A7%C3%A3o-de-faixa-salarial)
 
 
 ## Interpretação dos modelo 1º pergunta orientada a dados
@@ -6430,9 +6430,9 @@ A pergunta ("Quais fatores e suas interações influenciam a classificação em 
 
 -------------------------------------------------------------------------------------------------------------------------
 
-### Interpretação do modelo 2_3
+## Interpretação do modelo 2_3
 
-# INTERPRETAÇÃO DETALHADA DO MODELO DE REDE NEURAL (RNA V2) PARA CLASSIFICAÇÃO DE FAIXA SALARIAL
+### INTERPRETAÇÃO DETALHADA DO MODELO DE REDE NEURAL (RNA V2) PARA CLASSIFICAÇÃO DE FAIXA SALARIAL
 ---
 
 ### **1 JUSTIFICATIVA, OBJETIVO E CONFIGURAÇÃO DO MODELO RNA V2**
