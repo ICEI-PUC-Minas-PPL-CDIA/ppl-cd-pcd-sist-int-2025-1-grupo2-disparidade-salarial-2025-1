@@ -413,7 +413,7 @@ Nome: `salary_midpoint`, `dtype: object`
 		   *   	[1.3.16 Grafico Salário Estimado vs. Proporção de Docentes com Doutorado na UF de Residência](#grafico-salário-estimado-vs-proporção-de-docentes-com-doutorado-na-uf-de-residência)
 		   *   	[1.3.17 Gráfico Relação 3D entre Salário, Experiência e Nível de Ensino](#gráfico-relação-3d-entre-salário-experiência-e-nível-de-ensino)
 
-*   [2. 2º PERGUNTA ORIENTADA A DADOS ](#2º-pergunta-orientada-a-dados)
+* [2. 2º PERGUNTA ORIENTADA A DADOS ](#2º-pergunta-orientada-a-dados)
   
 * [3. 3º PERGUNTA ORIENTADA A DADOS](#3º-pergunta-orientada-a-dados)
     * [3.1 Análise Univariada](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-visualizacao-dos-dados-an%C3%A1lise-univariada)
@@ -5925,17 +5925,17 @@ O modelo de Rede Neural Artificial V8, após otimização de hiperparâmetros, d
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # _Interpretação dos modelos_
 
-*   [Interpretação dos modelo 1º pergunta orientada a dados](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
-	*   [Interpretação do modelo 1_1](#interpretação-do-modelo-1_1)
-	*   [Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
+*   [1. INTERPRETAÇÃO DOS MODELO 1º PERGUNTA ORIENTADA A DADOS](#interpretação-dos-modelo-1º-pergunta-orientada-a-dados)
+	*   [1.1 Interpretação do modelo 1_1](#interpretação-do-modelo-1_1)
+	*   [1.2 Interpretação do modelo 2_1](#interpretação-do-modelo-2_1)
  
-*   [Interpretação dos modelo 2º pergunta orientada a dados](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
-	*    [Interpretação do modelo 1_2](#interpretação-do-modelo-1_2)
-	*    [Interpretação do modelo 2_2](#interpretação-do-modelo-2_2)
+*   [2. INTERPRETAÇÃO DOS MODELO 2º PERGUNTA ORIENTADA A DADOS](#interpretação-dos-modelo-2º-pergunta-orientada-a-dados)
+	*    [2.1 Interpretação do modelo 1_2](#interpretação-do-modelo-1_2)
+	*    [2.2 Interpretação do modelo 2_2](#interpretação-do-modelo-2_2)
 	 
-*   [Interpretação dos modelo 3º pergunta orientada a dados](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
-	*    [Interpretação do modelo 1_3](#interpretação-do-modelo-1_3)
-	*    [Interpretação do modelo 2_3](#interpretação-do-modelo-2_3)
+*   [3. INTERPRETAÇÃO DOS MODELO 3º PERGUNTA ORIENTADA A DADOS](#interpretação-dos-modelo-3º-pergunta-orientada-a-dados)
+	*    [3.1 Interpretação do modelo 1_3](#interpretação-do-modelo-1_3)
+	*    [3.2 Interpretação do modelo 2_3](#interpretação-do-modelo-2_3)
 
 
 ## Interpretação dos modelo 1º pergunta orientada a dados
@@ -6573,9 +6573,9 @@ Esta interpretação visa cobrir os aspectos mais relevantes do seu modelo RNA v
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Análise comparativa dos modelos
 
-*   [Análise comparativa dos modelos da 1º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-1º-pergunta-orientada-a-dados)
-*   [Análise comparativa dos modelos da 2º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-2º-pergunta-orientada-a-dados)
-*   [Análise comparativa dos modelos da 3º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-3º-pergunta-orientada-a-dados)
+*   [1. ANÁLISE COMPARATIVA DOS MODELOS DA 1º PERGUNTA ORIENTADA A DADOS](#análise-comparativa-dos-modelos-da-1º-pergunta-orientada-a-dados)
+*   [2. ANÁLISE COMPARATIVA DOS MODELOS DA 2º PERGUNTA ORIENTADA A DADOS](#análise-comparativa-dos-modelos-da-2º-pergunta-orientada-a-dados)
+*   [3. ANÁLISE COMPARATIVA DOS MODELOS DA 3º PERGUNTA ORIENTADA A DADOS](#análise-comparativa-dos-modelos-da-3º-pergunta-orientada-a-dados)
 
 
 
