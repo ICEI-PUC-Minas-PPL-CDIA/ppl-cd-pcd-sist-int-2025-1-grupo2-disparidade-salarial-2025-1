@@ -2711,45 +2711,6 @@ plt.show()
 
 *Insight: Profissionais com médias salariais mais altas tendem a possuir formação em pós-graduação, mestrado ou doutorado. Contudo, a dispersão salarial é ampla em todos os níveis, indicando variação mesmo entre indivíduos com mesma formação.*
 
-## Distribuição Salarial por Estado (UF)
-
-**O gráfico abaixo apresenta uma matriz de calor com a distribuição das faixas salariais por estado no Brasil. Observa-se uma forte concentração de salários mais altos nos estados de São Paulo, Rio de Janeiro e Minas Gerais, indicando que esses centros urbanos oferecem mais oportunidades ou melhor remuneração para profissionais de dados. A visualização também evidencia disparidades regionais significativas, com muitos estados apresentando predominância de faixas salariais mais baixas.**
-
-![Distribuica_Faixa_salarial_por_Estado](docs/imagens/graficos_analise_exploratoria_2_pergunta_orientada_a_dados/Distribuica_Faixa_salarial_por_Estado.png)
-
-```python
-uf_stats = df.groupby('UF')['Salario_Medio'].agg(['median', 'count']).reset_index()
-uf_stats = uf_stats[uf_stats['count'] >= 10].sort_values('median', ascending=False)
-sns.barplot(x='UF', y='median', data=uf_stats)
-```
-
-*Insight: Estados como SP, RJ e MG concentram os maiores salários. Há disparidade relevante entre estados do Norte/Nordeste e Sul/Sudeste, refletindo desigualdade estrutural no setor de tecnologia.*
-
-## Linguagens de Programação Mais Utilizadas
-
-**O gráfico abaixo mostra as 10 linguagens de programação mais utilizadas no trabalho entre profissionais de dados no Brasil. Destacam-se SQL e Python como as mais utilizadas, refletindo seu papel essencial em tarefas de manipulação de dados, análise e machine learning. Linguagens como R, Visual Basic/VBA e JavaScript aparecem com menor frequência, indicando uso mais específico ou nichado. O domínio de SQL e Python se confirma como requisito central na área.**
-
-![10_linguagens_mais_utilizadas](docs/imagens/graficos_analise_exploratoria_2_pergunta_orientada_a_dados/10_linguagens_mais_utilizadas.png)
-
-```python
-tech_counts = df[['SQL', 'Python']].sum().sort_values(ascending=False)
-tech_counts.plot(kind='barh')
-```
-
-*Insight: As linguagens SQL e Python dominam a atuação dos profissionais de dados. São amplamente mais utilizadas que outras tecnologias, sugerindo que o conhecimento nelas é quase obrigatório no setor.*
-
-##Conclusões
-
-#Escolaridade influencia positivamente a remuneração, embora haja grande variabilidade dentro de cada grupo.
-
-#Região geográfica (UF) é um dos maiores fatores de desigualdade salarial. SP lidera com folga, seguido de RJ, MG e SC.
-
-#Proeficiência técnica, principalmente em SQL e Python, está presente nos perfis com maiores salários.
-
-#A experiência e senioridade contribuem diretamente para a progressão salarial — o que está de acordo com o esperado.
-
-
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # 3º Pergunta orientada a dados
