@@ -2386,6 +2386,229 @@ O heatmap revela **forte desigualdade regional na distribuição salarial**:
 
 ---
 
+# 📊 Gráfico: Profissionais por Setor de Atuação
+
+![image8](https://github.com/user-attachments/assets/556407b0-ab20-4fe8-9a45-8a16a5a1cd8d)
+
+## 📌 Descrição Geral
+
+Este gráfico de barras horizontais exibe a **quantidade de profissionais atuando em diferentes setores econômicos**. A ordenação decrescente permite identificar rapidamente os setores com maior e menor representatividade entre os respondentes da pesquisa.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Profissionais por Setor de Atuação"_
+
+- **Eixo X (Horizontal):** Quantidade de profissionais respondentes.
+
+- **Eixo Y (Vertical):** Setores de atuação, como:
+  - Finanças ou Bancos
+  - Tecnologia/Fábrica de Software
+  - Varejo
+  - Área de Consultoria
+  - Educação, Saúde, Setor Público
+  - Entretenimento, Imobiliário, ONGs, etc.
+
+- **Barras:** Representam o número absoluto de profissionais por setor.
+
+---
+
+## 📈 Observações e Interpretações
+
+### 🏦 Setores com Maior Representatividade
+
+1. **Finanças ou Bancos** — 🚀 _Setor líder absoluto_
+   - Aproximadamente **900 respondentes**
+   - Forte atratividade ou base de respondentes nesse segmento
+
+2. **Tecnologia / Fábrica de Software** — em 2º lugar
+   - Também muito expressivo, com quase **900 profissionais**
+   - Reflete a ascensão e demanda por profissionais de tecnologia
+
+3. **Varejo e Consultoria**
+   - Ambos próximos dos **400 profissionais**
+   - Alta empregabilidade e diversidade de perfis
+
+📌 **Interpretação:** Os dados apontam para uma maior concentração de profissionais nos setores financeiro e tecnológico, provavelmente por estarem mais organizados digitalmente ou oferecerem melhores condições salariais.
+
+---
+
+### 🎓 Setores com Representatividade Intermediária
+
+- **Indústria**, **Educação**, **Área da Saúde**, **Setor Público**
+  - Valores entre 200–350
+  - Refletem setores tradicionais com presença constante no mercado
+
+📌 **Interpretação:** Estes setores mostram participação sólida e estável no mercado, mas menor volume se comparado aos setores mais digitalizados.
+
+---
+
+### 🔍 Setores com Baixa Representatividade
+
+- **Setores com menos de 100 respondentes**:
+  - Filantropia/ONGs
+  - Setor Farmacêutico
+  - Setor Automotivo
+  - Entretenimento ou Esportes
+  - Setor Imobiliário/Construção Civil
+  - Seguros ou Previdência
+
+📌 **Interpretação:** Estes setores podem ter menor atratividade atual, menor base de amostragem, ou menor nível de formalização digital da carreira dos respondentes.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico revela uma clara **predominância de profissionais nos setores Financeiro e de Tecnologia**, seguidos por setores tradicionais como Varejo, Consultoria, Indústria e Saúde.
+
+💡 **Insight Final:** O padrão sugere uma **transformação digital no mercado de trabalho**, com setores inovadores superando em número os tradicionais. Isso pode impactar políticas de formação profissional, demandas salariais e estratégias de recrutamento nos próximos anos.
+
+---
+
+# 📊 Gráfico: Modelo de Trabalho por Nível de Senioridade
+
+![image9](https://github.com/user-attachments/assets/03079a44-e9eb-4bbf-8d03-e17f53f07ba9)
+
+## 📌 Descrição Geral
+
+Este gráfico de barras empilhadas apresenta a **distribuição dos modelos de trabalho** (presencial, remoto e híbrido) entre os profissionais segundo o **nível de senioridade**: Júnior, Pleno e Sênior.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Modelo de Trabalho por Nível de Senioridade"_
+- **Eixo X:** Nível de Senioridade (Júnior, Pleno, Sênior)
+- **Eixo Y:** Quantidade de profissionais
+- **Cores/Barras empilhadas:** Tipos de modelo de trabalho:
+  - 🟣 **Presencial**
+  - 🔵 **100% Remoto**
+  - 🟢 **Híbrido com dias fixos presenciais**
+  - 🟡 **Híbrido flexível (funcionário escolhe os dias presenciais)**
+
+---
+
+## 📈 Observações e Interpretações
+
+### 🧑‍💼 Profissionais Juniores
+
+- Maior concentração em **modelos 100% presenciais** e **remotos fixos**.
+- Participação menor nos modelos híbridos, especialmente o flexível.
+  
+📌 **Interpretação:** Profissionais juniores tendem a ser mais supervisionados ou contratados em empresas com estrutura menos flexível.
+
+---
+
+### 👨‍💻 Profissionais Plenos
+
+- Alta adesão ao **modelo 100% remoto**.
+- Equilíbrio considerável com modelos híbridos.
+- Redução significativa do modelo 100% presencial em relação aos juniores.
+
+📌 **Interpretação:** Profissionais plenos tendem a ter maior autonomia e acesso a políticas mais flexíveis de trabalho.
+
+---
+
+### 🧓 Profissionais Seniores
+
+- Predominância absoluta do **modelo 100% remoto**.
+- Crescimento no uso de **modelo híbrido flexível**.
+- **Menor proporção** de trabalho 100% presencial entre os três níveis.
+
+📌 **Interpretação:** Profissionais seniores, por sua experiência, **possuem maior poder de barganha**, sendo mais comuns em regimes flexíveis ou totalmente remotos.
+
+---
+
+## 🔍 Comparação Geral
+
+| Nível       | Predominância         | Observação                                        |
+|-------------|------------------------|---------------------------------------------------|
+| Júnior      | Presencial/Remoto fixo | Menor autonomia ou políticas menos flexíveis     |
+| Pleno       | Remoto fixo            | Transição para maior flexibilidade                |
+| Sênior      | Remoto fixo e híbrido flexível | Alta autonomia e preferência por flexibilidade |
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico destaca uma **correlação entre senioridade e flexibilidade no modelo de trabalho**:
+
+- Quanto maior o nível de senioridade, maior a prevalência de **modelos remotos e híbridos flexíveis**.
+- O modelo **100% presencial é significativamente mais comum entre profissionais juniores**, o que pode refletir necessidades de supervisão, cultura organizacional ou menos poder de negociação.
+
+💡 **Insight Final:** Empresas que desejam atrair ou reter talentos mais seniores devem **oferecer modelos mais flexíveis**, enquanto aquelas que contratam muitos juniores devem planejar **infraestrutura presencial adequada**.
+
+---
+
+# 🖥️ Gráfico: Top 10 Linguagens Mais Utilizadas no Trabalho
+
+![image10](https://github.com/user-attachments/assets/43bce909-5f1d-4d1d-b42c-cf02c0c2c892)
+
+## 📌 Descrição Geral
+
+Este gráfico de barras horizontais apresenta as **10 linguagens de programação mais utilizadas** no ambiente de trabalho pelos profissionais da amostra.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Top 10 Linguagens Mais Utilizadas no Trabalho"_
+- **Eixo X:** Quantidade de utilização
+- **Eixo Y:** Linguagens de programação
+- **Ordem:** Decrescente, da linguagem mais usada para a menos usada
+
+---
+
+## 📈 Observações e Interpretações
+
+### 🥇 SQL
+
+- **Linguagem mais utilizada** de forma destacada.
+- Aproximadamente **3.200 menções**.
+  
+📌 **Interpretação:** Reflete a importância do **acesso e manipulação de dados** em bancos relacionais no ambiente corporativo.
+
+---
+
+### 🥈 Python
+
+- Segunda mais popular, com mais de **2.800 menções**.
+- Muito próxima da primeira colocada.
+
+📌 **Interpretação:** Demonstra sua **versatilidade**, sendo utilizada em **ciência de dados, automações, back-end e análise de dados**.
+
+---
+
+### 🥉 R
+
+- Terceira colocada, com número significativamente menor (~400).
+  
+📌 **Interpretação:** Bastante usada em áreas estatísticas e acadêmicas, mas menos adotada fora desses nichos.
+
+---
+
+### Outros Destaques
+
+| Linguagem         | Interpretação                                                                 |
+|-------------------|--------------------------------------------------------------------------------|
+| Visual Basic/VBA  | Ainda presente em ambientes corporativos que usam fortemente **Excel e macros** |
+| JavaScript        | Representa o **desenvolvimento front-end** ou aplicações web interativas        |
+| SAS/Stata         | Usadas em **estatística aplicada**, especialmente em setores regulados         |
+| Scala             | Frequente em ambientes **big data (ex: Spark)**                                |
+| Java              | Forte em **sistemas corporativos legados** e back-end                          |
+| C/C++/C#          | Baixo uso, mas presentes em **sistemas embarcados, jogos, e aplicações de alto desempenho** |
+| PHP               | Apesar do declínio, ainda é utilizado em **sistemas legados e back-ends web**   |
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico evidencia a dominância de **SQL e Python** no ambiente profissional moderno, indicando uma forte **orientação para dados** nas funções de trabalho atuais. Linguagens como R, VBA, e SAS ainda aparecem com certa frequência, sugerindo a persistência de **soluções tradicionais em ambientes específicos**.
+
+💡 **Insight Final:** Profissionais que desejam se destacar no mercado devem priorizar o domínio de **SQL e Python**, seguidas de linguagens específicas conforme o setor de atuação (ex: R para estatística, JavaScript para web, Scala para big data).
+
+---
 
 
 ## Objetivo
