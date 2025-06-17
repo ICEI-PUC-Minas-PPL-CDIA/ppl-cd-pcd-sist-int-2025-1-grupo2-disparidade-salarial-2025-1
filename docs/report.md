@@ -3402,7 +3402,7 @@ Para uma análise mais completa, seria ideal cruzar esses dados também com a ex
 O modelo `RandomForestClassifier` é uma boa escolha para sua pergunta porque ele consegue identificar como diferentes fatores, como educação e experiência, interagem e qual a importância de cada um para explicar as diferenças salariais.
 
 ### Capacidade Inerente de Modelar Interações Complexas 🧩
-A pergunta foca explicitamente na **interação** entre formação e experiência. Modelos baseados em árvores, como o Random Forest, são excelentes em capturar automaticamente interações não lineares entre features. Cada caminho da raiz até uma folha em uma árvore de decisão representa uma sequência de condições, que é, em essência, uma regra de interação. Por exemplo, o impacto da "experiência profissional" no salário pode ser diferente para quem tem "doutorado" versus quem tem apenas "graduação". O Random Forest, ao agregar centenas de árvores, explora inúmeras dessas interações potenciais. O notebook até inclui uma visualização específica (`interacao_formacao_experiencia.png`) que tenta mostrar a probabilidade de salário alto com base na combinação de níveis de formação e experiência, demonstrando a capacidade do modelo de aprender e representar essas interações.
+A pergunta foca explicitamente na **interação** entre formação e experiência. Modelos baseados em árvores, como o Random Forest, são excelentes em captar automaticamente interações não lineares entre features. Cada caminho da raiz até uma folha em uma árvore de decisão representa uma sequência de condições, que é, em essência, uma regra de interação. Por exemplo, o impacto da "experiência profissional" no salário pode ser diferente para quem tem "doutorado" em relação a quem tem apenas "graduação". O Random Forest, ao agregar centenas de árvores, explora inúmeras dessas interações potenciais. O notebook até inclui uma visualização específica (`interacao_formacao_experiencia.png`) que tenta mostrar a probabilidade de salário alto com base na combinação de níveis de formação e experiência, demonstrando a capacidade do modelo de aprender e representar essas interações.
 
 ---
 ### Identificação dos Fatores Mais Influentes (Importância das Features) 📊
@@ -3414,8 +3414,7 @@ A relação entre fatores socioeconômicos e salário raramente é linear. Por e
 
 ---
 ### Robustez e Desempenho Geral 🚀
-Random Forests são conhecidos por sua **robustez** a outliers (em certa medida) e por seu **bom desempenho preditivo** em uma ampla gama de problemas de classificação sem a necessidade de um ajuste extensivo de hiperparâmetros (embora o tuning, como feito no notebook via `GridSearchCV`, geralmente melhore ainda mais o desempenho). A capacidade de lidar com diferentes tipos de features (numéricas e categóricas codificadas) e a menor propensão a overfitting em comparação com árvores de decisão únicas também são vantagens significativas.
-
+Random Forests são conhecidos por sua **robustez** a outliers (em certa medida) e por seu **bom desempenho preditivo** em uma ampla gama de problemas de classificação sem a necessidade de um ajuste extensivo de hiper parâmetros (embora o tuning, como feito no notebook via `GridSearchCV`, geralmente melhore ainda mais o desempenho). A capacidade de lidar com diferentes tipos de features (numéricas e categóricas codificadas) e a menor propensão a overfitting em comparação com árvores de decisão únicas também são vantagens significativas.
 ---
 ### Adequação à Definição do Problema no Notebook 🎯
 No notebook fornecido, a "disparidade salarial" foi transformada em um problema de **classificação binária** (salário alto vs. salário baixo/médio). O `RandomForestClassifier` é projetado especificamente para esse tipo de tarefa. Além disso, o código implementa:
@@ -3429,10 +3428,9 @@ No notebook fornecido, a "disparidade salarial" foi transformada em um problema 
 ### Como as Árvores de Decisão (Base do Random Forest) Capturam Interações
 
 * **Natureza Hierárquica e Condicional**:
-    * Uma árvore de decisão funciona dividindo o espaço das features em regiões menores através de uma série de **decisões condicionais (splits)**.
+    * Uma árvore de decisão funciona dividindo o espaço das features em regiões menores por uma série de **decisões condicionais (splits)**.
     * O caminho de uma amostra de dados da raiz até uma folha (nó terminal) representa uma **sequência específica de condições** sobre diferentes features.
-    * Por exemplo, uma árvore pode aprender que "SE `Nível de senioridade` é 'Sênior' E `Tempo de experiência na área de dados` é 'Mais de 10 anos', ENTÃO a probabilidade de `salario_alto` é X". Esta é uma interação direta entre `Nível de senioridade` e `Tempo de experiência`. O efeito da experiência no salário pode ser diferente para um júnior versus um sênior.
-
+    * Por exemplo, uma árvore pode aprender que "SE `Nível de senioridade` é 'Sênior' E `Tempo de experiência na área de dados` é 'Mais de 10 anos', ENTÃO a probabilidade de `salario_alto` é X". Esta é uma interação direta entre `Nível de senioridade` e `Tempo de experiência`. O efeito da experiência no salário pode ser diferente para um júnior em relação a um sênior.
 * **Profundidade da Árvore**:
     * Árvores mais profundas (controladas por `max_depth`, `min_samples_split`, `min_samples_leaf`) podem capturar interações de ordem superior (interações entre três ou mais features). No modelo otimizado, `max_depth` foi definido como `None`, permitindo que as árvores cresçam até que os critérios de `min_samples_leaf: 7` e `min_samples_split: 15` sejam atingidos. Isso dá flexibilidade para capturar interações significativas.
 
@@ -3457,7 +3455,7 @@ No notebook fornecido, a "disparidade salarial" foi transformada em um problema 
     * O fato de o modelo conseguir gerar previsões que resultam em um padrão claro neste heatmap (por exemplo, mostrando que a combinação de alta formação E alta experiência leva a uma maior probabilidade de salário alto) é uma **demonstração direta** de que o modelo está capturando e utilizando essa interação específica.
 
 * **Engenharia de Features**:
-    * A codificação one-hot de features como `'Área de formação acadêmica'`, `'UF onde mora'`, e `'Setor de atuação da empresa'` cria colunas binárias. O modelo pode então aprender, por exemplo, se o impacto do `'Tempo de experiência na área de dados'` no salário é diferente para `'UF onde mora_São Paulo'` versus `'UF onde mora_Bahia'`.
+    * A codificação one-hot de features como `'Área de formação acadêmica'`, `'UF onde mora'`, e `'Setor de atuação da empresa'` cria colunas binárias. O modelo pode então aprender, por exemplo, se o impacto do `'Tempo de experiência na área de dados'` no salário é diferente para `'UF onde mora_São Paulo'` em relação a `'UF onde mora_Bahia'`.
 
 * **Desempenho Geral do Modelo**:
     * Um bom desempenho em um problema complexo como a previsão salarial, que intuitivamente depende de como múltiplos fatores se combinam, sugere que o modelo está efetivamente capturando não apenas os efeitos principais das features, mas também suas interações. Se o modelo não conseguisse capturar essas interações, seu poder preditivo seria provavelmente muito menor.
@@ -3536,7 +3534,7 @@ A robustez refere-se à capacidade do modelo de manter seu desempenho mesmo dian
     * Em cada divisão de nó de cada árvore, apenas um subconjunto aleatório de features é considerado. Isso **descorrelaciona as árvores** e impede que features individualmente muito fortes (mas possivelmente ruidosas ou específicas demais para a amostra de treino) dominem a construção de todas as árvores. Isso torna o modelo menos sensível a pequenas variações nas features individuais.
 
 * **Controle da Complexidade das Árvores**:
-    * Os hiperparâmetros otimizados `min_samples_split: 15` e `min_samples_leaf: 7` restringem o crescimento das árvores. Eles evitam que as árvores se tornem excessivamente complexas e se ajustem ao ruído presente nos dados de treinamento. Árvores mais simples e robustas contribuem para uma floresta mais robusta.
+    * Os hiper parâmetros otimizados `min_samples_split: 15` e `min_samples_leaf: 7` restringem o crescimento das árvores. Eles evitam que as árvores se tornem excessivamente complexas e se ajustem ao ruído presente nos dados de treinamento. Árvores mais simples e robustas contribuem para uma floresta mais robusta.
 
 * **Tratamento de Desbalanceamento de Classes**:
     * O uso de `class_weight='balanced_subsample'` e `sample_weights` torna o modelo robusto a distribuições de classe desiguais. Sem isso, o modelo poderia simplesmente aprender a prever a classe majoritária, mostrando um desempenho pobre e não robusto quando confrontado com diferentes proporções de classe ou com a importância da classe minoritária.
@@ -3551,7 +3549,7 @@ A generalização é a capacidade do modelo de performar bem em dados novos e n�
     * A principal vantagem do bagging (usado no Random Forest) é a **redução da variância** do modelo sem aumentar significativamente o bias. Modelos com alta variância tendem a se ajustar demais aos dados de treinamento (overfitting) e generalizam mal. Ao agregar múltiplas árvores, o Random Forest suaviza as previsões e melhora a generalização.
 
 * **Validação Cruzada (`GridSearchCV` e `CalibratedClassifierCV`)**:
-    * O uso de validação cruzada de **5 folds** tanto no `GridSearchCV` (para otimização de hiperparâmetros) quanto no `CalibratedClassifierCV` (para calibração) é fundamental para a generalização.
+    * O uso de validação cruzada de **5 folds** tanto no `GridSearchCV` (para otimização de hiper parâmetros) quanto no `CalibratedClassifierCV` (para calibração) é fundamental para a generalização.
     * Nesses processos, o modelo é treinado e avaliado múltiplas vezes em diferentes subconjuntos dos dados de treinamento. Isso ajuda a garantir que os hiperparâmetros selecionados e o processo de calibração sejam eficazes não apenas para uma divisão específica dos dados, mas que **generalizem bem** para porções não vistas do conjunto de treinamento.
 
 * **Divisão em Conjunto de Treino e Teste**:
@@ -3928,14 +3926,14 @@ O script gera e salva diversas visualizações para ajudar na compreensão e ava
 
 -------------------------------------------
 
-### Modelo 2 Análise de Disparidade Salarial de Profissionais de Dados no Brasil Utilizando o Arvore de decisão por classificação
-### *Justificativa1-2*
+# Modelo 2 Análise de Disparidade Salarial de Profissionais de Dados no Brasil Utilizando o Arvore de decisão por classificação
+## *Justificativa1-2*
 
-O modelo escolhido foi o Gradient Boosting Classifier, uma técnica de ensemble baseada em árvores de decisão. A escolha se justifica porque o problema envolve múltiplas variáveis categóricas, relações não-lineares e a necessidade de interpretar a influência de fatores como formação acadêmica e experiência profissional sobre faixas salariais. O Gradient Boosting é reconhecido por sua eficácia em tarefas de classificação com dados tabulares e mistos, como é o caso do dataset analisado
+O modelo escolhido foi o Gradient Boosting Classifier, uma técnica de ensemble baseada em árvores de decisão. A escolha se justifica porque o problema envolve múltiplas variáveis categóricas, relações não-lineares e a necessidade de interpretar a influência de fatores como formação acadêmica e experiência profissional sobre faixas salariais. O Gradient Boosting é reconhecido por sua eficácia em tarefas de classificação com dados tabulares e mistos, como no caso do dataset analisado.
 
-### *Processo de Amostragem de Dados (Particionamento e Cross-Validation)1-2*
+## *Processo de Amostragem de Dados (Particionamento e Cross-Validation)1-2*
 
-## Processo de Amostragem de Dados (Particionamento e Cross-Validation)
+### Processo de Amostragem de Dados (Particionamento e Cross-Validation)
 
 ### 1. Particionamento dos Dados (Train-Test Split)
 
@@ -3951,7 +3949,7 @@ O modelo escolhido foi o Gradient Boosting Classifier, uma técnica de ensemble 
 ### 2. Cross-Validation Estratificada (Stratified K-Fold)
 
 - **Validação Cruzada Estratificada:**  
-  Durante a otimização de hiperparâmetros (`RandomizedSearchCV`), foi empregada a validação cruzada estratificada (`StratifiedKFold`) com 3 folds.  
+  Durante a otimização de hiper parâmetros (`RandomizedSearchCV`), foi empregada a validação cruzada estratificada (`StratifiedKFold`) com 3 folds.  
   Em cada iteração, o conjunto de treino é novamente dividido em 3 subconjuntos, mantendo a proporção das classes em cada fold. O modelo é treinado em dois folds e avaliado no terceiro, repetindo o processo para todos os folds.
 
 - **Vantagens da Estratificação:**  
@@ -3965,23 +3963,24 @@ O modelo escolhido foi o Gradient Boosting Classifier, uma técnica de ensemble 
 
 ### **Capacidade de Capturar Interações Complexas**
 
-Modelos de árvores, especialmente ensembles como o Gradient Boosting, capturam automaticamente interações complexas entre variáveis sem a necessidade de especificá-las manualmente. Isso é fundamental para o contexto, pois a relação entre formação acadêmica, experiência e salário não é linear nem independente: o impacto de um fator depende do outro. O modelo constrói sucessivas árvores que corrigem os erros das anteriores, ajustando-se a padrões e interações sutis presentes nos dados
+Modelos de árvores, especialmente ensembles como o Gradient Boosting, capturam automaticamente interações complexas entre variáveis sem a necessidade de especificá-las manualmente. Isso é fundamental para o contexto, pois a relação entre formação acadêmica, experiência e salário não é linear nem independente: o impacto de um fator depende do outro. O modelo constrói sucessivas árvores que corrigem os erros das anteriores, ajustando-se a padrões e interações sutis presentes nos dados.
+
 
 
 ### **Fornecimento de Importância das Features**
 
-O Gradient Boosting permite extrair a importância relativa de cada variável para a predição, facilitando a interpretação dos fatores que mais influenciam o salário. O código calcula e reporta métricas como o coeficiente de Cramer's V para variáveis categóricas antes do treinamento, e a própria biblioteca do modelo possibilita gerar rankings de importância das features após o ajuste. Isso é essencial para análises orientadas a dados e para justificar decisões baseadas nos resultados do modelo
+O Gradient Boosting permite extrair a importância relativa de cada variável para a predição, facilitando a interpretação dos fatores que mais influenciam o salário. O código calcula e reporta métricas como o coeficiente de Cramer's V para variáveis categóricas antes do treinamento, e a própria biblioteca do modelo possibilita gerar rankings de importância das features após o ajuste. Isso é essencial para análises orientadas a dados e para justificar decisões baseadas nos resultados do modelo.
 
 
 ### **Robustez e Generalização**
 
-O Gradient Boosting é robusto a outliers e a diferentes escalas de variáveis, além de apresentar boa capacidade de generalização quando parametrizado corretamente. O pipeline do código inclui validação cruzada estratificada, balanceamento de classes e busca de hiperparâmetros (RandomizedSearchCV), o que reduz o risco de overfitting e melhora a performance em dados não vistos. Isso garante que as conclusões sobre disparidade salarial sejam confiáveis e replicáveis em outros conjuntos de dados semelhantes
+O Gradient Boosting é robusto a outliers e a diferentes escalas de variáveis, além de apresentar boa capacidade de generalização quando parametrizado corretamente. O pipeline do código inclui validação cruzada estratificada, balanceamento de classes e busca de hiper parâmetros (RandomizedSearchCV), o que reduz o risco de overfitting e melhora o desempenho em dados não vistos. Isso garante que as conclusões sobre disparidade salarial sejam confiáveis e replicáveis em outros conjuntos de dados semelhantes.
+
 
 ### **Bom Desempenho em Problemas de Classificação**
 
-Modelos baseados em Gradient Boosting frequentemente apresentam desempenho superior em benchmarks de classificação com dados tabulares, especialmente quando há múltiplas classes e desbalanceamento, como no caso das faixas salariais. O modelo atingiu acurácia de 52,7% e acurácia balanceada de 40,1%, valores considerados competitivos para um problema de alta complexidade e múltiplas categorias. Além disso, o modelo lida bem com variáveis categóricas codificadas via OneHotEncoder e com a necessidade de interpretar resultados para diferentes grupos
-
-### 
+Modelos baseados em Gradient Boosting frequentemente apresentam desempenho superior em benchmarks de classificação com dados tabulares, especialmente quando há múltiplas classes e desbalanceamento, como nas faixas salariais. O modelo atingiu acurácia de 52,7% e acurácia balanceada de 40,1%, valores considerados competitivos para um problema de alta complexidade e múltiplas categorias. Além disso, o modelo lida bem com variáveis categóricas codificadas via OneHotEncoder e com a necessidade de interpretar resultados para diferentes grupos.
+ 
 
 ### *Parâmetros utilizados1-2*
 
@@ -4001,7 +4000,7 @@ Abaixo estão os principais hiperparâmetros definidos após otimização com Ra
 Esses parâmetros foram escolhidos para equilibrar desempenho, capacidade de generalização e evitar overfitting, garantindo que o modelo seja capaz de capturar padrões relevantes dos dados salariais sem se ajustar demais ao conjunto de treino.
 
 
-### *Explicação do Código:1-2*
+# *Explicação do Código:1-2*
 
 ### 1. Contexto do Modelo
 
