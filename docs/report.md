@@ -5021,7 +5021,7 @@ O gráfico apresentado é uma **Curva Precision-Recall**. Este tipo de gráfico 
 
 * **Título:** "Curva Precision-Recall" indica o que o gráfico representa.
 * **Eixo Vertical (Precision / Precisão):** Este eixo mede a "Precisão" do modelo e varia de aproximadamente 0.4 (40%) a 1.0 (100%).
-    * **O que é Precisão?** De todas as vezes que o modelo previu um resultado positivo (por exemplo, "Salário Alto"), qual a porcentagem dessas previsões estava realmente correta? Uma precisão alta significa que quando o modelo diz que algo é positivo, ele geralmente está certo.
+    * **O que é Precisão?** De todas às vezes que o modelo previu um resultado positivo (por exemplo, "Salário Alto"), qual a porcentagem dessas previsões estava realmente correta? Uma precisão alta significa que, quando o modelo diz que algo é positivo, ele geralmente está certo.
 * **Eixo Horizontal (Recall / Revocação / Sensibilidade):** Este eixo mede o "Recall" do modelo e varia de 0.0 (0%) a 1.0 (100%).
     * **O que é Recall?** De todos os casos que eram *realmente* positivos (por exemplo, todos os profissionais que *realmente* têm "Salário Alto"), qual a porcentagem que o modelo conseguiu identificar corretamente? Um recall alto significa que o modelo encontra a maioria dos casos positivos existentes.
 * **A Linha Azul:** A linha azul no gráfico traça a relação entre a precisão e o recall do modelo em diferentes "limiares de decisão".
@@ -5029,9 +5029,9 @@ O gráfico apresentado é uma **Curva Precision-Recall**. Este tipo de gráfico 
 
 **Interpretando a Curva:**
 
-* **Trade-off entre Precisão e Recall:** A curva geralmente mostra um "trade-off" (uma troca) entre precisão e recall. Idealmente, gostaríamos que ambas as métricas fossem 100% (canto superior direito do gráfico), mas na prática, aumentar uma muitas vezes leva à diminuição da outra. Isso é visível no gráfico: à medida que o Recall aumenta (movendo-se para a direita no eixo horizontal), a Precisão tende a diminuir (a linha azul geralmente desce).
+* **Trade-off entre Precisão e Recall:** A curva geralmente mostra um "trade-off" (uma troca) entre precisão e recall. Idealmente, gostaríamos que ambas as métricas fossem 100% (canto superior direito do gráfico), mas, na prática, aumentar uma muitas vezes leva à diminuição da outra. Isso é visível no gráfico: à medida que o Recall aumenta (movendo-se para a direita no eixo horizontal), a Precisão tende a diminuir (a linha azul geralmente desce).
 * **Formato da Curva:**
-    * No início (lado esquerdo), quando o Recall é baixo (o modelo está identificando poucos dos verdadeiros positivos), a Precisão é alta (próxima de 1.0). Isso sugere que para os poucos casos que ele classifica como positivos, ele está muito certo.
+    * No início (lado esquerdo), quando o Recall é baixo (o modelo está identificando poucos dos verdadeiros positivos), a Precisão é alta (próxima de 1.0). Isso sugere que, para os poucos casos que ele classifica como positivos, ele está muito certo.
     * À medida que o modelo tenta capturar mais dos verdadeiros positivos (Recall aumenta), a Precisão começa a cair. Vemos isso pela descida da linha azul. Por exemplo, quando o Recall está em torno de 0.8, a Precisão já caiu para perto de 0.7.
     * A queda se torna mais acentuada no final direito da curva, onde para alcançar um Recall muito alto (perto de 1.0), a Precisão cai significativamente para cerca de 0.4.
 * **O que é um "bom" resultado?** Uma curva que se mantém o mais próximo possível do canto superior direito (alta precisão e alto recall simultaneamente) indica um modelo com melhor desempenho. Quanto mais a curva "abraça" o canto superior direito, melhor.
@@ -5183,7 +5183,7 @@ Este gráfico é fundamental para entender "o que o modelo está pensando". Ele 
 
 3.  **O que significa "Grupo senioridade" neste contexto?**
     * Diferentemente dos gráficos de "Grupo UF onde mora" ou "Grupo Setor de atuação da empresa", onde várias features dentro do grupo eram comparadas (por exemplo, diferentes UFs ou diferentes setores), aqui o "Grupo senioridade" parece se referir apenas a esta única feature consolidada.
-    * Isso reforça que a senioridade, como um todo, foi tratada como um conceito único e poderoso pelo modelo.
+    * Isso reforça que a senioridade, na totalidade, foi tratada como um conceito único e poderoso pelo modelo.
 
 **O que este gráfico nos diz sobre o modelo?**
 
@@ -5208,8 +5208,8 @@ Este gráfico serve para enfatizar de forma isolada e clara o **peso significati
     * A barra se estende até um valor de importância relativa de aproximadamente **0.0952**. Embora este valor seja menor do que os observados para `senioridade_encoded` (próximo a 0.4053) e `experiencia_profissional_encoded` (próximo a 0.3588) em outros gráficos, ele ainda representa a terceira característica mais importante no geral para o modelo.
     * Isso indica que, após a senioridade e a experiência, o nível de formação acadêmica é o próximo fator mais influente nas previsões salariais.
 
-3.  **O que significa "Grupo formacao" neste contexto?**
-    * Assim como no gráfico do "Grupo senioridade", o "Grupo formacao" aqui se refere a esta única feature consolidada, `formacao_academica_encoded`.
+3.  **O que significa "Grupo Formação" neste contexto?**
+    * Assim como no gráfico do "Grupo senioridade", o "Grupo formação" aqui se refere a esta única feature consolidada, `formacao_academica_encoded`.
     * Isso não é uma comparação entre diferentes aspectos da formação, mas sim uma maneira de destacar a importância total atribuída ao conceito de "nível de formação acadêmica" da forma como foi processado e incluído no modelo.
 
 **O que este gráfico nos diz sobre o modelo?**
@@ -5497,9 +5497,11 @@ Vamos seguir um caminho hipotético:
 
 **Observações Gerais:**
 
+
 * O modelo parece ter um melhor desempenho para a classe **"R$ 8.001/mês a R$ 16.000/mês"**, que possui o maior número de classificações corretas na diagonal.
 * Há uma tendência de confusão entre faixas salariais adjacentes, o que é esperado, pois a distinção entre elas pode ser sutil.
-* A classe **"Acima de R$ 30.000/mês"** é a que apresenta o pior desempenho em termos de acertos, sendo frequentemente subestimada pelo modelo. Isso pode ser devido a um menor número de amostras nessa classe nos dados de treinamento (desbalanceamento de classes) ou à dificuldade intrínseca de separar essa faixa das demais com as features disponíveis.
+* A classe **"Acima de R$ 30.000/mês"** é a que apresenta o pior desempenho em termos de acertos, sendo frequentemente subestimada pelo modelo. Isso pode ser devido a menos amostras nessa classe nos dados de treinamento (desbalanceamento de classes) ou à dificuldade intrínseca de separar essa faixa das demais com as features disponíveis.
+
 
 
 ### distribuicao_faixas_salariais_originais 1_2
@@ -5944,7 +5946,9 @@ O modelo de Rede Neural Artificial V8, após otimização de hiperparâmetros, d
 ### I. Especificação do Modelo e Parâmetros Chave
 
 #### a. Tipo de Modelo de Machine Learning
-O modelo de machine learning implementado no código Python é um **`RandomForestClassifier`**. Este é um modelo de ensemble que utiliza múltiplas árvores de decisão para realizar classificações, combinando as previsões de cada árvore para obter um resultado final mais robusto e preciso.
+
+O modelo de machine learning implementado no código Python é um **`RandomForestClassifier`**. Este é um modelo de ensemble que utiliza múltiplas árvores de decisão para realizar classificações, combinando as previsões de cada árvore para obter um resultado mais robusto e preciso.
+
 
 #### b. Principais Hiperparâmetros do Modelo Final Treinado
 O modelo final (`best_rf_model` no código) foi obtido após um processo de otimização de hiperparâmetros utilizando `GridSearchCV`. Os principais hiperparâmetros do `best_rf_model` são:
@@ -6626,13 +6630,16 @@ A pergunta ("Quais fatores e suas interações influenciam a classificação em 
 
 * **Robustez e Generalização:**
     * Sendo um ensemble (bagging), é geralmente robusto a outliers (até certo ponto) e menos propenso a overfitting do que uma única árvore de decisão. A otimização de hiperparâmetros (`min_samples_leaf`, `min_samples_split`) e a validação cruzada no `GridSearchCV` (cv=5) visam melhorar a generalização.
-    * *Conexão com Objetivos:* A construção de um "sistema inteligente" confiável requer boa generalização para "auxiliar na equiparação salarial" de forma consistente.
+    * *Conexão com objetivos:* A construção de um "sistema inteligente" confiável requer boa generalização para "auxiliar na equiparação salarial" de forma consistente.
+
 
 * **Bom Desempenho em Problemas de Classificação Binária:**
+
     * O Random Forest é um algoritmo forte para tarefas de classificação. A transformação do problema em binário ("Salário Alto" vs. "Salário Baixo/Médio") simplifica a tarefa e foca na distinção de um limiar salarial chave (R$ 8.000/mês, conforme engenharia de features no código).
-    * O uso de `sample_weights` e `class_weight='balanced_subsample'`, junto com a otimização do limiar de decisão e a calibração das probabilidades, são boas práticas que melhoram a confiabilidade em cenários com leve desbalanceamento.
+    * O uso de `sample_weights` e `class_weight='balanced_subsample'`, com a otimização do limiar de decisão e a calibração das probabilidades, são boas práticas que melhoram a confiabilidade em cenários com leve desbalanceamento.
     * A acurácia balanceada de 0.8106 no teste, conforme o `report.md`, é um bom resultado para este problema binário.
     * *Conexão com Objetivos:* Permite "aplicar por meio de algoritmos de aprendizado de máquina, a previsão da variação salarial com base nos fatores identificados" de forma eficaz para o problema binário definido.
+
 
 * **Interpretabilidade Parcial e Visualizações:**
     * Embora ensembles sejam caixas-pretas, a importância das features e a capacidade de visualizar árvores individuais (como feito no código, ex: `arvore_exemplo_simplificada.png`) oferecem alguma interpretabilidade. O heatmap de interação (`interacao_formacao_experiencia.png`) é uma excelente forma de visualizar o efeito combinado de formação e experiência.
@@ -6649,12 +6656,15 @@ A pergunta ("Quais fatores e suas interações influenciam a classificação em 
     * *Impacto na Investigação:* Pode ser difícil "desenvolver um sistema inteligente para *compreender* os fatores que influenciam a variação salarial" em profundidade apenas com as saídas do Random Forest.
 
 * **Tratamento Ordinal de Features Chave:**
+
     * `formacao_academica_encoded` e `experiencia_profissional_encoded` são tratadas como numéricas ordinais. Embora haja uma ordem, o modelo de árvore pode tratar os intervalos entre os valores codificados como equidistantes, o que pode não ser verdade (o "salto" de Graduação para Pós pode não ser o mesmo que de Pós para Mestrado em termos de impacto salarial). Isso pode levar a splits subótimos se a relação não for estritamente linear dentro da ordem.
-    * *Impacto na Investigação:* A representação da influência dessas variáveis chave pode não ser totalmente precisa, afetando a análise da interação.
+    * *Impacto na Investigação:* A representação da influência dessas variáveis-chave pode não ser totalmente precisa, afetando a análise da interação.
+
 
 * **Sensibilidade a Hiperparâmetros:**
-    * Embora o `GridSearchCV` tenha sido usado, Random Forests ainda podem ser sensíveis à escolha da grade de parâmetros. O `max_depth=None` (melhor parâmetro encontrado) pode levar a árvores muito profundas se não bem controlado por `min_samples_leaf` (7) e `min_samples_split` (15).
+    * Embora o `GridSearchCV` tenha sido usado, Random Forests ainda podem ser sensíveis à escolha da grade de parâmetros. O `max_depth=None` (melhor parâmetro encontrado) pode levar a árvores muito profundas se não for bem controlado por `min_samples_leaf` (7) e `min_samples_split` (15).
     * *Impacto na Investigação:* Uma otimização subótima poderia levar a conclusões menos robustas sobre a importância dos fatores.
+
 
 ---
 
@@ -6665,16 +6675,20 @@ A pergunta ("Quais fatores e suas interações influenciam a classificação em 
 ##### Forças do Modelo B:
 
 * **Análise Granular da Disparidade Salarial:**
-    * Ao usar uma variável alvo multiclasse com 6 faixas salariais agrupadas (ex: 'Até R$ 2.000/mês', 'R$ 2.001/mês a R$ 4.000/mês', etc.), o modelo permite uma análise mais detalhada da disparidade salarial do que uma simples classificação binária. É possível ver como os fatores influenciam a probabilidade de pertencer a diferentes níveis de renda.
+
+    * Ao usar uma variável alvo multi-classe com 6 faixas salariais agrupadas (ex: 'Até R$ 2.000/mês', 'R$ 2.001/mês a R$ 4.000/mês', etc.), o modelo permite uma análise mais detalhada da disparidade salarial do que uma simples classificação binária. É possível ver como os fatores influenciam a probabilidade de pertencer a diferentes níveis de renda.
     * *Conexão com Objetivos:* Alinha-se melhor com "compreender os fatores que influenciam a *variação* salarial" de forma mais ampla, como detalhado no problema do `report.md`.
+
 
 * **Tratamento Flexível de Features Categóricas com One-Hot Encoding:**
     * Aplicar One-Hot Encoding a todas as features de entrada, incluindo 'Nível de ensino alcançado' e 'Tempo de experiência na área de dados' (que foram tratadas como categóricas antes do OHE no código), evita impor uma relação ordinal que pode não ser linear ou equidistante em seu efeito no salário. Cada categoria (ex: cada nível de ensino, cada faixa de experiência) torna-se uma feature binária independente, permitindo ao modelo aprender seu impacto específico.
-    * *Conexão com Objetivos:* Pode levar a uma modelagem mais flexível do impacto das variáveis chave 'formação acadêmica' e 'experiência profissional'.
+    * *Conexão com Objetivos:* Pode levar a uma modelagem mais flexível do impacto das variáveis-chave 'formação acadêmica' e 'experiência profissional'.
+
 
 * **Poder Preditivo do Gradient Boosting:**
-    * Gradient Boosting Machines (GBMs) são frequentemente algoritmos de ponta para dados tabulares, capazes de alcançar alta performance através da construção sequencial de árvores que corrigem os erros das anteriores.
+    * Gradient Boosting Machines (GBMs) são frequentemente algoritmos de ponta para dados tabulares, capazes de alcançar alto desempenho através da construção sequencial de árvores que corrigem os erros das anteriores.
     * *Conexão com Objetivos:* Pode levar a uma "previsão da variação salarial com base nos fatores identificados" mais precisa, dentro do contexto multiclasse.
+
 
 * **Importância das Features e Análise de Associação Inicial:**
     * Assim como o Random Forest, GBMs podem fornecer a importância das features (geralmente baseada no ganho). O código também calcula o V de Cramer para uma análise de correlação inicial entre features e o alvo multiclasse, informando sobre a força da associação antes da modelagem. 'Nível de senioridade' e 'Tempo de experiência' foram identificados como os mais correlacionados com a faixa salarial agrupada.
@@ -6688,16 +6702,22 @@ A pergunta ("Quais fatores e suas interações influenciam a classificação em 
     * *Impacto na Investigação:* Torna a "interpretação dos resultados" e a "geração de insights para o mercado" mais desafiadoras, especialmente para classes com baixo desempenho.
 
 * **Sensibilidade a Hiperparâmetros e Risco de Overfitting:**
-    * GBMs são conhecidos por serem sensíveis a hiperparâmetros (especialmente `learning_rate` e `n_estimators`). Embora `RandomizedSearchCV` tenha sido usado, a otimização pode ser mais crítica. Há um risco maior de overfitting se não cuidadosamente ajustado, especialmente com o oversampling.
+
+    * GBMs são conhecidos por serem sensíveis a hiperparâmetros (especialmente `learning_rate` e `n_estimators`). Embora `RandomizedSearchCV` tenha sido usado, a otimização pode ser mais crítica. Há um risco maior de overfitting se não for cuidadosamente ajustado, especialmente com o oversampling.
     * *Impacto na Investigação:* Pode levar a um modelo que não generaliza bem para novos dados ou que superestima a importância de certas interações aprendidas no conjunto de treino.
 
+
 * **Impacto do Oversampling Manual:**
-    * O oversampling manual no conjunto de treino para balancear as 6 classes pode introduzir redundância e potencialmente levar a um modelo que se ajusta demais às características das amostras replicadas, especialmente para as classes originalmente minoritárias. A distribuição das classes após o balanceamento mostrou todas as classes com 825 amostras cada.
+
+    * O oversampling manual no conjunto de treino para balancear as 6 classes pode introduzir redundância e levar potencialmente a um modelo que se ajusta demais às características das amostras replicadas, especialmente para as classes originalmente minoritárias. A distribuição das classes após o balanceamento mostrou todas as classes com 825 amostras cada.
     * *Impacto na Investigação:* As estimativas de desempenho no conjunto de treino podem ser otimistas, e a importância das features pode ser distorcida se o oversampling não for bem gerenciado.
 
+
 * **Perda de Informação Ordinal com One-Hot Encoding para 'Nível de Ensino' e 'Experiência':**
+
     * Ao tratar 'Nível de ensino alcançado' e 'Tempo de experiência na área de dados' como puramente categóricas para o One-Hot Encoding, a informação inerente de ordem (ex: Mestrado > Graduação, 5 anos > 2 anos) é perdida para o modelo, a menos que ele consiga reaprendê-la através das interações e da estrutura das árvores. Isso pode tornar mais difícil para o modelo capturar tendências monotônicas simples.
-    * *Impacto na Investigação:* Pode subestimar o impacto progressivo e ordenado dessas variáveis chave, que são centrais para a 1ª pergunta orientada a dados do `report.md`.
+    * *Impacto na Investigação:* Pode subestimar o impacto progressivo e ordenado dessas variáveis-chave, centrais para a 1ª pergunta orientada a dados do `report.md`
+.
 
 ---
 
