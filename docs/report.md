@@ -1941,6 +1941,453 @@ Este tipo de gráfico é uma ferramenta poderosa para a análise exploratória d
 **Pergunta Orientada a Dados:**
 *Qual é a relação entre o tempo de experiência na área de dados, o nível de senioridade e a faixa salarial dos profissionais no Brasil?*
 
+# 📊 Gráfico: Tempo de Experiência na Área de Dados vs Faixa Salarial
+
+![image1](https://github.com/user-attachments/assets/5a742221-23a3-4a2e-8719-dbe194546936)
+
+## 📌 Descrição Geral
+
+O gráfico apresentado é um **boxplot (gráfico de caixa)** que explora a relação entre o **tempo de experiência dos profissionais na área de dados** e suas respectivas **faixas salariais mensais**.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Experiência na Área de Dados vs Faixa Salarial"_
+
+- **Eixo X (Horizontal):** Tempo de experiência na área de dados, categorizado em faixas:
+  - Menos de 1 ano
+  - de 1 a 2 anos
+  - de 3 a 4 anos
+  - de 4 a 6 anos
+  - de 5 a 6 anos
+  - de 7 a 10 anos
+  - Mais de 10 anos
+  - Não tenho experiência na área de dados
+
+- **Eixo Y (Vertical):** Faixa salarial mensal, com categorias que vão desde _"Menos de R$1.000/mês"_ até _"Acima de R$40.001/mês"_, em intervalos definidos (exemplo: de R$4.001 a R$6.000, de R$6.001 a R$8.000, etc.).
+
+- **Elementos de Caixa (Boxplots):** Cada caixa representa a distribuição das faixas salariais dentro de cada categoria de tempo de experiência, indicando:
+  - **Mediana**
+  - **Quartis**
+  - **Faixa interquartil**
+  - **Outliers** (pontos fora da caixa)
+
+---
+
+## 📈 Observações e Interpretações
+
+### ✅ Tendência Geral de Crescimento Salarial com a Experiência
+Existe uma clara tendência de **aumento da mediana salarial** à medida que cresce o tempo de experiência na área de dados. Profissionais com **menos de 1 ano** ou entre **1 a 2 anos de experiência** estão concentrados nas **faixas salariais mais baixas**, enquanto aqueles com **mais de 5 anos** apresentam **medianas mais elevadas**.
+
+### ✅ Dispersão Salarial (Variabilidade)
+As categorias com **maior tempo de experiência** (especialmente _"Mais de 10 anos"_ e _"de 7 a 10 anos"_) apresentam **caixas mais altas e whiskers mais longos**, evidenciando **maior dispersão salarial**. Isso indica que nesses grupos há tanto profissionais com **salários medianos** quanto outros com **remunerações significativamente altas**.
+
+A presença de **outliers em praticamente todas as faixas** reforça a existência de casos com **salários discrepantes**, acima ou abaixo do intervalo típico.
+
+### ✅ Faixas de Experiência Inicial
+Profissionais com _"Menos de 1 ano"_ e _"de 1 a 2 anos"_ estão **fortemente concentrados nas faixas salariais até R$8.000/mês**, com **raros casos acima disso**, o que sugere um **teto salarial mais baixo para iniciantes** na área.
+
+### ✅ Categoria “Não tenho experiência na área de dados”
+Este grupo apresenta uma **distribuição salarial bastante dispersa**, com salários que vão de **faixas muito baixas até médias próximas a profissionais com 3-4 anos de experiência**. Isso pode indicar que parte desses profissionais possui **experiência em outras áreas relevantes** ou **cargos com exigências específicas**.
+
+### ✅ Outros Destaques
+- A **mediana salarial cresce de forma mais significativa** a partir da faixa _"de 5 a 6 anos"_, sugerindo um **marco importante de progressão de carreira**.
+- A faixa _"Mais de 10 anos"_ apresenta o **maior alcance de salários**, incluindo uma concentração visível nas **faixas mais altas**.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico confirma uma **correlação positiva entre tempo de experiência na área de dados e o aumento nas faixas salariais**. A **progressão salarial é notória principalmente após os 5 anos de experiência**, mas com **alta variabilidade dentro de cada grupo**. Essa análise reforça que, apesar da **experiência ser um fator relevante**, outros aspectos como **cargo ocupado**, **localização geográfica**, **setor da empresa** e **habilidades específicas** também devem **influenciar fortemente a remuneração final**.
+
+# 📊 Gráfico: Nível de Senioridade vs Faixa Salarial
+
+![image2](https://github.com/user-attachments/assets/66afa78f-916c-4185-81c2-e9b734cfbebf)
+
+## 📌 Descrição Geral
+
+O gráfico apresentado é um **boxplot (gráfico de caixa)** que explora a relação entre o **nível de senioridade dos profissionais na área de dados** e suas respectivas **faixas salariais mensais**.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Nível de Senioridade vs Faixa Salarial"_
+
+- **Eixo X (Horizontal):** Nível de senioridade, categorizado em:
+  - Júnior
+  - Pleno
+  - Sênior
+
+- **Eixo Y (Vertical):** Faixa salarial mensal, com categorias que vão desde _"Menos de R$1.000/mês"_ até _"Acima de R$40.001/mês"_, em intervalos definidos (exemplo: de R$4.001 a R$6.000, de R$6.001 a R$8.000, etc.).
+
+- **Elementos de Caixa (Boxplots):** Cada caixa representa a distribuição das faixas salariais dentro de cada categoria de senioridade, indicando:
+  - **Mediana**
+  - **Quartis**
+  - **Faixa interquartil**
+  - **Outliers** (pontos fora da caixa)
+
+---
+
+## 📈 Observações e Interpretações
+
+### ✅ Tendência Geral de Crescimento Salarial com a Senioridade
+Existe uma **clara progressão nas medianas salariais** conforme o profissional avança de **Júnior** para **Pleno** e depois para **Sênior**. A mediana salarial dos profissionais **Sênior** está situada nas **faixas salariais mais altas**, enquanto a dos **Júnior** permanece nas **faixas mais baixas**.
+
+### ✅ Dispersão Salarial (Variabilidade)
+- O grupo **Sênior** apresenta a **maior dispersão salarial**, com uma grande amplitude entre os quartis e presença de **outliers abaixo do esperado**, indicando que existem **profissionais Sênior com salários muito abaixo da média**, possivelmente por questões regionais ou cargos específicos.
+- O grupo **Júnior** mostra uma **dispersão menor**, com a maioria concentrada nas faixas **até R$8.000/mês**, mas com alguns poucos casos fora dessa faixa (outliers).
+
+### ✅ Grupo Pleno
+O grupo **Pleno** ocupa uma posição intermediária entre os níveis Júnior e Sênior, com:
+- **Mediana superior ao Júnior**, mas ainda **inferior ao Sênior**.
+- Menor dispersão que o grupo Sênior.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico evidencia uma **forte correlação entre o nível de senioridade e as faixas salariais**, confirmando a expectativa de **progressão salarial com o avanço de carreira**. 
+
+Porém, a **dispersão dentro de cada grupo**, especialmente entre os profissionais **Sênior**, sugere que **outros fatores** além da senioridade — como **localização**, **segmento de atuação**, **porte da empresa**, e **habilidades técnicas específicas** — influenciam significativamente o salário final.
+
+Essa análise reforça a importância de considerar o nível de senioridade como **um dos vários fatores determinantes na remuneração** na área de dados.
+
+# 📊 Gráfico: Distribuição de Gênero por Nível de Senioridade
+
+![image3](https://github.com/user-attachments/assets/3ebef7ec-2201-485d-b023-8d08d831573b)
+
+## 📌 Descrição Geral
+
+O gráfico apresentado é um **gráfico de barras agrupadas** que analisa a **distribuição de gênero dos profissionais** de acordo com o **nível de senioridade** na área de dados.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Distribuição de Gênero por Nível de Senioridade"_
+
+- **Eixo X (Horizontal):** Níveis de senioridade:
+  - Júnior
+  - Pleno
+  - Sênior
+
+- **Eixo Y (Vertical):** Quantidade de profissionais em cada combinação de gênero e nível de senioridade.
+
+- **Legenda:** Classificação dos gêneros:
+  - Masculino
+  - Feminino
+  - Outro
+  - Prefiro não informar
+
+---
+
+## 📈 Observações e Interpretações
+
+### ✅ Predominância de Gênero Masculino
+O gráfico mostra uma **predominância significativa de profissionais do gênero masculino** em todos os níveis de senioridade, sendo especialmente evidente nos níveis **Pleno** e **Sênior**.
+
+### ✅ Participação Feminina
+- Embora menor, a presença de profissionais do gênero **feminino** é consistente em todos os níveis.
+- Há um **ligeiro aumento proporcional no nível Pleno**, mas a diferença para o masculino ainda é grande.
+
+### ✅ Baixa Representatividade de Outros Gêneros
+- As categorias **"Outro"** e **"Prefiro não informar"** apresentam **quantidades muito pequenas**, com valores próximos de zero em todos os níveis.
+
+### ✅ Evolução ao longo da Senioridade
+- **O número absoluto de profissionais masculinos cresce da base (Júnior) até o topo (Sênior)**, refletindo um maior volume de homens nas posições mais altas.
+- **A participação feminina, embora menor, mantém-se relativamente estável entre os níveis**, mas não acompanha a mesma taxa de crescimento do masculino nas transições de carreira.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico evidencia um cenário de **baixa diversidade de gênero na área de dados**, com forte **concentração de profissionais do gênero masculino**, especialmente nos níveis **Pleno e Sênior**.
+
+Essa análise aponta para a importância de iniciativas de **diversidade, equidade e inclusão (DEI)** nas organizações de tecnologia e dados, com foco em **ampliar a presença feminina e de outros gêneros** ao longo das trajetórias de carreira.
+
+Fica evidente que **ações afirmativas, programas de desenvolvimento de liderança feminina e campanhas de inclusão** podem ser estratégias importantes para reduzir esse desequilíbrio ao longo do tempo.
+
+# 📊 Gráfico: Faixa Salarial por Grau de Escolaridade
+
+![image4](https://github.com/user-attachments/assets/11d0440a-37a3-4c55-8272-64de8fffc9ae)
+
+## 📌 Descrição Geral
+
+O gráfico apresentado é um **boxplot (gráfico de caixa)** que mostra a distribuição das **faixas salariais** em relação ao **grau de escolaridade** dos profissionais da área de dados.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Faixa Salarial por Grau de Escolaridade"_
+
+- **Eixo X (Horizontal):** Grau de escolaridade:
+  - Doutorado ou PhD
+  - Graduação/Bacharelado
+  - Estudante de Graduação
+  - Pós-graduação
+  - Mestrado
+  - Não tenho graduação formal
+  - Prefiro não informar
+
+- **Eixo Y (Vertical):** Faixas salariais mensais (em Reais - R$), como:
+  - Menos de R$ 1.000/mês
+  - R$ 1.001/mês a R$ 2.000/mês
+  - ...
+  - Acima de R$ 40.001/mês
+
+---
+
+## 📈 Observações e Interpretações
+
+### ✅ Tendência de Salário Crescente com Maior Escolaridade
+- Existe uma tendência geral de **aumento na faixa salarial com o avanço do grau de escolaridade**.
+- Profissionais com **Mestrado**, **Pós-graduação** e principalmente **Doutorado/PhD** tendem a ocupar **faixas salariais mais elevadas**.
+
+### ✅ Distribuição para Graduação/Bacharelado
+- Profissionais com **graduação/bacharelado** apresentam uma distribuição salarial ampla, mas com **mediana abaixo da faixa dos mestres e doutores**.
+
+### ✅ Estudantes de Graduação
+- Como esperado, a maior concentração de estudantes de graduação está nas **faixas salariais mais baixas**, refletindo **cargos de estágio ou início de carreira**.
+
+### ✅ Quem Não Tem Graduação Formal
+- Profissionais que declararam **"não ter graduação formal"** têm uma faixa salarial bem variada, mas a **mediana fica abaixo das outras categorias de maior escolaridade**, sugerindo **limitações de crescimento salarial sem diploma formal**.
+
+### ✅ Categoria "Prefiro não informar"
+- Interessante notar que o grupo que **não informou escolaridade** tem uma **mediana salarial razoavelmente elevada**, o que pode indicar **profissionais com experiência, porém sem desejo de divulgar formação**.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico confirma uma **correlação positiva entre escolaridade e faixa salarial**, reforçando a ideia de que **investir em educação formal (graduação, pós, mestrado e doutorado)** costuma ter impacto positivo na **remuneração média na área de dados**.
+
+Porém, também fica evidente que **existem exceções**, com algumas pessoas sem graduação formal ou sem informar escolaridade também alcançando **faixas salariais mais altas**, o que pode estar relacionado a **experiência prática ou competências técnicas diferenciadas**.
+
+# 📊 Gráfico: Distribuição por Área de Atuação
+
+![image5](https://github.com/user-attachments/assets/b0a43f95-275a-4a25-b748-c1936cbd0337)
+
+## 📌 Descrição Geral
+
+O gráfico acima é um **gráfico de barras horizontais**, que mostra a **quantidade de profissionais em cada área de atuação dentro do setor de dados**.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Distribuição por Área de Atuação"_
+
+- **Eixo X (Horizontal):** Quantidade de profissionais.
+
+- **Eixo Y (Vertical):** Área de atuação, com as seguintes categorias:
+  - Análise de Dados
+  - Engenharia de Dados
+  - Gestor
+  - Ciência de Dados
+  - Outra atuação
+  - Buscando oportunidade na área de dados
+
+---
+
+## 📈 Observações e Interpretações
+
+### ✅ Áreas com Maior Representatividade
+- A **Análise de Dados** é, de longe, a área com **maior número de profissionais**, superando as outras categorias com folga.
+- Em seguida vêm **Engenharia de Dados** e **Gestores**, mostrando a **diversificação de papéis** dentro da área de dados.
+
+### ✅ Representatividade da Ciência de Dados
+- **Ciência de Dados** aparece com uma **quantidade significativa**, mas menor do que as áreas de **Análise** e **Engenharia**, o que pode refletir o **perfil do mercado brasileiro**, onde ainda há maior demanda por **Analistas de Dados**.
+
+### ✅ Profissionais em Transição
+- Um número relevante de pessoas está **"Buscando oportunidade na área de dados"**, o que indica uma **grande quantidade de profissionais em transição de carreira** ou em busca de sua **primeira colocação no setor**.
+
+### ✅ Diversidade nas Áreas
+- A presença de uma categoria como **"Outra atuação"** mostra que existem também **funções mais específicas ou híbridas** dentro da área de dados.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico evidencia que a **área de Análise de Dados** é a **porta de entrada mais comum** no mercado de dados no Brasil. Isso pode servir de insight para profissionais que estão planejando sua carreira: **iniciar como analista pode ser uma forma estratégica de entrar na área**, antes de migrar para cargos mais especializados como **Engenheiro ou Cientista de Dados**.
+
+Além disso, o número expressivo de pessoas buscando oportunidades reforça a **competitividade do mercado** e a **importância de qualificação técnica**.
+
+# 📊 Gráfico: Satisfação com o Salário por Faixa Salarial
+
+![image6](https://github.com/user-attachments/assets/b38eca12-260e-4b02-af0b-b4d9d9aa7141)
+
+## 📌 Descrição Geral
+
+O gráfico acima é um **boxplot com barras sobrepostas**, que mostra a **distribuição da satisfação com o salário** (valores binários: satisfeito = 1, insatisfeito = 0) em diferentes faixas salariais mensais.
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Satisfação com o Salário por Faixa Salarial"_
+
+- **Eixo X (Horizontal):** Faixas salariais mensais, incluindo categorias como:
+  - Menos de R$1.000/mês
+  - de R$3.001/mês a R$4.000/mês
+  - Acima de R$40.000/mês
+  - Entre outras
+
+- **Eixo Y (Vertical):** Satisfação com o salário, em escala binária:
+  - `1`: Profissional satisfeito
+  - `0`: Profissional insatisfeito
+
+- **Elementos Visuais:**
+  - **Barras azuis:** Média de satisfação em cada faixa (todas próximas de 1.0 ou 0.0).
+  - **Pontos circulares (outliers):** Indicam respostas divergentes da média da faixa.
+
+---
+
+## 📈 Observações e Interpretações
+
+### ✅ Padrão Binário na Satisfação
+- A satisfação está praticamente **dicotomizada**: ou 100% satisfeita (1.0) ou 100% insatisfeita (0.0).
+- Isso sugere que os entrevistados têm uma percepção **muito clara** sobre sua remuneração.
+
+---
+
+### ✅ Faixas com Alta Satisfação (100%)
+As faixas abaixo apresentaram **satisfação completa**:
+
+- de **R$6.001/mês a R$8.000/mês**
+- de **R$8.001/mês a R$12.000/mês**
+- de **R$12.001/mês a R$16.000/mês**
+- de **R$16.001/mês a R$20.000/mês**
+- de **R$20.001/mês a R$25.000/mês**
+- de **R$25.001/mês a R$30.000/mês**
+- **Acima de R$40.000/mês**
+
+📌 **Interpretação:** A partir de cerca de **R$6.000/mês**, a maioria dos profissionais parece satisfeita — o que pode indicar um **limiar de conforto salarial**.
+
+---
+
+### ❌ Faixas com Baixa Satisfação (0%)
+Faixas com **insatisfação total**:
+
+- **Menos de R$1.000/mês**
+- de **R$1.001/mês a R$2.000/mês**
+- de **R$2.001/mês a R$3.000/mês**
+- de **R$3.001/mês a R$4.000/mês**
+- de **R$4.001/mês a R$6.000/mês**
+
+📌 **Interpretação:** Profissionais nessas faixas expressam **insatisfação unânime**, indicando que **salários abaixo de R$6.000/mês** não atendem às expectativas da amostra analisada.
+
+---
+
+### ⚠️ Outliers em Algumas Faixas
+
+- Apesar da média ser 0 ou 1, existem **outliers** em algumas faixas, representando casos **isolados** de satisfação ou insatisfação.
+- 📍 **Exemplo:** Na faixa de R$6.001/mês a R$8.000/mês há **pelo menos um ponto** indicando insatisfação.
+
+---
+
+## 📝 Conclusão Geral
+
+O gráfico mostra uma relação clara entre **faixa salarial** e **nível de satisfação**:
+
+- A **satisfação começa a se consolidar** a partir dos **R$6.000/mês**.
+- Faixas **inferiores a esse valor** apresentam **insatisfação universal**.
+- Outliers reforçam que, apesar de haver padrões gerais, **percepções individuais variam**.
+
+💡 **Insight Final:** O gráfico sugere a existência de um **ponto de corte salarial percebido como “mínimo aceitável”**, influenciado por fatores como:
+- Custo de vida
+- Expectativas de carreira
+- Padrões do mercado
+
+---
+
+# 📊 Gráfico: Distribuição de Faixa Salarial por Estado
+
+![image7](https://github.com/user-attachments/assets/3e34f2b3-53bb-496e-a458-4d5e86d9e164)
+
+## 📌 Descrição Geral
+
+O gráfico acima é um **heatmap (mapa de calor)** que mostra a **quantidade de profissionais por faixa salarial em cada estado brasileiro**. Cada célula contém a contagem de registros e é colorida de acordo com a intensidade (quanto mais escura, maior a quantidade).
+
+---
+
+## 🏷️ Elementos do Gráfico
+
+- **Título:** _"Distribuição de Faixa Salarial por Estado"_
+
+- **Eixo X (Horizontal):** Unidades da Federação (UF), de `AL` até `TO`.
+
+- **Eixo Y (Vertical):** Faixas salariais mensais, como:
+  - "Menos de R$ 1.000/mês"
+  - "de R$1.001/mês a R$2.000/mês"
+  - "de R$8.001/mês a R$12.000/mês"
+  - "Acima de R$40.001/mês"
+  - Entre outras.
+
+- **Cores:** Tons de azul/amarelo representam o volume de registros.
+  - Azul escuro: Maior concentração
+  - Amarelo claro: Baixa concentração
+
+---
+
+## 📈 Observações e Interpretações
+
+### 🌆 Concentração em SP, MG, RS e RJ
+
+Os estados com maiores volumes em **faixas salariais elevadas**:
+
+- **SP (São Paulo)**:
+  - Lidera em diversas faixas, especialmente:
+    - R$8.001 a R$12.000/mês (🔥 `416 registros`)
+    - R$12.001 a R$16.000/mês (`297 registros`)
+    - R$16.001 a R$20.000/mês (`170 registros`)
+    - R$4.001 a R$6.000/mês (`264 registros`)
+  - Indica uma concentração significativa de **profissionais com alta remuneração**.
+
+- **MG (Minas Gerais)** e **RS (Rio Grande do Sul)** também aparecem com destaque nas faixas:
+  - De R$6.001 a R$8.000/mês
+  - De R$8.001 a R$12.000/mês
+  - De R$4.001 a R$6.000/mês
+
+📌 **Interpretação:** Estados com maior presença de setores industriais, serviços avançados e polos urbanos concentram maiores salários.
+
+---
+
+### 🧊 Baixa Representatividade em Estados do Norte e Nordeste
+
+- Estados como **RR**, **AC**, **AP**, **TO**, **PI** e **SE** têm contagens extremamente baixas em todas as faixas.
+- Faixas elevadas praticamente ausentes em:
+  - AC, RR, TO: maioria com células `0`.
+
+📌 **Interpretação:** Pode refletir uma combinação de:
+  - Menor número de respondentes
+  - Menor presença de setores que pagam altos salários
+  - Desigualdade regional de renda
+
+---
+
+### 💵 Faixas Medianas (R$2.001/mês a R$6.000/mês) bem distribuídas
+
+- Estados como **PR**, **BA**, **CE**, **PE** e **DF** têm presença consistente nessas faixas.
+- Essa faixa parece representar o “ponto de equilíbrio” para muitos estados.
+
+---
+
+## 📝 Conclusão Geral
+
+O heatmap revela **forte desigualdade regional na distribuição salarial**:
+
+- **São Paulo**, com ampla vantagem, concentra profissionais de **alta renda**, reforçando seu papel como polo econômico nacional.
+- **Regiões Norte e partes do Nordeste** apresentam menor presença em faixas salariais elevadas, evidenciando **desigualdades estruturais**.
+
+💡 **Insight Final:** A distribuição geográfica da renda está fortemente concentrada em poucos estados, o que pode impactar políticas públicas, alocação de recursos e estratégias de desenvolvimento regional.
+
+---
+
+
+
 ## Objetivo
 
 Investigar as relações entre os principais fatores da carreira de profissionais de dados no Brasil e suas faixas salariais, utilizando dados da base survey_cleaned.csv. Esta análise busca entender como variáveis como experiência, senioridade, formação acadêmica, estado (UF) e habilidades técnicas (ex: Python, SQL) influenciam a remuneração.
