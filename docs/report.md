@@ -326,18 +326,16 @@ Nome: `salary_midpoint`, `dtype: object`
 ## Atributos relevantes da base de dados principal para 3ª pergunta orientada
 **Pergunta orientada a dados:** *Como fatores como  formalidade no emprego , características demográficas se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?*
 
-| Atributo                                           | Código de Referência | Tipo         | Subtipo                             | Descrição                                                                                     | Relevância  |
-|----------------------------------------------------|-----------------------|--------------|-------------------------------------|-----------------------------------------------------------------------------------------------|------------|
-| Faixa etária                                       | P1a1                  | Qualitativo  | Ordinal                             | Faixa etária do respondente                                                                   | Alta       |
-| Gênero                                             | P1b                   | Qualitativo  | Nominal (Multivalorado)             | Identidade de gênero do respondente                                                           | Alta       |
-| Nivel de ensino alcançado                          | P1l                   | Qualitativo  | Ordinal                             | Nível de ensino do respondente (graduação, mestrado, etc.)                                    | Alta       |
-| Faixa salarial mensal                              | P2h                   | Qualitativo  | Ordinal                             | Faixa salarial mensal do respondente                                                          | Alta       |
-| Tempo de experiência na área de dados              | P2i                   | Quantitativo | Discreto                            | Tempo de experiência do respondente na área de dados (em anos)                                | Alta       |
-| UF onde mora                                       | P1i1                  | Qualitativo  | Nominal (Multivalorado)             | Unidade Federativa onde o respondente reside                                                  | Alta       |
-| Cargo atual                                        | P2f                   | Qualitativo  | Nominal (Multivalorado)             | Cargo atual ocupado pelo respondente                                                          | Alta       |
-| Nível de senioridade                               | P2g                   | Qualitativo  | Ordinal                             | Nível de senioridade do respondente (Júnior, Pleno, Sênior)                                   | Alta       |
-
-
+| Atributo | Código de Referência | Tipo | Subtipo | Descrição | Relevância |
+|---|---|---|---|---|---|
+| Faixa etária | P1a1 | Qualitativo | Ordinal | Faixa etária do respondente | Alta |
+| Gênero | P1b | Qualitativo | Nominal (Multivalorado) | Identidade de gênero do respondente | Alta |
+| Nivel de ensino alcançado | P1l | Qualitativo | Ordinal | Nível de ensino do respondente (graduação, mestrado, etc.) | Alta |
+| Faixa salarial mensal | P2h | Qualitativo | Ordinal | Faixa salarial mensal do respondente | Alta |
+| Tempo de experiência na área de dados | P2i | Quantitativo | Discreto | Tempo de experiência do respondente na área de dados (em anos) | Alta |
+| UF onde mora | P1i1 | Qualitativo | Nominal (Multivalorado) | Unidade Federativa onde o respondente reside | Alta |
+| Cargo atual | P2f | Qualitativo | Nominal (Multivalorado) | Cargo atual ocupado pelo respondente | Alta |
+| Nível de senioridade | P2g | Qualitativo | Ordinal | Nível de senioridade do respondente (Júnior, Pleno, Sênior) | Alta |
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
