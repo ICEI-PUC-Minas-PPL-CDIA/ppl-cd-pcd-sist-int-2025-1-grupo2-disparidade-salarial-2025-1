@@ -2673,14 +2673,6 @@ df['Salario_Medio'] = df['Faixa_Salarial'].apply(convert_salary_range)
 df['Habilidades'] = df['SQL'] + df['Python']
 ```
 
-## Resultados e Gráficos
-
-**Faixa Salarial por Grau de Escolaridade**
-
-**O gráfico abaixo apresenta a distribuição das faixas salariais por grau de escolaridade dos profissionais de dados no Brasil, utilizando boxplots para visualizar medianas, dispersão e outliers. De forma geral, observa-se que níveis mais altos de escolaridade, como mestrado e doutorado, tendem a estar associados a faixas salariais superiores, embora haja sobreposição entre categorias e variações dentro de cada grupo.**
-
-![Faixa Salarial por Grau de Escolaridade](docs/imagens/graficos_analise_exploratoria_2_pergunta_orientada_a_dados/Faixa_Salarial_Por_Grau_Escolaridade.png)
-
 ```python
 # Importando bibliotecas necessárias
 import matplotlib.pyplot as plt
