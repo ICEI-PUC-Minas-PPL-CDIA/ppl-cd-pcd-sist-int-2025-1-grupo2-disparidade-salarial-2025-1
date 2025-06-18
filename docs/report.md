@@ -6273,6 +6273,8 @@ RandomForestRegressor(
 ## Resumo
 **Embora o modelo apresente desempenho moderado (R² = 0.38), ele oferece bons insights sobre os fatores que mais influenciam o salário na área de dados no Brasil. A predominância das variáveis individuais em relação às regionais sugere que decisões salariais estão mais associadas a fatores pessoais do que à estrutura educacional da região.**
 
+## Gráficos
+
 ![506df510-64aa-4254-b476-05d4402f020d](https://github.com/user-attachments/assets/328639a2-568d-4ee9-a61f-c80bc4f7285a)
 
 ### Análise do Gráfico: "Valores Reais vs. Valores Preditos (Regressor)"
@@ -6451,6 +6453,132 @@ Importância das variáveis: Todas as features tiveram importância zero, sugeri
 Tamanho da amostra: O principal motivo para o baixo desempenho é o número extremamente reduzido de exemplos (apenas 6 no total, 3 no teste). Modelos de machine learning geralmente precisam de dezenas ou centenas de exemplos por classe para aprender padrões úteis.
 
 Avisos de métricas: O relatório de classificação apresenta avisos sobre métricas indefinidas, pois algumas classes não foram previstas pelo modelo.
+
+## Gráficos
+
+![2885e53e-d232-4f49-8c85-0f128ef2c4c2](https://github.com/user-attachments/assets/ebe41bc6-6f93-4610-a921-b59fdc5653d8)
+
+### Análise do Gráfico: "Distribuição de Classes no Espaço de Features" (Scatter Plot com Cores por Categoria)
+
+O gráfico apresentado é um **Gráfico de Dispersão (Scatter Plot)** que visualiza a relação entre duas *features* importantes (`experiencia_num` e `nivel_cod`), com os pontos coloridos de acordo com as diferentes faixas salariais.
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (`experiencia_num`):** Representa o tempo de experiência do profissional na área de dados (variável numérica).
+* **Eixo Vertical (`nivel_cod`):** Representa o nível profissional codificado (variável numérica discreta, onde cada número corresponde a um nível como Júnior, Pleno, Sênior, etc.).
+* **Pontos Coloridos:** Cada ponto no gráfico corresponde a uma única amostra (um profissional). A cor do ponto indica a faixa salarial real desse profissional. As legendas no lado direito explicam a qual faixa salarial cada cor corresponde.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre a distribuição das classes no espaço das *features*:
+
+* **Correlação entre `experiencia_num` e `nivel_cod`:** Há uma clara correlação positiva entre experiência e nível. À medida que a `experiencia_num` aumenta (movendo-se para a direita no eixo X), o `nivel_cod` tende a aumentar (movendo-se para cima no eixo Y), o que é esperado e intuitivo.
+* **Separação das Classes (Faixas Salariais):**
+    * As faixas salariais mais baixas (como as representadas por cores mais frias/escuras) tendem a se agrupar na parte inferior-esquerda do gráfico, onde a experiência e o nível são menores.
+    * À medida que a experiência e o nível aumentam (movendo-se para a parte superior-direita), as faixas salariais tendem a ser mais altas (representadas por cores mais quentes/claras).
+    * Isso indica que `experiencia_num` e `nivel_cod` são *features* importantes e discriminatórias para separar as diferentes faixas salariais.
+* **Sobreposição de Classes:** Embora haja uma separação geral, também há alguma sobreposição entre as faixas salariais, especialmente em pontos de transição. Por exemplo, pode haver indivíduos com experiência e nível semelhantes, mas em faixas salariais adjacentes. Isso é comum em dados reais e mostra que a classificação não é trivial e pode haver outros fatores não representados no gráfico influenciando o salário.
+* **Conclusão:** Este gráfico é excelente para visualizar a relação entre as principais variáveis preditoras e a variável alvo (faixa salarial). Ele confirma que `experiencia_num` e `nivel_cod` são atributos fortes para a classificação, pois as diferentes classes de salário formam agrupamentos distintos (embora com alguma sobreposição) no espaço definido por essas duas variáveis. Isso corrobora a alta importância dessas *features*, como visto no gráfico de "Importância das Variáveis".
+
+![download (1)](https://github.com/user-attachments/assets/0eae93fd-a61d-40d9-9bdb-e5ecfb9a8da0)
+
+### Análise do Gráfico: "Gráfico de Resíduos (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Dispersão (Scatter Plot)** intitulado "Gráfico de Resíduos (Regressor)".
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (Salário Predito):** Representa os valores de salário que foram previstos pelo modelo Random Forest Regressor.
+* **Eixo Vertical (Resíduos):** Representa a diferença entre o salário real e o salário predito (Salário Real - Salário Predito). Um resíduo positivo indica que o modelo subestimou o valor real, enquanto um resíduo negativo indica que o modelo superestimou.
+* **Linha Tracejada Vermelha (y=0):** Esta linha horizontal no zero é o ponto de referência onde os resíduos seriam ideais (zero erro). Em um modelo bem ajustado, os resíduos devem estar aleatoriamente dispersos em torno desta linha.
+* **Pontos Dispersos:** Cada ponto no gráfico corresponde a um erro de previsão para uma amostra específica no conjunto de teste, plotado contra o valor de salário que o modelo prediz para essa amostra.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre os erros do modelo de regressão:
+
+* **Dispersão Aleatória em Torno do Zero:** A característica mais importante observada é que os pontos de resíduos parecem estar aleatoriamente espalhados em torno da linha horizontal em y=0. Não há um padrão discernível (como uma forma de funil, uma curva, ou um agrupamento sistemático acima ou abaixo da linha em certas faixas de salários preditos).
+* **Ausência de Viés Sistemático:** A falta de um padrão nos resíduos é um bom sinal de que o modelo não está sistematicamente subestimando ou superestimando os salários em faixas específicas. Se houvesse um padrão (por exemplo, todos os resíduos positivos para salários preditos baixos e negativos para salários preditos altos), isso indicaria um viés que o modelo não conseguiu capturar.
+* **Homocedasticidade:** A dispersão vertical dos resíduos parece ser relativamente constante ao longo de todo o eixo dos salários preditos. Isso sugere **homocedasticidade**, o que significa que a variância dos erros é consistente em todos os níveis de previsão. Se a dispersão se alargasse ou estreitasse (formando um funil), indicaria **heterocedasticidade**, um problema que pode afetar a confiança nas previsões.
+* **Magnitude dos Erros:** A maioria dos pontos está concentrada perto da linha zero, indicando que a maioria das previsões tem erros pequenos. No entanto, existem alguns pontos mais distantes (acima ou abaixo), que representam as instâncias onde o modelo teve erros de previsão maiores.
+* **Conclusão:** Este gráfico é uma ferramenta diagnóstica crucial para modelos de regressão. A distribuição aleatória e a variação constante dos resíduos em torno de zero indicam que o modelo RandomForestRegressor está funcionando de maneira robusta, capturando as principais relações nos dados e que não há padrões óbvios de erro que precisem de mais atenção ou refino do modelo.
+
+![download (2)](https://github.com/user-attachments/assets/d01b3259-c9c1-4119-b038-8bdf130ffb1c)
+
+### Análise do Gráfico: "Distribuição de Valores Reais vs. Preditos (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Distribuição de Densidade Combinada (Histograms e KDE)** intitulado "Distribuição de Valores Reais vs. Preditos (Regressor)".
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (Salário R$):** Representa a escala dos valores de salário.
+* **Eixo Vertical (Densidade):** Indica a densidade de probabilidade, ou seja, a concentração de pontos (amostras) em cada faixa de salário.
+* **Curva Azul ("Salário Real"):** Mostra a distribuição de densidade dos salários verdadeiros (reais) presentes no conjunto de teste.
+* **Curva Vermelha ("Salário Predito"):** Mostra a distribuição de densidade dos salários que foram previstos pelo modelo para o conjunto de teste.
+* **Histogramas Subjacentes:** As áreas sombreadas em azul e vermelho (histogramas) mostram a contagem de amostras em diferentes "caixas" de salário, enquanto as linhas suaves (KDE - *Kernel Density Estimate*) fornecem uma estimativa contínua da forma da distribuição.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre as distribuições de salários reais e preditos:
+
+* **Alinhamento das Distribuições:** As distribuições de "Salário Real" e "Salário Predito" parecem ter formas e centros semelhantes. Isso é um bom indicativo de que o modelo está não apenas prevendo valores próximos aos reais, mas também capturando a distribuição geral dos salários corretamente.
+* **Picos e Faixas Mais Comuns:** Ambos os gráficos de densidade mostram picos semelhantes em faixas de salários intermediárias, sugerindo que o modelo prediz mais salários nessas faixas, o que corresponde à realidade dos dados (como visto no gráfico de "Distribuição de Faixas Salariais Originais").
+* **Suavização nas Predições:** É comum que a distribuição dos valores preditos (vermelho) seja um pouco mais "suave" ou menos "pontiaguda" do que a distribuição dos valores reais (azul). Isso ocorre porque os modelos tendem a prever valores médios para amostras dentro de certas regiões do espaço de *features*, reduzindo a variância e os valores extremos em comparação com os dados reais.
+* **Limitações/Desvios:** Pequenas diferenças entre as curvas podem indicar áreas onde o modelo superestima ou subestima a densidade de valores. Por exemplo, se a curva predita for mais alta que a real em uma extremidade e mais baixa na outra, pode haver um viés. No gráfico atual, elas estão bem alinhadas.
+* **Conclusão:** Este gráfico é excelente para uma avaliação macro do desempenho do modelo de regressão. Um bom alinhamento entre as curvas real e predita indica que o modelo compreendeu a estrutura subjacente dos salários e está gerando previsões que seguem essa mesma distribuição.
+
+![download (3)](https://github.com/user-attachments/assets/e0d60273-4a82-4dc1-9265-dc2bc4004b3a)
+
+### Análise do Gráfico: "Resíduos vs experiencia_num (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Dispersão (Scatter Plot)** intitulado "Resíduos vs experiencia_num (Regressor)". (Assumindo que experiencia_num é a variável mais importante do seu modelo, conforme o gráfico de importância anterior).
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (experiencia_num):** Representa os valores da variável numérica de experiência dos profissionais.
+* **Eixo Vertical (Resíduos):** Representa a diferença entre o salário real e o salário predito (Salário Real - Salário Predito).
+* **Linha Tracejada Vermelha (y=0):** Indica o ponto de erro zero. Idealmente, os resíduos devem se espalhar aleatoriamente em torno desta linha, independentemente do valor da `experiencia_num`.
+* **Pontos Dispersos:** Cada ponto mostra o erro da previsão para uma amostra específica, plotado contra o valor da sua `experiencia_num`.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre os resíduos do modelo em relação à experiência:
+
+* **Dispersão Consistente:** Os resíduos parecem estar espalhados de forma aleatória em torno da linha zero, com a dispersão vertical (a magnitude dos erros) sendo relativamente consistente em todas as faixas de `experiencia_num`.
+* **Ausência de Padrões:** Não há um padrão visível (como uma curva ascendente/descendente, um formato de funil, ou agrupamentos) que correlacione a `experiencia_num` com a magnitude ou o sinal dos resíduos. Isso é um sinal positivo, pois sugere que o modelo não está errando sistematicamente mais para profissionais com pouca experiência, muita experiência ou em faixas intermediárias. Ele não parece ter dificuldade particular em prever salários com base na experiência.
+* **Conclusão:** Este gráfico confirma que a variável `experiencia_num`, embora seja a mais importante, não é uma fonte de viés sistemático para os erros do modelo. O modelo parece lidar bem com as diferentes faixas de experiência, e os erros são distribuídos de forma aleatória em relação a ela. Se houvesse um padrão, isso indicaria que o modelo pode ser melhorado para capturar nuances específicas relacionadas à experiência.
+
+![download](https://github.com/user-attachments/assets/db6669a4-c20e-4592-a318-68c41f30de77)
+
+### Análise do Gráfico: "Matriz de Confusão Normalizada (Classifier)"
+
+O gráfico apresentado é uma **Matriz de Confusão Normalizada (Heatmap)**, intitulada "Matriz de Confusão Normalizada (Classifier)". Ela mostra o desempenho do modelo de classificação ao comparar as classes reais com as classes preditas, normalizando os valores para proporções.
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (Classes Preditas):** Representa as faixas salariais que o modelo Random Forest Classifier previu para as amostras do conjunto de teste.
+* **Eixo Vertical (Classes Reais):** Representa as faixas salariais verdadeiras das amostras do conjunto de teste.
+* **Células (Valores e Cores):**
+    * Cada célula `(i, j)` na matriz indica a proporção de amostras da `Classe Real i` que foram preditas como `Classe j`.
+    * As cores das células (do azul claro ao azul escuro) indicam a magnitude dessas proporções. Valores mais próximos de 1 (azul escuro) indicam que o modelo previu corretamente uma alta proporção de amostras para aquela classe, ou que previu incorretamente uma alta proporção de amostras de uma classe como sendo outra.
+    * Os números dentro das células (`fmt=".2f"`) mostram a proporção exata, arredondada para duas casas decimais.
+* **Diagonal Principal:** As células ao longo da diagonal principal (onde `Classe Real == Classe Predita`) representam as proporções de **classificações corretas**. Quanto mais próximos de 1 forem esses valores, melhor o desempenho do modelo para aquela classe específica.
+* **Fora da Diagonal Principal:** As células fora da diagonal principal representam as proporções de **erros de classificação** (falsos positivos/negativos). Valores altos nessas células indicam que o modelo está confundindo uma classe com outra.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre o desempenho do modelo de classificação:
+
+* **Desempenho Geral:** Para cada linha (classe real), a soma das proporções é 1. O objetivo é ter a maior proporção (próximo de 1.00) na diagonal principal de cada linha.
+* **Acertos (Diagonal Principal):**
+    * As células ao longo da diagonal principal (valores como 1.00, 0.67, 0.50, etc.) indicam a precisão do modelo para cada classe quando é a classe real. Por exemplo, 1.00 significa que todas as amostras daquela classe foram corretamente classificadas.
+    * Valores altos na diagonal são desejáveis.
+* **Erros de Confusão (Fora da Diagonal):**
+    * Valores fora da diagonal principal mostram onde o modelo está errando. Por exemplo, se a célula na linha "de R$ X/mês a R$ Y/mês" e coluna "de R$ A/mês a R$ B/mês" tiver um valor alto, significa que o modelo frequentemente confunde a faixa "X-Y" com a faixa "A-B".
+    * Pode-se observar que há erros, mas geralmente as maiores proporções ainda estão na diagonal, ou os erros estão em classes adjacentes, o que é um comportamento comum para regressões transformadas em classificação. Por exemplo, uma classe pode ser confundida com a classe logo acima ou abaixo, o que é menos grave do que ser confundida com uma classe muito distante.
+* **Identificação de Classes Problemáticas:** Se uma linha específica tiver um valor baixo na diagonal principal e valores altos em outras colunas, isso indica que o modelo tem dificuldade em classificar corretamente as amostras dessa classe.
+* **Impacto do Desbalanceamento:** Em dados desbalanceados, a matriz normalizada é mais informativa que a não normalizada, pois mostra a proporção de acertos/erros *dentro de cada classe real*, evitando que a performance das classes majoritárias mascare problemas nas classes minoritárias.
+* **Conclusão:** A Matriz de Confusão Normalizada é uma ferramenta poderosa para uma análise detalhada do desempenho de um classificador. Ela não só mostra a acurácia geral, mas também revela onde o modelo está acertando e, crucialmente, onde e como ele está errando, permitindo identificar classes específicas que precisam de mais atenção ou refino no modelo.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Resultados obtidos com os Modelos 3º pergunta orietada a dados
