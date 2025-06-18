@@ -6269,7 +6269,7 @@ RandomForestRegressor(
 | Experiência         | O tempo de experiência também tem peso significativo.            |
 | Variáveis Regionais | Impacto reduzido na predição salarial.                           |
 
-## 🧾 Conclusão
+## Resumo
 **Embora o modelo apresente desempenho moderado (R² = 0.38), ele oferece bons insights sobre os fatores que mais influenciam o salário na área de dados no Brasil. A predominância das variáveis individuais em relação às regionais sugere que decisões salariais estão mais associadas a fatores pessoais do que à estrutura educacional da região.**
 
 # Relatório de Resultados e Insights (Modelo Random Forest Classifier)
@@ -7419,7 +7419,7 @@ e extrapolar um pouco o que os dados sugerem.
 **Versão**: v7 – Classificação Binária com RFECV e Optuna  
 **Fonte do Código**: `Conheça_o_Colab_(2).ipynb` 
 
-#### 🔹 Forças do Modelo 1
+####  Forças do Modelo 1
 
 **1. Alta Performance Preditiva em Dados Tabulares**
 - LightGBM é altamente eficaz para dados tabulares.
@@ -7447,7 +7447,7 @@ e extrapolar um pouco o que os dados sugerem.
 - Lida bem com variáveis categóricas.
 - **Conexão com Objetivos**: Facilita o pré-processamento e preserva a interpretabilidade.
 
-#### 🔻 Fragilidades do Modelo 1
+####  Fragilidades do Modelo 1
 
 **1. Interpretabilidade do Ensemble**
 - Explicações individuais pouco transparentes.
@@ -7474,7 +7474,7 @@ e extrapolar um pouco o que os dados sugerem.
 **Versão**: RNA v2 – Classificação Binária com RayTune  
 **Fonte do Código**: `Conheça_o_Colab (3).ipynb` 
 
-#### 🔹 Forças do Modelo 2
+####  Forças do Modelo 2
 
 **1. Modelagem de Interações Complexas e Não Lineares**
 - Capacidade de capturar relações complexas entre variáveis.
@@ -7541,8 +7541,55 @@ Modelos de rede neural, especialmente com conjuntos de dados pequenos ou com nú
 
 ### Distribuição do modelo (opcional)
 
-Tende criar um pacote de distribuição para o modelo construído, para ser aplicado 
-em um sistema inteligente.
+## 1. Deploy do Modelo: Aplicação Web Interativa
+
+Para TORNAR o modelo preditivo acessível e utilizável por pessoas não-técnicas, foi desenvolvida uma aplicação web simples, mas funcional. O objetivo desta etapa foi sair do ambiente de análise (Jupyter Notebook) e entregar uma ferramenta interativa que consome o modelo treinado para fazer previsões em tempo real.
+
+### 1.1. Arquitetura da Solução
+
+A solução foi construída utilizando uma arquitetura cliente-servidor simples:
+
+* **Front-End (Cliente):** Uma interface de usuário criada com **HTML** e **CSS**. A página contém um formulário onde o usuário pode inserir as características de um profissional de dados.
+* **Back-End (Servidor):** Um servidor web desenvolvido com o micro-framework **Flask** em Python. O servidor tem duas responsabilidades principais:
+    1.  Servir a página HTML para o navegador do usuário.
+    2.  Receber os dados do formulário, aplicar o mesmo pré-processamento dos dados de treino (carregado a partir dos artefatos `.pkl`) e passar os dados tratados para o modelo de Machine Learning fazer a previsão.
+* **Modelo Serializado:** O modelo LightGBM treinado e todos os artefatos de pré-processamento (como o `StandardScaler` e o `LabelEncoder`) foram salvos em um único arquivo `.pkl` usando `joblib`, garantindo que a mesma transformação de dados seja aplicada de forma consistente.
+
+O fluxo da aplicação é o seguinte:
+`Usuário -> Navegador (HTML) -> Servidor Flask (app.py) -> Modelo Preditivo (.pkl) -> Resultado para o Usuário`
+
+### 1.2. Tecnologias Utilizadas
+
+* **Linguagem:** Python 3
+* **Servidor Web:** Flask
+* **Interface:** HTML5 / CSS3
+* **Bibliotecas de ML/Dados:** Pandas, Scikit-learn, LightGBM, Joblib
+* **Ambiente e Dependências:** Conda
+
+### 1.3. Desafios e Aprendizados
+
+A transição de um notebook de análise para uma aplicação funcional apresentou desafios práticos importantes, que foram cruciais para o aprendizado:
+
+* **Gerenciamento de Dependências:** A instalação da biblioteca `lightgbm` no Windows exigiu o uso do gerenciador de pacotes **Conda**, uma vez que a instalação via `pip` falhou devido à ausência de compiladores C++.
+* **Serialização de Artefatos:** Foi necessário garantir que não apenas o modelo, mas todos os objetos de pré-processamento (como o `scaler`) fossem salvos e carregados corretamente, o que levou a um processo de depuração das chaves do dicionário no arquivo `.pkl`.
+* **Depuração Full-Stack:** O processo envolveu a depuração de erros tanto no back-end (lógica Python, carregamento de arquivos) quanto no front-end (erros de template, nomes de arquivo), proporcionando uma experiência completa de desenvolvimento.
+
+### 1.4. Como Executar a Aplicação Localmente
+
+1.  Clone o repositório do GitHub.
+2.  Certifique-se de ter o Miniconda ou Anaconda instalado.
+3.  Abra o **Anaconda Prompt** e navegue até a pasta raiz do projeto.
+4.  Instale as dependências necessárias:
+    ```bash
+    pip install flask pandas joblib scikit-learn
+    conda install -c conda-forge lightgbm
+    ```
+5.  Execute o servidor Flask:
+    ```bash
+    python app.py
+    ```
+6.  Abra um navegador e acesse `http://127.0.0.1:5000`.
+
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
