@@ -4930,6 +4930,78 @@ RandomForestRegressor(
 | **Importância das variáveis**        | Extração das importâncias com `model.feature_importances_` e exibição percentual.                                         |
 
 
+## Random Forest Classifier
+
+Este modelo foi utilizado para classificar a faixa salarial de profissionais da área de dados no Brasil, a partir da junção de duas bases:
+
+- **State of Data BR 2023 (Kaggle):** informações profissionais.  
+- **MICRODADOS_ED_SUP_IES_2023 (MEC):** características regionais da educação.
+
+## 2ª Pergunta Orientada a Dados (Adaptação para Classificação):
+
+**Qual é a relação entre o tempo de experiência na área de dados, o nível de senioridade e a classificação da faixa salarial dos profissionais no Brasil?**
+
+---
+
+## Objetivo
+
+Classificar profissionais da área de dados em suas respectivas faixas salariais (tratadas como categorias), investigando como variáveis como experiência, senioridade, formação acadêmica, estado (UF) e habilidades técnicas (ex: Python, SQL) influenciam a alocação em cada faixa. Esta análise busca entender os fatores que diferenciam as categorias salariais.
+
+---
+
+## Justificativa
+
+A escolha desta pergunta se justifica pela necessidade de entender quais variáveis impactam mais a categorização dos salários na área de dados. Além disso, identificar o peso de fatores individuais (como experiência e nível) versus regionais (como estrutura educacional) pode orientar políticas educacionais e decisões de carreira, focando na progressão entre faixas salariais.
+
+---
+
+## Processo de Amostragem de Dados (Particionamento e Cross-Validation)
+
+| Etapa           | Descrição                                                                                                                                                           |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Particionamento | Divisão dos dados em treinamento e teste utilizando `train_test_split`, com `random_state=42` para reprodutibilidade. Foi aplicada a estratificação (`stratify=y_class`) para garantir que a proporção de cada faixa salarial fosse mantida nos conjuntos de treino e teste, o que é crucial para problemas de classificação. |
+| Treinamento     | O modelo foi treinado com a amostra de treinamento (`X_train_c`, `y_train_c`).                                                                                     |
+| Validação       | Avaliação realizada na amostra de teste (`X_test_c`, `y_test_c`) com métricas como Acurácia, Matriz de Confusão e Relatório de Classificação (Precision, Recall, F1-score). |
+| Cross-Validation| Não foi implementada neste código, mas poderia ser adicionada para uma avaliação mais robusta da generalização do modelo, especialmente com classes desbalanceadas. |
+
+---
+
+## Parâmetros Utilizados
+
+```python
+RandomForestClassifier(
+    n_estimators=150,
+    max_depth=12,
+    min_samples_split=5,
+    min_samples_leaf=2,
+    class_weight='balanced',
+    random_state=42
+)
+```
+
+| Parâmetro            | Descrição                                                                                                                        |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| n_estimators=150     | Uso de 150 árvores na floresta, um número ligeiramente maior que o regressor, buscando maior robustez para a tarefa de classificação. |
+| max_depth=12         | Limitação da profundidade máxima das árvores em 12, controlando a complexidade do modelo e ajudando a evitar overfitting.          |
+| min_samples_split=5  | Mínimo de 5 amostras para dividir um nó, reduzindo overfitting e garantindo que as divisões sejam baseadas em um número razoável de dados. |
+| min_samples_leaf=2   | Mínimo de 2 amostras por folha, evitando árvores muito complexas e específicas para ruído nos dados.                               |
+| class_weight='balanced' | Parâmetro crucial para problemas de classificação com classes desbalanceadas. Ajusta automaticamente os pesos das amostras para dar maior atenção às classes menos frequentes, buscando um aprendizado mais equitativo. |
+| random_state=42      | Semente fixa para garantir a reprodutibilidade das divisões e do treinamento do modelo.                                           |
+
+## Explicação do Código
+
+| Etapa                 | Descrição                                                                                                                                                                            |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Importação de bibliotecas | Importa pandas, ferramentas de pré-processamento (LabelEncoder), modelo RandomForestClassifier, funções de particionamento (train_test_split) e métricas de avaliação (accuracy_score, confusion_matrix, classification_report). |
+| Exemplo de dados simulados | Cria um DataFrame df_merged com dados simulados, mantendo a estrutura das features de experiência, nível e dados regionais, além da faixa salarial original como string.                                                  |
+| Codificar variável target  | A coluna salario (string) é transformada em rótulos numéricos (salario_label) usando LabelEncoder, preparando-a para a classificação.                                                                                     |
+| Separar features e target  | As features (variáveis explicativas) são separadas em X_class e a variável alvo (salario_label) em y_class. As colunas originais salario e salario_label são removidas de X_class.                                         |
+| Split com estratificação   | Os dados são divididos em X_train_c, X_test_c, y_train_c, y_test_c com test_size=0.5 e stratify=y_class, garantindo que cada faixa salarial seja proporcionalmente representada nos conjuntos de treino e teste.             |
+| Treinar classificador      | O RandomForestClassifier é instanciado com os parâmetros definidos e treinado (clf.fit) nos dados de treino.                                                                                                               |
+| Predizer                   | O modelo treinado faz previsões (clf.predict) nos dados de teste, gerando y_pred_c.                                                                                                                                        |
+| Avaliação                  | São calculadas e impressas a Acurácia, a Matriz de Confusão e o Relatório de Classificação (precision, recall, f1-score por classe).                                                                                         |
+| Importância das variáveis  | A importância de cada feature é extraída (clf.feature_importances_) e exibida em formato percentual, indicando o quanto cada uma contribuiu para as decisões de classificação.                                               |
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Indução de modelos
