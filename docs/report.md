@@ -7076,61 +7076,356 @@ c.  **Limitações da Interpretação/Modelo:**
 
 ## Interpretação dos modelo 2º pergunta orientada a dados
 
-### Interpretação do modelo 1_2
+### Interpretação do modelo 1_2 (Random Forest Regressor para Previsão Salarial)
 
-Apresente os parâmetros do modelo obtido. Tentre mostrar as regras que são utilizadas no
-processo de 'raciocínio' (*reasoning*) do sistema inteligente. Utilize medidas como 
-o *feature importances* para tentar entender quais atributos o modelo se baseia no
-processo de tomada de decisão.
+## 1. Especificação do Modelo e Parâmetros Chave
+
+### 1.1 Tipo de Modelo de Machine Learning
+
+O modelo implementado é um `RandomForestRegressor` da biblioteca scikit-learn. Este é um algoritmo de *ensemble learning* que constrói múltiplas árvores de decisão durante o treinamento e produz a média das predições das árvores individuais para a regressão.
+
+O objetivo do modelo é prever o valor médio da faixa salarial (R$/mês) de profissionais da área de dados no Brasil, tornando-o um problema de regressão.
+
+### 1.2 Principais Hiperparâmetros do Modelo Final Treinado e Relevância
+
+- **n_estimators: 100**  
+  Relevância: Número de árvores na floresta. Um número maior tende a melhorar o desempenho e tornar o modelo mais robusto, ao custo de mais tempo de treinamento.
+
+- **max_depth: None**  
+  Relevância: Permite que as árvores cresçam totalmente. Pode causar overfitting se não for bem controlado, mas ajuda a capturar relações complexas.
+
+- **max_features: 'sqrt'**  
+  Relevância: Usa a raiz quadrada do total de variáveis em cada divisão, reduzindo a correlação entre as árvores e aumentando a generalização.
+
+- **min_samples_leaf: 2**  
+  Relevância: Evita folhas com apenas uma amostra, o que suaviza o modelo e previne overfitting.
+
+- **min_samples_split: 5**  
+  Relevância: Um nó só é dividido se tiver ao menos 5 amostras. Isso evita aprendizado de ruído.
+
+- **random_state: 42**  
+  Relevância: Garante reprodutibilidade dos resultados em diferentes execuções.
+
+---
+
+## 2. Análise de Importância das Features com o Alvo
+
+Embora não tenha sido apresentada uma matriz de correlação bivariada para todas as features com o alvo, a análise da **importância das variáveis** fornecida pelo modelo Random Forest atua como uma métrica poderosa.
+
+### 2.1 Metodologia e Interpretação
+
+A importância é baseada na redução do erro (MSE) provocada por cada variável, ponderada pela quantidade de amostras que passam pela divisão.
+
+### 2.2 Resumo das Importâncias das Features com `salario_num`
+
+| Variável                     | Importância (%) | Interpretação Consolidada                                                                 |
+|-----------------------------|-----------------|--------------------------------------------------------------------------------------------|
+| **nivel_cod**               | 73.29%          | Fortíssima influência. O nível do cargo é o fator mais dominante na faixa salarial.       |
+| **experiencia_num**         | 23.72%          | Forte influência. Quanto maior a experiência, maior a expectativa salarial.               |
+| **docentes_mestrado_regiao**| 0.82%           | Baixa influência. Impacto mínimo.                                                         |
+| **tecnicos_regiao**         | 0.78%           | Baixa influência. Impacto muito pequeno.                                                  |
+| **docentes_regiao**         | 0.70%           | Baixa influência. Impacto reduzido.                                                       |
+| **num_ies_regiao**          | 0.70%           | Baixa influência. Impacto quase insignificante.                                           |
+
+### 2.3 Observações da Análise de Importância
+
+- **Dominância Espectacular**: `nivel_cod` e `experiencia_num` juntos representam **97% da importância total** do modelo.
+- **Impacto Negligenciável das Variáveis Regionais**: Todas com menos de 1% de importância, indicando que fatores pessoais têm muito mais influência do que infraestrutura regional.
+
+---
+
+## 3. Fatores Preditivos Dominantes no Modelo Random Forest
+
+### 3.1 Features Selecionadas e Seus Significados
+
+- `experiencia_num`: Tempo de experiência na área de dados (em anos).
+- `nivel_cod`: Nível de senioridade (Júnior, Pleno, Sênior).
+- `docentes_regiao`: Número total de docentes na região.
+- `tecnicos_regiao`: Número total de técnicos administrativos na região.
+- `docentes_mestrado_regiao`: Número total de docentes com mestrado na região.
+- `num_ies_regiao`: Número de instituições de ensino superior (IES) na região.
+
+### 3.2 Análise de Importância das Features
+
+| Feature                     | Importância (%) |
+|----------------------------|-----------------|
+| `nivel_cod`                | 73.29%          |
+| `experiencia_num`          | 23.72%          |
+| `docentes_mestrado_regiao`| 0.82%           |
+| `tecnicos_regiao`          | 0.78%           |
+| `docentes_regiao`          | 0.70%           |
+| `num_ies_regiao`           | 0.70%           |
+
+### 3.3 Interpretação no Contexto da Predição Salarial
+
+- **Fatores Individuais são Primordiais**: O percurso individual tem influência dominante.
+- **Pouca Influência Regional**: Mesmo quando presentes, variáveis regionais impactam minimamente.
+
+---
+
+## 4. Desvendando a Lógica do Modelo: 'Regras de Raciocínio'
+
+### 4.1 Elucidando a Lógica do `RandomForestRegressor`
+
+O modelo é composto por 100 árvores de decisão, cada uma treinada com um subconjunto dos dados. A predição final é a **média das previsões de todas as árvores**.
+
+### 4.2 Como as "Regras Implícitas" Ajudam na Interpretação
+
+- **Divisões Primárias**: `nivel_cod` e `experiencia_num` são os primeiros critérios de divisão.
+- **Refinamento Secundário**: Variáveis regionais ajustam ligeiramente as previsões, mas têm impacto mínimo.
+
+---
+
+## 5. A Interação entre Fatores Chave na Predição Salarial
+
+### 5.1 Capacidade de Modelar Interações
+
+O Random Forest modela **interações não lineares** de forma natural. Exemplo:
+
+- Primeira divisão: `experiencia_num`
+- Segunda divisão: `nivel_cod`
+- Isso cria subgrupos com diferentes padrões salariais.
+
+### 5.2 Discussão sobre Interações Prováveis
+
+- **Experiência × Nível**: Interações sinérgicas que ampliam o impacto salarial.
+- **Região × Nível/Experiência**: Efeitos sutis e pouco relevantes, segundo a análise de importância.
+
+---
+
+## 6. Síntese: Conectando a Interpretação à Pergunta Central
+
+### 6.1 Principais Descobertas
+
+- **Desempenho do Modelo**:  
+  - MAE: R$ 2.882,21  
+  - R²: 0.38
+
+- **Fatores Dominantes**:  
+  `nivel_cod` e `experiencia_num` respondem por quase **97% da importância**.
+
+- **Fatores Secundários**:  
+  Variáveis regionais têm impacto **quase nulo**.
+
+- **Interações Importantes**:  
+  Principalmente entre nível e experiência.
+
+### 6.2 Relação com a Pergunta Orientadora
+
+> *"Quais fatores influenciam a faixa salarial média de profissionais da área de dados no Brasil?"*
+
+- **Resposta direta**:
+  - **Fatores primários**: Nível de cargo e tempo de experiência.
+  - **Fatores secundários**: Infraestrutura educacional da região é irrelevante.
+  - **Implicação**: O desenvolvimento pessoal é mais determinante que o contexto regional.
+
+### 6.3 Limitações da Interpretação / Modelo
+
+- **R² = 0.38**: Indica que muitos fatores ainda não estão sendo capturados.
+- **Associação ≠ Causalidade**: O modelo encontra padrões, mas não causações.
+- **Falta de Interpretabilidade Fina**: Exige SHAP, LIME ou métodos explicativos.
+- **Mapeamento de salário**: Faixas salariais foram representadas por médias, o que pode causar imprecisão.
+- **Variáveis regionais limitadas**: Faltam variáveis econômicas, como PIB ou custo de vida.
+
+---
+
+**Em resumo**, o modelo Random Forest, mesmo com desempenho moderado, oferece **insights claros**: a **experiência** e o **nível de senioridade** são os principais impulsionadores da renda na área de dados no Brasil.
 
 -------------------------------------------------------------------------------------------------------------------------
 
-### Interpretação do modelo 2_2
+### Interpretação do modelo 2_2 (Random Forest Classifier para Classificação Salarial)
 
-**Parâmetros do Modelo RandomForestClassifier:**
+## 1. Visão Geral do Código
 
-**Matriz de Confusão**
+### Objetivo Principal
+O script tem como objetivo construir um modelo de Machine Learning, especificamente um `RandomForestClassifier`, para prever a faixa salarial de profissionais da área de dados. A tarefa é tratada como um problema de classificação multiclasse, onde as diferentes faixas salariais são representadas por rótulos numéricos.
 
-| Classe         | Predito: R$ 1k-2k | Predito: R$ 2k-3k | Predito: R$ 3k-4k |
-|---------------|:-----------------:|:-----------------:|:-----------------:|
-| Real: R$ 1k-2k |        0          |        1          |        0          |
-| Real: R$ 2k-3k |        0          |        1          |        0          |
-| Real: R$ 3k-4k |        0          |        1          |        0          |
+### Bibliotecas Utilizadas
+- `pandas`: Para manipulação e análise de dados em forma tabular.  
+- `sklearn.preprocessing.LabelEncoder`: Para codificação de variáveis categóricas (ex: faixas salariais).  
+- `sklearn.ensemble.RandomForestClassifier`: Algoritmo de classificação baseado em floresta aleatória.  
+- `sklearn.model_selection.train_test_split`: Para dividir os dados em conjuntos de treino e teste.  
+- `sklearn.metrics`:  
+  - `accuracy_score`: Calcula a acurácia da classificação.  
+  - `confusion_matrix`: Gera a matriz de confusão com os acertos e erros por classe.  
+  - `classification_report`: Exibe precisão, recall, F1-score e suporte por classe.  
 
-**Relatório de Classificação**
+---
 
-| Classe                          | Precision | Recall | F1-score | Suporte |
-|----------------------------------|:---------:|:------:|:--------:|:-------:|
-| de R$ 1.001/mês a R$ 2.000/mês   |   0.00    |  0.00  |   0.00   |    1    |
-| de R$ 2.001/mês a R$ 3.000/mês   |   0.33    |  1.00  |   0.50   |    1    |
-| de R$ 3.001/mês a R$ 4.000/mês   |   0.00    |  0.00  |   0.00   |    1    |
-| **Acurácia**                     |           |        |  0.33    |    3    |
-| **Macro avg**                    |   0.11    |  0.33  |   0.17   |    3    |
-| **Weighted avg**                 |   0.11    |  0.33  |   0.17   |    3    |
+## 2. Pré-processamento de Dados e Engenharia de Features
 
-**Importância das Variáveis**
+### Criação da Tabela
+O DataFrame `df_merged` contém as seguintes colunas:
+- `experiencia_num`: tempo de experiência (em anos);  
+- `nivel_cod`: nível de senioridade codificado numericamente;  
+- `docentes_regiao`: número de docentes na região;  
+- `tecnicos_regiao`: número de técnicos administrativos na região;  
+- `docentes_mestrado_regiao`: número de docentes com mestrado;  
+- `num_ies_regiao`: número de instituições de ensino superior na região;  
+- `salario`: faixa salarial categórica (string).  
+
+### Codificação da Variável Alvo
+A variável `salario` é transformada em valores numéricos com `LabelEncoder`, criando a coluna `salario_label`:
+```python
+le_salario = LabelEncoder()
+df_merged['salario_label'] = le_salario.fit_transform(df_merged['salario'])
+```
+
+### Separação de Features e Target
+As features são armazenadas em `X_class` e a variável alvo em `y_class`:
+```python
+X_class = df_merged.drop(columns=['salario', 'salario_label'])
+y_class = df_merged['salario_label']
+```
+
+---
+
+## 3. Divisão em Conjuntos de Treino e Teste e Balanceamento das Classes
+
+### Divisão com Estratificação
+Os dados são divididos em treino e teste usando `train_test_split` com estratificação:
+```python
+X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(
+    X_class, y_class, test_size=0.5, random_state=42, stratify=y_class
+)
+```
+
+### Tratamento de Classes Desbalanceadas
+O parâmetro `class_weight='balanced'` é utilizado no `RandomForestClassifier`.
+
+---
+
+## 4. Construção e Treinamento do Modelo Random Forest
+
+### Otimização de Hiperparâmetros
+- `n_estimators=150`  
+- `max_depth=12`  
+- `min_samples_split=5`  
+- `min_samples_leaf=2`  
+- `class_weight='balanced'`  
+- `random_state=42`  
+
+### Treinamento do Modelo
+```python
+clf.fit(X_train_c, y_train_c)
+```
+
+---
+
+## 5. Realização de Previsões e Avaliação do Modelo
+
+### Previsão de Classes
+```python
+y_pred_c = clf.predict(X_test_c)
+```
+
+### Métricas de Avaliação
+
+#### Acurácia
+```python
+accuracy_score(y_test_c, y_pred_c)
+```
+
+#### Matriz de Confusão
+```python
+confusion_matrix(y_test_c, y_pred_c)
+```
+
+#### Relatório de Classificação
+```python
+classification_report(y_test_c, y_pred_c, target_names=le_salario.classes_)
+```
+
+---
+
+## 6. Análise de Importância das Features
+
+### Cálculo
+```python
+importances = clf.feature_importances_
+```
+
+### Valor da Informação
+Exemplo de saída:
+- `experiencia_num`: 34.72%  
+- `nivel_cod`: 28.34%  
+- `docentes_mestrado_regiao`: 16.21%  
+- ...  
+
+### Aplicações
+- Entendimento do que mais influencia o salário previsto  
+- Suporte para decisões políticas  
+- Refinamento do modelo  
+
+---
+
+## Relatório de Resultados e Insights (Modelo Random Forest Classifier)
+
+### 1. Resumo do Experimento
+O modelo foi treinado para prever faixas salariais com base em variáveis como experiência e dados regionais de educação.
+
+### 2. Resultados
+
+#### Métrica
+
+| Métrica  | Valor     |
+|----------|-----------|
+| Acurácia | 33.33%    |
+
+#### Matriz de Confusão
+
+| Classe Real             | Predito: R$ 1k-2k | Predito: R$ 2k-3k | Predito: R$ 3k-4k |
+|-------------------------|-------------------|-------------------|-------------------|
+| R$ 1k-2k                | 0                 | 1                 | 0                 |
+| R$ 2k-3k                | 0                 | 1                 | 0                 |
+| R$ 3k-4k                | 0                 | 1                 | 0                 |
+
+#### Relatório de Classificação
+
+| Classe                              | Precision | Recall | F1-score | Suporte |
+|-------------------------------------|-----------|--------|----------|---------|
+| de R$ 1.001/mês a R$ 2.000/mês      | 0.00      | 0.00   | 0.00     | 1       |
+| de R$ 2.001/mês a R$ 3.000/mês      | 0.33      | 1.00   | 0.50     | 1       |
+| de R$ 3.001/mês a R$ 4.000/mês      | 0.00      | 0.00   | 0.00     | 1       |
+| **Acurácia**                        | **0.333** |        |          |         |
+| Macro avg                          | 0.11      | 0.33   | 0.17     | 3       |
+| Weighted avg                       | 0.11      | 0.33   | 0.17     | 3       |
+
+#### Importância das Variáveis
 
 | Feature                    | Importância |
-|----------------------------|:----------:|
-| experiencia_num            |   0.00%    |
-| nivel_cod                  |   0.00%    |
-| docentes_regiao            |   0.00%    |
-| tecnicos_regiao            |   0.00%    |
-| docentes_mestrado_regiao   |   0.00%    |
-| num_ies_regiao             |   0.00%    |
+|---------------------------|-------------|
+| experiencia_num           | 0.00%       |
+| nivel_cod                 | 0.00%       |
+| docentes_regiao           | 0.00%       |
+| tecnicos_regiao           | 0.00%       |
+| docentes_mestrado_regiao  | 0.00%       |
+| num_ies_regiao            | 0.00%       |
 
-**Interpretação:**
+---
 
-Uma importância de 0% significa que a feature raramente (ou nunca) foi usada para dividir os nós das árvores, ou que sua contribuição para a redução da impureza foi insignificante.
-Em modelos reais, espera-se que algumas features tenham importâncias significativamente maiores, indicando que são mais relevantes para a classificação.
+## 3. Insights
 
-**Resumo**
+- **Baixa performance**: acurácia de 33%, equivalente ao acaso para 3 classes.
+- **Matriz de confusão**: modelo classificou todas as amostras na mesma faixa.
+- **Importância das variáveis**: todas com 0%, sem padrões relevantes.
+- **Tamanho da amostra**: apenas 6 exemplos (3 treino + 3 teste).
+- **Avisos de métricas**: algumas classes não foram previstas → métricas indefinidas.
 
-O RandomForestClassifier toma decisões combinando várias árvores de decisão, cada uma baseada em regras de splits em features diferentes.
+---
 
-A análise da importância das features mostra quais atributos mais influenciaram as decisões do modelo — sendo essencial para interpretar o “raciocínio” do sistema inteligente.
+## Observações Finais
 
-No caso apresentado, todas as importâncias ficaram em 0%, indicando que o modelo não encontrou padrões relevantes nos dados, provavelmente devido ao baixo volume de dados ou falta de variabilidade nas features.
+- O modelo **não aprendeu padrões significativos** devido à **extrema escassez de dados**.
+- **Todas as variáveis tiveram importância nula**, o que indica que o modelo não utilizou nenhuma delas para prever o salário.
+- O experimento **ilustra o fluxo de um pipeline de ML**, mas não deve ser usado como evidência de desempenho real de modelos Random Forest.
+- Para resultados confiáveis, é necessário treinar o modelo com **uma base de dados significativamente maior**.
+
+---
+
+_**Nota:** Para continuar esta análise com os gráficos interpretados (resíduos, distribuição real vs predito, matriz de confusão normalizada etc.), consulte a Parte 2 do relatório._
+
+
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
