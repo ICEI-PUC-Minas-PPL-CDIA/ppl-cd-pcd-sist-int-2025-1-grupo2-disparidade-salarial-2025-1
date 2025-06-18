@@ -6273,6 +6273,124 @@ RandomForestRegressor(
 ## Resumo
 **Embora o modelo apresente desempenho moderado (R² = 0.38), ele oferece bons insights sobre os fatores que mais influenciam o salário na área de dados no Brasil. A predominância das variáveis individuais em relação às regionais sugere que decisões salariais estão mais associadas a fatores pessoais do que à estrutura educacional da região.**
 
+![506df510-64aa-4254-b476-05d4402f020d](https://github.com/user-attachments/assets/328639a2-568d-4ee9-a61f-c80bc4f7285a)
+
+### Análise do Gráfico: "Valores Reais vs. Valores Preditos (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Dispersão (Scatter Plot)** intitulado "Valores Reais vs. Valores Preditos (Regressor)".
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (Salário Real):** Representa os valores de salário que são verdadeiros e observados no conjunto de teste.
+* **Eixo Vertical (Salário Predito):** Representa os valores de salário que foram previstos pelo modelo Random Forest Regressor para as mesmas amostras do conjunto de teste.
+* **Pontos Dispersos:** Cada ponto no gráfico corresponde a uma única amostra no conjunto de teste, com sua coordenada X sendo o valor real do salário e sua coordenada Y sendo o valor predito pelo modelo.
+* **Linha Tracejada Vermelha (45 graus):** Esta é a linha de identidade ($y=x$). Se o modelo fizesse previsões perfeitas, todos os pontos estariam exatamente sobre esta linha, pois o valor predito seria igual ao valor real.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre o desempenho do modelo de regressão:
+
+* **Dispersão em Torno da Linha:** Os pontos se espalham em torno da linha tracejada, indicando que o modelo tem alguma capacidade de previsão, mas não é perfeita.
+* **Tendência Central:** A maioria dos pontos segue a tendência da linha de 45 graus, o que sugere que o modelo geralmente prevê valores que estão na mesma ordem de grandeza dos valores reais.
+* **Variação da Precisão:** A dispersão dos pontos parece ser maior para valores salariais mais altos. Isso pode indicar que o modelo tem mais dificuldade em prever salários muito altos ou muito baixos, e sua precisão é maior para faixas salariais intermediárias. A nuvem de pontos não se estreita nos extremos, o que é um bom sinal de que não há um enviesamento sistemático em valores muito altos/baixos, mas sim uma variabilidade maior nos erros.
+* **Imprecisões:** Pontos muito distantes da linha de 45 graus representam previsões onde o modelo errou significativamente (por exemplo, previu um salário muito baixo para um valor real alto, ou vice-versa).
+* **Conclusão:** O gráfico oferece uma visão intuitiva do quão bem as previsões do modelo se alinham com os dados reais. Um bom modelo de regressão teria seus pontos bem agrupados ao redor da linha de 45 graus, com menor dispersão.
+
+![download (1)](https://github.com/user-attachments/assets/6a95ebc2-7b99-4166-bd64-acfca8f0166c)
+
+### Análise do Gráfico: "Valores Reais vs. Valores Preditos (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Dispersão (Scatter Plot)** intitulado "Valores Reais vs. Valores Preditos (Regressor)".
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (Salário Real):** Representa os valores de salário que são verdadeiros e observados no conjunto de teste.
+* **Eixo Vertical (Salário Predito):** Representa os valores de salário que foram previstos pelo modelo Random Forest Regressor para as mesmas amostras do conjunto de teste.
+* **Pontos Dispersos:** Cada ponto no gráfico corresponde a uma única amostra no conjunto de teste, com sua coordenada X sendo o valor real do salário e sua coordenada Y sendo o valor predito pelo modelo.
+* **Linha Tracejada Vermelha (45 graus):** Esta é a linha de identidade ($y=x$). Se o modelo fizesse previsões perfeitas, todos os pontos estariam exatamente sobre esta linha, pois o valor predito seria igual ao valor real.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre o desempenho do modelo de regressão:
+
+* **Dispersão em Torno da Linha:** Os pontos se espalham em torno da linha tracejada, indicando que o modelo tem alguma capacidade de previsão, mas não é perfeita.
+* **Tendência Central:** A maioria dos pontos segue a tendência da linha de 45 graus, o que sugere que o modelo geralmente prevê valores que estão na mesma ordem de grandeza dos valores reais.
+* **Variação da Precisão:** A dispersão dos pontos parece ser maior para valores salariais mais altos. Isso pode indicar que o modelo tem mais dificuldade em prever salários muito altos ou muito baixos, e sua precisão é maior para faixas salariais intermediárias. A nuvem de pontos não se estreita nos extremos, o que é um bom sinal de que não há um enviesamento sistemático em valores muito altos/baixos, mas sim uma variabilidade maior nos erros.
+* **Imprecisões:** Pontos muito distantes da linha de 45 graus representam previsões onde o modelo errou significativamente (por exemplo, previu um salário muito baixo para um valor real alto, ou vice-versa).
+* **Conclusão:** O gráfico oferece uma visão intuitiva do quão bem as previsões do modelo se alinham com os dados reais. Um bom modelo de regressão teria seus pontos bem agrupados ao redor da linha de 45 graus, com menor dispersão.
+
+![download (2)](https://github.com/user-attachments/assets/ad328d09-1dd1-403b-b164-e54be34c9375)
+
+### Análise do Gráfico: "Importância das Variáveis (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Barras Horizontais** intitulado "Importância das Variáveis (Regressor)".
+
+#### Como interpretar o gráfico:
+
+* **Eixo Vertical (Variável):** Lista as diferentes *features* (variáveis de entrada) usadas pelo modelo Random Forest Regressor.
+* **Eixo Horizontal (Importância - Medida Gini):** Indica a relevância ou o poder preditivo de cada variável para o modelo. A "Importância" é frequentemente calculada com base na redução total da impureza (Gini impurity ou MSE) que a variável traz nas árvores da floresta, ponderada pela quantidade de amostras que se beneficiam dessa divisão.
+* **Barras:** Cada barra representa uma variável. Quanto mais longa a barra, maior a importância dessa variável nas decisões de previsão do modelo.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre a importância das variáveis para a previsão de salários:
+
+* **Variáveis Mais Influentes:**
+    * **`experiencia_num` (Experiência Numérica):** É, de longe, a variável mais importante, com uma pontuação significativamente maior que as outras. Isso sugere que o tempo de experiência na área de dados é o fator mais relevante para determinar o salário, de acordo com o modelo.
+    * **`nivel_cod` (Nível Codificado):** É a segunda variável mais importante, mas com uma importância consideravelmente menor que a experiência. Isso é intuitivo, pois o nível profissional (Júnior, Pleno, Sênior, etc.) geralmente se correlaciona fortemente com a experiência.
+* **Variáveis Regionais e Institucionais:**
+    * Variáveis como `docentes_regiao`, `num_ies_regiao`, `tecnicos_regiao` e `docentes_mestrado_regiao` têm importâncias muito menores. Isso indica que, embora possam ter alguma influência, o modelo as considera secundárias em comparação com a experiência e o nível para prever o salário.
+* **Implicações:** A alta importância da experiência e do nível sugere que, para prever salários neste contexto, o foco deve ser primeiramente nessas características individuais dos profissionais, com as características regionais das instituições de ensino tendo um papel menos proeminente no modelo.
+
+![download (3)](https://github.com/user-attachments/assets/4d7abc02-5fa0-448f-957a-dde4a3ca74a9)
+
+### Análise do Gráfico: "Resíduos vs experiencia_num (Regressor)"
+
+O gráfico apresentado é um **Gráfico de Dispersão (Scatter Plot)** intitulado "Resíduos vs experiencia_num (Regressor)". (Assumindo que experiencia_num é a variável mais importante do seu modelo, conforme o gráfico de importância anterior).
+
+#### Como interpretar o gráfico:
+
+* **Eixo Horizontal (experiencia_num):** Representa os valores da variável numérica de experiência dos profissionais.
+* **Eixo Vertical (Resíduos):** Representa a diferença entre o salário real e o salário predito (Salário Real - Salário Predito).
+* **Linha Tracejada Vermelha (y=0):** Indica o ponto de erro zero. Idealmente, os resíduos devem se espalhar aleatoriamente em torno desta linha, independentemente do valor da experiencia_num.
+* **Pontos Dispersos:** Cada ponto mostra o erro da previsão para uma amostra específica, plotted contra o valor da sua experiencia_num.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre os resíduos do modelo em relação à experiência:
+
+* **Dispersão Consistente:** Os resíduos parecem estar espalhados de forma aleatória em torno da linha zero, com a dispersão vertical (a magnitude dos erros) sendo relativamente consistente em todas as faixas de experiencia_num.
+* **Ausência de Padrões:** Não há um padrão visível (como uma curva ascendente/descendente, um formato de funil, ou agrupamentos) que correlacione a experiencia_num com a magnitude ou o sinal dos resíduos. Isso é um sinal positivo, pois sugere que o modelo não está errando sistematicamente mais para profissionais com pouca experiência, muita experiência ou em faixas intermediárias. Ele não parece ter dificuldade particular em prever salários com base na experiência.
+* **Conclusão:** Este gráfico confirma que a variável experiencia_num, embora seja a mais importante, não é uma fonte de viés sistemático para os erros do modelo. O modelo parece lidar bem com as diferentes faixas de experiência, e os erros são distribuídos de forma aleatória em relação a ela. Se houvesse um padrão, isso indicaria que o modelo pode ser melhorado para capturar nuances específicas relacionadas à experiência.
+
+![download (4)](https://github.com/user-attachments/assets/474a3f35-fe1f-4d75-a121-adad6168c076)
+
+### Análise do Gráfico: "Distribuição de Faixas Salariais Originais"
+
+O gráfico apresentado é um **Gráfico de Barras Horizontais** intitulado "Distribuição de Faixas Salariais Originais". Ele mostra a frequência (ou contagem) de cada faixa salarial presente nos dados originais, antes de qualquer agrupamento ou processamento dessas faixas.
+
+#### Como interpretar o gráfico:
+
+* **Eixo Vertical (Faixa Salarial):** Lista as diferentes categorias de faixas salariais mensais que foram reportadas ou coletadas. Cada barra horizontal corresponde a uma dessas faixas.
+* **Eixo Horizontal (Contagem):** Indica o número de vezes que cada faixa salarial aparece no conjunto de dados. O comprimento da barra é diretamente proporcional a essa contagem.
+* **Barras:** Cada barra representa uma faixa salarial específica. Quanto mais longa a barra, maior o número de indivíduos ou registros que se enquadram naquela faixa salarial.
+
+#### Análise da Distribuição Apresentada:
+
+Observando o gráfico, podemos extrair as seguintes informações sobre a distribuição das faixas salariais originais:
+
+* **Faixas Mais Comuns:**
+    * A faixa salarial **"de R$8.001/mês a R$ 12.000/mês"** é a mais frequente, com uma contagem significativamente maior que as outras (aproximadamente 790 ocorrências).
+    * Seguida por **"de R$4.001/mês a R$ 6.000/mês"** (aproximadamente 630-640 ocorrências).
+    * E depois **"de R$6.001/mês a R$ 8.000/mês"** (aproximadamente 540 ocorrências).
+* **Faixas Menos Comuns:** Várias faixas salariais têm contagens muito baixas, indicando que são raras no conjunto de dados. Estas incluem, por exemplo:
+    * "de R$101/mês a R$ 2.000/mês" (contagem muito próxima de zero, quase imperceptível).
+    * "Acima de R$ 40.001/mês".
+    * "Menos de R$ 1.000/mês".
+    * "de R$30.001/mês a R$ 40.000/mês".
+    * "de R$25.001/mês a R$ 30.000/mês".
+* **Desbalanceamento:** O gráfico demonstra claramente um desbalanceamento entre as diferentes faixas salariais. Algumas poucas faixas concentram a maioria dos registros, enquanto muitas outras são representadas por um número pequeno de instâncias. Este desbalanceamento é uma característica importante dos dados e frequentemente leva à necessidade de agrupar faixas salariais (como visto no código do notebook) para criar classes mais equilibradas e significativas para modelos de machine learning.
+
 # Relatório de Resultados e Insights (Modelo Random Forest Classifier)
 
 **1. Resumo do Experimento**
