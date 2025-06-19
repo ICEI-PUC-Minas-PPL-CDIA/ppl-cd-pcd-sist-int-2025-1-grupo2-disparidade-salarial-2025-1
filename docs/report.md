@@ -150,11 +150,11 @@ Pesquisadores e acadêmicos: Aqueles que têm conhecimento analítico e estatís
 
 A aplicação será útil para esses grupos ao oferecer maneiras de visualizar intuitivas, comparações salariais e insights baseados em machine learning.
 
-## 🎯 Público-alvo da aplicação
+##  Público-alvo da aplicação
 
 A aplicação visa fornecer insights sobre disparidade salarial na área de dados no Brasil, ajudando diferentes perfis de usuários a tomar decisões estratégicas.
 
-## 🏢 Stakeholders e seus papéis
+##  Stakeholders e seus papéis
 
 | **Stakeholder**                 | **Nível de Interesse** | **Influência** | **Objetivos** |
 |---------------------------------|----------------------|--------------|--------------|
@@ -163,27 +163,27 @@ A aplicação visa fornecer insights sobre disparidade salarial na área de dado
 | **Pesquisadores e Acadêmicos**      | Médio                | Média        | Explorar padrões e desigualdades no mercado. |
 | **Órgãos Governamentais**           | Médio                | Alta         | Criar regulamentações e políticas de inclusão. |
 
-## 👥 Perfis de usuários (Personas)
+##  Perfis de usuários (Personas)
 
-### **1️⃣ Persona: Analista de Dados Júnior**
+### ** Persona: Analista de Dados Júnior**
 - **Nome:** Lucas Mendes  
 - **Idade:** 25 anos  
 - **Objetivo:** Comparar sua faixa salarial com o mercado para planejar seu crescimento profissional.  
 - **Desafios:** Não sabe quais habilidades influenciam no aumento salarial.  
 
-### **2️⃣ Persona: Gerente de RH em Tecnologia**
+### ** Persona: Gerente de RH em Tecnologia**
 - **Nome:** Mariana Costa  
 - **Idade:** 38 anos  
 - **Objetivo:** Definir pacotes salariais competitivos para atrair talentos na área de dados.  
 - **Desafios:** Falta de dados estruturados sobre o mercado e diferenças regionais.  
 
-### **3️⃣ Persona: Pesquisador de Mercado de Trabalho**
+### ** Persona: Pesquisador de Mercado de Trabalho**
 - **Nome:** Dr. João Ribeiro  
 - **Idade:** 45 anos  
 - **Objetivo:** Estudar desigualdades salariais no setor de tecnologia.  
 - **Desafios:** Precisa de dados confiáveis e ferramentas estatísticas para análise.  
 
-### **4️⃣ Persona: Regulador de Políticas Públicas**
+### ** Persona: Regulador de Políticas Públicas**
 - **Nome:** Ana Beatriz Oliveira  
 - **Idade:** 50 anos  
 - **Objetivo:** Criar diretrizes para reduzir a disparidade salarial na tecnologia.  
@@ -1929,17 +1929,17 @@ Este tipo de gráfico é uma ferramenta poderosa para a análise exploratória d
 **Pergunta Orientada a Dados:**
 *Qual é a relação entre o tempo de experiência na área de dados, o nível de senioridade e a faixa salarial dos profissionais no Brasil?*
 
-# 📊 Gráfico: Tempo de Experiência na Área de Dados vs Faixa Salarial
+#  Gráfico: Tempo de Experiência na Área de Dados vs Faixa Salarial
 
 ![image1](https://github.com/user-attachments/assets/5a742221-23a3-4a2e-8719-dbe194546936)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico apresentado é um **boxplot (gráfico de caixa)** que explora a relação entre o **tempo de experiência dos profissionais na área de dados** e suas respectivas **faixas salariais mensais**.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Experiência na Área de Dados vs Faixa Salarial"_
 
@@ -1963,43 +1963,43 @@ O gráfico apresentado é um **boxplot (gráfico de caixa)** que explora a rela�
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### ✅ Tendência Geral de Crescimento Salarial com a Experiência
+###  Tendência Geral de Crescimento Salarial com a Experiência
 Existe uma clara tendência de **aumento da mediana salarial** à medida que cresce o tempo de experiência na área de dados. Profissionais com **menos de 1 ano** ou entre **1 a 2 anos de experiência** estão concentrados nas **faixas salariais mais baixas**, enquanto aqueles com **mais de 5 anos** apresentam **medianas mais elevadas**.
 
-### ✅ Dispersão Salarial (Variabilidade)
+###  Dispersão Salarial (Variabilidade)
 As categorias com **maior tempo de experiência** (especialmente _"Mais de 10 anos"_ e _"de 7 a 10 anos"_) apresentam **caixas mais altas e whiskers mais longos**, evidenciando **maior dispersão salarial**. Isso indica que nesses grupos há tanto profissionais com **salários medianos** quanto outros com **remunerações significativamente altas**.
 
 A presença de **outliers em praticamente todas as faixas** reforça a existência de casos com **salários discrepantes**, acima ou abaixo do intervalo típico.
 
-### ✅ Faixas de Experiência Inicial
+###  Faixas de Experiência Inicial
 Profissionais com _"Menos de 1 ano"_ e _"de 1 a 2 anos"_ estão **fortemente concentrados nas faixas salariais até R$8.000/mês**, com **raros casos acima disso**, o que sugere um **teto salarial mais baixo para iniciantes** na área.
 
-### ✅ Categoria “Não tenho experiência na área de dados”
+###  Categoria “Não tenho experiência na área de dados”
 Este grupo apresenta uma **distribuição salarial bastante dispersa**, com salários que vão de **faixas muito baixas até médias próximas a profissionais com 3-4 anos de experiência**. Isso pode indicar que parte desses profissionais possui **experiência em outras áreas relevantes** ou **cargos com exigências específicas**.
 
-### ✅ Outros Destaques
+###  Outros Destaques
 - A **mediana salarial cresce de forma mais significativa** a partir da faixa _"de 5 a 6 anos"_, sugerindo um **marco importante de progressão de carreira**.
 - A faixa _"Mais de 10 anos"_ apresenta o **maior alcance de salários**, incluindo uma concentração visível nas **faixas mais altas**.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico confirma uma **correlação positiva entre tempo de experiência na área de dados e o aumento nas faixas salariais**. A **progressão salarial é notória principalmente após os 5 anos de experiência**, mas com **alta variabilidade dentro de cada grupo**. Essa análise reforça que, apesar da **experiência ser um fator relevante**, outros aspectos como **cargo ocupado**, **localização geográfica**, **setor da empresa** e **habilidades específicas** também devem **influenciar fortemente a remuneração final**.
 
-# 📊 Gráfico: Nível de Senioridade vs Faixa Salarial
+#  Gráfico: Nível de Senioridade vs Faixa Salarial
 
 ![image2](https://github.com/user-attachments/assets/66afa78f-916c-4185-81c2-e9b734cfbebf)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico apresentado é um **boxplot (gráfico de caixa)** que explora a relação entre o **nível de senioridade dos profissionais na área de dados** e suas respectivas **faixas salariais mensais**.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Nível de Senioridade vs Faixa Salarial"_
 
@@ -2018,23 +2018,23 @@ O gráfico apresentado é um **boxplot (gráfico de caixa)** que explora a rela�
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### ✅ Tendência Geral de Crescimento Salarial com a Senioridade
+###  Tendência Geral de Crescimento Salarial com a Senioridade
 Existe uma **clara progressão nas medianas salariais** conforme o profissional avança de **Júnior** para **Pleno** e depois para **Sênior**. A mediana salarial dos profissionais **Sênior** está situada nas **faixas salariais mais altas**, enquanto a dos **Júnior** permanece nas **faixas mais baixas**.
 
-### ✅ Dispersão Salarial (Variabilidade)
+###  Dispersão Salarial (Variabilidade)
 - O grupo **Sênior** apresenta a **maior dispersão salarial**, com uma grande amplitude entre os quartis e presença de **outliers abaixo do esperado**, indicando que existem **profissionais Sênior com salários muito abaixo da média**, possivelmente por questões regionais ou cargos específicos.
 - O grupo **Júnior** mostra uma **dispersão menor**, com a maioria concentrada nas faixas **até R$8.000/mês**, mas com alguns poucos casos fora dessa faixa (outliers).
 
-### ✅ Grupo Pleno
+###  Grupo Pleno
 O grupo **Pleno** ocupa uma posição intermediária entre os níveis Júnior e Sênior, com:
 - **Mediana superior ao Júnior**, mas ainda **inferior ao Sênior**.
 - Menor dispersão que o grupo Sênior.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico evidencia uma **forte correlação entre o nível de senioridade e as faixas salariais**, confirmando a expectativa de **progressão salarial com o avanço de carreira**. 
 
@@ -2042,17 +2042,17 @@ Porém, a **dispersão dentro de cada grupo**, especialmente entre os profission
 
 Essa análise reforça a importância de considerar o nível de senioridade como **um dos vários fatores determinantes na remuneração** na área de dados.
 
-# 📊 Gráfico: Distribuição de Gênero por Nível de Senioridade
+#  Gráfico: Distribuição de Gênero por Nível de Senioridade
 
 ![image3](https://github.com/user-attachments/assets/3ebef7ec-2201-485d-b023-8d08d831573b)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico apresentado é um **gráfico de barras agrupadas** que analisa a **distribuição de gênero dos profissionais** de acordo com o **nível de senioridade** na área de dados.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Distribuição de Gênero por Nível de Senioridade"_
 
@@ -2071,25 +2071,25 @@ O gráfico apresentado é um **gráfico de barras agrupadas** que analisa a **di
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### ✅ Predominância de Gênero Masculino
+###  Predominância de Gênero Masculino
 O gráfico mostra uma **predominância significativa de profissionais do gênero masculino** em todos os níveis de senioridade, sendo especialmente evidente nos níveis **Pleno** e **Sênior**.
 
-### ✅ Participação Feminina
+###  Participação Feminina
 - Embora menor, a presença de profissionais do gênero **feminino** é consistente em todos os níveis.
 - Há um **ligeiro aumento proporcional no nível Pleno**, mas a diferença para o masculino ainda é grande.
 
-### ✅ Baixa Representatividade de Outros Gêneros
+###  Baixa Representatividade de Outros Gêneros
 - As categorias **"Outro"** e **"Prefiro não informar"** apresentam **quantidades muito pequenas**, com valores próximos de zero em todos os níveis.
 
-### ✅ Evolução ao longo da Senioridade
+###  Evolução ao longo da Senioridade
 - **O número absoluto de profissionais masculinos cresce da base (Júnior) até o topo (Sênior)**, refletindo um maior volume de homens nas posições mais altas.
 - **A participação feminina, embora menor, mantém-se relativamente estável entre os níveis**, mas não acompanha a mesma taxa de crescimento do masculino nas transições de carreira.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico evidencia um cenário de **baixa diversidade de gênero na área de dados**, com forte **concentração de profissionais do gênero masculino**, especialmente nos níveis **Pleno e Sênior**.
 
@@ -2097,17 +2097,17 @@ Essa análise aponta para a importância de iniciativas de **diversidade, equida
 
 Fica evidente que **ações afirmativas, programas de desenvolvimento de liderança feminina e campanhas de inclusão** podem ser estratégias importantes para reduzir esse desequilíbrio ao longo do tempo.
 
-# 📊 Gráfico: Faixa Salarial por Grau de Escolaridade
+#  Gráfico: Faixa Salarial por Grau de Escolaridade
 
 ![image4](https://github.com/user-attachments/assets/11d0440a-37a3-4c55-8272-64de8fffc9ae)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico apresentado é um **boxplot (gráfico de caixa)** que mostra a distribuição das **faixas salariais** em relação ao **grau de escolaridade** dos profissionais da área de dados.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Faixa Salarial por Grau de Escolaridade"_
 
@@ -2128,43 +2128,43 @@ O gráfico apresentado é um **boxplot (gráfico de caixa)** que mostra a distri
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### ✅ Tendência de Salário Crescente com Maior Escolaridade
+###  Tendência de Salário Crescente com Maior Escolaridade
 - Existe uma tendência geral de **aumento na faixa salarial com o avanço do grau de escolaridade**.
 - Profissionais com **Mestrado**, **Pós-graduação** e principalmente **Doutorado/PhD** tendem a ocupar **faixas salariais mais elevadas**.
 
-### ✅ Distribuição para Graduação/Bacharelado
+###  Distribuição para Graduação/Bacharelado
 - Profissionais com **graduação/bacharelado** apresentam uma distribuição salarial ampla, mas com **mediana abaixo da faixa dos mestres e doutores**.
 
-### ✅ Estudantes de Graduação
+###  Estudantes de Graduação
 - Como esperado, a maior concentração de estudantes de graduação está nas **faixas salariais mais baixas**, refletindo **cargos de estágio ou início de carreira**.
 
-### ✅ Quem Não Tem Graduação Formal
+###  Quem Não Tem Graduação Formal
 - Profissionais que declararam **"não ter graduação formal"** têm uma faixa salarial bem variada, mas a **mediana fica abaixo das outras categorias de maior escolaridade**, sugerindo **limitações de crescimento salarial sem diploma formal**.
 
-### ✅ Categoria "Prefiro não informar"
+###  Categoria "Prefiro não informar"
 - Interessante notar que o grupo que **não informou escolaridade** tem uma **mediana salarial razoavelmente elevada**, o que pode indicar **profissionais com experiência, porém sem desejo de divulgar formação**.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico confirma uma **correlação positiva entre escolaridade e faixa salarial**, reforçando a ideia de que **investir em educação formal (graduação, pós, mestrado e doutorado)** costuma ter impacto positivo na **remuneração média na área de dados**.
 
 Porém, também fica evidente que **existem exceções**, com algumas pessoas sem graduação formal ou sem informar escolaridade também alcançando **faixas salariais mais altas**, o que pode estar relacionado a **experiência prática ou competências técnicas diferenciadas**.
 
-# 📊 Gráfico: Distribuição por Área de Atuação
+#  Gráfico: Distribuição por Área de Atuação
 
 ![image5](https://github.com/user-attachments/assets/b0a43f95-275a-4a25-b748-c1936cbd0337)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico acima é um **gráfico de barras horizontais**, que mostra a **quantidade de profissionais em cada área de atuação dentro do setor de dados**.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Distribuição por Área de Atuação"_
 
@@ -2180,40 +2180,40 @@ O gráfico acima é um **gráfico de barras horizontais**, que mostra a **quanti
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### ✅ Áreas com Maior Representatividade
+###  Áreas com Maior Representatividade
 - A **Análise de Dados** é, de longe, a área com **maior número de profissionais**, superando as outras categorias com folga.
 - Em seguida vêm **Engenharia de Dados** e **Gestores**, mostrando a **diversificação de papéis** dentro da área de dados.
 
-### ✅ Representatividade da Ciência de Dados
+###  Representatividade da Ciência de Dados
 - **Ciência de Dados** aparece com uma **quantidade significativa**, mas menor do que as áreas de **Análise** e **Engenharia**, o que pode refletir o **perfil do mercado brasileiro**, onde ainda há maior demanda por **Analistas de Dados**.
 
-### ✅ Profissionais em Transição
+###  Profissionais em Transição
 - Um número relevante de pessoas está **"Buscando oportunidade na área de dados"**, o que indica uma **grande quantidade de profissionais em transição de carreira** ou em busca de sua **primeira colocação no setor**.
 
-### ✅ Diversidade nas Áreas
+###  Diversidade nas Áreas
 - A presença de uma categoria como **"Outra atuação"** mostra que existem também **funções mais específicas ou híbridas** dentro da área de dados.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico evidencia que a **área de Análise de Dados** é a **porta de entrada mais comum** no mercado de dados no Brasil. Isso pode servir de insight para profissionais que estão planejando sua carreira: **iniciar como analista pode ser uma forma estratégica de entrar na área**, antes de migrar para cargos mais especializados como **Engenheiro ou Cientista de Dados**.
 
 Além disso, o número expressivo de pessoas buscando oportunidades reforça a **competitividade do mercado** e a **importância de qualificação técnica**.
 
-# 📊 Gráfico: Satisfação com o Salário por Faixa Salarial
+#  Gráfico: Satisfação com o Salário por Faixa Salarial
 
 ![image6](https://github.com/user-attachments/assets/b38eca12-260e-4b02-af0b-b4d9d9aa7141)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico acima é um **boxplot com barras sobrepostas**, que mostra a **distribuição da satisfação com o salário** (valores binários: satisfeito = 1, insatisfeito = 0) em diferentes faixas salariais mensais.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Satisfação com o Salário por Faixa Salarial"_
 
@@ -2233,15 +2233,15 @@ O gráfico acima é um **boxplot com barras sobrepostas**, que mostra a **distri
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### ✅ Padrão Binário na Satisfação
+###  Padrão Binário na Satisfação
 - A satisfação está praticamente **dicotomizada**: ou 100% satisfeita (1.0) ou 100% insatisfeita (0.0).
 - Isso sugere que os entrevistados têm uma percepção **muito clara** sobre sua remuneração.
 
 ---
 
-### ✅ Faixas com Alta Satisfação (100%)
+###  Faixas com Alta Satisfação (100%)
 As faixas abaixo apresentaram **satisfação completa**:
 
 - de **R$6.001/mês a R$8.000/mês**
@@ -2252,11 +2252,11 @@ As faixas abaixo apresentaram **satisfação completa**:
 - de **R$25.001/mês a R$30.000/mês**
 - **Acima de R$40.000/mês**
 
-📌 **Interpretação:** A partir de cerca de **R$6.000/mês**, a maioria dos profissionais parece satisfeita — o que pode indicar um **limiar de conforto salarial**.
+ **Interpretação:** A partir de cerca de **R$6.000/mês**, a maioria dos profissionais parece satisfeita — o que pode indicar um **limiar de conforto salarial**.
 
 ---
 
-### ❌ Faixas com Baixa Satisfação (0%)
+###  Faixas com Baixa Satisfação (0%)
 Faixas com **insatisfação total**:
 
 - **Menos de R$1.000/mês**
@@ -2265,18 +2265,18 @@ Faixas com **insatisfação total**:
 - de **R$3.001/mês a R$4.000/mês**
 - de **R$4.001/mês a R$6.000/mês**
 
-📌 **Interpretação:** Profissionais nessas faixas expressam **insatisfação unânime**, indicando que **salários abaixo de R$6.000/mês** não atendem às expectativas da amostra analisada.
+ **Interpretação:** Profissionais nessas faixas expressam **insatisfação unânime**, indicando que **salários abaixo de R$6.000/mês** não atendem às expectativas da amostra analisada.
 
 ---
 
-### ⚠️ Outliers em Algumas Faixas
+###  Outliers em Algumas Faixas
 
 - Apesar da média ser 0 ou 1, existem **outliers** em algumas faixas, representando casos **isolados** de satisfação ou insatisfação.
 - 📍 **Exemplo:** Na faixa de R$6.001/mês a R$8.000/mês há **pelo menos um ponto** indicando insatisfação.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico mostra uma relação clara entre **faixa salarial** e **nível de satisfação**:
 
@@ -2284,24 +2284,24 @@ O gráfico mostra uma relação clara entre **faixa salarial** e **nível de sat
 - Faixas **inferiores a esse valor** apresentam **insatisfação universal**.
 - Outliers reforçam que, apesar de haver padrões gerais, **percepções individuais variam**.
 
-💡 **Insight Final:** O gráfico sugere a existência de um **ponto de corte salarial percebido como “mínimo aceitável”**, influenciado por fatores como:
+ **Insight Final:** O gráfico sugere a existência de um **ponto de corte salarial percebido como “mínimo aceitável”**, influenciado por fatores como:
 - Custo de vida
 - Expectativas de carreira
 - Padrões do mercado
 
 ---
 
-# 📊 Gráfico: Distribuição de Faixa Salarial por Estado
+#  Gráfico: Distribuição de Faixa Salarial por Estado
 
 ![image7](https://github.com/user-attachments/assets/3e34f2b3-53bb-496e-a458-4d5e86d9e164)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 O gráfico acima é um **heatmap (mapa de calor)** que mostra a **quantidade de profissionais por faixa salarial em cada estado brasileiro**. Cada célula contém a contagem de registros e é colorida de acordo com a intensidade (quanto mais escura, maior a quantidade).
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Distribuição de Faixa Salarial por Estado"_
 
@@ -2320,15 +2320,15 @@ O gráfico acima é um **heatmap (mapa de calor)** que mostra a **quantidade de 
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### 🌆 Concentração em SP, MG, RS e RJ
+###  Concentração em SP, MG, RS e RJ
 
 Os estados com maiores volumes em **faixas salariais elevadas**:
 
 - **SP (São Paulo)**:
   - Lidera em diversas faixas, especialmente:
-    - R$8.001 a R$12.000/mês (🔥 `416 registros`)
+    - R$8.001 a R$12.000/mês ( `416 registros`)
     - R$12.001 a R$16.000/mês (`297 registros`)
     - R$16.001 a R$20.000/mês (`170 registros`)
     - R$4.001 a R$6.000/mês (`264 registros`)
@@ -2339,52 +2339,52 @@ Os estados com maiores volumes em **faixas salariais elevadas**:
   - De R$8.001 a R$12.000/mês
   - De R$4.001 a R$6.000/mês
 
-📌 **Interpretação:** Estados com maior presença de setores industriais, serviços avançados e polos urbanos concentram maiores salários.
+ **Interpretação:** Estados com maior presença de setores industriais, serviços avançados e polos urbanos concentram maiores salários.
 
 ---
 
-### 🧊 Baixa Representatividade em Estados do Norte e Nordeste
+###  Baixa Representatividade em Estados do Norte e Nordeste
 
 - Estados como **RR**, **AC**, **AP**, **TO**, **PI** e **SE** têm contagens extremamente baixas em todas as faixas.
 - Faixas elevadas praticamente ausentes em:
   - AC, RR, TO: maioria com células `0`.
 
-📌 **Interpretação:** Pode refletir uma combinação de:
+ **Interpretação:** Pode refletir uma combinação de:
   - Menor número de respondentes
   - Menor presença de setores que pagam altos salários
   - Desigualdade regional de renda
 
 ---
 
-### 💵 Faixas Medianas (R$2.001/mês a R$6.000/mês) bem distribuídas
+###  Faixas Medianas (R$2.001/mês a R$6.000/mês) bem distribuídas
 
 - Estados como **PR**, **BA**, **CE**, **PE** e **DF** têm presença consistente nessas faixas.
 - Essa faixa parece representar o “ponto de equilíbrio” para muitos estados.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O heatmap revela **forte desigualdade regional na distribuição salarial**:
 
 - **São Paulo**, com ampla vantagem, concentra profissionais de **alta renda**, reforçando seu papel como polo econômico nacional.
 - **Regiões Norte e partes do Nordeste** apresentam menor presença em faixas salariais elevadas, evidenciando **desigualdades estruturais**.
 
-💡 **Insight Final:** A distribuição geográfica da renda está fortemente concentrada em poucos estados, o que pode impactar políticas públicas, alocação de recursos e estratégias de desenvolvimento regional.
+ **Insight Final:** A distribuição geográfica da renda está fortemente concentrada em poucos estados, o que pode impactar políticas públicas, alocação de recursos e estratégias de desenvolvimento regional.
 
 ---
 
-# 📊 Gráfico: Profissionais por Setor de Atuação
+#  Gráfico: Profissionais por Setor de Atuação
 
 ![image8](https://github.com/user-attachments/assets/556407b0-ab20-4fe8-9a45-8a16a5a1cd8d)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 Este gráfico de barras horizontais exibe a **quantidade de profissionais atuando em diferentes setores econômicos**. A ordenação decrescente permite identificar rapidamente os setores com maior e menor representatividade entre os respondentes da pesquisa.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Profissionais por Setor de Atuação"_
 
@@ -2402,11 +2402,11 @@ Este gráfico de barras horizontais exibe a **quantidade de profissionais atuand
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### 🏦 Setores com Maior Representatividade
+###  Setores com Maior Representatividade
 
-1. **Finanças ou Bancos** — 🚀 _Setor líder absoluto_
+1. **Finanças ou Bancos** —  _Setor líder absoluto_
    - Aproximadamente **900 respondentes**
    - Forte atratividade ou base de respondentes nesse segmento
 
@@ -2418,21 +2418,21 @@ Este gráfico de barras horizontais exibe a **quantidade de profissionais atuand
    - Ambos próximos dos **400 profissionais**
    - Alta empregabilidade e diversidade de perfis
 
-📌 **Interpretação:** Os dados apontam para uma maior concentração de profissionais nos setores financeiro e tecnológico, provavelmente por estarem mais organizados digitalmente ou oferecerem melhores condições salariais.
+ **Interpretação:** Os dados apontam para uma maior concentração de profissionais nos setores financeiro e tecnológico, provavelmente por estarem mais organizados digitalmente ou oferecerem melhores condições salariais.
 
 ---
 
-### 🎓 Setores com Representatividade Intermediária
+###  Setores com Representatividade Intermediária
 
 - **Indústria**, **Educação**, **Área da Saúde**, **Setor Público**
   - Valores entre 200–350
   - Refletem setores tradicionais com presença constante no mercado
 
-📌 **Interpretação:** Estes setores mostram participação sólida e estável no mercado, mas menor volume se comparado aos setores mais digitalizados.
+ **Interpretação:** Estes setores mostram participação sólida e estável no mercado, mas menor volume se comparado aos setores mais digitalizados.
 
 ---
 
-### 🔍 Setores com Baixa Representatividade
+###  Setores com Baixa Representatividade
 
 - **Setores com menos de 100 respondentes**:
   - Filantropia/ONGs
@@ -2442,73 +2442,73 @@ Este gráfico de barras horizontais exibe a **quantidade de profissionais atuand
   - Setor Imobiliário/Construção Civil
   - Seguros ou Previdência
 
-📌 **Interpretação:** Estes setores podem ter menor atratividade atual, menor base de amostragem, ou menor nível de formalização digital da carreira dos respondentes.
+ **Interpretação:** Estes setores podem ter menor atratividade atual, menor base de amostragem, ou menor nível de formalização digital da carreira dos respondentes.
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico revela uma clara **predominância de profissionais nos setores Financeiro e de Tecnologia**, seguidos por setores tradicionais como Varejo, Consultoria, Indústria e Saúde.
 
-💡 **Insight Final:** O padrão sugere uma **transformação digital no mercado de trabalho**, com setores inovadores superando em número os tradicionais. Isso pode impactar políticas de formação profissional, demandas salariais e estratégias de recrutamento nos próximos anos.
+ **Insight Final:** O padrão sugere uma **transformação digital no mercado de trabalho**, com setores inovadores superando em número os tradicionais. Isso pode impactar políticas de formação profissional, demandas salariais e estratégias de recrutamento nos próximos anos.
 
 ---
 
-# 📊 Gráfico: Modelo de Trabalho por Nível de Senioridade
+#  Gráfico: Modelo de Trabalho por Nível de Senioridade
 
 ![image9](https://github.com/user-attachments/assets/03079a44-e9eb-4bbf-8d03-e17f53f07ba9)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 Este gráfico de barras empilhadas apresenta a **distribuição dos modelos de trabalho** (presencial, remoto e híbrido) entre os profissionais segundo o **nível de senioridade**: Júnior, Pleno e Sênior.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Modelo de Trabalho por Nível de Senioridade"_
 - **Eixo X:** Nível de Senioridade (Júnior, Pleno, Sênior)
 - **Eixo Y:** Quantidade de profissionais
 - **Cores/Barras empilhadas:** Tipos de modelo de trabalho:
-  - 🟣 **Presencial**
-  - 🔵 **100% Remoto**
-  - 🟢 **Híbrido com dias fixos presenciais**
-  - 🟡 **Híbrido flexível (funcionário escolhe os dias presenciais)**
+  -  **Presencial**
+  -  **100% Remoto**
+  -  **Híbrido com dias fixos presenciais**
+  -  **Híbrido flexível (funcionário escolhe os dias presenciais)**
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### 🧑‍💼 Profissionais Juniores
+###  Profissionais Juniores
 
 - Maior concentração em **modelos 100% presenciais** e **remotos fixos**.
 - Participação menor nos modelos híbridos, especialmente o flexível.
   
-📌 **Interpretação:** Profissionais juniores tendem a ser mais supervisionados ou contratados em empresas com estrutura menos flexível.
+ **Interpretação:** Profissionais juniores tendem a ser mais supervisionados ou contratados em empresas com estrutura menos flexível.
 
 ---
 
-### 👨‍💻 Profissionais Plenos
+###  Profissionais Plenos
 
 - Alta adesão ao **modelo 100% remoto**.
 - Equilíbrio considerável com modelos híbridos.
 - Redução significativa do modelo 100% presencial em relação aos juniores.
 
-📌 **Interpretação:** Profissionais plenos tendem a ter maior autonomia e acesso a políticas mais flexíveis de trabalho.
+ **Interpretação:** Profissionais plenos tendem a ter maior autonomia e acesso a políticas mais flexíveis de trabalho.
 
 ---
 
-### 🧓 Profissionais Seniores
+###  Profissionais Seniores
 
 - Predominância absoluta do **modelo 100% remoto**.
 - Crescimento no uso de **modelo híbrido flexível**.
 - **Menor proporção** de trabalho 100% presencial entre os três níveis.
 
-📌 **Interpretação:** Profissionais seniores, por sua experiência, **possuem maior poder de barganha**, sendo mais comuns em regimes flexíveis ou totalmente remotos.
+ **Interpretação:** Profissionais seniores, por sua experiência, **possuem maior poder de barganha**, sendo mais comuns em regimes flexíveis ou totalmente remotos.
 
 ---
 
-## 🔍 Comparação Geral
+##  Comparação Geral
 
 | Nível       | Predominância         | Observação                                        |
 |-------------|------------------------|---------------------------------------------------|
@@ -2518,28 +2518,28 @@ Este gráfico de barras empilhadas apresenta a **distribuição dos modelos de t
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico destaca uma **correlação entre senioridade e flexibilidade no modelo de trabalho**:
 
 - Quanto maior o nível de senioridade, maior a prevalência de **modelos remotos e híbridos flexíveis**.
 - O modelo **100% presencial é significativamente mais comum entre profissionais juniores**, o que pode refletir necessidades de supervisão, cultura organizacional ou menos poder de negociação.
 
-💡 **Insight Final:** Empresas que desejam atrair ou reter talentos mais seniores devem **oferecer modelos mais flexíveis**, enquanto aquelas que contratam muitos juniores devem planejar **infraestrutura presencial adequada**.
+ **Insight Final:** Empresas que desejam atrair ou reter talentos mais seniores devem **oferecer modelos mais flexíveis**, enquanto aquelas que contratam muitos juniores devem planejar **infraestrutura presencial adequada**.
 
 ---
 
-# 🖥️ Gráfico: Top 10 Linguagens Mais Utilizadas no Trabalho
+#  Gráfico: Top 10 Linguagens Mais Utilizadas no Trabalho
 
 ![image10](https://github.com/user-attachments/assets/43bce909-5f1d-4d1d-b42c-cf02c0c2c892)
 
-## 📌 Descrição Geral
+##  Descrição Geral
 
 Este gráfico de barras horizontais apresenta as **10 linguagens de programação mais utilizadas** no ambiente de trabalho pelos profissionais da amostra.
 
 ---
 
-## 🏷️ Elementos do Gráfico
+##  Elementos do Gráfico
 
 - **Título:** _"Top 10 Linguagens Mais Utilizadas no Trabalho"_
 - **Eixo X:** Quantidade de utilização
@@ -2548,31 +2548,31 @@ Este gráfico de barras horizontais apresenta as **10 linguagens de programaçã
 
 ---
 
-## 📈 Observações e Interpretações
+##  Observações e Interpretações
 
-### 🥇 SQL
+###  SQL
 
 - **Linguagem mais utilizada** de forma destacada.
 - Aproximadamente **3.200 menções**.
   
-📌 **Interpretação:** Reflete a importância do **acesso e manipulação de dados** em bancos relacionais no ambiente corporativo.
+ **Interpretação:** Reflete a importância do **acesso e manipulação de dados** em bancos relacionais no ambiente corporativo.
 
 ---
 
-### 🥈 Python
+###  Python
 
 - Segunda mais popular, com mais de **2.800 menções**.
 - Muito próxima da primeira colocada.
 
-📌 **Interpretação:** Demonstra sua **versatilidade**, sendo utilizada em **ciência de dados, automações, back-end e análise de dados**.
+ **Interpretação:** Demonstra sua **versatilidade**, sendo utilizada em **ciência de dados, automações, back-end e análise de dados**.
 
 ---
 
-### 🥉 R
+###  R
 
 - Terceira colocada, com número significativamente menor (~400).
   
-📌 **Interpretação:** Bastante usada em áreas estatísticas e acadêmicas, mas menos adotada fora desses nichos.
+ **Interpretação:** Bastante usada em áreas estatísticas e acadêmicas, mas menos adotada fora desses nichos.
 
 ---
 
@@ -2590,11 +2590,11 @@ Este gráfico de barras horizontais apresenta as **10 linguagens de programaçã
 
 ---
 
-## 📝 Conclusão Geral
+##  Conclusão Geral
 
 O gráfico evidencia a dominância de **SQL e Python** no ambiente profissional moderno, indicando uma forte **orientação para dados** nas funções de trabalho atuais. Linguagens como R, VBA, e SAS ainda aparecem com certa frequência, sugerindo a persistência de **soluções tradicionais em ambientes específicos**.
 
-💡 **Insight Final:** Profissionais que desejam se destacar no mercado devem priorizar o domínio de **SQL e Python**, seguidas de linguagens específicas conforme o setor de atuação (ex: R para estatística, JavaScript para web, Scala para big data).
+ **Insight Final:** Profissionais que desejam se destacar no mercado devem priorizar o domínio de **SQL e Python**, seguidas de linguagens específicas conforme o setor de atuação (ex: R para estatística, JavaScript para web, Scala para big data).
 
 ---
 
@@ -2967,7 +2967,7 @@ Este gráfico exibe a distribuição dos **anos de experiência** dos profission
 
 - A variável `experiencia_anos` é um **proxy essencial para proficiência técnica**, um dos pilares da sua pergunta de pesquisa.
 
-#### 🧠 **Fundamento para Disparidades Salariais:**
+####  **Fundamento para Disparidades Salariais:**
 
 - **Variabilidade na Experiência → Variabilidade Salarial**  
   Espera-se que profissionais com mais anos de experiência possuam maior proficiência, responsabilidades e, consequentemente, salários mais elevados.
@@ -3055,7 +3055,7 @@ Este boxplot resume visualmente a distribuição dos **anos de experiência** do
 
 O boxplot de `experiencia_anos` fornece um resumo conciso de um dos fatores centrais de sua análise: **proficiência técnica** como motor das **disparidades salariais**.
 
-#### 🧠 **Perfil de Senioridade e Disparidade Salarial:**
+####  **Perfil de Senioridade e Disparidade Salarial:**
 
 - A mediana de 3 anos mostra que boa parte do mercado é composta por profissionais em início ou meio de carreira.
 - A variação dentro do IQR (1–5 anos) já representa um potencial de diferenciação salarial significativa, pois o acúmulo de experiência geralmente implica maior conhecimento e responsabilidades.
@@ -3084,7 +3084,7 @@ O boxplot permite a definição de **faixas de experiência** para investigar di
 - **IQR (1–5 anos)**: Base representativa do mercado pleno.  
 - **Q3 em diante (5–10 anos)**: Profissionais seniores ou especialistas.
 
-🔍 *Exemplo de pergunta de análise:*  
+ *Exemplo de pergunta de análise:*  
 Como variam os salários de profissionais com 4 anos de experiência trabalhando como CLT em São Paulo, em comparação com profissionais com mesma experiência atuando como PJ no Nordeste?
   
 >Em resumo: O boxplot de `experiencia_anos` mostra uma mediana de cerca de **3 anos** e uma concentração de 50% dos profissionais entre **1 e 5 anos**, indicando um mercado majoritariamente jovem, com distribuição assimétrica à direita. A variação da experiência é um componente central da proficiência técnica e um dos **principais impulsionadores das disparidades salariais**. A interação entre experiência, formalidade, localização geográfica e perfil demográfico delineia os padrões salariais observados no setor de dados no Brasil.
@@ -4131,22 +4131,22 @@ Este relatório serve como um ponto de partida para análises mais aprofundadas,
 
 O modelo `RandomForestClassifier` é uma boa escolha para sua pergunta porque ele consegue identificar como diferentes fatores, como educação e experiência, interagem e qual a importância de cada um para explicar as diferenças salariais.
 
-### Capacidade Inerente de Modelar Interações Complexas 🧩
+### Capacidade Inerente de Modelar Interações Complexas 
 A pergunta foca explicitamente na **interação** entre formação e experiência. Modelos baseados em árvores, como o Random Forest, são excelentes em captar automaticamente interações não lineares entre features. Cada caminho da raiz até uma folha em uma árvore de decisão representa uma sequência de condições, que é, em essência, uma regra de interação. Por exemplo, o impacto da "experiência profissional" no salário pode ser diferente para quem tem "doutorado" em relação a quem tem apenas "graduação". O Random Forest, ao agregar centenas de árvores, explora inúmeras dessas interações potenciais. O notebook até inclui uma visualização específica (`interacao_formacao_experiencia.png`) que tenta mostrar a probabilidade de salário alto com base na combinação de níveis de formação e experiência, demonstrando a capacidade do modelo de aprender e representar essas interações.
 
 ---
-### Identificação dos Fatores Mais Influentes (Importância das Features) 📊
+### Identificação dos Fatores Mais Influentes (Importância das Features) 
 Para entender como diferentes fatores influenciam a disparidade salarial, é crucial saber quais são os mais determinantes. O Random Forest fornece uma métrica de "importância das features", que quantifica a contribuição de cada variável (como 'Nível de ensino alcançado', 'Tempo de experiência na área de dados', 'Nível de senioridade', 'UF onde mora', etc.) para a precisão da previsão. O notebook demonstra a extração e visualização dessas importâncias, permitindo identificar os principais direcionadores da disparidade salarial.
 
 ---
-### Flexibilidade para Modelar Relações Não Lineares 📈
+### Flexibilidade para Modelar Relações Não Lineares 
 A relação entre fatores socioeconômicos e salário raramente é linear. Por exemplo, o aumento salarial com a experiência pode não ser constante, ou o benefício de um diploma adicional pode variar dependendo do nível de senioridade atual. O Random Forest não assume relações lineares e pode modelar essas complexidades de forma eficaz.
 
 ---
-### Robustez e Desempenho Geral 🚀
+### Robustez e Desempenho Geral 
 Random Forests são conhecidos por sua **robustez** a outliers (em certa medida) e por seu **bom desempenho preditivo** em uma ampla gama de problemas de classificação sem a necessidade de um ajuste extensivo de hiper parâmetros (embora o tuning, como feito no notebook via `GridSearchCV`, geralmente melhore ainda mais o desempenho). A capacidade de lidar com diferentes tipos de features (numéricas e categóricas codificadas) e a menor propensão a overfitting em comparação com árvores de decisão únicas também são vantagens significativas.
 ---
-### Adequação à Definição do Problema no Notebook 🎯
+### Adequação à Definição do Problema no Notebook 
 No notebook fornecido, a "disparidade salarial" foi transformada em um problema de **classificação binária** (salário alto vs. salário baixo/médio). O `RandomForestClassifier` é projetado especificamente para esse tipo de tarefa. Além disso, o código implementa:
 * **Engenharia de features** relevante (mapeamento de níveis de formação, experiência, etc.).
 * **Tratamento de classes desbalanceadas** (usando `sample_weights` e `class_weight`), o que é comum em dados salariais.
@@ -4252,7 +4252,7 @@ A análise de importância das features fornecida pelo Random Forest é, portant
 ---
 ## - Robustez e Generalização:
 
-### Robustez do Modelo 💪
+### Robustez do Modelo 
 
 A robustez refere-se à capacidade do modelo de manter seu desempenho mesmo diante de variações nos dados de entrada, como ruído ou outliers.
 
@@ -4271,7 +4271,7 @@ A robustez refere-se à capacidade do modelo de manter seu desempenho mesmo dian
 
 ---
 
-### Generalização do Modelo 🌍
+### Generalização do Modelo 
 
 A generalização é a capacidade do modelo de performar bem em dados novos e não vistos, após ter sido treinado em um conjunto de dados específico. É o objetivo principal do aprendizado de máquina.
 
@@ -4382,7 +4382,7 @@ A combinação desses fatores – as qualidades inerentes do Random Forest e as 
 
 ---
 
-### 2. Amostragem Interna do `RandomForestClassifier` (Bootstrap) 🌳
+### 2. Amostragem Interna do `RandomForestClassifier` (Bootstrap) 
 
 * **Bootstrap Aggregating (Bagging)**: O `RandomForestClassifier` é um ensemble de árvores de decisão. Por padrão (**`bootstrap=True`**, que é o default no Scikit-learn e não foi alterado no código), cada árvore na floresta é treinada em uma amostra diferente do conjunto de treinamento, gerada através de **amostragem com reposição** (bootstrap).
     * Isso significa que, para cada uma das `n_estimators` (100 árvores, conforme o melhor parâmetro encontrado), uma nova subamostra do `X_train` é criada, tendo o mesmo tamanho do `X_train` original, mas com algumas instâncias repetidas e outras ausentes.
@@ -4391,7 +4391,7 @@ A combinação desses fatores – as qualidades inerentes do Random Forest e as 
 
 ---
 
-### 3. Amostragem na Otimização de Hiperparâmetros (`GridSearchCV`) 🔄
+### 3. Amostragem na Otimização de Hiperparâmetros (`GridSearchCV`) 
 
 * **Validação Cruzada (Cross-Validation)**: O `GridSearchCV` utiliza validação cruzada para avaliar o desempenho de diferentes combinações de hiperparâmetros. No código, `cv=5` foi especificado.
     * O conjunto de **treinamento** (`X_train`, `y_train`) é dividido em **5 folds (subconjuntos)** de tamanho aproximadamente igual.
@@ -4403,7 +4403,7 @@ A combinação desses fatores – as qualidades inerentes do Random Forest e as 
 
 ---
 
-### 4. Amostragem na Calibração do Modelo (`CalibratedClassifierCV`) ⚖️
+### 4. Amostragem na Calibração do Modelo (`CalibratedClassifierCV`) 
 
 * **Validação Cruzada Interna**: O `CalibratedClassifierCV` também utiliza um esquema de validação cruzada para ajustar o calibrador (neste caso, usando o método `'isotonic'`). O parâmetro `cv=5` foi usado aqui também.
     * O conjunto de **treinamento** (`X_train`, `y_train`) é novamente dividido em 5 folds.
@@ -8392,7 +8392,7 @@ Modelos de rede neural, especialmente com conjuntos de dados pequenos ou com nú
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Distribuição do modelo (opcional)
+### Distribuição do modelo
 
 ## 1. Deploy do Modelo: Aplicação Web Interativa
 
@@ -8492,13 +8492,13 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 ## Códigos relacionados a 2º pergunta orientada a dados
 
 ### Limpeza de Dados
-[Limpeza de Dados]() ⚠️(2ºPerguntOrientadaaDados) 
+[Limpeza de Dados](/src/code_data_cleanest/base_principal_state_of_data/2_pergunta_orientada_a_dados/)
 
 ### Analise Exploratória de Dados
-[Análise Exploratória de Dados]() ⚠️(2ºPerguntOrientadaaDados) 
+[Análise Exploratória de Dados](/src/analise_exploratorias_perguntas_orientadas_a_dados/2_pergunta_orientada_a_dados/)
 
 ### Indução a Modelos
-[Indução a Modelos]() ⚠️(2ºPerguntOrientadaaDados) 
+[Indução a Modelos](/src/modelos/modelo_2/)
 
 ---
 
@@ -8523,8 +8523,8 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 - [Base de Dados Original Auxiliar](/assets/data/bases_principais/bases_auxiliar/1_pergunta_orientada_a_dados)
 
 ### Limpeza de Dados
-- [Base de Dados Original State of Data](/assets/data/cleaned_data/1_pergunta_orientada_a_dados/versão_3/base_principal_state_of_data)
-- [Base de Dados Original Auxiliar](/assets/data/cleaned_data/1_pergunta_orientada_a_dados/versão_3/base_auxiliar)
+- [Base de Dados  State of Data](/assets/data/cleaned_data/1_pergunta_orientada_a_dados/versão_3/base_principal_state_of_data)
+- [Base de Dados  Auxiliar](/assets/data/cleaned_data/1_pergunta_orientada_a_dados/versão_3/base_auxiliar)
 
 ### Analise Exploratória de Dados
 [Análise Exploratória de Dados](/assets/results/análise_exploratória_de_dados/1_pergunta_orientada_a_dados)
@@ -8536,16 +8536,16 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 ## Artefatos relacionados a 2º pergunta orientada a dados
 ### Base de Dados Originais
-[Base de Dados Originais]()  ⚠️(2ºPerguntOrientadaaDados)
+[Base de Dados Originais](/assets/data/bases_principais/base_principal_state_of_data/State_of_data_BR_2023_Kaggle%20-%20df_survey_2023.csv)  
 
 ### Limpeza de Dados
-[Limpeza de Dados]()  ⚠️(2ºPerguntOrientadaaDados) 
+[Limpeza de Dados](/assets/data/cleaned_data/2_pergunta_orientada_a_dados/dados_limpos.csv)  
 
 ### Analise Exploratória de Dados
-[Análise Exploratória de Dados]() ⚠️(2ºPerguntOrientadaaDados) 
+[Análise Exploratória de Dados](/assets/results/análise_exploratória_de_dados/2_pergunta_orientada_a_dados/imagens/)
 
 ### Indução a Modelos
-[Indução a Modelos]() ⚠️(2ºPerguntOrientadaaDados) 
+[Indução a Modelos](/assets/results/modelos/2_pergunta_orientada_a_dados/2_Pergunta_Orientada_a_Dados.md)
 
 ---
 
@@ -8564,9 +8564,9 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 ---
 
-**Da apresentação final (armazenado no repositório);** ⚠️
+**Da apresentação final (armazenado no repositório);** 
 
-**Do vídeo de apresentação (armazenado no repositório).** ⚠️
+**Do vídeo de apresentação (armazenado no repositório).** 
 
 
 
