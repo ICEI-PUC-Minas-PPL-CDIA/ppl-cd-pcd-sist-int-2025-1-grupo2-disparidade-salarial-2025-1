@@ -27,7 +27,58 @@ Para isso, são exploradas características como experiência, formação acadê
 
 <h2 align="center">Instruções de utilização</h2>
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+### Como Executar a Aplicação Localmente
+
+### 6.4. Como Executar a Aplicação Localmente
+
+Esta seção detalha os passos para que outro desenvolvedor possa configurar e executar esta aplicação em seu próprio ambiente local.
+
+1.  **Clonar o Repositório:**
+    Primeiro, clone o repositório do GitHub para a sua máquina local.
+    ```bash
+    git clone [https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1]
+    ```
+
+2.  **Configurar o Ambiente:**
+    É altamente recomendado usar um ambiente virtual para evitar conflitos de dependência. Este projeto foi desenvolvido e testado com Conda.
+    ```bash
+    # Navegue até a pasta do projeto
+    cd preditor_salario_app
+
+    # Crie um novo ambiente Conda (opcional, mas recomendado)
+    conda create -n meu_app_ambiente python=3.10
+    conda activate meu_app_ambiente
+    ```
+
+3.  **Instalar as Dependências:**
+    Todas as bibliotecas necessárias estão listadas no arquivo `requirements.txt`. Para instalá-las, execute o comando:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Executar a Aplicação:**
+    Com as dependências instaladas, inicie o servidor Flask localmente com o seguinte comando:
+    ```bash
+    python app.py
+    ```
+
+5.  **Acessar a Aplicação:**
+    Abra seu navegador de internet e acesse o endereço `http://127.0.0.1:5000`. O formulário do previsor de salários deverá ser exibido.
+
+### Instruções de Utilização (Interface Web)
+
+Após iniciar a aplicação, o usuário interagirá com a interface da seguinte forma:
+
+1.  **Acesse a Aplicação:** Abra o navegador no endereço fornecido (`http://127.0.0.1:5000` para teste local ou o link público).
+2.  **Preenchimento do Formulário:** A tela principal exibirá um formulário solicitando as seguintes informações:
+    * Tempo de Experiência na Área de Dados
+    * Nível de Senioridade
+    * Cargo Atual
+    * Nível de Ensino
+    * Faixa Etária
+    * UF onde mora
+3.  **Obtenção da Previsão:** Após preencher todos os campos, clique no botão "Fazer Previsão".
+4.  **Visualização do Resultado:** A página será recarregada e o resultado da predição ('Salário Alto' ou 'Salário Baixo') será exibido de forma destacada abaixo do formulário.
 
 
 ---
