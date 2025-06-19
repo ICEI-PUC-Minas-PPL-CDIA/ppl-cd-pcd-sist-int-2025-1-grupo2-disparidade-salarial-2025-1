@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Previsor de Faixa Salarial</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f9; color: #333; }
+        h1 { color: #2c3e50; text-align: center; }
+        form { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 20px; }
+        label { display: block; margin-top: 20px; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input, select { width: 100%; padding: 10px; box-sizing: border-box; border-radius: 4px; border: 1px solid #ccc; background-color: #fafafa; }
+        button { background-color: #3498db; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 30px; width: 100%; }
+        button:hover { background-color: #2980b9; }
+        #resultado-container { margin-top: 30px; padding: 20px; background-color: #eaf2f8; border-left: 5px solid #3498db; border-radius: 5px; text-align: center; }
+        #resultado-container h2 { margin-top: 0; color: #2c3e50; }
+        #resultado-container p { font-size: 1.2em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Previsor de Faixa Salarial para Profissionais de Dados</h1>
+    
+    <form action="/predict" method="post">
+        
+        <label for="P2_i">Tempo de Experiência na Área de Dados (em anos):</label>
+        <input type="number" id="P2_i" name="P2_i" step="0.5" required placeholder="Ex: 3.5">
+
+        <label for="P2_g_Nivel">Nível de Senioridade:</label>
+        <select id="P2_g_Nivel" name="P2_g_Nivel" required>
+            <option value="Júnior">Júnior</option>
+            <option value="Pleno">Pleno</option>
+            <option value="Sênior">Sênior</option>
+            <option value="Liderança">Liderança</option>
+        </select>
+        
+        <label for="P2_f_Cargo_Atual">Cargo Atual:</label>
+        <select id="P2_f_Cargo_Atual" name="P2_f_Cargo_Atual" required>
+            <option value="Analista de Dados/BI">Analista de Dados/BI</option>
+            <option value="Cientista de Dados">Cientista de Dados</option>
+            <option value="Engenheiro de Dados">Engenheiro de Dados</option>
+        </select>
+
+        <label for="P1_l">Nível de Ensino:</label>
+        <select id="P1_l" name="P1_l" required>
+            <option value="Graduação/Bacharelado">Graduação/Bacharelado</option>
+            <option value="Pós-graduação">Pós-graduação</option>
+            <option value="Mestrado">Mestrado</option>
+        </select>
+
+        <label for="P1_a_1">Faixa Etária:</label>
+        <select id="P1_a_1" name="P1_a_1" required>
+            <option value="25-29">25-29 anos</option>
+            <option value="30-34">30-34 anos</option>
+            <option value="35-39">35-39 anos</option>
+        </select>
+        
+        <label for="uf_mora_P1i1">UF onde mora:</label>
+        <select id="uf_mora_P1i1" name="uf_mora_P1i1" required>
+            <option value="SP">SP</option> <option value="RJ">RJ</option> <option value="MG">MG</option>
+            <option value="RS">RS</option> <option value="PR">PR</option> <option value="SC">SC</option>
+            <option value="BA">BA</option> <option value="PE">PE</option> <option value="CE">CE</option>
+            <option value="DF">DF</option> <option value="GO">GO</option> <option value="ES">ES</option>
+            <option value="PA">PA</option> <option value="MA">MA</option> <option value="AM">AM</option>
+            </select>
+
+        <button type="submit">Fazer Previsão</button>
+    </form>
+
+    {% if resultado_previsao %}
+    <div id="resultado-container">
+        <h2>Resultado da Previsão:</h2>
+        <p>{{ resultado_previsao }}</p>
+    </div>
+    {% endif %}
+
+</body>
+</html>
