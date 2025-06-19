@@ -8383,7 +8383,7 @@ Modelos de rede neural, especialmente com conjuntos de dados pequenos ou com nú
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Distribuição do modelo (Modelo da 2ª pergunta orientada a dados)
+# Distribuição do modelo (Modelo da 3ª pergunta orientada a dados)
 
 ## 1. Deploy do Modelo: Aplicação Web Interativa
 
