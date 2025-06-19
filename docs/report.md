@@ -62,8 +62,8 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
     *   [Análise comparativa dos modelos da 1º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-1º-pergunta-orientada-a-dados)
     *   [Análise comparativa dos modelos da 2º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-2º-pergunta-orientada-a-dados)
     *   [Análise comparativa dos modelos da 3º pergunta orientada a dados](#análise-comparativa-dos-modelos-da-3º-pergunta-orientada-a-dados)
-*   [13. CONCLUSÃO](#-conclusão)
-*   [14. DISTRIBUIÇÃO DO MODELO ](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#distribui%C3%A7%C3%A3o-do-modelo-opcional)
+*   [13. CONCLUSÃO](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#8-conclus%C3%A3o)
+*   [14. DISTRIBUIÇÃO DO MODELO ](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#distribui%C3%A7%C3%A3o-do-modelo-modelo-da-3%C2%AA-pergunta-orientada-a-dados)
 *   [15. REFERÊNCIAS](#referências)
 *   [16. APÊNDICES](#apêndices)
 
