@@ -8439,14 +8439,64 @@ A transição de um notebook de análise para uma aplicação funcional apresent
 
 # 8. Conclusão
 
-Apresente aqui a conclusão do seu trabalho. Discussão dos resultados obtidos no trabalho, 
-onde se verifica as observações pessoais de cada aluno.
+## Conclusão do Estudo sobre Disparidade Salarial dos Profissionais de Dados no Brasil
 
-Uma conclusão deve ter 3 partes:
+Este trabalho de pesquisa aprofundou-se na complexa temática da disparidade salarial entre profissionais de dados no Brasil, buscando desvendar os fatores subjacentes que moldam a remuneração nesse setor em franca expansão. Para tal, empreendemos uma investigação estruturada em torno de três perguntas orientadoras, cada qual abordando uma dimensão particular desse fenômeno multifacetado. A análise foi fundamentada nos dados da pesquisa "State of Data Brasil 2023", enriquecida por informações complementares dos microdados do Censo da Educação Superior do MEC. A metodologia abrangeu um robusto pipeline de análise exploratória de dados, engenharia de *features* e o desenvolvimento de modelos preditivos, buscando extrair o máximo de conhecimento a partir das informações disponíveis.
 
-   * Breve resumo do que foi desenvolvido
-	 * Apresenação geral dos resultados obtidos com discussão das vantagens e desvantagens do sistema inteligente
-	 * Limitações e possibilidades de melhoria
+### Reflexões sobre o Caminho Percorrido e os Conhecimentos Adquiridos
+
+Ao longo deste estudo, nossa jornada se desdobrou através de etapas distintas, cada uma contribuindo para uma compreensão mais rica do cenário salarial:
+
+#### Pergunta Orientada a Dados 1: Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?
+
+Para abordar esta questão central, nossa análise mirou na relação entre o nível de ensino formal, o tempo de experiência no campo de dados e a respectiva faixa salarial, buscando identificar quais variáveis impactam a remuneração desses profissionais. Desenvolvemos e comparamos dois modelos de classificação: um **Random Forest Classifier** e um **Gradient Boosting Classifier**. Optamos inicialmente por uma categorização binária do salário ("Salário Alto" versus "Salário Baixo/Médio") para o Random Forest, permitindo um foco claro nos limiares de remuneração. Posteriormente, exploramos uma abordagem multiclasse (seis faixas salariais) com o Gradient Boosting para uma visão mais detalhada. A exploração inicial dos dados já nos dava indícios de uma correlação positiva entre experiência/senioridade e salário, e entre formação acadêmica e salário. Contudo, foi a aplicação do Random Forest Classifier que, ao binarizar o alvo, revelou com maior clareza a **senioridade**, a **experiência profissional** e o **nível de formação acadêmica** como os três pilares fundamentais na previsão da faixa salarial. Aprofundando a investigação das interações entre formação e experiência, observamos um padrão que, para nós, foi bastante elucidativo: embora a experiência seja inegavelmente crucial, uma base acadêmica mais sólida parece amplificar o retorno salarial dessa experiência, pavimentando o caminho para patamares de remuneração mais elevados.
+
+#### Pergunta Orientada a Dados 2: Qual é a relação entre o tempo de experiência na área de dados, o nível de senioridade e a faixa salarial dos profissionais no Brasil?
+
+Aprofundando o escopo da experiência e da senioridade, esta etapa do trabalho buscou quantificar e qualificar sua influência na remuneração. Para isso, concebemos e testamos dois modelos Random Forest: um **Regressor**, desenhado para estimar o valor salarial médio em reais, e um **Classifier**, com o intuito de categorizar a faixa salarial. O modelo de Regressão, em particular, forneceu uma validação robusta de nossa intuição: o **nível do cargo (`nivel_cod`)** e o **tempo de experiência (`experiencia_num`)** emergiram como os fatores mais relevantes para a previsão salarial, explicando mais de 97% da importância total no modelo. Um achado, para nós, intrigante foi o impacto quase insignificante das variáveis regionais ligadas à infraestrutura educacional neste modelo, sugerindo que, na escala analisada, o mérito individual e a trajetória profissional pesam muito mais que o contexto educacional local. O modelo de classificação, apesar da promessa de uma análise mais granular das faixas, enfrentou desafios consideráveis devido à escassez de dados, resultando em um desempenho insatisfatório que, infelizmente, limitou suas conclusões nessa etapa específica.
+
+#### Pergunta Orientada a Dados 3: Como fatores como formalidade no emprego, características demográficas e regionais se interagem com a proficiência técnica para influenciar as disparidades salariais entre profissionais de dados no Brasil?
+
+Nesta fase, buscamos uma perspectiva mais integradora, abrangendo variáveis como formalidade no emprego, aspectos demográficos (gênero, raça, idade), o contexto regional e a proficiência técnica (inferida por experiência e senioridade). Para isso, implementamos e comparamos dois modelos de classificação binária de alta complexidade: um **LightGBM Classifier** e uma **Rede Neural Artificial (RNA)**, esta última com a inovação das camadas de *embedding*. Ambos os modelos foram submetidos a otimizações rigorosas com ferramentas como Optuna e Ray Tune, e validados por meio de processos criteriosos de seleção de *features*. A análise exploratória bivariada e multivariada já nos alertava para padrões de disparidade relacionados à **idade** (faixas etárias mais elevadas tendendo a salários maiores) e ao **gênero** (com o gênero masculino associado a remunerações mais altas). A **formalidade no emprego** e a **região**, especialmente o eixo Sudeste-Sul, também se mostraram importantes concentradores de salários mais elevados. O modelo LightGBM validou que a **experiência, cargo e senioridade** são os preditores mais influentes, seguidos por nível de ensino, faixa etária e, em menor grau, a região. A RNA, por sua vez, com sua capacidade de modelar interações complexas, corroborou a primazia da **senioridade, do cargo e da experiência** como pilares da remuneração, ao mesmo tempo em que sinalizou a presença de uma importância secundária, mas perceptível, do **gênero** e da **região** – um achado relevante, pois o LightGBM, em sua versão otimizada, havia optado por excluir o gênero.
+
+### Avaliação Geral dos Resultados: Balanço entre Promessas e Realidade dos Modelos
+
+Cada modelo, como ferramenta de inteligência artificial, demonstrou capacidades e limitações que se tornaram evidentes ao longo do projeto.
+
+#### **Modelos da 1ª Pergunta Orientada a Dados**
+
+O **Random Forest Classifier (Binário)** mostrou sua alta acurácia balanceada (~81%) e a clareza na identificação das *features* mais importantes (senioridade, experiência, formação) são inegáveis vantagens. A capacidade de ilustrar graficamente a interação entre formação e experiência foi, para nós, um ponto alto, facilitando a interpretação. Contudo, a simplificação do problema salarial para apenas duas classes inevitavelmente nos fez perder nuances importantes na análise detalhada da disparidade. O **Gradient Boosting Classifier (Multiclasse)**, embora promissor por sua granularidade, infelizmente não atingiu o mesmo patamar de desempenho, provavelmente pela complexidade aumentada da tarefa multiclasse e, talvez, por desafios no balanceamento de classes mais sutis.
+
+#### **Modelos da 2ª Pergunta Orientada a Dados**
+
+O **Random Forest Regressor** nos impressionou pela clareza com que apontou a **senioridade** e a **experiência** como os verdadeiros determinantes salariais. O fato de que juntos explicam quase 97% da importância do modelo foi um achado contundente. A análise de resíduos, que não mostrou vieses sistemáticos, nos deu confiança na robustez do modelo, mesmo com seu R² de 0.38 – um valor que, embora não seja altíssimo, é razoável considerando a complexidade da remuneração no mercado real. A grande desilusão nesta etapa foi o desempenho crítico do **Random Forest Classifier** devido à escassez de dados. Esse resultado serve como um lembrete vívido da máxima em Ciência de Dados: "Garbage in, garbage out" (ou, mais precisamente, "poucos dados, pouco aprendizado").
+
+#### **Modelos da 3ª Pergunta Orientada a Dados**
+
+Aqui, a comparação entre o **LightGBM Classifier** e a **Rede Neural com Embeddings (RNA v2)** foi particularmente interessante. Ambos entregaram um desempenho preditivo robusto e comparável (acurácias acima de 83% e ROC AUCs superiores a 0.92), o que é notável. O LightGBM se destacou pela sua eficiência e pela clareza da hierarquia de importância das *features*. A RNA, por sua vez, demonstrou a força de uma arquitetura mais moderna: sua capacidade de modelar interações não lineares e a utilização de *embeddings* para *features* categóricas são teoricamente superiores para capturar relações mais complexas, incluindo a sutil influência do gênero e da região. A principal "desvantagem" da RNA, para nós, foi sua natureza de "caixa-preta", o que nos exigiria um esforço extra (com técnicas como SHAP) para desvendar completamente o *porquê* de suas decisões, algo essencial em um contexto de "sistema inteligente" que busca *compreender* e não apenas prever.
+
+### Limitações Deste Trabalho e Horizontes para Melhoria Contínua
+
+Ao refletir sobre os resultados e o processo, tornam-se evidentes algumas limitações inerentes a este estudo e, consequentemente, propostas para futuras melhorias:
+
+1.  **A Questão da Granularidade Salarial:** A binarização das faixas salariais, embora simplifique o problema e melhore o desempenho de alguns modelos, limita a profundidade da análise. Futuras investigações poderiam explorar:
+    * **Regressão Direta:** Aprimorar o modelo de regressão para prever o salário exato, com mais features e dados, para uma estimativa mais precisa.
+    * **Classificação Ordinal:** Utilizar modelos que consideram a ordem das classes (ex: Ordinal Regression), para prever faixas salariais em um espectro mais amplo de forma mais sofisticada.
+
+2.  **O Desafio dos Dados:** A principal limitação para alguns modelos (como o Random Forest Classifier da 2ª pergunta) foi o volume insuficiente de dados em certas categorias ou a ausência de features mais granulares:
+    * **Mais Dados:** A coleta de um volume maior de dados, especialmente para as classes minoritárias (salários muito altos ou muito baixos), melhoraria significativamente a robustez e a capacidade de generalização dos modelos.
+    * **Features Adicionais:** Incluir variáveis como o porte da empresa, o tipo de contrato (CLT vs. PJ, detalhando o PJ), habilidades técnicas específicas (ex: proficiência em Python, SQL, etc., de forma mais quantitativa), certificações, e o uso de dados de custo de vida por região.
+
+3.  **Interpretabilidade e Causalidade:**
+    * **Ferramentas de XAI (Explainable AI):** A aplicação de técnicas como SHAP (SHapley Additive exPlanations) ou LIME (Local Interpretable Model-agnostic Explanations) seria um próximo passo crucial. Elas permitiriam uma interpretação mais granular da contribuição de cada feature para *previsões individuais* e para o comportamento geral do modelo, elucidando a lógica da "caixa-preta" de modelos como LightGBM e RNA, e revelando a natureza exata das interações aprendidas.
+    * **Análise de Causalidade:** Este estudo identificou correlações e padrões preditivos. Métodos causais (ex: inferência causal) poderiam ser empregados para discernir, por exemplo, se uma pós-graduação *causa* um salário mais alto, ou se outros fatores (como acesso a redes, privilégios) são os reais impulsionadores.
+
+4.  **A Questão da Equidade:** Apesar de termos incluído *features* demográficas como gênero e raça/etnia, suas correlações iniciais foram modestas, e em um dos modelos (LightGBM v7), o gênero foi excluído pela seleção de *features*. Aprofundar a análise de viés e equidade, possivelmente com técnicas de *fairness-aware machine learning*, seria essencial para auxiliar na equiparação salarial de forma justa.
+
+5.  **Aprimoramento da Engenharia de Features:**
+    * **Feature Engineering Avançada:** Criar *features* que capturem interações de forma explícita (ex: `senioridade_x_regiao`), ou métricas mais sofisticadas de proficiência técnica e impacto.
+
+Em suma, este projeto serviu como uma base sólida para a compreensão das dinâmicas salariais no campo de dados brasileiro, com a senioridade, experiência e formação acadêmica emergindo como fatores centrais. Os modelos desenvolvidos demonstram a viabilidade de construir sistemas inteligentes para auxiliar na compreensão e previsão salarial. Para que o verdadeiro potencial de um "sistema inteligente para auxiliar na equiparação salarial" seja alcançado, será necessário aprimorar a coleta de dados, aprofundar a interpretabilidade dos modelos e transitar da identificação de padrões para a inferência de relações causais e proposição de ações de equidade. A distribuição do modelo como uma aplicação web já é um passo para tornar esses insights acessíveis e acionáveis.
 
 
 # REFERÊNCIAS 
