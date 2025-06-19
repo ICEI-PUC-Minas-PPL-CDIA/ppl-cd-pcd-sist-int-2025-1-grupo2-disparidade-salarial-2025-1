@@ -6777,7 +6777,7 @@ As Figuras 5 e 6 apresentam a distribuição do tempo de experiência para cada 
 Figura 5 – Boxplot do tempo de experiência por faixa salarial
 ![Image](https://github.com/user-attachments/assets/390ae2c5-36e8-4af9-9eda-ba46a1abaf7b)
 
-Figura 6 – Violin plot do tempo de experiência por faixa salarial
+Figura 6 – Violin plot do tempo de experiência por faixa salarial+
 ![Image](https://github.com/user-attachments/assets/c8674650-d96c-4932-972b-c8d1a0ac64f9)
 
 A análise dos gráficos revela que a mediana de experiência para a faixa de "Salário Baixo" é significantemente inferior à da faixa de "Salário Alto" (aproximadamente 1-2 anos contra cerca de 5 anos). O violin plot (Figura 6) sugere que a distribuição para "Salário Alto" é mais ampla e possui múltiplas concentrações, indicando que diferentes níveis de experiência podem alcançar remunerações mais altas, possivelmente a depender de outros fatores como cargo ou empresa.
