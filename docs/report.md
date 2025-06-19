@@ -433,7 +433,11 @@ Nome: `salary_midpoint`, `dtype: object`
         * [3.3.1 Gráfico: Experiência vs Salário por nível de senioridade](#análise-do-gráfico-de-dispersão-experiência-vs-limite-inferior-do-salário-por-nível-de-senioridade)
         * [3.3.2 Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
         * [3.3.3 Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
-        * [3.3.4 Gráfico: Nível de ensino por região e faixa salarial](#análise-do-gráfico-nível-de-ensino-por-região-e-faixa-salarial-alvo)		
+        * [3.3.4 Gráfico: Nível de ensino por região e faixa salarial](#análise-do-gráfico-nível-de-ensino-por-região-e-faixa-salarial-alvo)
+   * [3.3 Analise exploratoria base auxiliar](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#an%C3%A1lise-explorat%C3%B3ria-auxiliar-3-pergunta-orientada-a-dados)
+     	* [3.3.1. Visualização dos Dados (Análise Univariada)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-visualiza%C3%A7%C3%A3o-dos-dados-an%C3%A1lise-univariada)
+     	* [3.3.2. Análise Bivariada: Fatores Influenciadores de Disparidades Salariais](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#2-an%C3%A1lise-bivariada-fatores-influenciadores-de-disparidades-salariais)
+     	
 
 # 1º Pergunta orientada a dados 
 **Pergunta Orientada a Dados:** *Como fatores como formação acadêmica e experiência profissional interagem para influenciar a disparidade salarial entre profissionais de dados no Brasil?*
@@ -3962,6 +3966,125 @@ A maior contagem de profissionais em "Salário Alto" (barras azuis) no Sudeste e
 >Em resumo: O gráfico "Nível de Ensino por Região e Faixa Salarial (Alvo)" é fundamental para ilustrar que a região é um fator crucial que interage com o nível de ensino para influenciar a probabilidade de um profissional de dados alcançar uma faixa salarial mais alta.  
 As disparidades salariais no Brasil para profissionais de dados não podem ser entendidas sem considerar o contexto regional, que modula o valor da educação e, provavelmente, da proficiência técnica.  
 Para uma análise mais completa, seria ideal cruzar esses dados também com a experiência/senioridade e a formalidade do emprego dentro de cada combinação de região e nível de ensino.
+
+---
+# Análise Exploratória auxiliar: 3° Pergunta orientada a dados
+
+## Introdução
+
+Este relatório apresenta uma análise exploratória de dados (EDA) com o objetivo de investigar como fatores como formalidade no emprego, características demográficas e proficiência técnica interagem para influenciar as disparidades salariais entre profissionais de dados no Brasil. A análise foi realizada utilizando um conjunto de dados de uma pesquisa com profissionais de dados brasileiros.
+
+## 1. Visualização dos Dados (Análise Univariada)
+
+Esta seção inicializa a análise exploratória de dados univariada, onde cada variável é analisada individualmente para entender sua distribuição e características.
+
+### Análise Numérica da coluna `salary_numeric_lower_bound`
+
+A coluna `salary_numeric_lower_bound` representa o limite inferior da faixa salarial convertida para um valor numérico. As estatísticas descritivas para esta coluna são:
+
+| Estatística       | Valor         | Descrição                                                      |
+|-------------------|---------------|----------------------------------------------------------------|
+| count             | 4753          | Número de observações não nulas na coluna                      |
+| mean              | 8935.37       | Média do limite inferior do salário (R$ 8.935,37)              |
+| std               | 7308.44       | Desvio padrão, indicando grande dispersão dos salários         |
+| min               | 0             | Valor mínimo (pode indicar salários "menos de X")              |
+| 25% (1º Quartil)   | 4001          | 25% dos respondentes ganham até R$ 4.001                        |
+| 50% (Mediana)     | 8001          | Mediana do limite inferior do salário (metade ganha até isso)  |
+| 75% (3º Quartil)   | 12001         | 75% dos respondentes ganham até R$ 12.001                       |
+| max               | 40001         | Valor máximo registrado                                        |
+| Name & dtype      | salary_numeric_lower_bound (float64) | Nome e tipo de dado da coluna              |
+
+**Comentários:** Esta saída é típica do método `.describe()` do Pandas aplicado a séries numéricas, fornecendo um resumo estatístico essencial para entender a distribuição central, a dispersão e a amplitude dos dados salariais.
+
+### Análise do Histograma e KDE dos Salários Numéricos
+
+O gráfico a seguir combina um histograma e uma estimativa de densidade do kernel (KDE) para a variável `salary_numeric_lower_bound`. Esta visualização é crucial para entender a distribuição dos salários e as disparidades existentes.
+
+![Histograma e KDE de salary_numeric_lower_bound](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997405_na1fn_L2hvbWUvdWJ1bnR1L2Zvcm1hbGlkYWRlX3NhbGFyaW8.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MDVfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyWnZjbTFoYkdsa1lXUmxYM05oYkdGeWFXOC5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NjcyMjU2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=BcoJNrI4RcHuTBz7uWyHMlYt6qnyauyl~hjKIKopAY83xFrQM~pVNzLU1YHlNkLJES5wOqWmdSabXDgdL6~sU15Ac~KfCT7tZYHCQ7ZpM1zLx3WEQb6N5iQsLJXrlQ-qTijzju1~-2BaZk87FHxbqGcMjecjejCyo7ZPMxAbn7ClHCbgfzdmlJEfRnIpGfXSDmM5rjSJBgA9LGM3uJGUKwTguG2P7L1SefXUT5BFLM4Tvev8z2z2-nYtns2iOui4g~BBT2x16i2xssuA48Gc7~rpfXHvL7WrrjUSv4AO5p3iYFi9cGUgCu6uIiwYw9MnaOHQnyKXH4jargkEzxA5Og__)
+
+**Como Interpretar o Gráfico:**
+
+- **Eixo X (`salary_numeric_lower_bound`)**: Representa os valores do limite inferior da faixa salarial, variando de valores próximos a zero até acima de R$ 40.000.
+- **Eixo Y Esquerdo (Contagem - Histograma)**: Associado às barras azuis, indica o número de profissionais de dados cujo limite inferior da faixa salarial se encontra em cada intervalo.
+- **Eixo Y Direito (Densidade - Linha KDE)**: Associado à linha azul escura, é uma versão suavizada do histograma, mostrando a forma contínua da distribuição salarial. Picos indicam maiores concentrações.
+
+**Informações Extraídas do Gráfico:**
+
+- **Concentração Salarial**: Há uma concentração significativa de profissionais na faixa salarial mais baixa, com o pico principal em torno de R$ 5.000 a R$ 10.000.
+- **Assimetria Positiva (Skewness)**: A distribuição é assimétrica à direita, com a maioria dos salários em valores mais baixos e uma cauda longa para valores altos, indicando que alguns profissionais recebem salários muito superiores.
+- **Multimodalidade Sugerida**: A curva KDE mostra múltiplos picos, sugerindo diferentes grupos salariais.
+
+**Possíveis Insights e Conexão com a Pergunta Orientada a Dados:**
+
+O gráfico evidencia disparidades salariais significativas, com a longa cauda à direita e os múltiplos picos mostrando visualmente essa variação. Este ponto de partida visual ajuda a direcionar análises mais detalhadas sobre como os fatores demográficos, regionais e de proficiência técnica afetam essas disparidades.
+
+## 2. Análise Bivariada: Fatores Influenciadores de Disparidades Salariais
+
+Esta seção explora a relação entre o salário e diversas variáveis, buscando identificar padrões e influências.
+
+### 2.1. Formalidade no Emprego vs. Salário
+
+O gráfico de boxplot abaixo ilustra a disparidade salarial com base na situação atual de trabalho dos profissionais.
+
+![Disparidade Salarial por Formalidade no Emprego](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997406_na1fn_L2hvbWUvdWJ1bnR1L2Zvcm1hbGlkYWRlX3NhbGFyaW8.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MDZfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyWnZjbTFoYkdsa1lXUmxYM05oYkdGeWFXOC5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NjcyMjU2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=MICV42FcX2vL1zhGKRMRdI0toLueOilZajWo30Zie0scWw9fOeMwS00V37WdROePBZ4-dJjkv3CruoYAFxR92tRwM7BXj7kd3LY2bjGZrNITQrx9FZYYK8NhNje7rGeyu4OBaTDRWGInPpOzlEGXFGBZw7zUh73ElRc4Xqr9aFCUh~N3x11RFHLeHulbakuLNC0JwxcnpDKzSTf-8BCbQE1RO6YEbVyGBib~5zMh0zh2LNL-6tgbBEfPc101-HhDd9MBREOYEIxSQj9omXf7UgnT0dgBS6ByJl5C2mJWrdd7HblYRMsKGzq~eEqbBnu49gOqnzTJ-VoC8AW6ZfH4hw__)
+
+**Análise:** Observa-se que profissionais com vínculo empregatício formal (CLT, PJ) tendem a ter salários medianos mais altos em comparação com aqueles em outras situações (estágio, autônomo, etc.). A dispersão salarial também varia entre os grupos, indicando que a formalidade do emprego é um fator relevante nas disparidades salariais.
+
+### 2.2. Gênero vs. Salário
+
+O boxplot a seguir compara as faixas salariais entre diferentes gêneros.
+
+![Disparidade Salarial por Gênero](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997407_na1fn_L2hvbWUvdWJ1bnR1L2dlbmVyb19zYWxhcmlv.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MDdfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyZGxibVZ5YjE5ellXeGhjbWx2LnBuZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2NzIyNTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Wr0cPU7HHIbNU6h31VSkPqCj1nkFxEG7ViiIW22jHd3wK2KFdOCPfRfnw9O-ImlFeT-p1yErESbKWiuA3aJmiLHDX9jFwkFhwNKONA2egA51twMl~E8SpTCJSEh66cH~fP-HYGIPa8Vixsmmy1OGpyQxKj-eIEmytwrQc2soAJXLqWxo4Z1ZKxs-awr6Q349VNEXuQEth850okwWcOoLwnZUEEmMciA4usZjtcLid79sV-Lkjl8bCFnAmnvj339lKtdIYDpFKgmJ0xqX4~3mxZUaNMLClFbh~6O4HHEov2kCItbzsRdCAClyBjbHjWc7zV~QiNc4RDY2Q4LxO-EKxA__)
+
+**Análise:** Este gráfico permite identificar se há diferenças salariais significativas entre gêneros. Embora a mediana possa ser similar em alguns casos, a amplitude e a presença de outliers podem revelar desigualdades. É fundamental analisar a distribuição completa para entender a extensão das disparidades de gênero.
+
+### 2.3. Raça/Etnia vs. Salário
+
+O gráfico de boxplot abaixo apresenta a distribuição salarial por cor/raça/etnia.
+
+![Disparidade Salarial por Cor/Raça/Etnia](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997407_na1fn_L2hvbWUvdWJ1bnR1L3JhY2Ffc2FsYXJpbw.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MDdfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzSmhZMkZmYzJGc1lYSnBidy5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NjcyMjU2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=nKTMjHBS7Kf1JdNeqxYw6jf3k1ohcvw8CgoU9WfkTtreKWwKGe6-b7nNbdZtyDTwOV3bq2VZVi-J81W1TK2jWJrMhGwBv9AcTFCpaCYmYSN3DQFeM4SXCipgI0UWbsI2uM9vAgIkeTkLxjGQAWMKO25VDCUy-YwXs0z749LKNrgO6C~LmKSZrro9Yskq3hFt2U3Pv49A53tdn6IA9IYJmomY2TTGNCadlKsmNNBsbe-pB0KzBxRpfoHOltGAhvHzTdJ93Mpc1auM3KH0kDMR5UqdT1ie973fTKxxU0eBNEZRdXSDi83n~FDeitiy9dnsBdgWobE01SY-TE2cB48pxw__)
+
+**Análise:** A visualização das faixas salariais por raça/etnia é crucial para identificar possíveis desigualdades. Diferenças nas medianas e na dispersão dos salários entre os grupos podem indicar a presença de vieses e a necessidade de políticas de inclusão e equidade.
+
+### 2.4. Nível de Ensino vs. Salário
+
+O boxplot a seguir mostra a relação entre o nível de ensino e o salário.
+
+![Disparidade Salarial por Nível de Ensino](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997408_na1fn_L2hvbWUvdWJ1bnR1L2Vuc2lub19zYWxhcmlv.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MDhfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyVnVjMmx1YjE5ellXeGhjbWx2LnBuZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2NzIyNTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=ceO7MS5jrm-QsyQa5W48JgxZ74Hzwz3tFxN8EHErPcvCXS4Z05GFsQn87NkRBsS39N8mah38zKehZqXqX6G7Y680Sl0w4twcl0sacrov-~hHsA7q0IJLp0rLVFpixJQk6imy-9Te2Vd3ukiWwHsK9X2WK4JeF0W9l0ZS4b~n1c972WMTT5TyYMIv5WdyTGu41XQMakEd3DLxVoGH0gQoX24EdfWG5SKLmyWKPid58oDTeS9fiG6Vhk5tN7njn2Y5qx74fKseA-Vc~Av2jeRsA96iRV43ESPVktKvUJ-tLje0RquNTt8ScthyTMEutAZQtMCcwHCZHLiUJWJ3CRmCNQ__)
+
+**Análise:** Espera-se que níveis de ensino mais elevados estejam associados a salários mais altos. Este gráfico confirma essa tendência, mas também pode revelar se há um "teto" salarial para determinados níveis de formação ou se a educação superior garante uma remuneração significativamente maior no mercado de dados.
+
+### 2.5. Experiência na Área de Dados vs. Salário
+
+O gráfico de boxplot abaixo ilustra como o tempo de experiência na área de dados se relaciona com o salário.
+
+![Disparidade Salarial por Tempo de Experiência na Área de Dados](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997409_na1fn_L2hvbWUvdWJ1bnR1L2V4cGVyaWVuY2lhX3NhbGFyaW8.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MDlfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyVjRjR1Z5YVdWdVkybGhYM05oYkdGeWFXOC5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NjcyMjU2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=tSiMDYyH~DzeXGehKI5CUHmgnZrA5fztCqkGHlSajdzRmNB9E9vjNqq8GiQu-fSTAoKjYfWjAIWAcGCQiHrn6QPNZPH4AFd6YDEu~RzkGejkANwcUpa7iSEzanyqMbXs0Fff3bhoASeDYWmMGLE-Wo-wQvmZQEiGtqI-W4hqwialMkk00fgNHRgF2B4OT15Y0lJaNZtjYYiF0puCPdl6TqmTvxuEtfDBnr344tNMeb5exGnHyrkoGhUixNt8RfnflkSwAhrh5QV0Q0XTutUAoCwPWq~UHjSccieWujFpl7GZC20PbOcx3g63Xn~p90yEWt~ye4cdbAmz0j~5KXw8Rg__)
+
+**Análise:** É natural que a experiência profissional impacte o salário. Este gráfico demonstra a progressão salarial à medida que os anos de experiência aumentam. A análise da inclinação e da variabilidade das caixas pode indicar em que ponto da carreira a experiência se torna mais valorizada e onde as disparidades começam a se acentuar.
+
+### 2.6. Cargo Atual vs. Salário (Top 10 Cargos Mais Frequentes)
+
+O boxplot a seguir compara as faixas salariais dos 10 cargos mais frequentes na pesquisa.
+
+![Disparidade Salarial por Cargo Atual (Top 10)](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997415_na1fn_L2hvbWUvdWJ1bnR1L2NhcmdvX3NhbGFyaW8.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MTVfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwyTmhjbWR2WDNOaGJHRnlhVzgucG5nIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzY3MjI1NjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=nEV88xaMCoM5gCW7D2Nzz~yGSIj2vJgqu39wymHOpJTI88CoEogmJezojspN2CrjUQl8MXis7XQpGG3iiNrt6fPz209wakS5aXC1yxLVSXmeZrPvpvu-fo9VbWVDZS-gDX-80JqEgrGEgZrNyav-bODBbJ~jYem2a6CPD5mOPWuoaFw8ZGZz9OZwumUgt~g3Lwo1wli59X1zuufD7WVl4LxojomDrtJZnx-FJ3~fNgV~VpL05jHd8EeDuS95g5~SzWo3iXHHr7tJoN18vqSSyhrqF9BWwXHyX7~N1FYyEl7r2VXwdQdiGN9imIMqX3Es3UsXbxa7uxiw22a6gGF0iQ__)
+
+**Análise:** Diferentes cargos na área de dados possuem responsabilidades e níveis de complexidade distintos, o que se reflete nos salários. Este gráfico permite comparar as medianas e a dispersão salarial entre os cargos mais comuns, identificando quais posições são mais bem remuneradas e onde há maior variabilidade de ganhos.
+
+### 2.7. Região onde mora vs. Salário
+
+O boxplot abaixo exibe a disparidade salarial por região geográfica.
+
+![Disparidade Salarial por Região](https://private-us-east-1.manuscdn.com/sessionFile/5L7AJzGJNgCqxyNaNEndEg/sandbox/vvsk0vH3xnrxrHrbazJLcs-images_1750347997415_na1fn_L2hvbWUvdWJ1bnR1L3JlZ2lhb19zYWxhcmlv.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNUw3QUp6R0pOZ0NxeHlOYU5FbmRFZy9zYW5kYm94L3Z2c2swdkgzeG5yeHJIcmJhekpMY3MtaW1hZ2VzXzE3NTAzNDc5OTc0MTVfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzSmxaMmxoYjE5ellXeGhjbWx2LnBuZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2NzIyNTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=XkRj7mrCdch1QKy-jtfrQpjQIacLkrBOM5fVa424LbMybAmfUhZTzwshZNgaubuSUXN1z~-DXrht8aU85MGGc6ahRqs~i2EUNSfOIIz6-sO7fnMT7bvfi5z~dqL244Uv2zbNu29zT88HhU2zB4eKJpoLB-4NmEIQ8JGjpQUaCHGEBRNM3K1o0GE7PI~5zJLHHrfBED8FEUbXe7Gl2gLQIVJxjkhk0bio6QI2VLDk~omZpZjmowJQmfbuF3ZVkMymAMCn2NN59nViIBB-2bdEi-uV5Pk1x6NEyjncpuLK629XSeH0thawqB2cLzXqMdtRQolF~yOF4Al7yz6Pykyqsw__)
+
+**Análise:** A localização geográfica pode influenciar significativamente os salários devido a fatores como custo de vida, demanda por profissionais e concentração de empresas de tecnologia. Este gráfico ajuda a identificar quais regiões oferecem salários mais competitivos e onde as disparidades regionais são mais evidentes.
+
+## Conclusão
+
+A análise exploratória de dados revelou que as disparidades salariais entre profissionais de dados no Brasil são influenciadas por uma combinação de fatores. A formalidade no emprego, características demográficas como gênero e raça/etnia, nível de ensino, tempo de experiência, cargo atual e região de moradia desempenham papéis importantes na determinação dos salários. A proficiência técnica, embora não diretamente quantificada em um único gráfico, é intrinsecamente ligada à experiência e ao cargo, e sua interação com os demais fatores é fundamental para entender a complexidade das disparidades salariais no mercado de dados brasileiro.
+
+Este relatório serve como um ponto de partida para análises mais aprofundadas, que poderiam incluir modelos estatísticos mais complexos para quantificar a contribuição de cada fator e identificar interações mais sutis.
+
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
