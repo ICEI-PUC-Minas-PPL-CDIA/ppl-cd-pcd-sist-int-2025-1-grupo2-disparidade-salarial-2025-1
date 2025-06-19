@@ -434,9 +434,9 @@ Nome: `salary_midpoint`, `dtype: object`
         * [3.3.2 Gráfico: Limite salarial por nível de ensino e faixa salarial](#análise-do-gráfico-de-boxplots-limite-inferior-do-salário-por-nível-de-ensino-e-faixa-salarial-alvo)
         * [3.3.3 Gráfico: Violin plot - experiência por senioridade e faixa salarial](#análise-do-gráfico-de-violin-plots-divididos-experiência-anos-por-nível-de-senioridade-e-faixa-salarial-alvo)
         * [3.3.4 Gráfico: Nível de ensino por região e faixa salarial](#análise-do-gráfico-nível-de-ensino-por-região-e-faixa-salarial-alvo)
-   * [3.3 Análise Univariada]()
-     	* [3.3.1. Visualização dos Dados (Análise Univariada)]()
-     	* [3.3.2. Análise Bivariada: Fatores Influenciadores de Disparidades Salariais]()
+   * [3.3 Analise exploratoria base auxiliar](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#an%C3%A1lise-explorat%C3%B3ria-de-dados-disparidades-salariais-entre-profissionais-de-dados-no-brasil)
+     	* [3.3.1. Visualização dos Dados (Análise Univariada)](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#1-visualiza%C3%A7%C3%A3o-dos-dados-an%C3%A1lise-univariada)
+     	* [3.3.2. Análise Bivariada: Fatores Influenciadores de Disparidades Salariais](https://github.com/ICEI-PUC-Minas-PPL-CDIA/ppl-cd-pcd-sist-int-2025-1-grupo2-disparidade-salarial-2025-1/blob/main/docs/report.md#2-an%C3%A1lise-bivariada-fatores-influenciadores-de-disparidades-salariais)
      	
 
 # 1º Pergunta orientada a dados 
@@ -3983,7 +3983,7 @@ As disparidades salariais no Brasil para profissionais de dados não podem ser e
 Para uma análise mais completa, seria ideal cruzar esses dados também com a experiência/senioridade e a formalidade do emprego dentro de cada combinação de região e nível de ensino.
 
 ---
-# Análise Exploratória de Dados: Disparidades Salariais entre Profissionais de Dados no Brasil
+# Análise Exploratória auxiliar: 3° Pergunta orientada a dados
 
 ## Introdução
 
