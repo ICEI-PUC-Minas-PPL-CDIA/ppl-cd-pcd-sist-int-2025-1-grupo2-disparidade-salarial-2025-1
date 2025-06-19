@@ -29,8 +29,6 @@ Para isso, são exploradas características como experiência, formação acadê
 
 ### Como Executar a Aplicação Localmente
 
-### 6.4. Como Executar a Aplicação Localmente
-
 Esta seção detalha os passos para que outro desenvolvedor possa configurar e executar esta aplicação em seu próprio ambiente local.
 
 1.  **Clonar o Repositório:**
