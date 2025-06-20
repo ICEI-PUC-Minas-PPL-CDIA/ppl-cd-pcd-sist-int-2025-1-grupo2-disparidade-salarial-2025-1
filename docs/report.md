@@ -8605,9 +8605,9 @@ INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA (INEP). 
 
 ---
 
-**Da apresentação final (armazenado no repositório);** 
+[**Da apresentação final (armazenado no repositório) :**](/docs/media/link_apresentação.md) 
 
-**Do vídeo de apresentação (armazenado no repositório).** 
+[**Do vídeo de apresentação (armazenado no repositório).:**](/docs/media/disparidade_salarial_grupo2.pdf)
 
 
 
